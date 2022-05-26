@@ -8,13 +8,14 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String username;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false, length = 500)
     private String password;
 
+    //account connects to the profile (one to one: one account for one profile)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "profile")
     private Profile profile;
 
@@ -26,6 +27,7 @@ public class Account {
         this.password = password;
     }
 
+    // copy constructor for spring security
     public Account(Account copy){
         id = copy.id;
         username = copy.username;
