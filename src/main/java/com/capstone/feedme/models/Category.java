@@ -1,5 +1,4 @@
 package com.capstone.feedme.models;
-
 import javax.persistence.*;
 import java.util.List;
 

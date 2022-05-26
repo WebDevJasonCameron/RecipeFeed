@@ -1,5 +1,4 @@
 package com.capstone.feedme.models;
-
 import javax.persistence.*;
 
 @Entity
@@ -35,6 +34,10 @@ public class Image {
         return recipe;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -44,6 +47,10 @@ public class Image {
     }
 
     public void setProfile(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
 }

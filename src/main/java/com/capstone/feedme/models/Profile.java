@@ -1,5 +1,4 @@
 package com.capstone.feedme.models;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,10 +21,6 @@ public class Profile {
     @OneToMany
     private List<Recipe> postedRecipes;
 
-    //connects the profile to the list of their posted comments (one to many: one profile for multiple comments)
-    @OneToMany
-    private List<Comment> postedComments;
-
     //connects the profile to multiple favorite posts (many to many: multiple profiles can favorite multiple posts)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -34,4 +29,62 @@ public class Profile {
             inverseJoinColumns = {@JoinColumn(name = "recipe_id")}
     )
     private List<Recipe> favoriteRecipes;
+
+    public Profile() {}
+
+    public Profile(String avatar, String bio, Account account, List<Recipe> postedRecipes, List<Recipe> favoriteRecipes) {
+        this.avatar = avatar;
+        this.bio = bio;
+        this.account = account;
+        this.postedRecipes = postedRecipes;
+        this.favoriteRecipes = favoriteRecipes;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public List<Recipe> getPostedRecipes() {
+        return postedRecipes;
+    }
+
+    public List<Recipe> getFavoriteRecipes() {
+        return favoriteRecipes;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void setPostedRecipes(List<Recipe> postedRecipes) {
+        this.postedRecipes = postedRecipes;
+    }
+
+    public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
+        this.favoriteRecipes = favoriteRecipes;
+    }
 }

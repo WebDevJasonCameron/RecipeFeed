@@ -1,10 +1,5 @@
 package com.capstone.feedme.models;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
-
 import javax.persistence.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.List;
 
 @Entity
@@ -48,4 +43,125 @@ public class Recipe {
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private Profile profile;
+
+    public Recipe() {}
+
+    public Recipe(int rating, String visibility, int prep_time, int cook_time, int cook_temp, String cook_method, String skill_level, List<Image> postImages, List<Comment> commentList, List<Category> categories, List<Profile> favoriteProfiles, Profile profile) {
+        this.rating = rating;
+        this.visibility = visibility;
+        this.prep_time = prep_time;
+        this.cook_time = cook_time;
+        this.cook_temp = cook_temp;
+        this.cook_method = cook_method;
+        this.skill_level = skill_level;
+        this.postImages = postImages;
+        this.commentList = commentList;
+        this.categories = categories;
+        this.favoriteProfiles = favoriteProfiles;
+        this.profile = profile;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public int getPrep_time() {
+        return prep_time;
+    }
+
+    public int getCook_time() {
+        return cook_time;
+    }
+
+    public int getCook_temp() {
+        return cook_temp;
+    }
+
+    public String getCook_method() {
+        return cook_method;
+    }
+
+    public String getSkill_level() {
+        return skill_level;
+    }
+
+    public List<Image> getPostImages() {
+        return postImages;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public List<Profile> getFavoriteProfiles() {
+        return favoriteProfiles;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public void setPrep_time(int prep_time) {
+        this.prep_time = prep_time;
+    }
+
+    public void setCook_time(int cook_time) {
+        this.cook_time = cook_time;
+    }
+
+    public void setCook_temp(int cook_temp) {
+        this.cook_temp = cook_temp;
+    }
+
+    public void setCook_method(String cook_method) {
+        this.cook_method = cook_method;
+    }
+
+    public void setSkill_level(String skill_level) {
+        this.skill_level = skill_level;
+    }
+
+    public void setPostImages(List<Image> postImages) {
+        this.postImages = postImages;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void setFavoriteProfiles(List<Profile> favoriteProfiles) {
+        this.favoriteProfiles = favoriteProfiles;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }

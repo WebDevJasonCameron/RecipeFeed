@@ -1,5 +1,4 @@
 package com.capstone.feedme.models;
-
 import javax.persistence.*;
 
 @Entity
@@ -21,7 +20,54 @@ public class Comment {
     //connects the comment to the profile that posted it (many to one: many comments to one profile)
     @ManyToOne
     @JoinColumn(name = "profile_id")
-    private Profile profile;
+    private Account account;
 
+    public Comment() {}
 
+    public Comment(String comment, String post_date, Recipe recipe, Account account) {
+        this.comment = comment;
+        this.post_date = post_date;
+        this.recipe = recipe;
+        this.account = account;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getPost_date() {
+        return post_date;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setPost_date(String post_date) {
+        this.post_date = post_date;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

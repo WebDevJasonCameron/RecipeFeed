@@ -1,6 +1,6 @@
 package com.capstone.feedme.models;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "account", uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
@@ -19,6 +19,10 @@ public class Account {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "profile")
     private Profile profile;
 
+    //connects the account to the list of their posted comments (one to many: one profile for multiple comments)
+    @OneToMany
+    private List<Comment> postedComments;
+
     public Account() {}
 
     public Account(String username, String email, String password) {
@@ -34,6 +38,7 @@ public class Account {
         email = copy.email;
         password = copy.password;
         profile = copy.profile;
+        postedComments = copy.postedComments;
     }
 
     public long getId() {
@@ -52,6 +57,14 @@ public class Account {
         return password;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public List<Comment> getPostedComments() {
+        return postedComments;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -66,5 +79,13 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public void setPostedComments(List<Comment> postedComments) {
+        this.postedComments = postedComments;
     }
 }
