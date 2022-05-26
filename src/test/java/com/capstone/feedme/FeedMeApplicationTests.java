@@ -1,4 +1,4 @@
-package com.example.feedme;
+package com.capstone.feedme;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
