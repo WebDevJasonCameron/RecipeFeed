@@ -14,43 +14,4 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
-
-    public Image() {}
-
-    public Image(String image, Recipe recipe) {
-        this.image = image;
-        this.recipe = recipe;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public Recipe getProfile() {
-        return recipe;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public void setProfile(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }

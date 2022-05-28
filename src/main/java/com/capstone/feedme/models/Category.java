@@ -14,44 +14,4 @@ public class Category {
     //connects the categories to multiple posts (many to many: multiple categories can connect to multiple posts)
     @ManyToMany(mappedBy = "category")
     private List<Recipe> recipes;
-
-    public Category() {}
-
-    public Category(String type, String foodAllergy, List<Recipe> recipes) {
-        this.type = type;
-        this.foodAllergy = foodAllergy;
-        this.recipes = recipes;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getFoodAllergy() {
-        return foodAllergy;
-    }
-
-    public List<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setFoodAllergy(String foodAllergy) {
-        this.foodAllergy = foodAllergy;
-    }
-
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 }
