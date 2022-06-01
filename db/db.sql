@@ -1,0 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS feed_me_db;
+
+
+# DANGER!
+DROP DATABASE IF EXISTS feed_me_db;
+
