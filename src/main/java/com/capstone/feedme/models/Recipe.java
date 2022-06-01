@@ -1,46 +1,48 @@
 package com.capstone.feedme.models;
 import javax.persistence.*;
+
 import java.util.List;
 
 @Entity
-@Table(name = "recipe")
+@Table(name = "recipes")
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    //limit to 5
-    private int rating;
-    @Column(length = 10)
-    private String visibility;
-    private int prep_time;
-    private int cook_time;
-    private int cook_temp;
-    @Column(length = 500)
-    private String cook_method;
-    private String skill_level;
+    @Column(name = "api_id")
+    private int apiId;
+    private String title;
+    @Column(name = "img_url")
+    private String imgUrl;
+    private String summary;
+    private String instruction;
+    @Column(name = "ready_in_min")
+    private int readyInMin;
+    @Column(name = "serving_amount")
+    private int servingAmount;
+    @Column(name = "source_name")
+    private String sourceName;
+    @Column(name = "source_url")
+    private String sourceUrl;
+    private boolean vegetarian;
+    private boolean vegan;
+    @Column(name = "gluten_free")
+    private boolean glutenFree;
+    @Column(name = "dairy_free")
+    private boolean dairyFree;
 
-    //connects the recipe to its images (one to many: many images to one recipe)
-    @OneToMany
-    private List<Image> postImages;
 
-    //connects the recipe to its comments (one to many: many comments to one recipe)
-    @OneToMany
-    private List<Comment> commentList;
+    @ManyToMany(mappedBy = "recipe")
+    private List<User> userFavorites;
 
-    //connects the recipe to the categories it is related to (many to many: multiple categories to multiple recipes)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "recipe_categories",
             joinColumns = {@JoinColumn(name = "recipe_id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id")}
     )
-    private List<Category> categories;
+    private List<Category> recipeCategories;
 
-    @ManyToMany(mappedBy = "recipe")
-    private List<Profile> favoriteProfiles;
-
-    //connects the recipe to the profile that posted (many to one: many recipes to one profile)
-    @ManyToOne
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private List<Ingredient> recipeIngredients;
 }
