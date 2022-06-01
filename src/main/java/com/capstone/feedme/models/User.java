@@ -25,6 +25,12 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Recipe> userRecipes;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Comment> userComments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Rating> userRatings;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_favorite_recipes",
@@ -32,6 +38,4 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "recipe_id")}
     )
     private List<Recipe> favoriteRecipes;
-
-
 }

@@ -13,6 +13,7 @@ public class UserRecipe {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    private Recipe recipe;
+    //???
+//    @OneToOne
+//    private Recipe recipe;
 }
