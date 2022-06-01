@@ -65,7 +65,7 @@ public class RecipeController {
             Model model
     ) {
         System.out.println("id = " + id);
-        model.addAttribute("recipe", recipesDao.findById(id))
+        model.addAttribute("recipe", recipesDao.findById(id));
                 return "recipes/create";
     }
 
