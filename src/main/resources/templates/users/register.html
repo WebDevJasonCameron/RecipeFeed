@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/partials.html :: head ('Register')" ></head>
+
+
+<body>
+<div th:replace="partials/partials.html :: navbar"></div>
+<div th:replace="partials/partials.html :: header"></div>
+<h1>Create an account</h1>
+
+
+<form th:action="@{/sign-up}" method="POST" th:object="${user}">
+    <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" th:field="*{password}">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<!--<form th:action="@{/sign-up}" method="POST" th:object="${user}">-->
+<!--    <label for="firstname">First Name </label>-->
+<!--    <input id="firstname" th:field="*{firstname}">-->
+
+<!--    <label for="lastname">Last Name </label>-->
+<!--    <input id="lastname" th:field="*{lastname}">-->
+
+<!--    <label for="email">Email</label>-->
+<!--    <input id="email" th:field="*{email}">-->
+
+<!--    <label for="password">Password</label>-->
+<!--    <input id="password" type="password" th:field="*{password}">-->
+
+<!--    <input value="Sign me up!" type="submit">-->
+<!--</form>-->
+
+<div th:replace="partials/partials.html :: footer"></div>
+
+</body>
+</html>
