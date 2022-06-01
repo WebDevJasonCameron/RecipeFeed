@@ -29,7 +29,14 @@ public class Recipe {
     @Column(name = "gluten_free")
     private boolean glutenFree;
     @Column(name = "dairy_free")
+
+    // ADDITIONAL ATT
     private boolean dairyFree;
+    @Column(length = 500)
+    private String video_url;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
     @ManyToMany(mappedBy = "recipe")
