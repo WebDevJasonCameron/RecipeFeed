@@ -32,12 +32,12 @@ public class UserController {
 
     @GetMapping("/profile")
     public String profile(){
-        return "";
+        return "profiles/index";
     }
 
     @GetMapping("/profile/edit")
     public String editProfile(){
-        return "";
+        return "profiles/edit";
     }
 
     @PostMapping("/delete")
