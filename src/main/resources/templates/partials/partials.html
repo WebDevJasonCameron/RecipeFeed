@@ -55,7 +55,9 @@
     </nav>
 
     <!--HEADER-->
-    <section th:fragment="header"></section>
+    <section th:fragment="header (headerName)">
+        <h1 th:text="${headerName}"></h1>
+    </section>
 
 
     <!--MODEL for ADMIN-->
