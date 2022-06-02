@@ -3,6 +3,8 @@ package com.capstone.feedme.controllers;
 
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.models.User;
+import com.capstone.feedme.repositories.RecipeRepository;
+import com.capstone.feedme.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
