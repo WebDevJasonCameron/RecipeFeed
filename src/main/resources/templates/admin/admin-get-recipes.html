@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/partials/partials.html :: head ('Admin | Get Recipes')"></head>
+<body>
+<div class="container">
+  <!--NAV-->
+  <nav th:replace="/partials/partials.html :: navbar"></nav>
+
+  <!--HEADER-->
+  <section th:replace="/partials/partials.html :: header ('Amdin | Get Recipes')"></section>
+
+  <!--MAIN-->
+  <!--input form-->
+  <form id="get-recipe-list-form" class="form-inline my-2 my-lg-0">
+    <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search">
+    <button id="get-recipe-btn" class="btn btn-outline-success my-3 w-100" type="submit">Search</button>
+  </form>
+  <!--cards-->
+  <div class="container" id="recipe-results"></div>       <!--Rem, JS pops this-->
+  <!--details-->
+  <div class="container" id="recipe-details"></div>
+
+  <!--MODAL-->
+  <div th:replace="/partials/partials.html :: recipe-details-modal"></div>
+
+
+
+
+
+  <!--FOOTER-->
+  <footer th:replace="/partials/partials.html :: footer"></footer>
+
+  <!--SCRIPTS-->
+  <section th:replace="/partials/partials.html :: script-section"></section>
+</div>
+</body>
+</html>
