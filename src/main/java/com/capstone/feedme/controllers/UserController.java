@@ -5,6 +5,7 @@ import com.capstone.feedme.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,14 +40,10 @@ public class UserController {
         return "";
     }
 
-    @GetMapping("/profile/create")
-    public String createProfile(){
-        return "";
-    }
-
     @PostMapping("/delete")
-    public String deleteUser(){
-        return "";
+    public String deleteUser(@ModelAttribute User user){
+        usersDao.save(user);
+        return "redirect:/login";
     }
 
 }
