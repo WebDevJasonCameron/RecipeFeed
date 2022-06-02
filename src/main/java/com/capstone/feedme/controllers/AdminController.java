@@ -4,9 +4,7 @@ import com.capstone.feedme.models.Ingredient;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +62,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("/recipe-details-to-db")
+    @PostMapping("/admin-details-to-db")
     public String enterComplexRecipeDetailsIntoDb(@RequestParam(name = "cid") long cid,
                                                   @RequestParam(name = "title") String title,
                                                   @RequestParam(name = "image-url") String imageUrl,
@@ -142,7 +140,7 @@ public class AdminController {
         return "redirect:/admin/admin-details-to-db";
     }
 
-    @GetMapping("/recipe-details-to-db")
+    @GetMapping("/admin-details-to-db")
     public String showRecipeDetailsToDb(){
 
         return "/admin/admin-details-to-db";
