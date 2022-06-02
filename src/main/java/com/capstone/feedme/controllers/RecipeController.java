@@ -24,6 +24,7 @@ public class RecipeController {
     }
 
 
+
     // METH
     @GetMapping
     public String allRecipes(Model model){
