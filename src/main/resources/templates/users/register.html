@@ -5,8 +5,7 @@
 
 <body>
 <div th:replace="partials/partials.html :: navbar"></div>
-<div th:replace="partials/partials.html :: header ('Register')"></div>
-<h1>Create an account</h1>
+<div th:replace="partials/partials.html :: header ('Create an Account')"></div>
 
 
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">

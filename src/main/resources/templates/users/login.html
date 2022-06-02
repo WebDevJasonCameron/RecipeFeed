@@ -5,8 +5,7 @@
 
 <body>
 <div th:replace="partials/partials.html :: navbar"></div>
-<div th:replace="partials/partials.html :: header('Login')"></div>
-<h1>Log In</h1>
+<div th:replace="partials/partials.html :: header('Log In')"></div>
 
 <div th:if="${param.error}">
     Invalid Username and Password.
