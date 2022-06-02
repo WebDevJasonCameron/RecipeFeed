@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/partials/partials.html :: head ('Template')" ></head>
+<body>
+<div class="container">
+<ul th:replace="/partials/partials.html :: navbar"></ul>
+<form th:action="@{/recipes/edit.html}"
+      th:method="post" >
+    <h1>Edit your recipe</h1>
+    <section th:replace="/partials/partials.html :: header ('Template')"></section>
+    <form>
+        <label for="category">Select a Category</label>
+        <input type="checkbox" id="category" >
+        <br><br>
+        <input type="submit" value="Post">
+        <br><br>
+    </form>
+    <label for="dishName">Dish Name</label>
+    <input type="text" id="dishName" >
+    <br><br>
+    <label for="description">Description</label>
+    <br><br>
+    <input type="text" id="description" >
+    <br><br>
+    <!--                 May require breaks to space, edit once displayed -->
+    <div>
+        <form>
+            <label for="ingredient">Ingredients List</label>
+            <input type="text" id="ingredient">
+            <br><br>
+            <label for="iAmount">Amount</label>
+            <input type="number" id="iAmount">
+            <br><br>
+            <input type="submit" value="Post">
+            <br><br>
+        </form>
+    </div>
+    <label for="instructions">Instructions</label>
+    <input type="text" id="instructions">
+    <br><br>
+    <label for="time">Time</label>
+    <input type="text" id="time">
+    <br><br>
+    <label for="servings">Servings</label>
+    <input type="number" id="servings">
+    <br><br>
+    <label for="vegetarian">Vegetarian</label>
+    <input type="checkbox" id="vegetarian" >
+    <label for="vegan">Vegan</label>
+    <input type="checkbox" id="vegan" >
+    <label for="glutenFree">Gluten Free</label>
+    <input type="checkbox" id="glutenFree" >
+    <label for="dairyFree">Dairy Free</label>
+    <input type="checkbox" id="dairyFree" ><br><br>
+</form>
+<input type="submit" value="Submit">
+</form>
+<footer th:replace="/partials/partials.html :: footer"></footer>
+
+<section th:replace="/partials/partials.html :: script-section"></section>
+
+</div>
+</body>
+</html>
