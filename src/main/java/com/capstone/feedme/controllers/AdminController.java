@@ -2,6 +2,7 @@ package com.capstone.feedme.controllers;
 
 import com.capstone.feedme.models.Ingredient;
 import com.capstone.feedme.models.Recipe;
+import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import org.springframework.stereotype.Controller;
@@ -20,14 +21,15 @@ public class AdminController {
     // ATT
     private final RecipeRepository recipeDao;
     private final IngredientRepository ingredientDao;
+    private final CategoryRepository categoryDao;
 
 
     // CON
-    public AdminController(RecipeRepository recipeDao, IngredientRepository ingredientDao) {
+    public AdminController(RecipeRepository recipeDao, IngredientRepository ingredientDao, CategoryRepository categoryDao) {
         this.recipeDao = recipeDao;
         this.ingredientDao = ingredientDao;
+        this.categoryDao = categoryDao;
     }
-
 
 
     // METH
@@ -76,7 +78,8 @@ public class AdminController {
                                                   @RequestParam(name = "vegan") boolean vegan,
                                                   @RequestParam(name = "gluten-free") boolean glutenFree,
                                                   @RequestParam(name = "dairy-free") boolean dairyFree,
-                                                  @RequestParam(name = "dish-type") String dishType,
+
+                                                  @RequestParam(name = "category-type") String categoryType,
 
                                                   @RequestParam(name = "ingredient-name") String ingredientName,
                                                   @RequestParam(name = "ingredient-original") String ingredientOriginal
@@ -105,8 +108,8 @@ public class AdminController {
         System.out.println("vegan = " + vegan);
         System.out.println("glutenFree = " + glutenFree);
         System.out.println("dairyFree = " + dairyFree);
-        System.out.println("dishType = " + dishType);
         System.out.println("------");
+        System.out.println("categoryType = " + categoryType);
         System.out.println("ingredientName = " + ingredientName);
         System.out.println("ingredientOriginal = " + ingredientOriginal);
 

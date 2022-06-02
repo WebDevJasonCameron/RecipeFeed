@@ -169,8 +169,13 @@ function makeModalBody(r){
                                 <input type="hidden" name="vegan" value="${r.vegan}">
                                 <input type="hidden" name="gluten-free" value="${r.glutenFree}">
                                 <input type="hidden" name="dairy-free" value="${r.dairyFree}">
-                                <input type="hidden" name="dish-type" value="${r.dishTypes}">
-
+                                
+                                <div id="categories">
+                                
+                                ` + hiddenCategoryInputList(r) + `
+                                
+                                
+                                </div>
                                 
                             </div>
                             <div id="ingredients">      <!--for each-->
@@ -230,4 +235,19 @@ function hiddenIngredientInputList(r){
         output += hiddenIngredientInputs(r.extendedIngredients[i]);
     }
     return output;
+}
+
+// CREATE HIDDEN CAT INPUT FOR FORM
+function hiddenCategoryInputs(fC){
+    return `
+                <input type="hidden" name="category-type" value="${rI.dishTypes}">
+    `
+}
+
+// COMBINE HIDDEN CAT LIST FOR MORM
+function hiddenCategoryInputList(r) {
+    let output = '';
+    for (let i = 0; i < r.dishTypes.length; i++) {
+        output += hiddenCategoryInputs(r.dishTypes[i]);
+    }
 }
