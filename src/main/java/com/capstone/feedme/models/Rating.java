@@ -12,6 +12,8 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
     private long id;
+    @Column(name = "rating")
+    private int rating;
 
     @ManyToOne                              // Many ratings per one user
     @JoinColumn(name = "user_id")
@@ -36,7 +38,9 @@ public class Rating {
     public Recipe getRecipe() {
         return recipe;
     }
-
+    public int getRating() {
+        return rating;
+    }
 
     // SET
     public void setUser(User user) {
@@ -45,6 +49,9 @@ public class Rating {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
 
     // CHECK
@@ -52,9 +59,11 @@ public class Rating {
     public String toString() {
         return "Rating{" +
                 "id=" + id +
+                ", rating=" + rating +
                 ", user=" + user +
                 ", recipe=" + recipe +
                 '}';
     }
+
 
 }  //<--END
