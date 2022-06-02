@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/partials/partials.html :: head ('Main Feed')"></head>
+<body>
+<div class="container">
+    <!--NAV-->
+    <nav th:replace="/partials/partials.html :: navbar"></nav>
+    <!--HEADER-->
+    <section th:replace="/partials/partials.html :: header"></section>
+    <!--MAIN-->
+
+    This page will show ALL the recipes in the database, not just the users.
+
+
+
+
+
+    <!--FOOTER-->
+    <footer th:replace="/partials/partials.html :: footer"></footer>
+
+    <!--SCRIPTS-->
+    <section th:replace="/partials/partials.html :: script-section"></section>
+</div>
+</body>
+</html>
