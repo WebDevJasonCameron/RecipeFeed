@@ -7,8 +7,11 @@ import java.util.List;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
 public class User {
+
+    // ATT
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
     private long id;
     @Column(name = "username" ,nullable = false, length = 50)
     private String username;
@@ -22,20 +25,108 @@ public class User {
     @Type(type = "text")
     private String bio;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // recipes
     private List<Recipe> userRecipes;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // comments
     private List<Comment> userComments;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // ratings
     private List<Rating> userRatings;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})                     // OWNER: favorites
     @JoinTable(
-            name = "users_favorite_recipes",
+            name = "user_favorites",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "recipe_id")}
     )
-    private List<Recipe> favoriteRecipes;
-}
+    private List<Recipe> userFavorites;
+
+
+    // CON
+    public User() {
+    }
+
+
+    // GET
+    public long getId() {
+        return id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
+    public String getBio() {
+        return bio;
+    }
+    public List<Recipe> getUserRecipes() {
+        return userRecipes;
+    }
+    public List<Comment> getUserComments() {
+        return userComments;
+    }
+    public List<Rating> getUserRatings() {
+        return userRatings;
+    }
+    public List<Recipe> getuserFavorites() {
+        return userFavorites;
+    }
+
+
+    // SET
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+    public void setUserRecipes(List<Recipe> userRecipes) {
+        this.userRecipes = userRecipes;
+    }
+    public void setUserComments(List<Comment> userComments) {
+        this.userComments = userComments;
+    }
+    public void setUserRatings(List<Rating> userRatings) {
+        this.userRatings = userRatings;
+    }
+    public void setuserFavorites(List<Recipe> userFavorites) {
+        this.userFavorites = userFavorites;
+    }
+
+
+    // CHECK
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", bio='" + bio + '\'' +
+                ", userRecipes=" + userRecipes +
+                ", userComments=" + userComments +
+                ", userRatings=" + userRatings +
+                ", userFavorites=" + userFavorites +
+                '}';
+    }
+
+
+}  //<--END
