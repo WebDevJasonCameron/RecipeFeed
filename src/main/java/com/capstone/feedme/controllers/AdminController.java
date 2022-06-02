@@ -139,75 +139,14 @@ public class AdminController {
         }
 
 
-        return "redirect:/recipes/recipe-details-to-db";
+        return "redirect:/admin/admin-details-to-db";
     }
 
     @GetMapping("/recipe-details-to-db")
     public String showRecipeDetailsToDb(){
 
-        return "/recipes/recipe-details-to-db";
+        return "/admin/admin-details-to-db";
     }
-
-
-
-    // TEST
-    @GetMapping("/test-json")
-    public String showJsonTestFromDB(Model model){
-
-        List<Recipe> recipes  = recipeDao.findAll();
-        List<Ingredient> ingredients = ingredientDao.findAll();
-
-
-        String json = "";
-        String iJson = "";
-
-
-        //<--KEY to JSON formatting!
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // Set Recipe data into json
-        try {
-            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(recipes);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        // Set Ingredient data into json
-        try {
-            iJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(ingredients);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        model.addAttribute("json", json);
-        model.addAttribute("iJson", iJson);
-        model.addAttribute("recipes", recipes);
-
-
-        return "recipes/test-json-from-db";
-    }
-
-
-    // TEST JS CARDS
-    @GetMapping("/test-j-r-cards")
-    public String ShowTestJRCards(Model model){
-        List<Recipe> recipes  = recipeDao.findAll();
-        String json = "";
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(recipes);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        model.addAttribute("json", json);
-
-
-        return "/recipes/test-js-r-card";
-    }
-
-
-
 
 
 }
