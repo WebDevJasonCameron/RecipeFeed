@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials/partials.html :: head ('Create a recipe')" ></head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head th:replace="/partials/partials.html :: head ('Template')" >
+    <link href="multiselect.css" rel="stylesheet">
+</head>
 <title>Create a New Recipe</title>
 <meta charset="UTF-8" />
-<body
-        th:object="${post}"
->
-         <ul th:replace="partials/partials.html :: navbar"></ul>
+<body>
+<div class="container">
+         <ul th:replace="/partials/partials.html :: navbar"></ul>
          <h2>Create a New Recipe</h2>
-         <form action="/recipes/create" method="post">
+         <section th:replace="/partials/partials.html :: header ('Template')"></section>
+         <form th:action="@{/recipes/create.html}" method="post">
              <form th:action="@{/recipes/{action}(action=${'create'})}"
                    th:method="post" >
              <form>
                  <label for="category">Select a Category</label>
-                 <input type="checkbox" id="category" >
+<!--                 <input type="checkbox" id="category" >-->
+                 <select id="category" multiple>
+                     <option value="1">Mexican</option>
+                     <option value="2">Italian</option>
+                     <option value="3">Chinese</option>
+                 </select>
                  <br><br>
                  <input type="submit" value="Post">
                  <br><br>
@@ -56,7 +63,12 @@
                  <label for="dairyFree">Dairy Free</label>
                  <input type="checkbox" id="dairyFree" ><br><br>
              </form>
-                 <input type="submit" value="Create">
+                 <input type="submit" value="Edit">
+                 <input type="submit" value="Submit">
          </form>
+         <footer th:replace="/partials/partials.html :: footer"></footer>
+
+         <section th:replace="/partials/partials.html :: script-section"></section>
+</div>
 </body>
 </html>
