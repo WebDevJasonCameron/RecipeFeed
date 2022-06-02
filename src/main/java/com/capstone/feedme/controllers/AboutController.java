@@ -2,7 +2,7 @@ package com.capstone.feedme.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-public class IndexController {
+public class AboutController {
 
     @RequestMapping("/about")
     public String index(){
