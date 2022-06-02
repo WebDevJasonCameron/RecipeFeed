@@ -40,6 +40,11 @@ public class RecipeController {
         return "/recipes/create";
     }
 
+    @GetMapping("/details")
+    public String viewDetails(){
+        return "/recipes/details";
+    }
+
     @PostMapping("/delete")
     public String deleteRecipe(@ModelAttribute Recipe recipe
     ) {
