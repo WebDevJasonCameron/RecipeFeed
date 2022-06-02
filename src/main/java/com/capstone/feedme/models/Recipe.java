@@ -14,7 +14,7 @@ public class Recipe {
     private long id;
     @Column(name = "api_id", unique = true)
     private long apiId;
-    @Column(name = "user_id")
+    @Column(name = "user_recipe_id")
     private long userId;
     @Column(name = "title", nullable = false)
     private String title;
@@ -25,9 +25,9 @@ public class Recipe {
     @Column(name = "instruction", columnDefinition="TEXT")
     private String instruction;
     @Column(name = "ready_in_min")
-    private int readyInMin;
+    private String readyInMin;
     @Column(name = "serving_amount")
-    private int servingAmount;
+    private String servingAmount;
     @Column(name = "source_name")
     private String sourceName;
     @Column(name = "source_url")
@@ -66,7 +66,11 @@ public class Recipe {
     // CON
     public Recipe() {
     }
-
+    public Recipe(long apiId, String title, String imgUrl) {
+        this.apiId = apiId;
+        this.title = title;
+        this.imgUrl = imgUrl;
+    }
 
     // GET
     public long getId() {
@@ -90,10 +94,10 @@ public class Recipe {
     public String getInstruction() {
         return instruction;
     }
-    public int getReadyInMin() {
+    public String getReadyInMin() {
         return readyInMin;
     }
-    public int getServingAmount() {
+    public String getServingAmount() {
         return servingAmount;
     }
     public String getSourceName() {
@@ -151,10 +155,10 @@ public class Recipe {
     public void setInstruction(String instruction) {
         this.instruction = instruction;
     }
-    public void setReadyInMin(int readyInMin) {
+    public void setReadyInMin(String readyInMin) {
         this.readyInMin = readyInMin;
     }
-    public void setServingAmount(int servingAmount) {
+    public void setServingAmount(String servingAmount) {
         this.servingAmount = servingAmount;
     }
     public void setSourceName(String sourceName) {

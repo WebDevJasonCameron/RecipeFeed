@@ -26,7 +26,11 @@ public class Ingredient {
     // CON
     public Ingredient() {
     }
-
+    public Ingredient(String ingredientName, String ingredientAmount, Recipe recipe) {
+        this.ingredientName = ingredientName;
+        this.ingredientAmount = ingredientAmount;
+        this.recipe = recipe;
+    }
 
     // GET
     public int getId() {

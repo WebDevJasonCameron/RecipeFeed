@@ -1,5 +1,8 @@
 package com.capstone.feedme.controllers;
 
+import com.capstone.feedme.models.Ingredient;
+import com.capstone.feedme.models.Recipe;
+import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -22,23 +25,27 @@ public class AdminController {
 
 
     // CON
+    public AdminController(RecipeRepository recipeDao, IngredientRepository ingredientDao) {
+        this.recipeDao = recipeDao;
+        this.ingredientDao = ingredientDao;
+    }
 
 
 
     // METH
     @GetMapping
     public String showRecipeHomePage(){
-        return "/recipes/index";
+        return "/admin/index";
     }
 
-    @GetMapping("/get-list")
+    @GetMapping("/get-recipes")
     public String getRecipeListPage(){
-        return "/recipes/get-list";
+        return "/admin/admin-get-recipes";
     }
 
     @GetMapping("/get-details")
     public String getRecipeDetailsPage(){
-        return "/recipes/get-details";
+        return "/admin/admin-get-details";
     }
 
     @PostMapping("/get-details")
@@ -46,14 +53,14 @@ public class AdminController {
                                              @RequestParam(name = "title") String title,
                                              @RequestParam(name = "image") String image){
 
-        if(recipeDao.findRecipeByCid(cid) == null){
+        if(recipeDao.findRecipeByApiId(cid) == null){
             System.out.println("Recipe Not found");
             recipeDao.save(new Recipe(cid, title, image));
         } else {
-            return "redirect:/recipes/get-list";
+            return "redirect:/admin/get-list";
         }
 
-        return "/recipes/get-details";
+        return "/admin/admin-get-details";
     }
 
 
@@ -81,8 +88,8 @@ public class AdminController {
         List<Ingredient> ingredients = new ArrayList<>();
 
 
-        if(recipeDao.findRecipeByCid(cid) != null){
-            recipe = recipeDao.findRecipeByCid(cid);
+        if(recipeDao.findRecipeByApiId(cid) != null){
+            recipe = recipeDao.findRecipeByApiId(cid);
         } else {
             recipe = new Recipe();
         }
@@ -105,21 +112,20 @@ public class AdminController {
         System.out.println("ingredientName = " + ingredientName);
         System.out.println("ingredientOriginal = " + ingredientOriginal);
 
-
-        recipe.setCid(cid);
+        recipe.setApiId(cid);
         recipe.setTitle(title);
-        recipe.setImageUrl(imageUrl);
+        recipe.setImgUrl(imageUrl);
         recipe.setSummary(summary);
-        recipe.setInstructions(instructions);
-        recipe.setReadyInMinutes(readyInMinutes);
-        recipe.setServings(servings);
+        recipe.setInstruction(instructions);
+        recipe.setReadyInMin(readyInMinutes);
+        recipe.setServingAmount(servings);
         recipe.setSourceName(sourceName);
         recipe.setSourceUrl(sourceUrl);
         recipe.setVegetarian(vegetarian);
         recipe.setVegan(vegan);
         recipe.setGlutenFree(glutenFree);
         recipe.setDairyFree(dairyFree);
-        recipe.setDishType(dishType);
+//        recipe.setDishType(dishType);
 
         recipeDao.save(recipe);
 
