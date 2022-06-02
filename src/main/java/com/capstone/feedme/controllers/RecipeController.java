@@ -42,6 +42,7 @@ public class RecipeController {
 
     @GetMapping("/details")
     public String viewDetails(){
+        // will need to add request param to get recipe id
         return "/recipes/details";
     }
 
