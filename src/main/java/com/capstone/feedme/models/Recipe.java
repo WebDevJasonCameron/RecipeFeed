@@ -13,7 +13,9 @@ public class Recipe {
     @Column(name = "id")
     private long id;
     @Column(name = "api_id", unique = true)
-    private int apiId;
+    private long apiId;
+    @Column(name = "user_id")
+    private long userId;
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "img_url")
@@ -70,8 +72,11 @@ public class Recipe {
     public long getId() {
         return id;
     }
-    public int getApiId() {
+    public long getApiId() {
         return apiId;
+    }
+    public long getUserId() {
+        return userId;
     }
     public String getTitle() {
         return title;
@@ -121,14 +126,18 @@ public class Recipe {
     public List<Category> getRecipeCategories() {
         return recipeCategories;
     }
-    public List<Ingredient> getingredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
 
+
     // SET
-    public void setApiId(int apiId) {
+    public void setApiId(long apiId) {
         this.apiId = apiId;
+    }
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
     public void setTitle(String title) {
         this.title = title;
@@ -179,6 +188,9 @@ public class Recipe {
         this.recipeCategories = recipeCategories;
     }
     public void setingredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
