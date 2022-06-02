@@ -40,6 +40,17 @@
     <!--            <form th:action="@{/logout}" th:method="post">-->
     <!--                <button class="btn btn-outline-success">Logout</button>-->
     <!--            </form>-->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                    Recipe Items
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/admin">admin</a>
+                    <a class="dropdown-item" href="/admin/get-recipes">Get Recipes</a>
+                    <a class="dropdown-item" href="/admin/get-details">Get Full Recipe</a>
+                </div>
+            <li class="nav-item">
+
         </div>
     </nav>
 
@@ -132,7 +143,7 @@
 
 
     <!--FOOTER-->
-    <footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
+    <footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom mt-auto">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
             <!-- Section: Social media -->

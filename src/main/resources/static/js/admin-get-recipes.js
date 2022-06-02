@@ -22,9 +22,9 @@ function testFunction(id){
  */
 // GET R LIST
 function getSpoonRecipeListByKeyWord(kw){
-    // const apiKey = SPOON_KEY_01;
+    const apiKey = SPOON_KEY_01;
     // const apiKey = SPOON_KEY_02;
-    const apiKey = SPOON_KEY_03;
+    // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=0&number=10';
     const readOption = {
@@ -88,16 +88,6 @@ function makeCard(r){
                         </div>
                     </div>
                     <div class="card-footer">
-                        <form action="/recipes/get-details" method="post" >       <!--Can remove for modal-->
-                            <input type="hidden" name="image" value="${r.image}" >
-                            <input type="hidden" name="title" value="${r.title}" >
-                            <input type="hidden" name="id" value="${r.id}" >
-                            <button type="submit" class="btn btn-primary add-btn">
-                                Add to DB
-                            </button>  
-                        </form>           
-                    </div>
-                    <div>
                         <button 
                             onclick="testFunction(${r.id})"
                             class="btn btn-primary" 
@@ -164,7 +154,7 @@ function makeModalBody(r){
                                 <a href="${r.sourceUrl}" alt="source link">${r.sourceName}</a>
                             </small>
                         </div>
-                        <form action="/recipes/recipe-details-to-db" method="post">
+                        <form action="/admin/admin-details-to-db" method="post">
                             <div id="recipe-data">
                                 <input type="hidden" name="cid" value="${r.id}">
                                 <input type="hidden" name="title" value="${r.title}">

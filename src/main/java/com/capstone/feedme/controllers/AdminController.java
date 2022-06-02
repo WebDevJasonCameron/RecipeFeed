@@ -4,9 +4,7 @@ import com.capstone.feedme.models.Ingredient;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +62,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("/recipe-details-to-db")
+    @PostMapping("/admin-details-to-db")
     public String enterComplexRecipeDetailsIntoDb(@RequestParam(name = "cid") long cid,
                                                   @RequestParam(name = "title") String title,
                                                   @RequestParam(name = "image-url") String imageUrl,
@@ -139,75 +137,14 @@ public class AdminController {
         }
 
 
-        return "redirect:/recipes/recipe-details-to-db";
+        return "redirect:/admin/admin-details-to-db";
     }
 
-    @GetMapping("/recipe-details-to-db")
+    @GetMapping("/admin-details-to-db")
     public String showRecipeDetailsToDb(){
 
-        return "/recipes/recipe-details-to-db";
+        return "/admin/admin-details-to-db";
     }
-
-
-
-    // TEST
-    @GetMapping("/test-json")
-    public String showJsonTestFromDB(Model model){
-
-        List<Recipe> recipes  = recipeDao.findAll();
-        List<Ingredient> ingredients = ingredientDao.findAll();
-
-
-        String json = "";
-        String iJson = "";
-
-
-        //<--KEY to JSON formatting!
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // Set Recipe data into json
-        try {
-            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(recipes);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        // Set Ingredient data into json
-        try {
-            iJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(ingredients);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        model.addAttribute("json", json);
-        model.addAttribute("iJson", iJson);
-        model.addAttribute("recipes", recipes);
-
-
-        return "recipes/test-json-from-db";
-    }
-
-
-    // TEST JS CARDS
-    @GetMapping("/test-j-r-cards")
-    public String ShowTestJRCards(Model model){
-        List<Recipe> recipes  = recipeDao.findAll();
-        String json = "";
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(recipes);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        model.addAttribute("json", json);
-
-
-        return "/recipes/test-js-r-card";
-    }
-
-
-
 
 
 }
