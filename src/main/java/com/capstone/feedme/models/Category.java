@@ -21,6 +21,9 @@ public class Category {
     // CON
     public Category() {
     }
+    public Category(String type) {
+        this.type = type;
+    }
 
 
     // GET

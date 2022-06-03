@@ -26,6 +26,10 @@ public class Ingredient {
     // CON
     public Ingredient() {
     }
+    public Ingredient(String ingredientName, String ingredientAmount) {
+        this.ingredientName = ingredientName;
+        this.ingredientAmount = ingredientAmount;
+    }
     public Ingredient(String ingredientName, String ingredientAmount, Recipe recipe) {
         this.ingredientName = ingredientName;
         this.ingredientAmount = ingredientAmount;
