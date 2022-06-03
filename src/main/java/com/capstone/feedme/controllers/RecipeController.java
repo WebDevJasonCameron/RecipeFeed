@@ -53,5 +53,10 @@ public class RecipeController {
         return "redirect:/recipes";
     }
 
+    @GetMapping("/edit")
+    public String editRecipe(){
+        return "recipes/edit";
+    }
+
 
 }  //<--END
