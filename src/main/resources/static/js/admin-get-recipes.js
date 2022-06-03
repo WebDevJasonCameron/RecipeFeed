@@ -238,9 +238,9 @@ function hiddenIngredientInputList(r){
 }
 
 // CREATE HIDDEN CAT INPUT FOR FORM
-function hiddenCategoryInputs(fC){
+function hiddenCategoryInputs(rC){
     return `
-                <input type="hidden" name="category-type" value="${rI.dishTypes}">
+                <input type="hidden" name="category-type" value="${rC}">
     `
 }
 
@@ -250,4 +250,5 @@ function hiddenCategoryInputList(r) {
     for (let i = 0; i < r.dishTypes.length; i++) {
         output += hiddenCategoryInputs(r.dishTypes[i]);
     }
+    return output;
 }

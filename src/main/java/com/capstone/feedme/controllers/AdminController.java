@@ -1,5 +1,6 @@
 package com.capstone.feedme.controllers;
 
+import com.capstone.feedme.models.Category;
 import com.capstone.feedme.models.Ingredient;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.repositories.CategoryRepository;
@@ -86,15 +87,19 @@ public class AdminController {
     ){
 
         Recipe recipe;
+        List<Category> categories = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
 
 
+
+        // IS RECIPE IN DB?
         if(recipeDao.findRecipeByApiId(cid) != null){
             recipe = recipeDao.findRecipeByApiId(cid);
         } else {
             recipe = new Recipe();
         }
 
+        // CHECKS
         System.out.println("cid = " + cid);
         System.out.println("title = " + title);
         System.out.println("imageUrl = " + imageUrl);
@@ -110,9 +115,28 @@ public class AdminController {
         System.out.println("dairyFree = " + dairyFree);
         System.out.println("------");
         System.out.println("categoryType = " + categoryType);
+
         System.out.println("ingredientName = " + ingredientName);
         System.out.println("ingredientOriginal = " + ingredientOriginal);
 
+        // CATEGORIES
+        String[] categoryTypes = categoryType.toLowerCase().split(",");
+
+        // ADD CATS IF NOT IN TABLE
+        for (int i = 0; i < categoryTypes.length; i++) {
+            // if cat type !found, save cat in table
+            if(categoryDao.findCategoryByType(categoryTypes[i]) == null){
+                Category category = new Category(categoryTypes[i]);
+                categoryDao.save(category);
+                categories.add(category);
+            }else{
+                Category category = categoryDao.findCategoryByType(categoryTypes[i]);
+                categories.add(category);
+            }
+        }
+
+
+        // PLACE DATA IN RECIPE
         recipe.setApiId(cid);
         recipe.setTitle(title);
         recipe.setImgUrl(imageUrl);
@@ -126,19 +150,32 @@ public class AdminController {
         recipe.setVegan(vegan);
         recipe.setGlutenFree(glutenFree);
         recipe.setDairyFree(dairyFree);
-//        recipe.setDishType(dishType);
+        recipe.setRecipeCategories(categories);
 
-        recipeDao.save(recipe);
-
+        // INGREDIENTS
         String[] iNames = ingredientName.split(",");
         String[] iAmount = ingredientOriginal.split(",");
 
+        System.out.println("==================================");
+        System.out.println("recipe.getId() = " + (Long) recipe.getId());
+
         for (int i = 0; i < iNames.length; i++) {
-            Ingredient ingredient = new Ingredient(iNames[i], iAmount[i], recipe);
-            ingredientDao.save(ingredient);
-            ingredients.add(ingredient);
+            Ingredient ingredient = new Ingredient( );
+            if( (Long) recipe.getId() == 0) {
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                ingredient.setIngredientName(iNames[i]);
+                ingredient.setIngredientAmount(iAmount[i]);
+                ingredientDao.save(ingredient);
+                ingredients.add(ingredient);
+            }
         }
 
+        recipeDao.save(recipe);
+
+        for (int i = 0; i < ingredients.size(); i++) {
+            ingredients.get(i).setRecipe(recipe);
+            ingredientDao.save(ingredients.get(i));
+        }
 
         return "redirect:/admin/admin-details-to-db";
     }
