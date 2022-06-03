@@ -28,9 +28,9 @@ public class RecipeController {
     // METH
     @GetMapping
     public String allRecipes(Model model){
-        List<Recipe> allRecipes = recipesDao.findAll();
+        List<Recipe> recipes = recipesDao.findAll();
 
-        model.addAttribute("allRecipes", allRecipes);
+        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
