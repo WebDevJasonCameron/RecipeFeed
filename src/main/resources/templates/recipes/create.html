@@ -6,7 +6,7 @@
 
 <meta charset="UTF-8" />
 <body>
-<div class="container">
+
          <ul th:replace="/partials/partials.html :: navbar"></ul>
          <section th:replace="/partials/partials.html :: header ('Create Your Own')"></section>
          <form th:action="@{/recipes/create.html}" method="post">
@@ -68,6 +68,6 @@
          <footer th:replace="/partials/partials.html :: footer"></footer>
 
          <section th:replace="/partials/partials.html :: script-section"></section>
-</div>
+
 </body>
 </html>
