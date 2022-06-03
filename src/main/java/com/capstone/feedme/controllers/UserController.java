@@ -22,11 +22,6 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "users/login";
-    }
-
     @GetMapping("/register")
     public String register(Model model){
         model.addAttribute("user", new User());
