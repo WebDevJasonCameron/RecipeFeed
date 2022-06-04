@@ -7,10 +7,137 @@
     <!--NAV-->
     <nav th:replace="/partials/partials.html :: navbar"></nav>
 
-    <!--HEADER-->
-    <section th:replace="/partials/partials.html :: header ('Recipes Details')"></section>
+    <div class="container w-75" style="margin-top: 100px">
 
-    <h1>You are now viewing the recipe details</h1>
+        <!--MAIN-->
+        <div class="row">
+            <!--LEFT-->
+            <div class="col-6">
+                <!--IMG-->
+                <div>
+                    <img th:src="${recipe.imgUrl}" th:alt="${recipe.title}">
+                </div>
+                <!--COMMENTS/SIMILAR/REMIX-->
+                <div class="mt-2">
+                    <!--LEFT NAV TABS-->
+                    <ul class="nav nav-tabs" id="details-tabs-left" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab">Comments</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="similar-tab" data-bs-toggle="tab" data-bs-target="#similar" type="button" role="tab">Similar</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="remix-tab" data-bs-toggle="tab" data-bs-target="#remix" type="button" role="tab">Remix</button>
+                        </li>
+                    </ul>
+                    <!--LEFT TAB DATA-->
+                    <div class="tab-content" id="left-tab-contents">
+                        <!--COMMENTS-->
+                        <div class="tab-pane fade show active" id="comments" role="tabpanel">
+                            SIDE CARD WITH AVATAR AND LIST OF COMMENTS HERE...
+                        </div>
+                        <!--SIMILAR-->
+                        <div class="tab-pane fade" id="similar" role="tabpanel">
+                            PINTEREST STYLE LIST OF SIMILAR RECIPES (PHOTOS ONLY)
+                        </div>
+                        <!--REMIX-->
+                        <div class="tab-pane fade" id="remix" role="tabpanel">
+                            PINTEREST STYLE LIST OF REMIX RECIPES (PHOTOS ONLY)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--RIGHT-->
+            <div class="col-6">
+                <div class="card no-gutters">
+                    <!--HEADER-->
+                    <div class="card-header">
+                        <h1 th:text="${recipe.title}">Title</h1>
+                        <small class="text-muted">Recipe by:
+                            <a th:href="${recipe.sourceUrl}">
+                                <span th:text="${recipe.sourceName}"></span>
+                            </a>
+                        </small>
+                    </div>
+                    <!--BODY-->
+                    <div class="card-body overflow-scroll" style="height: 100vh">
+                        <!--TITLE-->
+                        <div class="card-title">
+                            <div>
+                                Ready in <san th:text="${recipe.readyInMin}">min</san> Minutes <br>
+                                Serving amount <spn th:text="${recipe.servingAmount}">number</spn>
+                            </div>
+                            <div th:each="cat: ${recipe.recipeCategories}" class="d-inline-block">
+                                <div class="small text-muted mx-1">
+                                    <span th:text="${cat.type}">category</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--RIGHT DETAILS-->
+                        <div class="mt-2">
+                            <!--RIGHT TABS-->
+                            <ul class="nav nav-tabs" id="details-tabs-right" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab">Summary</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="instructions-tab" data-bs-toggle="tab" data-bs-target="#instructions" type="button" role="tab">Instructions</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="ingredients-tab" data-bs-toggle="tab" data-bs-target="#ingredients" type="button" role="tab">Remix</button>
+                                </li>
+                            </ul>
+                            <!--RIGHT TAB DATA-->
+                            <div class="tab-content mt-2" id="right-tab-contents">
+                                <!--SUMMARY-->
+                                <div class="tab-pane fade show active" id="summary" role="tabpanel">
+                                    <div>
+                                        <div class="h3">
+                                            Summary:
+                                        </div>
+                                        <div>
+                                            <span th:utext="${recipe.summary}">Recipe Summary</span><br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--INSTRUCTIONS-->
+                                <div class="tab-pane fade" id="instructions" role="tabpanel">
+                                    <div>
+                                        <div class="h3">
+                                            Instructions:
+                                        </div>
+                                        <span th:utext="${recipe.instruction}">Recipe Instructions</span><br><br>
+                                    </div>
+                                </div>
+                                <!--INGREDIENTS-->
+                                <div class="tab-pane fade" id="ingredients" role="tabpanel">
+                                    <div>
+                                        <div class="h3">
+                                            Ingredients:
+                                        </div>
+                                        <ul th:each="ing: ${recipe.ingredients}">
+                                            <li style="list-style-type:none;">
+                                                <input type="checkbox"> &nbsp;<span th:text="${ing.ingredientName}">Name</span><br>
+                                                &emsp; Amount: <span th:text="${ing.ingredientAmount}">Amount</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
     <!--FOOTER-->
     <footer th:replace="/partials/partials.html :: footer"></footer>
 

@@ -2,40 +2,81 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="/partials/partials.html :: head ('Recipes Home')"></head>
+<head th:replace="/partials/partials.html :: head ('Main Feed')"></head>
 <body>
     <!--NAV-->
     <nav th:replace="/partials/partials.html :: navbar"></nav>
 
-    <!--HEADER-->
-    <section th:replace="/partials/partials.html :: header ('Recipes Home')"></section>
+    <div class="container" style="margin-top: 100px">
 
-    <div class="container">
-
-        <!--SECURITY TEST BUTTONS-->
-        <a class="btn btn-outline-success btn-sm" type="submit" th:href="@{/recipes/create}">Create Recipe</a>
-        <a class="btn btn-outline-success btn-sm" type="submit" th:href="@{/recipes/edit}">Edit Recipe</a>
-        <a class="btn btn-outline-success btn-sm" type="submit" th:href="@{/user/profile}">Profile</a>
-
-        <form th:action="@{/logout}" th:method="post">
-            <button class="btn-link btn btn-sm" style="margin-top: 8px">Logout</button>
-        </form>
-
-        <!--MAIN-->
         <!--MAIN-->
         <div class="container w-75">
             <div class="row mt-3">
                 <!--FEED.-->
                 <div class="col-8">
+                    <!--CATEGORIES-->
+                    <div class="container">
+                        <div class="d-flex  overflow-hidden">        <!--fix with css and nicer icons-->
+                            <!--BREAKFAST-->
+                            <div class="mr-2">
+                                <img src="https://source.unsplash.com/random/200x200/?breakfast"
+                                     alt="random picture" class="img-fluid"
+                                     style="height: 100px; width: 100px; border-radius: 50%">
+                                <div class="text-center">
+                                    breakfast
+                                </div>
+                            </div>
+                            <!--LUNCH-->
+                            <div class="mx-2">
+                                <img src="https://source.unsplash.com/random/200x200/?lunch"
+                                     alt="random picture" class="img-fluid"
+                                     style="height: 100px; width: 100px; border-radius: 50%">
+                                <div class="text-center">
+                                    lunch
+                                </div>
+                            </div>
+                            <!--DINNER-->
+                            <div class="mx-2">
+                                <img src="https://source.unsplash.com/random/200x200/?dinner"
+                                     alt="random picture" class="img-fluid"
+                                     style="height: 100px; width: 100px; border-radius: 50%">
+                                <div class="text-center">
+                                    dinner
+                                </div>
+                            </div>
+                            <!--BRUNCH-->
+                            <div class="mx-2">
+                                <img src="https://source.unsplash.com/random/200x200/?brunch"
+                                     alt="random picture" class="img-fluid"
+                                     style="height: 100px; width: 100px; border-radius: 50%">
+                                <div class="text-center">
+                                    brunch
+                                </div>
+                            </div>
+                            <!--MAIN DISH-->
+
+                            <!--APPETIZER-->
+
+                            <!--DESSERT-->
+
+                            <!--DIP-->
+
+                            <!--SAUCE-->
+
+                        </div>
+                    </div>
+                    <!--CARDS-->
                     <div th:each="recipe: ${recipes}">
 
                         <div class="card mt-3">
                             <!--CARD HEADER-->
                             <div class="card-header">
                                 <div class="row">
+                                    <!--AVATAR-->
                                     <div class="col-2">
                                         <img src="https://source.unsplash.com/random/50x50/?raccoon" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
                                     </div>
+                                    <!--USERNAME-->
                                     <div class="col-10 d-flex align-items-center">
                                         <div>
                                             <div>
@@ -54,7 +95,7 @@
                             <div class="class-body">
                                 <!--IMG-->
                                 <div>
-                                    <a href="/recipes/details">
+                                    <a th:href="@{/recipes/details/{id}(id=${recipe.id})}">
                                         <img th:src="${recipe.imgUrl}" alt="${img.getImageTitle()}" class="img-thumbnail" style="width: 100%">
                                     </a>
                                 </div>
@@ -64,7 +105,7 @@
                                         <a href="#"><i class="fa-regular fa-heart fa-2x p-2"></i></a>
                                     </div>
                                     <div>
-                                        <a href="/recipes/details"><i class="fa-regular fa-comment fa-2x p-2"></i></a>
+                                        <a th:href="@{/recipes/details/{id}(id=${recipe.id})}"><i class="fa-solid fa-list-check fa-2x p-2"></i></a>
                                     </div>
                                     <div>
                                         <a href="#"><i class="fa-regular fa-paper-plane fa-2x p-2"></i></a>
@@ -108,7 +149,9 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-4">
-                                <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                <a th:href="@{/user/profile}">
+                                    <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                </a>
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <div>
@@ -118,8 +161,25 @@
                                     <div class="text-muted">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     </div>
+                                    <!--SECURITY TEST BUTTONS-->
                                 </div>
                             </div>
+                            <div>
+                                <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
+                                    create
+                                </a>
+                                <a class="btn border-0" type="submit" th:href="@{/recipes/edit}">
+                                    edit
+                                </a>
+                                <a class="btn border-0" type="submit" th:href="@{/user/profile}">
+                                    profile
+                                </a>
+
+                                <form th:action="@{/logout}" th:method="post">
+                                    <button class="btn-link btn btn-sm" style="margin-top: 8px">Logout</button>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -128,16 +188,10 @@
         </div>
 
 
-
-
-
-
-
-
     </div>
 
     <!--FOOTER-->
-    <footer th:replace="/partials/partials.html :: footer"></footer>
+<!--    <footer th:replace="/partials/partials.html :: footer"></footer>-->
 
     <!--SCRIPTS-->
     <section th:replace="/partials/partials.html :: script-section"></section>
