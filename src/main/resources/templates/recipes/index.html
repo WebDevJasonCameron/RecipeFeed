@@ -10,17 +10,131 @@
     <!--HEADER-->
     <section th:replace="/partials/partials.html :: header ('Recipes Home')"></section>
 
-    <!--MAIN-->
+    <div class="container">
 
-    <a class="btn btn-outline-success" type="submit" th:href="@{/recipes/create}">Create Recipe</a>
-    <a class="btn btn-outline-success" type="submit" th:href="@{/recipes/edit}">Edit Recipe</a>
-    <a class="btn btn-outline-success" type="submit" th:href="@{/user/profile}">Profile</a>
+        <!--SECURITY TEST BUTTONS-->
+        <a class="btn btn-outline-success btn-sm" type="submit" th:href="@{/recipes/create}">Create Recipe</a>
+        <a class="btn btn-outline-success btn-sm" type="submit" th:href="@{/recipes/edit}">Edit Recipe</a>
+        <a class="btn btn-outline-success btn-sm" type="submit" th:href="@{/user/profile}">Profile</a>
 
-    <form th:action="@{/logout}" th:method="post">
-        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-    </form>
+        <form th:action="@{/logout}" th:method="post">
+            <button class="btn-link btn btn-sm" style="margin-top: 8px">Logout</button>
+        </form>
+
+        <!--MAIN-->
+        <!--MAIN-->
+        <div class="container w-75">
+            <div class="row mt-3">
+                <!--FEED.-->
+                <div class="col-8">
+                    <div th:each="recipe: ${recipes}">
+
+                        <div class="card mt-3">
+                            <!--CARD HEADER-->
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="https://source.unsplash.com/random/50x50/?raccoon" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                    </div>
+                                    <div class="col-10 d-flex align-items-center">
+                                        <div>
+                                            <div>
+                                                <strong th:text="${recipe.user != null}? ${recipe.user.username} : 'Feed.'" >username</strong>
+                                            </div>
+                                            <div th:each="cat: ${recipe.recipeCategories}" class="d-inline-block">
+                                                <div class="small text-muted mx-1">
+                                                    <span th:text="${cat.type}">category</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--BODY-->
+                            <div class="class-body">
+                                <!--IMG-->
+                                <div>
+                                    <a href="/recipes/details">
+                                        <img th:src="${recipe.imgUrl}" alt="${img.getImageTitle()}" class="img-thumbnail" style="width: 100%">
+                                    </a>
+                                </div>
+                                <!--ICON LINKS-->
+                                <div class="d-flex d-inline-block p-1">
+                                    <div>
+                                        <a href="#"><i class="fa-regular fa-heart fa-2x p-2"></i></a>
+                                    </div>
+                                    <div>
+                                        <a href="/recipes/details"><i class="fa-regular fa-comment fa-2x p-2"></i></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><i class="fa-regular fa-paper-plane fa-2x p-2"></i></a>
+                                    </div>
+                                    <div style="margin-left: auto">
+                                        <a href="#"><i class="fa-regular fa-bookmark fa-2x p-2"></i></a>
+                                    </div>
+                                </div>
+                                <!--LIKES and TITLE-->
+                                <div class="p-3">
+                                    <div class="small text-muted">
+                                        # of likes
+                                    </div>
+                                    <div>
+                                        <span th:text="${recipe.title}">Title of Recipe</span>
+                                    </div>
+                                    <div class="small text-muted">
+                                        # of Comments
+                                    </div>
+                                </div>
+                            </div>
+                            <!--FOOTER-->
+                            <div class="card-footer">
+                                <div class="d-flex d-inline-block">
+                                    <div>
+                                        <i class="fa-regular fa-face-smile fa-2x pt-1 pr-1"></i>
+                                    </div>
+                                    <div class="input-group w-100 pl-2">
+                                        <div class="form-outline w-100 "> <!--Add Form action and method-->
+                                            <input id="comment" type="Add a comment" class="form-control border-0" placeholder="Add a comment..." />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--PROFILE STUFF-->
+                <div class="col-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                            </div>
+                            <div class="col-8 d-flex align-items-center">
+                                <div>
+                                    <div>
+                                        <strong>username</strong>
+                                    </div>
+                                    <div class="text-muted">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
+
+
+
+
+
+
+    </div>
 
     <!--FOOTER-->
     <footer th:replace="/partials/partials.html :: footer"></footer>
