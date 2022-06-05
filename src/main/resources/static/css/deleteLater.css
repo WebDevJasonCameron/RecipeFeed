@@ -1,0 +1,18 @@
+/*FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA*/
+body {
+    padding-top: 100px;
+    padding-bottom: 150px;
+}
+/*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
+
+
+/*SMALLER SCREEN CAUSES THE MAIN AREA TO BE COVERED BY THE NAV BAR,
+ EXTRA PADDING IS NEEDED TO FIX THAT ISSUE.*/
+@media only screen and (max-width: 600px) {
+    /*FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA*/
+    body {
+        padding-top: 150px;
+        padding-bottom: 150px;
+    }
+    /*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
+}
