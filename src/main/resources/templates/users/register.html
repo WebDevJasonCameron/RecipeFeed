@@ -10,7 +10,7 @@
 <div class="container d-flex align-items-center justify-content-center">
     <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
         <div th:replace="partials/partials.html :: header ('Create an Account')"></div>
-        <form th:action="@{/user/register}" method="POST" th:object="${user}">
+        <form th:action="@{/user/register}" method="POST" th:object="${user}" onsubmit="submitForm(event)">
             <div class="my-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" th:field="*{username}">
@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
                 <label for="confirm" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm" onmouseleave="validatePassword()">
+                <input type="password" class="form-control" id="confirm" >
             </div>
             <button id="submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
