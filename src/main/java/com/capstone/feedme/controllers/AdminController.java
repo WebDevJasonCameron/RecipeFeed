@@ -7,6 +7,7 @@ import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,7 +89,9 @@ public class AdminController {
                                                   @RequestParam(name = "category-type") String categoryType,
 
                                                   @RequestParam(name = "ingredient-name") String ingredientName,
-                                                  @RequestParam(name = "ingredient-original") String ingredientOriginal
+                                                  @RequestParam(name = "ingredient-original") String ingredientOriginal,
+
+                                                  Model model
     ){
 
         Recipe recipe;
@@ -181,6 +184,9 @@ public class AdminController {
             ingredients.get(i).setRecipe(recipe);
             ingredientDao.save(ingredients.get(i));
         }
+
+
+        model.addAttribute(recipe);
 
         return "/admin/admin-details-to-db";
     }

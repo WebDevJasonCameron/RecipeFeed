@@ -42,13 +42,64 @@ public class RecipeController {
         breakfastRecipesFinal.addAll((morningMealRecipes));
 
 
-
-
-
         model.addAttribute("breakfastRecipesFinal", breakfastRecipesFinal);
         model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
+
+    @GetMapping("/breakfast")
+    public String showMainRecipeBreakfastFeed(Model model){
+        List<Recipe> recipes = new ArrayList<>();
+
+        // breakfast
+        List<Recipe> breakfastRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("breakfast"));
+        List<Recipe> morningMealRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("morning meal"));
+
+        recipes.addAll((breakfastRecipes));
+        recipes.addAll((morningMealRecipes));
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
+    @GetMapping("/lunch")
+    public String showMainRecipeLunchFeed(Model model){
+
+        // lunch
+        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("lunch"));
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
+    @GetMapping("/dinner")
+    public String showMainRecipeDinnerFeed(Model model){
+
+        // dinner
+        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("dinner"));
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
+    @GetMapping("/dessert")
+    public String showMainRecipeDessertFeed(Model model){
+
+        // dessert
+        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("dessert"));
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
 
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
@@ -67,7 +118,6 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         return "/recipes/details";
     }
-
 
     @GetMapping("/create")
     public String createRecipe(Model model){

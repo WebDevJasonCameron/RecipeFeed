@@ -42,16 +42,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/recipes") // user's home page, it can be any URL
-                .permitAll(true) // Anyone can go to the login page
+                .permitAll() // Anyone can go to the login page
+
                 /* Logout configuration */
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout") // append a query string value
+
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/admin", "/admin/admin-details-to-db", "/admin/get-recipes", "/admin/get-details") // anyone can see the home and the recipe pages
+                .antMatchers("/", "/admin/**") // anyone can see the home and the recipe pages
                 .permitAll()
+
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()

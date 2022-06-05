@@ -1,9 +1,22 @@
 
 // CAT FILTER BUTTONS
-$('#breakfast-recipe-filter').on('click', function() {
-    console.log('click')
-    $('#feed').html(changeFeed('breakfastRecipeFinal'))
+// $('#all-recipe-filter').on('click', function() {
+//     console.log('click')
+//     $('#feed').html(changeFeed('recipes'))
+// })
+//
+// $('#breakfast-recipe-filter').on('click', function() {
+//     console.log('click')
+//     $('#feed').html(changeFeed('breakfastRecipesFinal'))
+// })
+
+$('#breakfast-recipe-filter').on('click', () => {
+    console.log('test click');
+    $('#feed').html(changeFeed('breakfastRecipesFinal'));
 })
+
+
+
 
 // CONSTRUCT FEED
 function changeFeed(newFeed){
