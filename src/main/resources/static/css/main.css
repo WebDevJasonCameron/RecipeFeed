@@ -1,3 +1,9 @@
-body {
-    padding-bottom: 150px;
+
+/* CAT FILTER BTN */
+.cat-filter-btn {
+    cursor: pointer;
+}
+
+.cat-filter-btn img:hover {
+    opacity: 0.5;
 }

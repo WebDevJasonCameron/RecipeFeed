@@ -7,6 +7,7 @@ import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,6 +65,11 @@ public class AdminController {
         return "/admin/admin-get-details";
     }
 
+    @GetMapping("/admin-details-to-db")
+    public String showRecipeDetailsToDb(){
+
+        return "/admin/admin-details-to-db";
+    }
 
     @PostMapping("/admin-details-to-db")
     public String enterComplexRecipeDetailsIntoDb(@RequestParam(name = "cid") long cid,
@@ -83,7 +89,9 @@ public class AdminController {
                                                   @RequestParam(name = "category-type") String categoryType,
 
                                                   @RequestParam(name = "ingredient-name") String ingredientName,
-                                                  @RequestParam(name = "ingredient-original") String ingredientOriginal
+                                                  @RequestParam(name = "ingredient-original") String ingredientOriginal,
+
+                                                  Model model
     ){
 
         Recipe recipe;
@@ -177,14 +185,13 @@ public class AdminController {
             ingredientDao.save(ingredients.get(i));
         }
 
-        return "redirect:/admin/admin-details-to-db";
-    }
 
-    @GetMapping("/admin-details-to-db")
-    public String showRecipeDetailsToDb(){
+        model.addAttribute(recipe);
 
         return "/admin/admin-details-to-db";
     }
+
+
 
 
 }

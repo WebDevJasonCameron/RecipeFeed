@@ -8,27 +8,28 @@
   <!--NAV-->
   <nav th:replace="/partials/partials.html :: navbar"></nav>
 
-  <!--HEADER-->
-  <section th:replace="/partials/partials.html :: header ('Amdin | Get Recipes')"></section>
+  <div class="container" style="margin-top: 100px">
 
-  <!--MAIN-->
-  <!--input form-->
-  <form id="get-recipe-list-form" class="form-inline my-2 my-lg-0">
-    <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search">
-    <button id="get-recipe-btn" class="btn btn-outline-success my-3 w-100" type="submit">Search</button>
-  </form>
-  <!--cards-->
-  <div class="container" id="recipe-results"></div>       <!--Rem, JS pops this-->
-  <!--details-->
-  <div class="container" id="recipe-details"></div>
+    <!--HEADER-->
+    <section th:replace="/partials/partials.html :: header ('Amdin | Get Recipes')"></section>
 
-  <!--MODAL-->
-  <div th:replace="/partials/partials.html :: recipe-details-modal"></div>
+    <!--MAIN-->
+    <!--input form-->
+    <form id="get-recipe-list-form" class="form-inline my-2 my-lg-0">
+      <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button id="get-recipe-btn" class="btn btn-outline-success my-3 w-100" type="submit">Search</button>
+    </form>
+    <!--cards-->
+    <div class="container" id="recipe-results"></div>       <!--Rem, JS pops this-->
+    <!--details-->
+    <div class="container" id="recipe-details"></div>
+
+    <!--MODAL-->
+    <div th:replace="/partials/partials.html :: recipe-details-modal"></div>
 
 
 
-
-
+  </div>
   <!--FOOTER-->
   <footer th:replace="/partials/partials.html :: footer"></footer>
 
