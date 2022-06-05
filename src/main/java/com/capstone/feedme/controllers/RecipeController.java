@@ -2,16 +2,14 @@ package com.capstone.feedme.controllers;
 
 import com.capstone.feedme.models.Category;
 import com.capstone.feedme.models.Recipe;
+import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 @Controller
@@ -21,22 +19,33 @@ public class RecipeController {
     // ATT
     private final RecipeRepository recipesDao;
     private final UserRepository usersDao;
+    private final CategoryRepository categoryDao;
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
+        this.categoryDao = categoryDao;
     }
-
-
 
     // METH
     @GetMapping
     public String showMainRecipeFeed(Model model){
         List<Recipe> recipes = recipesDao.findAll();
-
         Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
 
+        // breakfast
+        List<Recipe> breakfastRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("breakfast"));
+        List<Recipe> morningMealRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("morning meal"));
+        List<Recipe> breakfastRecipesFinal = new ArrayList<>();
+        breakfastRecipesFinal.addAll((breakfastRecipes));
+        breakfastRecipesFinal.addAll((morningMealRecipes));
+
+
+
+
+
+        model.addAttribute("breakfastRecipesFinal", breakfastRecipesFinal);
         model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
@@ -44,19 +53,18 @@ public class RecipeController {
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
                                    Model model){
-
         Recipe recipe = recipesDao.findRecipeById(id);
-        model.addAttribute(recipe);
-        return "/recipes/details";
-    }
 
+        // Used to get Similar Recipes (by their first cat type)
+        Category category = recipe.getRecipeCategories().get(0);
+        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
 
+        // NEED QUERY: Used to get Remix Recipes (find by apiId and userId is not null)
 
+        
 
-
-    @GetMapping("/details")
-    public String viewDetails(){
-        // will need to add request param to get recipe id
+        model.addAttribute("similarRecipes", similarRecipes);
+        model.addAttribute("recipe", recipe);
         return "/recipes/details";
     }
 

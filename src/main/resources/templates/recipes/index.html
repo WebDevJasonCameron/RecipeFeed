@@ -4,10 +4,14 @@
 
 <head th:replace="/partials/partials.html :: head ('Main Feed')"></head>
 <body>
+
     <!--NAV-->
     <nav th:replace="/partials/partials.html :: navbar"></nav>
 
     <div class="container" style="margin-top: 100px">
+
+
+
 
         <!--MAIN-->
         <div class="container w-75">
@@ -19,38 +23,47 @@
                         <div class="d-flex  overflow-hidden">        <!--fix with css and nicer icons-->
                             <!--BREAKFAST-->
                             <div class="mr-2">
-                                <img src="https://source.unsplash.com/random/200x200/?breakfast"
-                                     alt="random picture" class="img-fluid"
-                                     style="height: 100px; width: 100px; border-radius: 50%">
-                                <div class="text-center">
-                                    breakfast
+                                <div id="breakfast-recipe-filter" class="cat-filter-btn">
+                                    <img src="https://source.unsplash.com/random/200x200/?breakfast"
+                                         alt="random picture" class="img-fluid"
+                                         style="height: 100px; width: 100px; border-radius: 50%">
+                                    <div class="text-center">
+                                        breakfast
+                                    </div>
                                 </div>
                             </div>
                             <!--LUNCH-->
                             <div class="mx-2">
-                                <img src="https://source.unsplash.com/random/200x200/?lunch"
-                                     alt="random picture" class="img-fluid"
-                                     style="height: 100px; width: 100px; border-radius: 50%">
-                                <div class="text-center">
-                                    lunch
+                                <div id="lunch-recipe-filter" class="cat-filter-btn">
+                                    <img src="https://source.unsplash.com/random/200x200/?lunch"
+                                         alt="random picture" class="img-fluid"
+                                         style="height: 100px; width: 100px; border-radius: 50%">
+                                    <div class="text-center">
+                                        lunch
+                                    </div>
                                 </div>
                             </div>
                             <!--DINNER-->
                             <div class="mx-2">
-                                <img src="https://source.unsplash.com/random/200x200/?dinner"
-                                     alt="random picture" class="img-fluid"
-                                     style="height: 100px; width: 100px; border-radius: 50%">
-                                <div class="text-center">
-                                    dinner
+                                <div id="dinner-recipe-filter" class="cat-filter-btn">
+
+                                    <img src="https://source.unsplash.com/random/200x200/?dinner"
+                                             alt="random picture" class="img-fluid"
+                                             style="height: 100px; width: 100px; border-radius: 50%">
+                                    <div class="text-center">
+                                        dinner
+                                    </div>
                                 </div>
                             </div>
                             <!--BRUNCH-->
                             <div class="mx-2">
-                                <img src="https://source.unsplash.com/random/200x200/?brunch"
-                                     alt="random picture" class="img-fluid"
-                                     style="height: 100px; width: 100px; border-radius: 50%">
-                                <div class="text-center">
-                                    brunch
+                                <div id="brunch-recipe-filter" class="cat-filter-btn">
+                                    <img src="https://source.unsplash.com/random/200x200/?brunch"
+                                             alt="random picture" class="img-fluid"
+                                             style="height: 100px; width: 100px; border-radius: 50%">
+                                    <div class="text-center">
+                                        brunch
+                                    </div>
                                 </div>
                             </div>
                             <!--MAIN DISH-->
@@ -65,85 +78,87 @@
 
                         </div>
                     </div>
-                    <!--CARDS-->
-                    <div th:each="recipe: ${recipes}">
-
-                        <div class="card mt-3">
-                            <!--CARD HEADER-->
-                            <div class="card-header">
-                                <div class="row">
-                                    <!--AVATAR-->
-                                    <div class="col-2">
-                                        <img src="https://source.unsplash.com/random/50x50/?raccoon" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
-                                    </div>
-                                    <!--USERNAME-->
-                                    <div class="col-10 d-flex align-items-center">
-                                        <div>
+                    <!--CARDS | ALL RECIPES-->
+                    <div id="feed" >
+                        <div th:each="recipe: ${recipes}">
+                            <div class="card mt-3">
+                                <!--CARD HEADER-->
+                                <div class="card-header">
+                                    <div class="row">
+                                        <!--AVATAR-->
+                                        <div class="col-2">
+                                            <img src="https://source.unsplash.com/random/50x50/?raccoon" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                        </div>
+                                        <!--USERNAME-->
+                                        <div class="col-10 d-flex align-items-center">
                                             <div>
-                                                <strong th:text="${recipe.user != null}? ${recipe.user.username} : 'Feed.'" >username</strong>
-                                            </div>
-                                            <div th:each="cat: ${recipe.recipeCategories}" class="d-inline-block">
-                                                <div class="small text-muted mx-1">
-                                                    <span th:text="${cat.type}">category</span>
+                                                <div>
+                                                    <strong th:text="${recipe.user != null}? ${recipe.user.username} : 'Feed.'" >username</strong>
+                                                </div>
+                                                <div th:each="cat: ${recipe.recipeCategories}" class="d-inline-block">
+                                                    <div class="small text-muted mx-1">
+                                                        <span th:text="${cat.type}">category</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--BODY-->
-                            <div class="class-body">
-                                <!--IMG-->
-                                <div>
-                                    <a th:href="@{/recipes/details/{id}(id=${recipe.id})}">
-                                        <img th:src="${recipe.imgUrl}" alt="${img.getImageTitle()}" class="img-thumbnail" style="width: 100%">
-                                    </a>
+                                <!--BODY-->
+                                <div class="class-body">
+                                    <!--IMG-->
+                                    <div>
+                                        <a th:href="@{/recipes/details/{id}(id=${recipe.id})}">
+                                            <img th:src="${recipe.imgUrl}" alt="${img.getImageTitle()}" class="img-thumbnail" style="width: 100%">
+                                        </a>
+                                    </div>
+                                    <!--ICON LINKS-->
+                                    <div class="d-flex d-inline-block p-1">
+                                        <div>
+                                            <a href="#"><i class="fa-regular fa-heart fa-2x p-2"></i></a>
+                                        </div>
+                                        <div>
+                                            <a th:href="@{/recipes/details/{id}(id=${recipe.id})}"><i class="fa-solid fa-list-check fa-2x p-2"></i></a>
+                                        </div>
+                                        <div>
+                                            <a href="#"><i class="fa-regular fa-paper-plane fa-2x p-2"></i></a>
+                                        </div>
+                                        <div style="margin-left: auto">
+                                            <a href="#"><i class="fa-regular fa-bookmark fa-2x p-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--LIKES and TITLE-->
+                                    <div class="p-3">
+                                        <div class="small text-muted">
+                                            # of likes
+                                        </div>
+                                        <div>
+                                            <span th:text="${recipe.title}">Title of Recipe</span>
+                                        </div>
+                                        <div class="small text-muted">
+                                            # of Comments
+                                        </div>
+                                    </div>
                                 </div>
-                                <!--ICON LINKS-->
-                                <div class="d-flex d-inline-block p-1">
-                                    <div>
-                                        <a href="#"><i class="fa-regular fa-heart fa-2x p-2"></i></a>
-                                    </div>
-                                    <div>
-                                        <a th:href="@{/recipes/details/{id}(id=${recipe.id})}"><i class="fa-solid fa-list-check fa-2x p-2"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="#"><i class="fa-regular fa-paper-plane fa-2x p-2"></i></a>
-                                    </div>
-                                    <div style="margin-left: auto">
-                                        <a href="#"><i class="fa-regular fa-bookmark fa-2x p-2"></i></a>
-                                    </div>
-                                </div>
-                                <!--LIKES and TITLE-->
-                                <div class="p-3">
-                                    <div class="small text-muted">
-                                        # of likes
-                                    </div>
-                                    <div>
-                                        <span th:text="${recipe.title}">Title of Recipe</span>
-                                    </div>
-                                    <div class="small text-muted">
-                                        # of Comments
-                                    </div>
-                                </div>
-                            </div>
-                            <!--FOOTER-->
-                            <div class="card-footer">
-                                <div class="d-flex d-inline-block">
-                                    <div>
-                                        <i class="fa-regular fa-face-smile fa-2x pt-1 pr-1"></i>
-                                    </div>
-                                    <div class="input-group w-100 pl-2">
-                                        <div class="form-outline w-100 "> <!--Add Form action and method-->
-                                            <input id="comment" type="Add a comment" class="form-control border-0" placeholder="Add a comment..." />
+                                <!--FOOTER-->
+                                <div class="card-footer">
+                                    <div class="d-flex d-inline-block">
+                                        <div>
+                                            <i class="fa-regular fa-face-smile fa-2x pt-1 pr-1"></i>
+                                        </div>
+                                        <div class="input-group w-100 pl-2">
+                                            <div class="form-outline w-100 "> <!--Add Form action and method-->
+                                                <input id="a-comment" type="Add a comment" class="form-control border-0" placeholder="Add a comment..." />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
+
                 <!--PROFILE STUFF-->
                 <div class="col-4">
                     <div class="card-header">
@@ -155,9 +170,10 @@
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <div>
-                                    <div>
-                                        <strong>username</strong>
+                                    <div sec:authorize="isAuthenticated()">
+                                        <strong><span th:text="${#authentication.principal.username}"/></strong><br>
                                     </div>
+
                                     <div class="text-muted">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     </div>
@@ -195,5 +211,8 @@
 
     <!--SCRIPTS-->
     <section th:replace="/partials/partials.html :: script-section"></section>
+    <script th:src="@{/js/main-feed.js}"></script>
+
+
 </body>
 </html>

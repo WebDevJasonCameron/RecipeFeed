@@ -64,6 +64,11 @@ public class AdminController {
         return "/admin/admin-get-details";
     }
 
+    @GetMapping("/admin-details-to-db")
+    public String showRecipeDetailsToDb(){
+
+        return "/admin/admin-details-to-db";
+    }
 
     @PostMapping("/admin-details-to-db")
     public String enterComplexRecipeDetailsIntoDb(@RequestParam(name = "cid") long cid,
@@ -177,14 +182,10 @@ public class AdminController {
             ingredientDao.save(ingredients.get(i));
         }
 
-        return "redirect:/admin/admin-details-to-db";
-    }
-
-    @GetMapping("/admin-details-to-db")
-    public String showRecipeDetailsToDb(){
-
         return "/admin/admin-details-to-db";
     }
+
+
 
 
 }
