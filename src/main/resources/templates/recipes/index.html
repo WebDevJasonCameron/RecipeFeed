@@ -13,89 +13,132 @@
 
         <!--MAIN-->
         <div class="container w-75">
+            <!--CATEGORIES-->
+            <div id="categories-container" class="d-inline-flex overflow-auto justify-content-between w-100"
+                 style="height: 120px;">
+                <!--ALL-->
+                <div class="mr-2 cat-contents">
+                    <div id="all-recipe-filter" class="cat-filter-btn">
+                        <a href="/recipes">
+                            <img src="https://source.unsplash.com/random/200x200/?food"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                all
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!--BREAKFAST-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/breakfast">
+                        <div id="breakfast-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?breakfast"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                breakfast
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--LUNCH-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/lunch">
+                        <div id="lunch-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?lunch"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                lunch
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--DINNER-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/dinner">
+                        <div id="dinner-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?dinner"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                dinner
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--DESSERT-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/dessert">
+                        <div id="brunch-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?dessert"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                dessert
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--MAIN DISH-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/main-course">
+                        <div id="main-dish-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?plate"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                main
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--APPETIZER-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/appetizer">
+                        <div id="appetizer-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?appetizer"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                appetizer
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--SIDES-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/sides">
+                        <div id="sides-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?soup"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                side dishes
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--DIP & SAUCE-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/dips-and-sauces">
+                        <div id="dips-and-sauces-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?sauces"
+                                 alt="random picture" class="img-fluid"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                               dips & sauces
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
             <div class="row mt-3">
                 <!--FEED.-->
                 <div class="col-8">
-                    <!--CATEGORIES-->
-                    <div class="container">
-                        <div class="d-flex overflow-hidden justify-content-between">        <!--fix with css and nicer icons-->
-                            <!--ALL-->
-                            <div class="mr-2">
-                                <div id="all-recipe-filter" class="cat-filter-btn">
-                                    <a href="/recipes">
-                                        <img src="https://source.unsplash.com/random/200x200/?food"
-                                             alt="random picture" class="img-fluid"
-                                             style="height: 100px; width: 100px; border-radius: 50%">
-                                        <div class="text-center">
-                                            all
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <!--BREAKFAST-->
-                            <div class="mx-2">
-                                <a href="/recipes/breakfast">
-                                    <div id="breakfast-recipe-filter" class="cat-filter-btn">
-                                        <img src="https://source.unsplash.com/random/200x200/?breakfast"
-                                             alt="random picture" class="img-fluid"
-                                             style="height: 100px; width: 100px; border-radius: 50%">
-                                        <div class="text-center">
-                                            breakfast
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!--LUNCH-->
-                            <div class="mx-2">
-                                <a href="/recipes/lunch">
-                                    <div id="lunch-recipe-filter" class="cat-filter-btn">
-                                        <img src="https://source.unsplash.com/random/200x200/?lunch"
-                                             alt="random picture" class="img-fluid"
-                                             style="height: 100px; width: 100px; border-radius: 50%">
-                                        <div class="text-center">
-                                            lunch
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!--DINNER-->
-                            <div class="mx-2">
-                                <a href="/recipes/dinner">
-                                    <div id="dinner-recipe-filter" class="cat-filter-btn">
-                                        <img src="https://source.unsplash.com/random/200x200/?dinner"
-                                                 alt="random picture" class="img-fluid"
-                                                 style="height: 100px; width: 100px; border-radius: 50%">
-                                        <div class="text-center">
-                                            dinner
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!--DESSERT-->
-                            <div class="mx-2">
-                                <a href="/recipes/dessert">
-                                    <div id="brunch-recipe-filter" class="cat-filter-btn">
-                                        <img src="https://source.unsplash.com/random/200x200/?dessert"
-                                                 alt="random picture" class="img-fluid"
-                                                 style="height: 100px; width: 100px; border-radius: 50%">
-                                        <div class="text-center">
-                                            dessert
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <!--MAIN DISH-->
-
-                            <!--APPETIZER-->
-
-                            <!--BRUNCH-->
-
-                            <!--DIP-->
-
-                            <!--SAUCE-->
-
-                        </div>
-                    </div>
                     <!--CARDS | ALL RECIPES-->
                     <div id="feed" >
                         <div th:each="recipe: ${recipes}">

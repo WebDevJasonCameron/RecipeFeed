@@ -54,9 +54,11 @@ public class RecipeController {
         // breakfast
         List<Recipe> breakfastRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("breakfast"));
         List<Recipe> morningMealRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("morning meal"));
+        List<Recipe> brunchRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("brunch"));
 
-        recipes.addAll((breakfastRecipes));
-        recipes.addAll((morningMealRecipes));
+        recipes.addAll(breakfastRecipes);
+        recipes.addAll(morningMealRecipes);
+        recipes.addAll(brunchRecipes);
 
         Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
 
@@ -67,8 +69,14 @@ public class RecipeController {
     @GetMapping("/lunch")
     public String showMainRecipeLunchFeed(Model model){
 
+        List<Recipe> recipes = new ArrayList<>();
+
         // lunch
-        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("lunch"));
+        List<Recipe> lunchRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("lunch"));
+        List<Recipe> brunchRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("brunch"));
+
+        recipes.addAll(lunchRecipes);
+        recipes.addAll(brunchRecipes);
 
         Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
 
@@ -99,6 +107,86 @@ public class RecipeController {
         model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
+
+    @GetMapping("/main-course")
+    public String showMainRecipeMainCourseFeed(Model model){
+        List<Recipe> recipes = new ArrayList<>();
+
+        // breakfast
+        List<Recipe> mainDishRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("main dish"));
+        List<Recipe> mainCourseRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("main course"));
+
+        recipes.addAll((mainDishRecipes));
+        recipes.addAll((mainCourseRecipes));
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
+    @GetMapping("/appetizer")
+    public String showMainRecipeAppetizerFeed(Model model){
+        List<Recipe> recipes = new ArrayList<>();
+
+        // breakfast
+        List<Recipe> starterRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("starter"));
+        List<Recipe> appetizerRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("appetizer"));
+        List<Recipe> fingerFoodRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("fingerfood"));
+
+        recipes.addAll(starterRecipes);
+        recipes.addAll(appetizerRecipes);
+        recipes.addAll(fingerFoodRecipes);
+
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
+    @GetMapping("/sides")
+    public String showMainRecipeSidesFeed(Model model){
+        List<Recipe> recipes = new ArrayList<>();
+
+        // breakfast
+        List<Recipe> soupRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("soup"));
+        List<Recipe> sideDishRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("side dish"));
+        List<Recipe> saladRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("salad"));
+        List<Recipe> fingerFoodRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("fingerfood"));
+
+        recipes.addAll(soupRecipes);
+        recipes.addAll(sideDishRecipes);
+        recipes.addAll(saladRecipes);
+        recipes.addAll(fingerFoodRecipes);
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
+    @GetMapping("/dips-and-sauces")
+    public String showMainRecipeDipsAndSaucesFeed(Model model){
+        List<Recipe> recipes = new ArrayList<>();
+
+        // breakfast
+        List<Recipe> condimentRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("condiment"));
+        List<Recipe> dipRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("dip"));
+        List<Recipe> sauceRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("sauce"));
+        List<Recipe> spreadRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("spread"));
+
+        recipes.addAll(condimentRecipes);
+        recipes.addAll(dipRecipes);
+        recipes.addAll(sauceRecipes);
+        recipes.addAll(spreadRecipes);
+
+        Collections.shuffle(recipes);                   // Randomize feed to keep thing fresh
+
+        model.addAttribute("recipes", recipes);
+        return "recipes/index";
+    }
+
 
 
     @GetMapping("/details/{id}")
