@@ -7,3 +7,9 @@
 .cat-filter-btn img:hover {
     opacity: 0.5;
 }
+
+/* CAT CONTAINER*/
+.cat-contents {
+    height: 100px;
+    width: 100px;
+}
