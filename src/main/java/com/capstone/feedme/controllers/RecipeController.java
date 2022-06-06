@@ -190,8 +190,9 @@ public class RecipeController {
 
 
     @GetMapping("/details/{id}")
-    public String showRecipeDetail(@PathVariable long id,
-                                   Model model){
+    public String showRecipeDetail(
+            @PathVariable long id,
+            Model model){
         Recipe recipe = recipesDao.findRecipeById(id);
 
         // Used to get Similar Recipes (by their first cat type)
@@ -212,6 +213,50 @@ public class RecipeController {
         model.addAttribute("recipe", new Recipe());
         return "/recipes/create";
     }
+
+    @PostMapping("/create")
+    public String publishAd(
+            @RequestParam(name= "imgUrl") String imgUrl,
+            @RequestParam(name = "apiId") long apiId,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "summary") String summary,
+            @RequestParam(name = "instruction") String instruction,
+            @RequestParam(name = "readyInMin") String readyInMin,
+            @RequestParam(name = "servingAmount") String servingAmount,
+            @RequestParam(name = "sourceName") String sourceName,
+            @RequestParam(name = "sourceUrl") String sourceUrl,
+            @RequestParam(name = "video_url") String video_url,
+//            @RequestParam(name = "dairyFree") boolean dairyFree ,
+//            @RequestParam(name = "glutenFree") boolean glutenFree ,
+//            @RequestParam(name = "vegan") boolean vegan,
+//            @RequestParam(name = "vegetarian") boolean vegetarian,
+
+            Model model
+    ) {
+        Recipe recipe = new Recipe();
+        recipe.setImgUrl(imgUrl);
+        recipe.setApiId(apiId);
+        recipe.setTitle(title);
+        recipe.setSummary(summary);
+        recipe.setInstruction(instruction);
+        recipe.setReadyInMin(readyInMin);
+        recipe.setServingAmount(servingAmount);
+        recipe.setSourceName(sourceName);
+        recipe.setSourceUrl(sourceUrl);
+        recipe.setVideo_url(video_url);
+//        recipe.setDairyFree(dairyFree);
+//        recipe.setGlutenFree(glutenFree);
+//        recipe.setVegan(vegan);
+//        recipe.setVegetarian(vegetarian);
+        recipesDao.save(recipe);
+
+        model.addAttribute("recipe", recipe);
+        return "redirect:/recipes";
+    }
+
+
+
+
 
     @PostMapping("/delete")
     public String deleteRecipe(@ModelAttribute Recipe recipe
