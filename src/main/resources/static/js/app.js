@@ -1,6 +1,7 @@
 // VARS, ARRAYS AND LISTS
 let recipeListReturns;
 let recipeDetails;
+let startingOffset = 0;
 
 /**
  *   PAGE ACTIONS
@@ -8,12 +9,19 @@ let recipeDetails;
 // SEARCH BTN ACTION
 $('#find-more-from-api-btn').on('click', (e) => {
     e.preventDefault();
-    getSpoonRecipeListByKeyWord($('#search-input').val())
+    startingOffset += 50;
+    getSpoonRecipeListByKeyWord($('#search-input').val());
+    scrollToTop();
 })
 
 // ACCESS MODAL
 function seeRecipeDetails(id){
-    getSpoonRecipeDetailsByID(id)
+    getSpoonRecipeDetailsByID(id);
+}
+
+// SCROLL TO TOP
+function scrollToTop() {
+    window.scrollTo(0, 0);
 }
 
 
@@ -26,7 +34,7 @@ function getSpoonRecipeListByKeyWord(kw){
     // const apiKey = SPOON_KEY_02;
     // const apiKey = SPOON_KEY_03;
 
-    const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=10&number=50';
+    const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=' + startingOffset + '&number=50';
     const readOption = {
         method: 'GET',
     };
@@ -34,7 +42,7 @@ function getSpoonRecipeListByKeyWord(kw){
     fetch(spoonURL, readOption)
         .then((res) => res.json())
         .then((data) => {
-            // console.log(data);
+            console.log(data);
             recipeListReturns = data;
         }).then(() => {
         $('#feed').html(combineCards(recipeListReturns));
@@ -75,22 +83,22 @@ function makeCard(r){
     return  `
         <div class="card border-0 mt-4">
             <div class="row no-gutters">
-                <div class="col-sm-3">
-                    <img src="${r.image}" alt="#" class="card-img-top">
+                <div class="col-sm-7">
+                    <img 
+                        src="${r.image}" 
+                        alt="image of ${r.title}" 
+                        class="card-img-top">
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-5">
                     <div class="card-body">
-                        <div class="card-title">
+                        <div class="card-title h4">
                             ${r.title}
-                        </div>
-                        <div class="h4">
-                             ${r.id}
                         </div>
                     </div>
                     <div class="card-footer">
                         <button 
                             onclick="seeRecipeDetails(${r.id})"
-                            class="btn btn-primary" 
+                            class="btn btn-secondary w-100" 
                             type="button" 
                             data-toggle="modal" 
                             data-target="#recipe-details-modal"
@@ -124,12 +132,21 @@ function makeModalBody(r){
                     <!--body-->
                     <div class="modal-body">
                         <h4>${r.title}</h4>
-                        <ul>
-                            <li>${r.summary}</li>
-                            <li>${r.instructions}</li>
-                            <li>Time: ${r.readyInMinutes}</li> 
-                        </ul>
-                        <h4>Ingredients</h4>
+                            <div>
+                                <div class="h4">
+                                    Summary:
+                                </div>
+                                ${r.summary}
+                            </div>
+                            <div>
+                                <div class="h4 mt-2">
+                                    Instructions:
+                                </div>
+                                ${r.instructions}
+                            </div>
+                            <div><strong>Ready in</strong> ${r.readyInMinutes} minutes</div> 
+                        
+                        <h4 class="mt-2">Ingredients</h4>
                         <ol> 
                         
                         
@@ -148,7 +165,7 @@ function makeModalBody(r){
 
                     </div>
                     <!--footer-->
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex justify-content-between">
                         <div>
                             <small>Source:
                                 <a href="${r.sourceUrl}" alt="source link">${r.sourceName}</a>
@@ -195,7 +212,7 @@ function makeModalBody(r){
                                 <button 
                                     class="btn btn-primary" 
                                     type="submit">
-                                        Add to DB
+                                        Add to Your Feed
                                 </button>
                             </div>
                         </form>
