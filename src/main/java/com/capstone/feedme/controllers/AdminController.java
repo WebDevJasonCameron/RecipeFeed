@@ -8,10 +8,7 @@ import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,6 +189,15 @@ public class AdminController {
     }
 
 
+    @GetMapping("/get-recipe-titles")
+    @ResponseBody
+    public List<Recipe> getRecipeTitlesWithAjax(){
+
+        System.out.println("Made it to the fetching spot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+        return recipeDao.findAll();
+    }
 
 
 }

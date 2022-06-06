@@ -1,5 +1,8 @@
 package com.capstone.feedme.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,10 +20,12 @@ public class Rating {
 
     @ManyToOne                              // Many ratings per one user
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToOne                              // Many ratings per one recipe
     @JoinColumn(name = "recipe_id")
+    @JsonBackReference
     private Recipe recipe;
 
     // CON

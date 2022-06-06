@@ -1,4 +1,6 @@
 package com.capstone.feedme.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,10 +21,12 @@ public class Comment {
 
     @ManyToOne                              // Many comments per one user
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToOne                              // Many comments per one recipe
     @JoinColumn(name = "recipe_id")
+    @JsonBackReference
     private Recipe recipe;
 
 
