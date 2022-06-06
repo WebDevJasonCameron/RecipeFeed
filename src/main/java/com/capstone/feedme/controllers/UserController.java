@@ -41,9 +41,15 @@ public class UserController {
         return "profiles/index";
     }
 
-    @GetMapping("/profile/edit")
+    @GetMapping("/edit")
     public String editProfile(){
         return "profiles/edit";
+    }
+
+
+    @GetMapping("/favorites")
+    public String userFavorites(){
+        return "profiles/favorites";
     }
 
     @PostMapping("/delete")
