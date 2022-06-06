@@ -1,5 +1,6 @@
 package com.capstone.feedme.models;
 import org.hibernate.annotations.Type;
+import javax.validation.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,10 +15,13 @@ public class User {
     @Column(name = "id" )
     private long id;
     @Column(name = "username" ,nullable = false, length = 50)
+    @NotBlank(message = "Please enter your username")
     private String username;
     @Column(name = "email" ,nullable = false, length = 100)
+    @NotBlank(message = "Please enter your email")
     private String email;
     @Column(name = "password" ,nullable = false, length = 500)
+    @NotBlank(message = "Please enter a password")
     private String password;
     @Column(name = "avatar" ,length = 500)
     private String avatar;

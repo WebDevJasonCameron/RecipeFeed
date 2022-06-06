@@ -13,16 +13,19 @@
         <form th:action="@{/user/register}" method="POST" th:object="${user}" onsubmit="submitForm(event)">
             <div class="my-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" th:field="*{username}">
+                <input type="text" class="form-control" id="username" th:field="*{username}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" th:field="*{password}">
+                <input type="password" class="form-control" id="password" th:field="*{password}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
             </div>
             <div class="mb-3">
                 <label for="confirm" class="form-label">Confirm Password</label>
