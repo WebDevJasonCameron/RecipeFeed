@@ -192,6 +192,7 @@ public class RecipeController {
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
                                    Model model){
+
         Recipe recipe = recipesDao.findRecipeById(id);
 
         // Used to get Similar Recipes (by their first cat type)
