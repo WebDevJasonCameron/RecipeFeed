@@ -4,74 +4,45 @@
 
     <head th:replace="/partials/partials.html :: head ('Home Test')"></head>
     <body>
-    <div class="container">
         <!--NAV-->
         <nav th:replace="/partials/partials.html :: navbar"></nav>
-
         <!--HEADER-->
         <section th:replace="/partials/partials.html :: header('Home Test')"></section>
-
         <!--MAIN-->
-        <br>
-        <br>
-        <div class="container">
-            <div class="card mb-3" style="width: 1265px; height: 600px; border: hidden; background-color: lightcyan">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="https://source.unsplash.com/random/561x561/?pizza" class="card-img" style="width: 750px; height: 600px" alt="Responsive image">
+            <div class="card firstCard d-flex flex-row-reverse flex-wrap">
+                    <div class="col-6">
+                        <img src="https://source.unsplash.com/random/561x561/?pizza" class="card-img float-end" alt="Responsive image">
                     </div>
-                    <div class="col-md-8">
+                     <div class="col-6">
+                            <h5 class="card-title">(First Card)</h5>
+                            <p class="card-text font-italic">(First Card) Move writing to the left</p>
+                            <p class="card-text"><small class="text-muted"></small></p>
+                     </div>
+            </div>
+            <div class="card secondCard d-flex flex-row flex-wrap">
+                <div class="row no-gutters">
+                    <div class="col-6">
+                        <img src="https://source.unsplash.com/random/561x561/?tacos" class="card-img" alt="...">
+                    </div>
+                    <div class="col-6">
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text font-italic">Move writing to the left</p>
+                            <h5 class="card-title">(Second Card)</h5>
+                            <p class="card-text font-italic">(Second Card) Move writing to the right</p>
                             <p class="card-text"><small class="text-muted"></small></p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="container">
-            <div class="card mb-3" style="width: 1265px; height: 600px; border: hidden;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="https://source.unsplash.com/random/561x561/?tacos" class="card-img" style="width: 750px; height: 600px" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text font-italic">Move writing to the right</p>
-                            <p class="card-text"><small class="text-muted"></small></p>
-                        </div>
-                    </div>
-                </div>
+        <div class="card thirdCard d-flex flex-row-reverse flex-wrap">
+            <div class="col-6">
+                <img src="https://source.unsplash.com/random/561x561/?pizza" class="card-img float-end" alt="Responsive image">
+            </div>
+            <div class="col-6">
+                <h5 class="card-title">(Third Card)</h5>
+                <p class="card-text font-italic">(Third Card) Move writing to the left</p>
+                <p class="card-text"><small class="text-muted"></small></p>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <div class="container">
-            <div class="card mb-3" style="width: 1265px; height: 600px; border: hidden; background-color: lightcyan">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="https://source.unsplash.com/random/561x561/?breakfast" class="card-img" style="width: 750px; height: 600px" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text font-italic">Move writing to the left</p>
-                            <p class="card-text"><small class="text-muted"></small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-
-
 
 
         <!--FOOTER-->

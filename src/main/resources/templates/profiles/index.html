@@ -10,16 +10,41 @@
 
     <!--HEADER-->
     <div class="text-center pt-5">
-    <section th:replace="/partials/partials.html :: header('Profile Page')"></section>
+<!--    <section th:replace="/partials/partials.html :: header('Profile Page')"></section>-->
     </div>
 
     <!--MAIN-->
-    <img src="https://images.pexels.com/photos/3629537/pexels-photo-3629537.jpeg" class="w-25 rounded-circle mx-auto d-block" alt="lady holding a spinach plant over her face">
-<!--    <th:span th:each="user : ${post.user}">-->
-<!--    <p th:text="${user}"></p>-->
-<!--    </th:span>-->
+    <div class="text-center d-flex flex-wrap">
 
+    <a th:href="@{/user/profile}" class="col-12">
+        <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle mb-3">
+    </a>
+    <div sec:authorize="isAuthenticated()" class="col-12">
+        <h1><span th:text="${#authentication.principal.username}"/></h1><br>
+    </div>
+        <section class="col-12">
 
+                    <a class="btn border-0" type="submit" th:href="@{/user/edit}">
+                        Edit Profile
+                    </a>
+                    |
+            <a class="btn border-0" type="submit" th:href="@{/admin/get-recipes}">
+                Add Recipe
+            </a>
+            |
+                    <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
+                    Create Recipe
+                    </a>
+                    |
+                    <a class="btn border-0" type="submit" th:href="@{/user/favorites}">
+                        View Favorites
+                    </a>
+            |
+            <a class="btn border-0" type="submit" th:href="@{/recipes}">
+                Main Feed
+            </a>
+        </section>
+    </div>
 
 
 
