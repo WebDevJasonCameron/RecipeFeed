@@ -1,4 +1,7 @@
 package com.capstone.feedme.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 import java.util.List;
@@ -44,16 +47,20 @@ public class Recipe {
     private String video_url;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
+    @JsonManagedReference
     private List<Ingredient> ingredients;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToMany(mappedBy = "userFavorites")      // NON OWNER
+    @JsonBackReference
     private List<User> userFavorites;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // OWNER <--REMEMBER: API has this as "dishType"
+    @JsonManagedReference
     @JoinTable(
             name = "recipe_categories",
             joinColumns = {@JoinColumn(name = "recipe_id")},

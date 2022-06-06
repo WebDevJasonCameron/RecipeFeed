@@ -1,4 +1,6 @@
 package com.capstone.feedme.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class Category {
     private String type;
 
     @ManyToMany(mappedBy = "recipeCategories")             // NON OWNER
+    @JsonBackReference
     private List<Recipe> recipes;
 
 

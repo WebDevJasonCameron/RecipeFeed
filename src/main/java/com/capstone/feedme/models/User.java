@@ -1,4 +1,5 @@
 package com.capstone.feedme.models;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 import javax.validation.constraints.NotBlank;
 
@@ -30,15 +31,19 @@ public class User {
     private String bio;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // recipes
+    @JsonManagedReference
     private List<Recipe> userRecipes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // comments
+    @JsonManagedReference
     private List<Comment> userComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // ratings
+    @JsonManagedReference
     private List<Rating> userRatings;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})                     // OWNER: favorites
+    @JsonManagedReference
     @JoinTable(
             name = "user_favorites",
             joinColumns = {@JoinColumn(name = "user_id")},

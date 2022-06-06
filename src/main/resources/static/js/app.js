@@ -14,6 +14,14 @@ $('#find-more-from-api-btn').on('click', (e) => {
     scrollToTop();
 })
 
+// LOCAL AJAX TEST
+$('#test-local-ajax-request').on('click', (e) => {
+    e.preventDefault();
+    console.log("local ajax click");
+    testLocalAjaxRequest()
+
+})
+
 // ACCESS MODAL
 function seeRecipeDetails(id){
     getSpoonRecipeDetailsByID(id);
@@ -30,8 +38,8 @@ function scrollToTop() {
  */
 // GET R LIST
 function getSpoonRecipeListByKeyWord(kw){
-    const apiKey = SPOON_KEY_01;
-    // const apiKey = SPOON_KEY_02;
+    // const apiKey = SPOON_KEY_01;
+    const apiKey = SPOON_KEY_02;
     // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=' + startingOffset + '&number=50';
@@ -51,8 +59,8 @@ function getSpoonRecipeListByKeyWord(kw){
 
 // GET R DETAILS
 function getSpoonRecipeDetailsByID(cid){
-    const apiKey = SPOON_KEY_01;
-    // const apiKey = SPOON_KEY_02;
+    // const apiKey = SPOON_KEY_01;
+    const apiKey = SPOON_KEY_02;
     // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/' + cid + '/information?apiKey=' + apiKey;
@@ -72,7 +80,19 @@ function getSpoonRecipeDetailsByID(cid){
         });
 }
 
+// TEST LOCAL AJAX REQ
+function testLocalAjaxRequest(){
+    const url = 'http://localhost:8080/admin/get-recipe-titles';
+    const readOption = {
+        method: 'GET',
+    };
 
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        });
+}
 
 
 /**

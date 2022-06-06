@@ -20,6 +20,7 @@ public class Ingredient {
 
     @ManyToOne                              // Many ingredients per one recipe
     @JoinColumn(name = "recipe_id")
+    @JsonBackReference
     private Recipe recipe;
 
 
