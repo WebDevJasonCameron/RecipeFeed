@@ -11,7 +11,8 @@
     <!--FAVICON-->
     <link rel="shortcut icon" th:href="@{/img/MoonPatch_v001.svg}" type="image/x-icon">
     <!--BOOTSTRAP-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!--MAIN CSS-->
     <link rel="stylesheet" th:href="@{/css/main.css}">
 
@@ -25,46 +26,45 @@
 <body>
 
 <!--NAVBAR-->
-<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-dark text-light fixed-top">
-    <div class="d-flex container-fluid">
-        <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-light">FeedMe</h1></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav th:fragment="navbar" class="navbar navbar-dark bg-dark text-light fixed-top">
+    <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-light">FeedMe</h1></a>
 
-        <div sec:authorize="!isAuthenticated()">
-            <form class="d-flex px-2" role="search">
-                <a class="btn btn-outline-success" type="submit" th:href="@{/login}">Log In</a>
-            </form>
-            <form class="d-flex px-2" role="search">
-                <a class="btn btn-outline-success" type="submit" th:href="@{/user/register}">Register</a>
-            </form>
+
+    <!--    LOGIN/REGISTER-->
+    <div sec:authorize="!isAuthenticated()" class="d-flex flex-row">
+        <form class="col px-2" role="search">
+            <a class="btn btn-outline-success" type="submit" th:href="@{/login}">Log In</a>
+        </form>
+        <form class="col px-2" role="search">
+            <a class="btn btn-outline-success" type="submit" th:href="@{/user/register}">Register</a>
+        </form>
+    </div>
+
+    <!--    LOGOUT/SEARCH-->
+    <div sec:authorize="isAuthenticated()" class="d-flex flex-row">
+        <form th:action="@{/logout}" th:method="post" class="col px-2">
+            <button class="btn btn-outline-success" style="margin-top: 8px">Logout</button>
+        </form>
+        <p class="col text-nowrap">Welcome, <span th:text="${#authentication.principal.username}"/>!</p><br>
+    </div>
+
+<!--    <form class="col px-2" role="search">-->
+<!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--        <a class="btn btn-outline-success" type="submit">Search</a>-->
+<!--    </form>-->
+<!--    <br>-->
+
+    <li sec:authorize="isAuthenticated()" class="nav-item dropdown list-unstyled px-5">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+            Recipe Items
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/user/profile">user profile</a>
+            <a class="dropdown-item" href="/recipes">Main Feed</a>
         </div>
+    </li>
 
-        <div sec:authorize="isAuthenticated()">
-            <form class="d-flex px-2" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form><br>
-            Welcome <span th:text="${#authentication.principal.username}"/><br>
-            <form th:action="@{/logout}" th:method="post">
-                <button class="btn btn-outline-success" style="margin-top: 8px">Logout</button>
-            </form>
-        </div>
 
-        <li class="nav-item dropdown list-unstyled">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                Recipe Items
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="/admin">admin</a>
-                <a class="dropdown-item" href="/admin/get-recipes">Get Recipes</a>
-                <a class="dropdown-item" href="/admin/get-details">Get Full Recipe</a>
-                <a class="dropdown-item" href="/user/profile">user profile</a>
-                <a class="dropdown-item" href="/recipes">Main Feed</a>
-                <a class="dropdown-item" href="/recipes/details">user recipe details</a>
-            </div>
-        </li>
     </div>
 </nav>
 
@@ -84,7 +84,7 @@
                 </button>
             </div>
             <!--JS MODAL CONTENT HERE-->
-            <div  id="recipe-details-modal-content" >
+            <div id="recipe-details-modal-content">
                 <!--header-->
                 <div class="modal-header">
                     <img src="#" alt="Image data here">
@@ -95,7 +95,7 @@
                     <ul>
                         <li>Summary</li>
                         <li>Instructions</li>
-                        <li>Time: </li>
+                        <li>Time:</li>
                     </ul>
                     <h4>Ingredients</h4>
                     <ul>                                    <!--for each here-->
@@ -157,7 +157,6 @@
 </div>
 
 
-
 <!--FOOTER-->
 <footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
     <!-- Grid container -->
@@ -202,7 +201,9 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <!--BOOTSTRAP JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
 </footer>
 
 <!--SCRIPTS-->
@@ -210,12 +211,21 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/f2796ec852.js" crossorigin="anonymous"></script>
     <!--Bootstrap JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
     <!--JQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <!--MOD SCRIPTS-->
     <script th:src="@{/js/app.js}"></script>
