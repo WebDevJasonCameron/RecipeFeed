@@ -41,18 +41,22 @@
     </div>
 
     <!--    LOGOUT/SEARCH-->
-    <div sec:authorize="isAuthenticated()" class="d-flex flex-row">
-        <form th:action="@{/logout}" th:method="post" class="col px-2">
-            <button class="btn btn-outline-success" style="margin-top: 8px">Logout</button>
-        </form>
+    <div sec:authorize="isAuthenticated()" class="d-flex">
         <p class="col text-nowrap">Welcome, <span th:text="${#authentication.principal.username}"/>!</p><br>
+        <form class="px-2 d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <form th:action="@{/logout}" th:method="post">
+            <button class="btn btn-outline-success">Logout</button>
+        </form>
     </div>
 
-<!--    <form class="col px-2" role="search">-->
-<!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--        <a class="btn btn-outline-success" type="submit">Search</a>-->
-<!--    </form>-->
-<!--    <br>-->
+    <!--    <form class="col px-2" role="search">-->
+    <!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+    <!--        <a class="btn btn-outline-success" type="submit">Search</a>-->
+    <!--    </form>-->
+    <!--    <br>-->
 
     <li sec:authorize="isAuthenticated()" class="nav-item dropdown list-unstyled px-5">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
