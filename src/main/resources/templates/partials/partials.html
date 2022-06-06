@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      lang="en">
 
 <!--HEAD-->
 <head th:fragment="head (title)">
@@ -14,7 +15,7 @@
     <!--MAIN CSS-->
     <link rel="stylesheet" th:href="@{/css/main.css}">
 
-<!--    can delete later, just to see main body in all the pages for now vv -->
+    <!--    can delete later, just to see main body in all the pages for now vv -->
     <link rel="stylesheet" th:href="@{/css/deleteLater.css}">
     <!--    can delete later, just to see main body in all the pages for now ^^ -->
 
@@ -31,25 +32,26 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <form class="d-flex px-2" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div sec:authorize="!isAuthenticated()">
+            <form class="d-flex px-2" role="search">
+                <a class="btn btn-outline-success" type="submit" th:href="@{/login}">Log In</a>
+            </form>
+            <form class="d-flex px-2" role="search">
+                <a class="btn btn-outline-success" type="submit" th:href="@{/user/register}">Register</a>
+            </form>
+        </div>
 
-        <form class="d-flex px-2" role="search">
-            <a class="btn btn-outline-success" type="submit" th:href="@{/login}">Log In</a>
-        </form>
-        <form class="d-flex px-2" role="search">
-            <a class="btn btn-outline-success" type="submit" th:href="@{/user/register}">Register</a>
-        </form>
+        <div sec:authorize="isAuthenticated()">
+            <form class="d-flex px-2" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form><br>
+            Welcome <span th:text="${#authentication.principal.username}"/><br>
+            <form th:action="@{/logout}" th:method="post">
+                <button class="btn btn-outline-success" style="margin-top: 8px">Logout</button>
+            </form>
+        </div>
 
-
-
-
-
-        <!--            <form th:action="@{/logout}" th:method="post">-->
-        <!--                <button class="btn btn-outline-success">Logout</button>-->
-        <!--            </form>-->
         <li class="nav-item dropdown list-unstyled">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                 Recipe Items
@@ -63,7 +65,6 @@
                 <a class="dropdown-item" href="/recipes/details">user recipe details</a>
             </div>
         </li>
-
     </div>
 </nav>
 
@@ -219,7 +220,5 @@
     <!--MOD SCRIPTS-->
     <script th:src="@{/js/app.js}"></script>
 </section>
-
-
 </body>
 </html>
