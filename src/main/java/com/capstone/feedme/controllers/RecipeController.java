@@ -374,13 +374,13 @@ public class RecipeController {
         Recipe recipe = recipesDao.findRecipeById(id);
 
         // Used to get Similar Recipes (by their first cat type)
-        Category category = recipe.getRecipeCategories().get(0);
-        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
+//        Category category = recipe.getRecipeCategories().get(0);
+//        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
 
         // NEED QUERY: Used to get Remix Recipes (find by apiId and userId is not null)
 
 
-        model.addAttribute("similarRecipes", similarRecipes);
+//        model.addAttribute("similarRecipes", similarRecipes);
         model.addAttribute("recipe", recipe);
         return "/recipes/details";
     }
