@@ -7,13 +7,45 @@
 
     <!--NAV-->
     <nav th:replace="/partials/partials.html :: navbar"></nav>
-
-    <!--HEADER-->
-    <section th:replace="/partials/partials.html :: header ('Edit Profile')"></section>
-
     <!--MAIN-->
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
+            <section th:replace="/partials/partials.html :: header ('Edit Profile')"></section>
+            <form th:action="@{/user/edit}" method="post" th:object="${user}">
+                <div class="my-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" th:field="*{username}">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+                </div>
 
-    Options to edit profile will be here.
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea rows="5" cols="80" class="form-control" id="bio" th:field="*{bio}"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="avatar">Avatar</label>
+                    <input id="avatar" type="file" accept="image/*" th:field="*{avatar}">
+                </div>
+
+
+
+                <button id="submit" type="submit" value="post" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
 
 
 
@@ -24,6 +56,5 @@
 
     <!--SCRIPTS-->
     <section th:replace="/partials/partials.html :: script-section"></section>
-
 </body>
 </html>

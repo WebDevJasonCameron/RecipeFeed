@@ -96,7 +96,12 @@ public class User {
     }
 
 
+
     // SET
+
+    public void setId(long id) {
+        this.id = id;
+    }
     public void setUsername(String username) {
         this.username = username;
     }

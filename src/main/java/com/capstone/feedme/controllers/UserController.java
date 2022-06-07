@@ -3,16 +3,16 @@ package com.capstone.feedme.controllers;
 import com.capstone.feedme.models.User;
 import com.capstone.feedme.repositories.UserRepository;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -65,15 +65,37 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String profile(){
+    public String profile(@AuthenticationPrincipal User user, Model model){
+        model.addAttribute("user", user);
         return "profiles/index";
     }
 
     @GetMapping("/edit")
-    public String editProfile(){
+    public String editProfile(@AuthenticationPrincipal User user, Model model){
+        model.addAttribute("user", user);
         return "profiles/edit";
     }
 
+    @PostMapping("/edit")
+    public String saveProfileEdits(@ModelAttribute User user){
+        String username = user.getUsername();
+        String email = user.getEmail();
+        String bio = user.getBio();
+        String avatar = user.getAvatar();
+        String hash = passwordEncoder.encode(user.getPassword());
+
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User editedUser = usersDao.getById(principle.getId());
+        editedUser.setUsername(username);
+        editedUser.setPassword(hash);
+        editedUser.setEmail(email);
+        editedUser.setBio(bio);
+        editedUser.setAvatar(avatar);
+
+        usersDao.save(editedUser);
+        return "redirect:/user/profile";
+    }
 
     @GetMapping("/favorites")
     public String userFavorites(){

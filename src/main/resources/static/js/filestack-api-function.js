@@ -15,3 +15,6 @@ const options = {
 document.getElementById("dragDrop").onclick = function (){
     client.picker(options).open();
 }
+
+// <div id="dragDrop" className="btn btn-warning"></div>
+// <input th:field="*{}" type="hidden">
