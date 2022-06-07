@@ -364,9 +364,6 @@ public class RecipeController {
         return "recipes/index";
     }
 
-
-
-
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
                                    Model model){
@@ -447,6 +444,15 @@ public class RecipeController {
     }
 
 
+    // AJAX LOCAL DB
+    @GetMapping("/add-favorite")
+    @ResponseBody
+    public List<Recipe> getRecipeTitlesWithAjax(){
+
+        System.out.println("Made it to the fetching spot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        return recipesDao.findAll();
+    }
 
 
     // HELPER METHS
@@ -467,7 +473,7 @@ public class RecipeController {
         // build an anonymousUser user obj to pass to the expecting thymeleaf page and set it in the model
         User user;
         if (username.equals("anonymousUser")) {
-            user = new User();
+            user = new User(-1, "anonymousUser");
         } else {
             user = usersDao.findByUsername(username);
         }
