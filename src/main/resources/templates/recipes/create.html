@@ -7,75 +7,108 @@
 <meta charset="UTF-8" />
 <body>
 
-         <ul th:replace="/partials/partials.html :: navbar"></ul>
+<ul th:replace="/partials/partials.html :: navbar"></ul>
+         <form th:action="@{/recipes/create}"
+               th:method="post" th:object="${recipe}">
+
+            <div class="container d-flex align-items-center justify-content-center">
+               <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
+
          <section th:replace="/partials/partials.html :: header ('Create Your Own')"></section>
+<!--CATEGORIES-->
+            <label for="category">Category</label>
+            <select name="category" id="category">
+               <option value="select" disabled="disabled" selected="selected">Select</option>
+               <option value="antipasti">Antipasti</option>
+               <option value="starter">Starter</option>
+               <option value="snack">Snack</option>
+               <option value="appetizer">Appetizer</option>
+               <option value="antipasto">Antipasto</option>
+               <option value="hor d'oeuvre">Hor d'oeuvre</option>
+               <option value="lunch">Lunch</option>
+               <option value="main course">Main Course</option>
+               <option value="main dish">Main Dish</option>
+               <option value="dinner">Dinner</option>
+               <option value="morning meal">Morning meal</option>
+               <option value="brunch">Brunch</option>
+               <option value="breakfast">Breakfast</option>
+               <option value="side dish">Side Dish</option>
+               <option value="dessert">Dessert</option>
+               <option value="batter">Batter</option>
+            </select>
 
+                  <!--    </form:se>-->
+                  <br><br>
 
-         <form th:action="@{/recipes/create}" method="post" th:object="${recipe}">
-            <!--IMAGE-->
-             <label for="image">Image:</label>
-          <input th:field="*{imgUrl}" th:errorClass="is-invalid" name="image" id="image">
-             <br>
-             <!--TITLE-->
-             <label for="title">Title:</label>
-             <input th:field="*{title}" name="title" id="title">
-             <br>
-<!--             SUMMARY-->
-             <label for="summary">Summary:</label>
-             <input th:field="*{summary}" name="summary" id="summary">
-             <br>
-<!--INSTRUCTIONS-->
-             <label for="instruction">Instructions:</label>
-             <input th:field="*{instruction}" name="instruction" id="instruction">
-             <br>
-<!--READY IN MINUTES-->
-             <label for="time">Time:</label>
-             <input th:field="*{readyInMin}" name="time" id="time">
-             <br>
-<!--SERVING AMOUNT-->
-             <label for="servings">Servings:</label>
-             <input th:field="*{servingAmount}" name="servings" id="servings">
-             <br>
-<!--SOURCE NAME-->
-             <label for="source">Source Name:</label>
-             <input th:field="*{sourceName}" name="source" id="source">
-             <br>
-<!--SOURCE URL-->
-             <label for="sourceUrl">Source Url:</label>
-             <input th:field="*{sourceUrl}" name="sourceUrl" id="sourceUrl">
-             <br>
-<!--VIDEO URL-->
-             <label for="video">Video:</label>
-             <input th:field="*{video_url}" name="video" id="video">
-             <br>
-<!-- DAIRY-->
-             <label class="form-check-label" for="dairy">Dairy:</label>
-             <input class="form-check-input" type="checkbox" th:field="*{dairyFree}" id="dairy">
-             <br>
-<!--GLUTEN-->
-             <label class="form-check-label" for="gluten">Gluten:</label>
-             <input class="form-check-input" type="checkbox" th:field="*{glutenFree}" id="gluten">
-             <br>
-<!--VEGAN-->
-             <label class="form-check-label" for="vegan">Vegan:</label>
-             <input class="form-check-input" type="checkbox" th:field="*{vegan}" id="vegan">
-             <br>
-<!--VEGETARIAN-->
-             <label class="form-check-label" for="vegetarian">Dairy:</label>
-             <input class="form-check-input" type="checkbox" th:field="*{vegetarian}" id="vegetarian">
-             <br>
-             <input type="submit" value="Create">
+                  <!--IMAGE-->
+                  <label for="image">Image:</label>
+                  <input th:field="*{imgUrl}" th:errorClass="is-invalid" name="image" id="image">
+                  <br>
+                  <br>
+                  <!--TITLE-->
+                  <label for="title">Title:</label>
+                  <input th:field="*{title}" name="title" id="title">
+                  <br>
+                  <br>
+                  <!--             SUMMARY-->
+                  <label for="summary">Summary:</label>
+                  <input th:field="*{summary}" name="summary" id="summary">
+                  <br>
+                  <br>
+                  <!--INSTRUCTIONS-->
+                  <label for="instruction">Instructions:</label>
+                  <input th:field="*{instruction}" name="instruction" id="instruction">
+                  <br>
+                  <br>
+                  <!--READY IN MINUTES-->
+                  <label for="time">Time:</label>
+                  <input th:field="*{readyInMin}" name="time" id="time">
+                  <br>
+                  <br>
+                  <!--SERVING AMOUNT-->
+                  <label for="servings">Servings:</label>
+                  <input th:field="*{servingAmount}" name="servings" id="servings">
+                  <br>
+                  <br>
+                  <!--SOURCE NAME-->
+                  <label for="source">Source Name:</label>
+                  <input th:field="*{sourceName}" name="source" id="source">
+                  <br>
+                  <br>
+                  <!--SOURCE URL-->
+                  <label for="sourceUrl">Source Url:</label>
+                  <input th:field="*{sourceUrl}" name="sourceUrl" id="sourceUrl">
+                  <br>
+                  <br>
+                  <!--VIDEO URL-->
+                  <label for="video">Video:</label>
+                  <input th:field="*{video_url}" name="video" id="video">
+                  <br>
+                  <br>
+                  <!-- DAIRY-->
+                  <label class="form-check-label" for="dairy">Dairy:</label>
+                  <input class="form-check-input" type="checkbox" th:field="*{dairyFree}" id="dairy">
+                  <br>
+                  <br>
+                  <!--GLUTEN-->
+                  <label class="form-check-label" for="gluten">Gluten:</label>
+                  <input class="form-check-input" type="checkbox" th:field="*{glutenFree}" id="gluten">
+                  <br>
+                  <br>
+                  <!--VEGAN-->
+                  <label class="form-check-label" for="vegan">Vegan:</label>
+                  <input class="form-check-input" type="checkbox" th:field="*{vegan}" id="vegan">
+                  <br>
+                  <br>
+                  <!--VEGETARIAN-->
+                  <label class="form-check-label" for="vegetarian">Dairy:</label>
+                  <input class="form-check-input" type="checkbox" th:field="*{vegetarian}" id="vegetarian">
+                  <br>
+                  <br>
+                  <input type="submit" value="Create">
+               </div>
+            </div>
          </form>
-
-
-
-
-
-
-
-
-
-
 
 
          <footer th:replace="/partials/partials.html :: footer"></footer>
