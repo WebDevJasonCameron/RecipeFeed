@@ -15,10 +15,22 @@ $('#find-more-from-api-btn').on('click', (e) => {
 })
 
 // BOOKMARK BTN
-$('.bookmark-btn').on('click', (e) => {
+$('.bookmark-btn').on('click', function (e) {
     e.preventDefault();
 
-    // testLocalAjaxRequest()
+    let v1 = $(this).data('data')
+    let v2 = $(this).data()
+
+    console.log(v1);
+    console.log();
+
+    if($(this).children('span').children('i').hasClass('fa-regular')){
+        changeIconClass($(this), 'fa-regular', 'fa-solid');
+        addToFavorite(getBtnValue($(this)));
+    } else {
+        changeIconClass($(this), 'fa-solid', 'fa-regular');
+        getBtnValue($(this));
+    }
 
 })
 
@@ -31,6 +43,22 @@ function seeRecipeDetails(id){
 function scrollToTop() {
     window.scrollTo(0, 0);
 }
+
+/**
+ * HELPER METHS
+ */
+function getBtnValue(target){
+    let val = target;
+    val = val[0].attributes[2].value.split(',');
+    console.log(val);
+    return val;
+}
+
+function changeIconClass(target, fromClass, toClass){
+    target.children('span').children('i').removeClass(fromClass).addClass(toClass);
+}
+
+
 
 
 /**
@@ -80,17 +108,28 @@ function getSpoonRecipeDetailsByID(cid){
         });
 }
 
-// TEST LOCAL AJAX REQ
-function testLocalAjaxRequest(){
-    const url = 'http://localhost:8080/admin/get-recipe-titles';
+// ADD TO FAVORITE
+function addToFavorite(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/add-favorite';
     const readOption = {
-        method: 'GET',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
     };
 
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error adding favorite recipe to user m-t-m: ', e)
         });
 }
 

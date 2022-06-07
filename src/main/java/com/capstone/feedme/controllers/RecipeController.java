@@ -8,6 +8,7 @@ import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -365,9 +366,6 @@ public class RecipeController {
         return "recipes/index";
     }
 
-
-
-
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
                                    Model model){
@@ -409,10 +407,17 @@ public class RecipeController {
     }
 
     @GetMapping("/edit")
-    public String editRecipe(){
-        return "recipes/edit";
+    public String editRecipe(Model model){
+        model.addAttribute("recipe", new Recipe());
+     return "recipes/edit";
     }
 
+    @PostMapping("/edit")
+    public String remixRecipe(@Valid Recipe recipe, Model model){
+        recipesDao.save(recipe);
+        model.addAttribute("recipe", recipe);
+        return "redirect:/recipes";
+    }
 
 
 
@@ -434,7 +439,7 @@ public class RecipeController {
         // build an anonymousUser user obj to pass to the expecting thymeleaf page and set it in the model
         User user;
         if (username.equals("anonymousUser")) {
-            user = new User();
+            user = new User(-1, "anonymousUser");
         } else {
             user = usersDao.findByUsername(username);
         }

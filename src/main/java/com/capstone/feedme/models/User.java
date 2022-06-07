@@ -55,7 +55,12 @@ public class User {
     // CON
     public User() {
     }
+    public User(long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 
+    // COPY CON
     public User(User copy){
         id = copy.id;
         username = copy.username;
@@ -96,7 +101,12 @@ public class User {
     }
 
 
+
     // SET
+
+    public void setId(long id) {
+        this.id = id;
+    }
     public void setUsername(String username) {
         this.username = username;
     }

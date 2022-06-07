@@ -2,29 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 >
 
-<head th:replace="/partials/partials.html :: head ('Home Test')"></head>
+<head th:replace="/partials/partials.html :: head ('Home Feed')"></head>
 <body>
 <!--NAV-->
 <nav th:replace="/partials/partials.html :: navbar"></nav>
 <!--HEADER-->
-<section th:replace="/partials/partials.html :: header('Home Test')"></section>
+<section th:replace="/partials/partials.html :: header('Home Feed')"></section>
 <!--MAIN-->
 
 <!--        CARD1-->
 <div class="card firstCard d-flex flex-row-reverse flex-wrap" id="card1">
     <div class="col-12 col-md-6">
-        <img src="https://source.unsplash.com/random/561x561/?pizza" class="card-img" alt="Responsive image">
+        <a href="/recipes">
+        <img src="https://source.unsplash.com/random/561x561/?breakfast" class="card-img" alt="Responsive image">
+        </a>
     </div>
     <div class="col-12 col-md-6">
-        <h5 class="card-title">(First Card)</h5>
-        <p class="card-text font-italic">(First Card) Move writing to the left Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Consectetur dicta fuga incidunt minima quas vel. Adipisci alias amet consectetur debitis
-            earum eius maxime molestiae nostrum quas quibusdam, repellendus vero voluptatibus! Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit. Accusamus aliquid animi architecto atque aut cupiditate enim explicabo
-            facere iusto minima perferendis possimus rem reprehenderit, suscipit tempora tenetur totam vel voluptatem.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium et maxime numquam quam quod. Accusamus
-            aut deserunt, dolor dolorum enim maxime, placeat porro quidem quo quos, recusandae repellendus reprehenderit
-            voluptatum.</p>
+        <h5 class="card-title"></h5>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p class="card-text font-italic">“A recipe has no soul. You as the cook must bring soul to the recipe.” <br>
+            – Thomas Keller</p>
         <p class="card-text"><small class="text-muted"></small></p>
     </div>
 </div>
@@ -32,22 +38,25 @@
 <!--        CARD2-->
 <div class="card secondCard d-flex flex-row flex-wrap" id="card2">
     <div class="col-12 col-md-6">
-        <img src="https://source.unsplash.com/random/561x561/?tacos" class="card-img" alt="...">
+        <a href="/recipes">
+            <img src="https://source.unsplash.com/random/561x561/?lunch" class="card-img" alt="...">
+        </a>
     </div>
     <div class="col-12 col-md-6">
-        <h5 class="card-title">(Second Card)</h5>
-        <p class="card-text font-italic">(Second Card) Move writing to the right
-            Ice cream tart tart donut cotton candy fruitcake. Brownie candy canes tiramisu croissant shortbread. Jelly-o
-            sweet roll icing dragée donut shortbread lemon drops. Pudding croissant cake jelly-o oat cake cake
-            liquorice.
-            Carrot cake marzipan brownie dragée chocolate bar caramels. Jelly biscuit cake halvah liquorice. Tootsie
-            roll jelly-o cake jelly tootsie roll cake halvah.
-            Carrot cake marzipan pie macaroon fruitcake pie muffin. Jelly fruitcake lollipop toffee wafer bonbon cookie.
-            Liquorice brownie tootsie roll muffin danish jujubes. Gummies pie chocolate cake apple pie caramels.
-            Chocolate soufflé chocolate bar liquorice candy brownie oat cake biscuit. Cotton candy dessert chocolate bar
-            donut jujubes oat cake. Jelly-o donut croissant halvah jelly.
-            Croissant dessert jelly pudding dessert. Chupa chups ice cream toffee macaroon halvah ice cream. Sesame
-            snaps cookie pastry sweet pie liquorice sesame snaps lollipop candy canes.</p>
+        <h5 class="card-title"></h5>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p class="card-text font-italic">“Cooking requires confident guesswork and improvisation—experimentation and substitution,
+            dealing with failure and uncertainty in a creative way.” <br>
+            – Paul Theroux </p>
         <p class="card-text"><small class="text-muted"></small></p>
     </div>
 </div>
@@ -55,26 +64,21 @@
 
 <!--        CARD3-->
 <div class="card thirdCard d-flex flex-row-reverse flex-wrap" id="card3">
-    <div class="col-12 col-md-6">
-        <img src="https://source.unsplash.com/random/561x561/?pizza" class="card-img" alt="Responsive image">
-    </div>
-    <div class="col-12 col-md-6">
-        <h5 class="card-title">(Third Card)</h5>
-        <p class="card-text font-italic">(Third Card) Move writing to the left
-            Ice cream tart tart donut cotton candy fruitcake. Brownie candy canes tiramisu croissant shortbread. Jelly-o
-            sweet roll icing dragée donut shortbread lemon drops. Pudding croissant cake jelly-o oat cake cake
-            liquorice.
-            Carrot cake marzipan brownie dragée chocolate bar caramels. Jelly biscuit cake halvah liquorice. Tootsie
-            roll jelly-o cake jelly tootsie roll cake halvah.
-            Carrot cake marzipan pie macaroon fruitcake pie muffin. Jelly fruitcake lollipop toffee wafer bonbon cookie.
-            Liquorice brownie tootsie roll muffin danish jujubes. Gummies pie chocolate cake apple pie caramels.
-            Chocolate soufflé chocolate bar liquorice candy brownie oat cake biscuit. Cotton candy dessert chocolate bar
-            donut jujubes oat cake. Jelly-o donut croissant halvah jelly.
-            Croissant dessert jelly pudding dessert. Chupa chups ice cream toffee macaroon halvah ice cream. Sesame
-            snaps cookie pastry sweet pie liquorice sesame snaps lollipop candy canes.</p>
+    <div class="thirdCardimageSection col-12 col-md-6">
+        <a href="/recipes" class="p-0">
+            <img src="https://source.unsplash.com/random/561x561/?dessert" class="card-img" alt="Responsive image">
+        </a> </div>
+    <div class="thirdCardWritingSection col-12 col-md-6">
+        <h5 class="card-title"></h5>
+        <p class="card-text font-italic">“Cooking with kids is not just about ingredients, recipes, and cooking.
+            It’s about harnessing imagination, empowerment, and creativity.” <br>
+            – Guy Fieri</p>
         <p class="card-text"><small class="text-muted"></small></p>
     </div>
 </div>
+<br>
+<br>
+
 
 
 <!--FOOTER-->
