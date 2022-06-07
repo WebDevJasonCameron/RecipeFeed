@@ -91,7 +91,7 @@ public class User {
     public List<Rating> getUserRatings() {
         return userRatings;
     }
-    public List<Recipe> getuserFavorites() {
+    public List<Recipe> getUserFavorites() {
         return userFavorites;
     }
 
@@ -121,7 +121,7 @@ public class User {
     public void setUserRatings(List<Rating> userRatings) {
         this.userRatings = userRatings;
     }
-    public void setuserFavorites(List<Recipe> userFavorites) {
+    public void setUserFavorites(List<Recipe> userFavorites) {
         this.userFavorites = userFavorites;
     }
 

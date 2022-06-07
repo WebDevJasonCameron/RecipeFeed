@@ -14,11 +14,11 @@ $('#find-more-from-api-btn').on('click', (e) => {
     scrollToTop();
 })
 
-// LOCAL AJAX TEST
-$('#test-local-ajax-request').on('click', (e) => {
+// BOOKMARK BTN
+$('.bookmark-btn').on('click', (e) => {
     e.preventDefault();
-    console.log("local ajax click");
-    testLocalAjaxRequest()
+
+    // testLocalAjaxRequest()
 
 })
 
