@@ -348,10 +348,10 @@ public class RecipeController {
             @RequestParam(name = "sourceName") String sourceName,
             @RequestParam(name = "sourceUrl") String sourceUrl,
             @RequestParam(name = "video_url") String video_url,
-//            @RequestParam(name = "dairyFree") boolean dairyFree ,
-//            @RequestParam(name = "glutenFree") boolean glutenFree ,
-//            @RequestParam(name = "vegan") boolean vegan,
-//            @RequestParam(name = "vegetarian") boolean vegetarian,
+            @RequestParam(name = "dairyFree") boolean dairyFree ,
+            @RequestParam(name = "glutenFree") boolean glutenFree ,
+            @RequestParam(name = "vegan") boolean vegan,
+            @RequestParam(name = "vegetarian") boolean vegetarian,
 
             Model model
     ) {
@@ -366,10 +366,10 @@ public class RecipeController {
         recipe.setSourceName(sourceName);
         recipe.setSourceUrl(sourceUrl);
         recipe.setVideo_url(video_url);
-//        recipe.setDairyFree(dairyFree);
-//        recipe.setGlutenFree(glutenFree);
-//        recipe.setVegan(vegan);
-//        recipe.setVegetarian(vegetarian);
+        recipe.setDairyFree(dairyFree);
+        recipe.setGlutenFree(glutenFree);
+        recipe.setVegan(vegan);
+        recipe.setVegetarian(vegetarian);
         recipesDao.save(recipe);
 
         model.addAttribute("recipe", recipe);

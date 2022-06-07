@@ -71,7 +71,7 @@
          <form th:action="@{/recipes/create}" method="post" th:object="${recipe}">
             <!--IMAGE-->
              <label for="image">Image:</label>
-          <input th:field="*{imgUrl}" name="image" id="image" th:href="@{/recipes/details/{id}(id=${recipe.id})}">
+          <input th:field="*{imgUrl}" name="image" id="image">
              <br>
 <!--             API ID-->
              <label for="apiId">API ID:</label>
@@ -81,7 +81,7 @@
              <label for="title">Title:</label>
              <input th:field="*{title}" name="title" id="title">
              <br>
-             SUMMARY
+<!--             SUMMARY-->
              <label for="summary">Summary:</label>
              <input th:field="*{summary}" name="summary" id="summary">
              <br>
@@ -110,20 +110,20 @@
              <input th:field="*{video_url}" name="video" id="video">
              <br>
 <!-- DAIRY-->
-<!--             <label class="form-check-label" for="dairy">Dairy:</label>-->
-<!--             <input class="form-check-input" type="checkbox" th:field="*{dairyFree}" id="dairy">-->
-<!--             <br>-->
+             <label class="form-check-label" for="dairy">Dairy:</label>
+             <input class="form-check-input" type="checkbox" th:field="*{dairyFree}" id="dairy">
+             <br>
 <!--GLUTEN-->
-<!--             <label class="form-check-label" for="gluten">Glugen:</label>-->
-<!--             <input class="form-check-input" type="checkbox" th:field="*{glutenFree}" id="gluten">-->
-<!--             <br>-->
+             <label class="form-check-label" for="gluten">Gluten:</label>
+             <input class="form-check-input" type="checkbox" th:field="*{glutenFree}" id="gluten">
+             <br>
 <!--VEGAN-->
-<!--             <label class="form-check-label" for="vegan">Vegan:</label>-->
-<!--             <input class="form-check-input" type="checkbox" th:field="*{vegan}" id="vegan">-->
-<!--             <br>-->
+             <label class="form-check-label" for="vegan">Vegan:</label>
+             <input class="form-check-input" type="checkbox" th:field="*{vegan}" id="vegan">
+             <br>
 <!--VEGETARIAN-->
-<!--             <label class="form-check-label" for="vegetarian">Dairy:</label>-->
-<!--             <input class="form-check-input" type="checkbox" th:field="*{vegetarian}" id="vegetarian">-->
+             <label class="form-check-label" for="vegetarian">Dairy:</label>
+             <input class="form-check-input" type="checkbox" th:field="*{vegetarian}" id="vegetarian">
              <br>
              <input type="submit" value="Create">
          </form>
