@@ -16,7 +16,7 @@ public class Recipe {
     @Column(name = "id")
     private long id;
     @Column(name = "api_id", unique = true)
-    private long apiId;
+    private Long apiId;
     @Column(name = "user_recipe_id")
     private long userId;
     @Column(name = "title", nullable = false)
