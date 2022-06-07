@@ -8,6 +8,7 @@ import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -443,16 +444,6 @@ public class RecipeController {
         return "recipes/edit";
     }
 
-
-    // AJAX LOCAL DB
-    @GetMapping("/add-favorite")
-    @ResponseBody
-    public List<Recipe> getRecipeTitlesWithAjax(){
-
-        System.out.println("Made it to the fetching spot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-        return recipesDao.findAll();
-    }
 
 
     // HELPER METHS

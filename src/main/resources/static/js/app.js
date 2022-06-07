@@ -21,14 +21,12 @@ $('.bookmark-btn').on('click', function (e) {
     let v1 = $(this).data('data')
     let v2 = $(this).data()
 
-
     console.log(v1);
     console.log();
 
     if($(this).children('span').children('i').hasClass('fa-regular')){
         changeIconClass($(this), 'fa-regular', 'fa-solid');
-        getBtnValue($(this));
-        // addToFavorite(getBtnValue());
+        addToFavorite(getBtnValue($(this)));
     } else {
         changeIconClass($(this), 'fa-solid', 'fa-regular');
         getBtnValue($(this));
@@ -111,20 +109,27 @@ function getSpoonRecipeDetailsByID(cid){
 }
 
 // ADD TO FAVORITE
-function addToFavorite(rId){
-    const url = 'http://localhost:8080/recipes/add-favorite';
+function addToFavorite(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/add-favorite';
     const readOption = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            body: JSON.stringify(blogPost),
-        }
+        },
+        body: JSON.stringify(data),
     };
 
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error adding favorite recipe to user m-t-m: ', e)
         });
 }
 
