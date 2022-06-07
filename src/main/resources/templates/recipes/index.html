@@ -40,6 +40,19 @@
                         </div>
                     </a>
                 </div>
+                <!--BRUNCH-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/brunch">
+                        <div id="brunch-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?brunch"
+                                 alt="random picture"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                brunch
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 <!--LUNCH-->
                 <div class="mx-2 cat-contents">
                     <a href="/recipes/lunch">
@@ -69,7 +82,7 @@
                 <!--DESSERT-->
                 <div class="mx-2 cat-contents">
                     <a href="/recipes/dessert">
-                        <div id="brunch-recipe-filter" class="cat-filter-btn">
+                        <div id="dessert-recipe-filter" class="cat-filter-btn">
                             <img src="https://source.unsplash.com/random/200x200/?dessert"
                                  alt="random picture"
                                  style="height: 100px; width: 100px; border-radius: 50%">
@@ -118,15 +131,54 @@
                         </div>
                     </a>
                 </div>
-                <!--DIP & SAUCE-->
+                <!--CONDIMENTS-->
                 <div class="mx-2 cat-contents">
-                    <a href="/recipes/dips-and-sauces">
-                        <div id="dips-and-sauces-recipe-filter" class="cat-filter-btn">
+                    <a href="/recipes/condiments">
+                        <div id="condiments-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?condiments"
+                                 alt="random picture"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                               condiments
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--DIPS-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/dips">
+                        <div id="dips-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?food-dips"
+                                 alt="random picture"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                dips
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--SAUCES-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/sauces">
+                        <div id="sauces-recipe-filter" class="cat-filter-btn">
                             <img src="https://source.unsplash.com/random/200x200/?sauces"
                                  alt="random picture"
                                  style="height: 100px; width: 100px; border-radius: 50%">
                             <div class="text-center">
-                               dips & sauces
+                                sauces
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--SPREADS-->
+                <div class="mx-2 cat-contents">
+                    <a href="/recipes/spreads">
+                        <div id="spreads-recipe-filter" class="cat-filter-btn">
+                            <img src="https://source.unsplash.com/random/200x200/?food-spreads"
+                                 alt="random picture"
+                                 style="height: 100px; width: 100px; border-radius: 50%">
+                            <div class="text-center">
+                                spreads
                             </div>
                         </div>
                     </a>
@@ -174,17 +226,31 @@
                                     </div>
                                     <!--ICON LINKS-->
                                     <div class="d-flex d-inline-block p-1">
+                                        <!--HEART-->
                                         <div>
                                             <a href="#"><i class="fa-regular fa-heart fa-2x p-2"></i></a>
                                         </div>
+                                        <!--LIST-->
                                         <div>
                                             <a th:href="@{/recipes/details/{id}(id=${recipe.id})}"><i class="fa-solid fa-list-check fa-2x p-2"></i></a>
                                         </div>
+                                        <!--PLAIN-->
                                         <div>
                                             <a href="#"><i class="fa-regular fa-paper-plane fa-2x p-2"></i></a>
                                         </div>
+                                        <!--BOOKMARK-->
                                         <div style="margin-left: auto">
-                                            <a href="#"><i class="fa-regular fa-bookmark fa-2x p-2"></i></a>
+                                            <button
+                                                    class="btn border-0 bookmark-btn"
+                                                    href="#"
+                                                    th:data-value="${recipe.id}">
+                                                <span th:utext="${recipe.id ne user.userFavorites?
+                                                 '<i class=&quot;fa-regular fa-bookmark fa-2x p-2&quot;></i>'
+                                                 :
+                                                 '<i class=&quot;fa-solid fa-bookmark fa-2x p-2&quot;></i>'}">
+                                                    response
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
                                     <!--LIKES and TITLE-->
@@ -236,50 +302,43 @@
 
                 <!--PROFILE STUFF-->
                 <div class="col-4">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-4">
-                                <a th:href="@{/user/profile}">
-                                    <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
-                                </a>
-                            </div>
-                            <div class="col-8 d-flex align-items-center">
-                                <div>
-                                    <div sec:authorize="isAuthenticated()">
-                                        <strong><span th:text="${#authentication.principal.username}"/></strong><br>
-                                    </div>
-
-                                    <div class="text-muted">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    </div>
-                                    <!--SECURITY TEST BUTTONS-->
+                    <div sec:authorize="isAuthenticated()" class="d-flex">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a th:href="@{/user/profile}">
+                                        <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                    </a>
                                 </div>
-                            </div>
-                            <div>
-                                <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
-                                    create
-                                </a>
-                                <a class="btn border-0" type="submit" th:href="@{/recipes/edit}">
-                                    edit
-                                </a>
-                                <a class="btn border-0" type="submit" th:href="@{/user/profile}">
-                                    profile
-                                </a>
+                                <div class="col-8 d-flex align-items-center">
+                                    <div>
+                                        <div sec:authorize="isAuthenticated()">
+                                            <strong>
+                                                <span th:text="${#authentication.principal.username}"></span>
+                                            </strong>
+                                        </div>
+                                        <div class="text-muted">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        </div>
+                                        <!--SECURITY TEST BUTTONS-->
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
+                                        create
+                                    </a>
+                                    <a class="btn border-0" type="submit" th:href="@{/recipes/edit}">
+                                        edit
+                                    </a>
+                                    <a class="btn border-0" type="submit" th:href="@{/user/profile}">
+                                        profile
+                                    </a>
+                                </div>
 
-                                <form th:action="@{/logout}" th:method="post">
-                                    <button class="btn-link btn btn-sm" style="margin-top: 8px">Logout</button>
-                                </form>
                             </div>
-
                         </div>
                     </div>
-                    <div>
-                        <button id="test-local-ajax-request" class="btn btn-primary w-100">text</button>
-                    </div>
-                    <div id="test">Info here Maybe</div>
                 </div>
-
-
             </div>
         </div>
 
