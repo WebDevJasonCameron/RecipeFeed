@@ -3,10 +3,13 @@ package com.capstone.feedme.controllers;
 import com.capstone.feedme.models.Category;
 import com.capstone.feedme.models.Ingredient;
 import com.capstone.feedme.models.Recipe;
+import com.capstone.feedme.models.User;
 import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +38,16 @@ public class RecipeController {
     // METH
     @GetMapping
     public String showMainRecipeFeed(Model model){
-        List<Recipe> recipes = recipesDao.findAll();
-        Collections.shuffle(recipes);                   // Randomize
 
-        String apiSearchParameter = "";
+        // USER MODEL
+        provideUserModel(model);
 
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-        model.addAttribute("recipes", recipes);
+        // RECIPES MODEL
+        provideRecipesModel(model);
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "");
+
         return "recipes/index";
     }
 
@@ -142,171 +148,222 @@ public class RecipeController {
     public String showMainRecipeBreakfastFeed(Model model){
         List<Recipe> recipes = new ArrayList<>();
 
+        // USER MODEL
+        provideUserModel(model);
+
         // breakfast
-        List<Recipe> breakfastRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("breakfast"));
-        List<Recipe> morningMealRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("morning meal"));
-        List<Recipe> brunchRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("brunch"));
+        // RECIPES MODEL
+        provideRecipesModel(model, "breakfast", "morning meal");
 
-        recipes.addAll(breakfastRecipes);
-        recipes.addAll(morningMealRecipes);
-        recipes.addAll(brunchRecipes);
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "breakfast");
 
-        Collections.shuffle(recipes);                   // Randomize
+        return "recipes/index";
+    }
 
-        String apiSearchParameter = "breakfast";
+    @GetMapping("/brunch")
+    public String showMainRecipeBrunchFeed(Model model){
 
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-        model.addAttribute("recipes", recipes);
+        // USER MODEL
+        provideUserModel(model);
+
+        // brunch
+        // RECIPES MODEL
+        provideRecipesModel(model, "brunch");
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "brunch");
+
         return "recipes/index";
     }
 
     @GetMapping("/lunch")
     public String showMainRecipeLunchFeed(Model model){
 
-        List<Recipe> recipes = new ArrayList<>();
+        // USER MODEL
+        provideUserModel(model);
 
         // lunch
-        List<Recipe> lunchRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("lunch"));
-        List<Recipe> brunchRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("brunch"));
+        // RECIPES MODEL
+        provideRecipesModel(model, "lunch");
 
-        recipes.addAll(lunchRecipes);
-        recipes.addAll(brunchRecipes);
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "lunch");
 
-        Collections.shuffle(recipes);               // Randomize
-
-        String apiSearchParameter = "lunch";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
     @GetMapping("/dinner")
     public String showMainRecipeDinnerFeed(Model model){
 
+        // USER MODEL
+        provideUserModel(model);
+
         // dinner
-        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("dinner"));
+        // RECIPES MODEL
+        provideRecipesModel(model, "dinner");
 
-        Collections.shuffle(recipes);                   // Randomize
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "dinner");
 
-        String apiSearchParameter = "dinner";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-
-        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
     @GetMapping("/dessert")
     public String showMainRecipeDessertFeed(Model model){
 
+        // USER MODEL
+        provideUserModel(model);
+
         // dessert
-        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("dessert"));
+        // RECIPES MODEL
+        provideRecipesModel(model, "dessert");
 
-        Collections.shuffle(recipes);                   // Randomize
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "sweet");
 
-        String apiSearchParameter = "sweet";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-
-        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
     @GetMapping("/main-course")
     public String showMainRecipeMainCourseFeed(Model model){
-        List<Recipe> recipes = new ArrayList<>();
 
-        // breakfast
-        List<Recipe> mainDishRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("main dish"));
-        List<Recipe> mainCourseRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("main course"));
+        // USER MODEL
+        provideUserModel(model);
 
-        recipes.addAll((mainDishRecipes));
-        recipes.addAll((mainCourseRecipes));
+        // main-course / main-dish
+        // RECIPES MODEL
+        provideRecipesModel(model, "main course", "main dish");
 
-        Collections.shuffle(recipes);                   // Randomize
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "main course");
 
-        String apiSearchParameter = "main course";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-
-        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
     @GetMapping("/appetizer")
     public String showMainRecipeAppetizerFeed(Model model){
-        List<Recipe> recipes = new ArrayList<>();
 
-        // breakfast
-        List<Recipe> starterRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("starter"));
-        List<Recipe> appetizerRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("appetizer"));
-        List<Recipe> fingerFoodRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("fingerfood"));
+        // USER MODEL
+        provideUserModel(model);
 
-        recipes.addAll(starterRecipes);
-        recipes.addAll(appetizerRecipes);
-        recipes.addAll(fingerFoodRecipes);
+        // appetizer / starter /
+        // RECIPES MODEL
+        provideRecipesModel(model, "appetizer", "starter", "fingerfood");
 
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "appetizer");
 
-        Collections.shuffle(recipes);                   // Randomize
-
-        String apiSearchParameter = "appetizer";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-
-        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
     @GetMapping("/sides")
     public String showMainRecipeSidesFeed(Model model){
-        List<Recipe> recipes = new ArrayList<>();
 
-        // breakfast
-        List<Recipe> soupRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("soup"));
-        List<Recipe> sideDishRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("side dish"));
-        List<Recipe> saladRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("salad"));
-        List<Recipe> fingerFoodRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("fingerfood"));
+        // USER MODEL
+        provideUserModel(model);
 
-        recipes.addAll(soupRecipes);
-        recipes.addAll(sideDishRecipes);
-        recipes.addAll(saladRecipes);
-        recipes.addAll(fingerFoodRecipes);
+        // soup / salad / side dish
+        // RECIPES MODEL
+        provideRecipesModel(model, "soup", "salad", "side dish");
 
-        Collections.shuffle(recipes);                   // Randomize
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "appetizer");
 
-        String apiSearchParameter = "";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-
-        model.addAttribute("recipes", recipes);
         return "recipes/index";
     }
 
-    @GetMapping("/dips-and-sauces")
-    public String showMainRecipeDipsAndSaucesFeed(Model model){
-        List<Recipe> recipes = new ArrayList<>();
+    @GetMapping("/snacks")                                          // not used yet
+    public String showMainRecipeSnacksFeed(Model model){
 
-        // breakfast
-        List<Recipe> condimentRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("condiment"));
-        List<Recipe> dipRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("dip"));
-        List<Recipe> sauceRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("sauce"));
-        List<Recipe> spreadRecipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType("spread"));
+        // USER MODEL
+        provideUserModel(model);
 
-        recipes.addAll(condimentRecipes);
-        recipes.addAll(dipRecipes);
-        recipes.addAll(sauceRecipes);
-        recipes.addAll(spreadRecipes);
+        // snack
+        // RECIPES MODEL
+        provideRecipesModel(model, "snack");
 
-        Collections.shuffle(recipes);                   // Randomize
-
-        String apiSearchParameter = "dip";
-
-        model.addAttribute("apiSearchParameter", apiSearchParameter);
-
-        model.addAttribute("recipes", recipes);
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "snack");
         return "recipes/index";
     }
+
+    @GetMapping("/antipasto")                                      // not used yet
+    public String showMainRecipeAntipastoFeed(Model model){
+
+        // USER MODEL
+        provideUserModel(model);
+
+        // antipasto / antipasti
+        // RECIPES MODEL
+        provideRecipesModel(model, "antipasto", "antipasti");
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "snack");
+        return "recipes/index";
+    }
+
+    @GetMapping("/condiments")
+    public String showMainRecipeCondimentsFeed(Model model){
+
+        // USER MODEL
+        provideUserModel(model);
+
+        // condiment
+        // RECIPES MODEL
+        provideRecipesModel(model, "condiment");
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "condiment");
+
+        return "recipes/index";
+    }
+
+    @GetMapping("/dips")
+    public String showMainRecipeDipsFeed(Model model){
+
+        // USER MODEL
+        provideUserModel(model);
+
+        // dips
+        // RECIPES MODEL
+        provideRecipesModel(model, "dip");
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "dip");
+        return "recipes/index";
+    }
+
+    @GetMapping("/sauces")
+    public String showMainRecipeSaucesFeed(Model model){
+
+        // USER MODEL
+        provideUserModel(model);
+
+        // sauce
+        // RECIPES MODEL
+        provideRecipesModel(model, "sauce");
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "sauce");
+        return "recipes/index";
+    }
+
+    @GetMapping("/spreads")
+    public String showMainRecipeSpreadsFeed(Model model){
+
+        // USER MODEL
+        provideUserModel(model);
+
+        // dips
+        // RECIPES MODEL
+        provideRecipesModel(model, "dip");
+
+        // API SEARCH MODEL
+        provideApiSearchModel(model, "dip");
+        return "recipes/index";
+    }
+
 
 
 
@@ -377,9 +434,6 @@ public class RecipeController {
     }
 
 
-
-
-
     @PostMapping("/delete")
     public String deleteRecipe(@ModelAttribute Recipe recipe
     ) {
@@ -392,5 +446,77 @@ public class RecipeController {
         return "recipes/edit";
     }
 
+
+
+
+    // HELPER METHS
+    private void provideUserModel(Model model){
+
+        // First, get the authenticated session's credentials
+        Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // Set up var outside
+        String username = "";
+
+        // if an auth user is present, their name will go in var.  If NOT, anonymousUser is returned
+        if (principle instanceof UserDetails){
+            username = ((UserDetails)principle).getUsername();
+        } else {
+            username = principle.toString();
+        }
+
+        // build an anonymousUser user obj to pass to the expecting thymeleaf page and set it in the model
+        User user;
+        if (username.equals("anonymousUser")) {
+            user = new User();
+        } else {
+            user = usersDao.findByUsername(username);
+        }
+        model.addAttribute("user", user);
+    }
+
+    private void provideApiSearchModel(Model model, String param){
+        model.addAttribute("apiSearchParameter", param);
+    }
+
+    private void provideRecipesModel(Model model){
+        List<Recipe> recipes = recipesDao.findAll();
+        Collections.shuffle(recipes);                   // Randomize
+        model.addAttribute("recipes", recipes);
+    }
+
+    private void provideRecipesModel(Model model, String param){
+        List<Recipe> recipes = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param));
+        Collections.shuffle(recipes);                   // Randomize
+        model.addAttribute("recipes", recipes);
+    }
+
+    private void provideRecipesModel(Model model, String param1, String param2){
+        List<Recipe> recipes = new ArrayList<>();
+        List<Recipe> rl1 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param1));
+        List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
+
+        recipes.addAll(rl1);
+        recipes.addAll(rl2);
+
+        Collections.shuffle(recipes);                   // Randomize
+
+        model.addAttribute("recipes", recipes);
+    }
+
+
+    private void provideRecipesModel(Model model, String param1, String param2, String param3){
+        List<Recipe> recipes = new ArrayList<>();
+        List<Recipe> rl1 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param1));
+        List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
+        List<Recipe> rl3 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
+
+        recipes.addAll(rl1);
+        recipes.addAll(rl2);
+        recipes.addAll(rl3);
+
+        Collections.shuffle(recipes);                   // Randomize
+
+        model.addAttribute("recipes", recipes);
+    }
 
 }  //<--END
