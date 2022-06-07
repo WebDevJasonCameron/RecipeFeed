@@ -406,8 +406,16 @@ public class RecipeController {
     }
 
     @GetMapping("/edit")
-    public String editRecipe(){
-        return "recipes/edit";
+    public String editRecipe(Model model){
+        model.addAttribute("recipe", new Recipe());
+     return "recipes/edit";
+    }
+
+    @PostMapping("/edit")
+    public String remixRecipe(@Valid Recipe recipe, Model model){
+        recipesDao.save(recipe);
+        model.addAttribute("recipe", recipe);
+        return "redirect:/recipes";
     }
 
 
