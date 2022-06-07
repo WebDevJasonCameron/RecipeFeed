@@ -188,16 +188,4 @@ public class AdminController {
         return "/admin/admin-details-to-db";
     }
 
-
-    @GetMapping("/get-recipe-titles")
-    @ResponseBody
-    public List<Recipe> getRecipeTitlesWithAjax(){
-
-        System.out.println("Made it to the fetching spot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-
-        return recipeDao.findAll();
-    }
-
-
 }

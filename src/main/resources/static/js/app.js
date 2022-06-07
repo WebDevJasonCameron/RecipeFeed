@@ -15,10 +15,24 @@ $('#find-more-from-api-btn').on('click', (e) => {
 })
 
 // BOOKMARK BTN
-$('.bookmark-btn').on('click', (e) => {
+$('.bookmark-btn').on('click', function (e) {
     e.preventDefault();
 
-    // testLocalAjaxRequest()
+    let v1 = $(this).data('data')
+    let v2 = $(this).data()
+
+
+    console.log(v1);
+    console.log();
+
+    if($(this).children('span').children('i').hasClass('fa-regular')){
+        changeIconClass($(this), 'fa-regular', 'fa-solid');
+        getBtnValue($(this));
+        // addToFavorite(getBtnValue());
+    } else {
+        changeIconClass($(this), 'fa-solid', 'fa-regular');
+        getBtnValue($(this));
+    }
 
 })
 
@@ -31,6 +45,22 @@ function seeRecipeDetails(id){
 function scrollToTop() {
     window.scrollTo(0, 0);
 }
+
+/**
+ * HELPER METHS
+ */
+function getBtnValue(target){
+    let val = target;
+    val = val[0].attributes[2].value.split(',');
+    console.log(val);
+    return val;
+}
+
+function changeIconClass(target, fromClass, toClass){
+    target.children('span').children('i').removeClass(fromClass).addClass(toClass);
+}
+
+
 
 
 /**
@@ -80,11 +110,15 @@ function getSpoonRecipeDetailsByID(cid){
         });
 }
 
-// TEST LOCAL AJAX REQ
-function testLocalAjaxRequest(){
-    const url = 'http://localhost:8080/admin/get-recipe-titles';
+// ADD TO FAVORITE
+function addToFavorite(rId){
+    const url = 'http://localhost:8080/recipes/add-favorite';
     const readOption = {
-        method: 'GET',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            body: JSON.stringify(blogPost),
+        }
     };
 
     fetch(url, readOption)

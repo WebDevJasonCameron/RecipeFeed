@@ -55,7 +55,12 @@ public class User {
     // CON
     public User() {
     }
+    public User(long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 
+    // COPY CON
     public User(User copy){
         id = copy.id;
         username = copy.username;
