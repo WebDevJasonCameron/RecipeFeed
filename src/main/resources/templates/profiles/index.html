@@ -17,7 +17,7 @@
     <div class="text-center d-flex flex-wrap">
 
     <a th:href="@{/user/profile}" class="col-12">
-        <img th:src="${#authentication.principal.avatar}" alt="px" class="img-fluid rounded-circle mb-3">
+        <img th:src="${user.avatar}" alt="px" class="img-fluid rounded-circle mb-3">
     </a>
     <div sec:authorize="isAuthenticated()" class="col-12">
 

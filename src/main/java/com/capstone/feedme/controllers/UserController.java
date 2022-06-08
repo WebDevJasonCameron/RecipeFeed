@@ -65,10 +65,11 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String profile(@AuthenticationPrincipal User user, Model model){
+    public String profile(Model model){
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = usersDao.getById(principle.getId());
 
-
-        model.addAttribute("user", user);
+        model.addAttribute("user", loggedInUser);
         return "profiles/index";
     }
 
