@@ -17,9 +17,10 @@
     <div class="text-center d-flex flex-wrap">
 
     <a th:href="@{/user/profile}" class="col-12">
-        <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle mb-3">
+        <img th:src="${user.avatar}" alt="px" class="img-fluid rounded-circle mb-3" style="width: 20em; height: 20em;">
     </a>
     <div sec:authorize="isAuthenticated()" class="col-12">
+
         <h1><span th:text="${#authentication.principal.username}"/></h1><br>
     </div>
         <section class="col-12">

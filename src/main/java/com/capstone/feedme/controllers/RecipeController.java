@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 
@@ -370,14 +371,13 @@ public class RecipeController {
         Recipe recipe = recipesDao.findRecipeById(id);
 
         // Used to get Similar Recipes (by their first cat type)
-        Category category = recipe.getRecipeCategories().get(0);
-        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
+//        Category category = recipe.getRecipeCategories().get(0);
+//        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
 
         // NEED QUERY: Used to get Remix Recipes (find by apiId and userId is not null)
 
-        
 
-        model.addAttribute("similarRecipes", similarRecipes);
+//        model.addAttribute("similarRecipes", similarRecipes);
         model.addAttribute("recipe", recipe);
         return "/recipes/details";
     }
@@ -389,41 +389,8 @@ public class RecipeController {
     }
 
     @PostMapping("/create")
-    public String publishAd(
-            @RequestParam(name= "imgUrl") String imgUrl,
-            @RequestParam(name = "apiId") long apiId,
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "summary") String summary,
-            @RequestParam(name = "instruction") String instruction,
-            @RequestParam(name = "readyInMin") String readyInMin,
-            @RequestParam(name = "servingAmount") String servingAmount,
-            @RequestParam(name = "sourceName") String sourceName,
-            @RequestParam(name = "sourceUrl") String sourceUrl,
-            @RequestParam(name = "video_url") String video_url,
-//            @RequestParam(name = "dairyFree") boolean dairyFree ,
-//            @RequestParam(name = "glutenFree") boolean glutenFree ,
-//            @RequestParam(name = "vegan") boolean vegan,
-//            @RequestParam(name = "vegetarian") boolean vegetarian,
-
-            Model model
-    ) {
-        Recipe recipe = new Recipe();
-        recipe.setImgUrl(imgUrl);
-        recipe.setApiId(apiId);
-        recipe.setTitle(title);
-        recipe.setSummary(summary);
-        recipe.setInstruction(instruction);
-        recipe.setReadyInMin(readyInMin);
-        recipe.setServingAmount(servingAmount);
-        recipe.setSourceName(sourceName);
-        recipe.setSourceUrl(sourceUrl);
-        recipe.setVideo_url(video_url);
-//        recipe.setDairyFree(dairyFree);
-//        recipe.setGlutenFree(glutenFree);
-//        recipe.setVegan(vegan);
-//        recipe.setVegetarian(vegetarian);
+    public String publishRecipe(@Valid Recipe recipe, Model model){
         recipesDao.save(recipe);
-
         model.addAttribute("recipe", recipe);
         return "redirect:/recipes";
     }
@@ -437,8 +404,16 @@ public class RecipeController {
     }
 
     @GetMapping("/edit")
-    public String editRecipe(){
-        return "recipes/edit";
+    public String editRecipe(Model model){
+        model.addAttribute("recipe", new Recipe());
+     return "recipes/edit";
+    }
+
+    @PostMapping("/edit")
+    public String remixRecipe(@Valid Recipe recipe, Model model){
+        recipesDao.save(recipe);
+        model.addAttribute("recipe", recipe);
+        return "redirect:/recipes";
     }
 
 

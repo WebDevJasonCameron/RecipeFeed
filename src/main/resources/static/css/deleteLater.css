@@ -3,6 +3,17 @@ body {
     padding-top: 100px;
     padding-bottom: 150px;
 }
+
+
+.firstCard, .secondCard, .thirdCard {
+    padding: 50px 0px 100px 0px;
+    border-style: none;
+}
+
+.firstCardTextSection, .secondCardTextSection, .thirdCardTextSection {
+    padding: 250px 0px 0px 0px;
+}
+
 /*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
 
 
@@ -15,4 +26,13 @@ body {
         padding-bottom: 150px;
     }
     /*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
+
+    .firstCard, .secondCard, .thirdCard {
+        padding: 0px 0px 100px 0px;
+        border-style: none;
+    }
+
+    .firstCardTextSection, .secondCardTextSection, .thirdCardTextSection {
+        padding: 20px 0px 20px 0px;
+    }
 }
