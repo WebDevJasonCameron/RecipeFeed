@@ -5,7 +5,7 @@ import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
-import org.apache.tomcat.util.json.JSONParser;
+import com.capstone.feedme.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -25,13 +25,17 @@ public class RecipeController {
     private final UserRepository usersDao;
     private final CategoryRepository categoryDao;
     private final IngredientRepository ingredientsDao;
+    private final EmailService emailService;
+
+
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, EmailService emailService) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
         this.ingredientsDao = ingredientsDao;
+        this.emailService = emailService;
     }
 
     // METH
