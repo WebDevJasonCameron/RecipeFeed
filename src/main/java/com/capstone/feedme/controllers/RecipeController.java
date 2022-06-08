@@ -1,9 +1,6 @@
 package com.capstone.feedme.controllers;
 
-import com.capstone.feedme.models.Category;
-import com.capstone.feedme.models.Ingredient;
-import com.capstone.feedme.models.Recipe;
-import com.capstone.feedme.models.User;
+import com.capstone.feedme.models.*;
 import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
@@ -465,6 +462,15 @@ public class RecipeController {
         User user;
         if (username.equals("anonymousUser")) {
             user = new User(-1, "anonymousUser");
+
+            // Additional objects thymeleaf will look for
+            List<Recipe> recipes = new ArrayList<>();           // For Favorites
+            List<Rating> ratings = new ArrayList<>();           // For Ratings
+
+            user.setUserFavorites(recipes);
+            user.setUserRatings(ratings);
+            user.setEmail("no email");
+
         } else {
             user = usersDao.findByUsername(username);
         }

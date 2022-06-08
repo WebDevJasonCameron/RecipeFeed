@@ -29,7 +29,7 @@ $('.bookmark-btn').on('click', function (e) {
         addToFavorite(getBtnValue($(this)));
     } else {
         changeIconClass($(this), 'fa-solid', 'fa-regular');
-        getBtnValue($(this));
+        removeFromFavorite(getBtnValue($(this)));
     }
 
 })
@@ -133,6 +133,30 @@ function addToFavorite(values){
         });
 }
 
+// REMOVE FROM FAVORITE
+function removeFromFavorite(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/remove-favorite';
+    const readOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error removing favorite recipe to user m-t-m: ', e)
+        });
+}
 
 /**
  * BUILD BODY
