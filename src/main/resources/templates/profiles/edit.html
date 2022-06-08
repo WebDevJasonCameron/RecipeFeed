@@ -32,8 +32,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="avatar">Avatar</label>
-                    <input id="avatar" type="file" accept="image/*" th:field="*{avatar}">
+                    <div id="upload-img" class="btn btn-primary">Upload an Image</div>
+                    <input id="avatar" type="hidden" th:field="*{avatar}">
                 </div>
 
 
@@ -51,10 +51,18 @@
 
 
 
+
+
     <!--FOOTER-->
     <footer th:replace="/partials/partials.html :: footer"></footer>
 
     <!--SCRIPTS-->
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
     <section th:replace="/partials/partials.html :: script-section"></section>
+    <script th:src="@{/js/keys.js}"></script>
+    <script th:src="@{/js/edit-filestack-intigration.js}"></script>
+
+
+
 </body>
 </html>

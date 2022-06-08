@@ -66,6 +66,8 @@ public class UserController {
 
     @GetMapping("/profile")
     public String profile(@AuthenticationPrincipal User user, Model model){
+
+
         model.addAttribute("user", user);
         return "profiles/index";
     }
