@@ -151,7 +151,7 @@ public class RecipeController {
         }
 
         model.addAttribute(recipe);
-        return "/profiles/index";
+        return "redirect:/recipes";
     }
 
 
