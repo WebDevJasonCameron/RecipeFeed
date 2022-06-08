@@ -38,7 +38,7 @@ public class User {
     @JsonManagedReference
     private List<Comment> userComments;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",  orphanRemoval = true)     // ratings
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe",  orphanRemoval = true)     // ratings
     @JsonManagedReference
     private List<Rating> userRatings;
 
