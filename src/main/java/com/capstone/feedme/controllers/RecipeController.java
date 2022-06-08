@@ -31,15 +31,10 @@ public class RecipeController {
     private final RatingsRepository ratingsDao;
     private final EmailService emailService;
   
-    // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao) {
-
-
-
 
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, EmailService emailService) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, EmailService emailService) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
@@ -47,7 +42,6 @@ public class RecipeController {
         this.ratingsDao = ratingsDao;
         this.emailService = emailService;
     }
-
 
     // METH
     @GetMapping
