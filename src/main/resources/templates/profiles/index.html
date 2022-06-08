@@ -20,7 +20,9 @@
         <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle mb-3">
     </a>
     <div sec:authorize="isAuthenticated()" class="col-12">
-        <h1><span th:text="${#authentication.principal.username}"/></h1><br>
+        <h1><span th:text="${#authentication.principal.username}"/></h1>
+        <p th:text="${user.bio}"></p>
+        <br>
     </div>
         <section class="col-12">
 
