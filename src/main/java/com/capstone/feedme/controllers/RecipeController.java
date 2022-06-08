@@ -1,11 +1,14 @@
 package com.capstone.feedme.controllers;
 
 import com.capstone.feedme.models.*;
+
+import com.capstone.feedme.repositories.*;
+import org.apache.tomcat.util.json.JSONParser;
 import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
-import org.apache.tomcat.util.json.JSONParser;
+import com.capstone.feedme.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -25,13 +28,19 @@ public class RecipeController {
     private final UserRepository usersDao;
     private final CategoryRepository categoryDao;
     private final IngredientRepository ingredientsDao;
+    private final RatingsRepository ratingsDao;
+    private final EmailService emailService;
+  
+
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, EmailService emailService) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
         this.ingredientsDao = ingredientsDao;
+        this.ratingsDao = ratingsDao;
+        this.emailService = emailService;
     }
 
     // METH
@@ -43,6 +52,9 @@ public class RecipeController {
 
         // RECIPES MODEL
         provideRecipesModel(model);
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "");
@@ -154,6 +166,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "breakfast", "morning meal");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "breakfast");
 
@@ -169,6 +184,9 @@ public class RecipeController {
         // brunch
         // RECIPES MODEL
         provideRecipesModel(model, "brunch");
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "brunch");
@@ -186,6 +204,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "lunch");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "lunch");
 
@@ -201,6 +222,9 @@ public class RecipeController {
         // dinner
         // RECIPES MODEL
         provideRecipesModel(model, "dinner");
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "dinner");
@@ -218,6 +242,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "dessert");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "sweet");
 
@@ -233,6 +260,9 @@ public class RecipeController {
         // main-course / main-dish
         // RECIPES MODEL
         provideRecipesModel(model, "main course", "main dish");
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "main course");
@@ -250,6 +280,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "appetizer", "starter", "fingerfood");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "appetizer");
 
@@ -265,6 +298,9 @@ public class RecipeController {
         // soup / salad / side dish
         // RECIPES MODEL
         provideRecipesModel(model, "soup", "salad", "side dish");
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "appetizer");
@@ -282,6 +318,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "snack");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "snack");
         return "recipes/index";
@@ -297,6 +336,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "antipasto", "antipasti");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "snack");
         return "recipes/index";
@@ -311,6 +353,9 @@ public class RecipeController {
         // condiment
         // RECIPES MODEL
         provideRecipesModel(model, "condiment");
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "condiment");
@@ -328,6 +373,9 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "dip");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "dip");
         return "recipes/index";
@@ -342,6 +390,9 @@ public class RecipeController {
         // sauce
         // RECIPES MODEL
         provideRecipesModel(model, "sauce");
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "sauce");
@@ -358,10 +409,15 @@ public class RecipeController {
         // RECIPES MODEL
         provideRecipesModel(model, "dip");
 
+        // RATINGS MODEL
+        provideRatingsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "dip");
         return "recipes/index";
     }
+
+
 
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
@@ -452,6 +508,14 @@ public class RecipeController {
         model.addAttribute("user", user);
     }
 
+    private void provideRatingsModel(Model model){
+
+        List<Rating> ratings = ratingsDao.findAll();
+
+        model.addAttribute("ratings", ratings);
+
+    }
+
     private void provideApiSearchModel(Model model, String param){
         model.addAttribute("apiSearchParameter", param);
     }
@@ -473,6 +537,12 @@ public class RecipeController {
         List<Recipe> rl1 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param1));
         List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
 
+        for (int i = 0; i < rl2.size(); i++) {
+            if(rl1.contains(rl2.get(i))){
+                rl2.remove(rl2.get(i));
+            }
+        }
+
         recipes.addAll(rl1);
         recipes.addAll(rl2);
 
@@ -481,12 +551,22 @@ public class RecipeController {
         model.addAttribute("recipes", recipes);
     }
 
-
     private void provideRecipesModel(Model model, String param1, String param2, String param3){
         List<Recipe> recipes = new ArrayList<>();
         List<Recipe> rl1 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param1));
         List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
         List<Recipe> rl3 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
+
+        for (int i = 0; i < rl2.size(); i++) {
+            if(rl1.contains(rl2.get(i))){
+                rl2.remove(rl2.get(i));
+            }
+        }
+        for (int i = 0; i < rl3.size(); i++) {
+            if(rl1.contains(rl3.get(i)) || rl2.contains(rl3.get(i))){
+                rl3.remove(rl3.get(i));
+            }
+        }
 
         recipes.addAll(rl1);
         recipes.addAll(rl2);

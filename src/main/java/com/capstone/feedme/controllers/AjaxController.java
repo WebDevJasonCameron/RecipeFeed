@@ -4,10 +4,7 @@ import com.capstone.feedme.classes.AjaxCodeResults;
 import com.capstone.feedme.models.Rating;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.models.User;
-import com.capstone.feedme.repositories.CategoryRepository;
-import com.capstone.feedme.repositories.IngredientRepository;
-import com.capstone.feedme.repositories.RecipeRepository;
-import com.capstone.feedme.repositories.UserRepository;
+import com.capstone.feedme.repositories.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -32,15 +29,16 @@ public class AjaxController {
     private final UserRepository usersDao;
     private final CategoryRepository categoryDao;
     private final IngredientRepository ingredientsDao;
+    private final RatingsRepository ratingsDao;
 
     // CON
-    public AjaxController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao) {
+    public AjaxController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
         this.ingredientsDao = ingredientsDao;
+        this.ratingsDao = ratingsDao;
     }
-
 
     @PostMapping("/add-favorite")
     public Object addFavoriteToUser(@RequestBody String data) throws IOException {
@@ -116,17 +114,18 @@ public class AjaxController {
         // build objects
         User user = usersDao.getById(user_id);
         Recipe recipe = recipesDao.getById(recipe_id);
+        List<Rating> userRatings = user.getUserRatings();
+
         Rating rating = new Rating(1, user, recipe);
-        List<Rating> ratings = user.getUserRatings();
 
         // logic stops dupes
-        if(ratings.contains(recipe)){
+        if(userRatings.contains(recipe.getId())){
             System.out.println("True!!!!!!!!!!!!!!!!!!");
             return new AjaxCodeResults("rating result", 500, "user unable to rate a recipe");
         } else {
             System.out.println("False------------------");
-            ratings.add(rating);
-            user.setUserRatings(ratings);
+            userRatings.add(rating);
+            user.setUserRatings(userRatings);
             usersDao.save(user);
             return new AjaxCodeResults("rating result", 200, "user successfully rated a recipe");
         }
@@ -146,13 +145,13 @@ public class AjaxController {
         User user = usersDao.getById(user_id);
         Recipe recipe = recipesDao.getById(recipe_id);
         Rating rating = new Rating(1, user, recipe);
-        List<Rating> ratings = user.getUserRatings();
+        List<Rating> userRatings = user.getUserRatings();
 
         // logic stops dupes
-        if(ratings.contains(recipe)){
+        if(userRatings.contains(recipe.getId())){
             System.out.println("True!!!!!!!!!!!!!!!!!!");
-            ratings.remove(rating);
-            user.setUserRatings(ratings);
+            userRatings.remove(rating);
+            user.setUserRatings(userRatings);
             usersDao.save(user);
             return new AjaxCodeResults("rating result", 200, "user successfully able remove rating of recipe");
         } else {
