@@ -1,6 +1,7 @@
 package com.capstone.feedme.controllers;
 
 import com.capstone.feedme.classes.AjaxCodeResults;
+import com.capstone.feedme.models.Rating;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.models.User;
 import com.capstone.feedme.repositories.CategoryRepository;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -100,6 +102,65 @@ public class AjaxController {
         }
 
     }
+
+    @PostMapping("/add-rating")
+    public Object addUserRating(@RequestBody String data) throws IOException {
+
+        // All this to get the String into a usable Json obj (See Helper Meths)
+        JsonNode actualObj = stringToJsonNode(data);
+
+        // placing data from the json into usable vars
+        long user_id  = actualObj.get("user_id").asLong();
+        long recipe_id  = actualObj.get("recipe_id").asLong();
+
+        // build objects
+        User user = usersDao.getById(user_id);
+        Recipe recipe = recipesDao.getById(recipe_id);
+        Rating rating = new Rating(1, user, recipe);
+        List<Rating> ratings = user.getUserRatings();
+
+        // logic stops dupes
+        if(ratings.contains(recipe)){
+            System.out.println("True!!!!!!!!!!!!!!!!!!");
+            return new AjaxCodeResults("rating result", 500, "user unable to rate a recipe");
+        } else {
+            System.out.println("False------------------");
+            ratings.add(rating);
+            user.setUserRatings(ratings);
+            usersDao.save(user);
+            return new AjaxCodeResults("rating result", 200, "user successfully rated a recipe");
+        }
+    }
+
+    @PostMapping("/remove-rating")
+    public Object removeUserRating(@RequestBody String data) throws IOException {
+
+        // All this to get the String into a usable Json obj (See Helper Meths)
+        JsonNode actualObj = stringToJsonNode(data);
+
+        // placing data from the json into usable vars
+        long user_id  = actualObj.get("user_id").asLong();
+        long recipe_id  = actualObj.get("recipe_id").asLong();
+
+        // build objects
+        User user = usersDao.getById(user_id);
+        Recipe recipe = recipesDao.getById(recipe_id);
+        Rating rating = new Rating(1, user, recipe);
+        List<Rating> ratings = user.getUserRatings();
+
+        // logic stops dupes
+        if(ratings.contains(recipe)){
+            System.out.println("True!!!!!!!!!!!!!!!!!!");
+            ratings.remove(rating);
+            user.setUserRatings(ratings);
+            usersDao.save(user);
+            return new AjaxCodeResults("rating result", 200, "user successfully able remove rating of recipe");
+        } else {
+            System.out.println("False------------------");
+            return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
+        }
+    }
+
 
 
 

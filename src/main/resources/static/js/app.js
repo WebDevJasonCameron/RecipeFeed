@@ -18,20 +18,34 @@ $('#find-more-from-api-btn').on('click', (e) => {
 $('.bookmark-btn').on('click', function (e) {
     e.preventDefault();
 
-    let v1 = $(this).data('data')
-    let v2 = $(this).data()
-
-    console.log(v1);
-    console.log();
-
-    if($(this).children('span').children('i').hasClass('fa-regular')){
-        changeIconClass($(this), 'fa-regular', 'fa-solid');
-        addToFavorite(getBtnValue($(this)));
-    } else {
-        changeIconClass($(this), 'fa-solid', 'fa-regular');
-        removeFromFavorite(getBtnValue($(this)));
+    // must check to see if a user is logged in, or you will get errors in the run log
+    let checkAnonU = getBtnValue($(this));
+    if(checkAnonU[1] != -1){
+        if($(this).children('span').children('i').hasClass('fa-regular')){
+            changeIconClass($(this), 'fa-regular', 'fa-solid');
+            addToFavorite(getBtnValue($(this)));
+        } else {
+            changeIconClass($(this), 'fa-solid', 'fa-regular');
+            removeFromFavorite(getBtnValue($(this)));
+        }
     }
+})
 
+// HEART BTN
+$('.heart-btn').on('click', function (e) {
+    e.preventDefault();
+
+    // must check to see if a user is logged in, or you will get errors in the run log
+    let checkAnonU = getBtnValue($(this));
+    if(checkAnonU[1] != -1){
+        if($(this).children('span').children('i').hasClass('fa-regular')){
+            changeIconClass($(this), 'fa-regular', 'fa-solid');
+            addUserRating(getBtnValue($(this)));
+        } else {
+            changeIconClass($(this), 'fa-solid', 'fa-regular');
+            removeUserRating(getBtnValue($(this)));
+        }
+    }
 })
 
 // ACCESS MODAL
@@ -157,6 +171,57 @@ function removeFromFavorite(values){
             console.log('Error removing favorite recipe to user m-t-m: ', e)
         });
 }
+
+// ADD USER RATING
+function addUserRating(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/add-rating';
+    const readOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error adding user rating recipe to user 1-t-m: ', e)
+        });
+}
+
+// REMOVE USER RATING
+function removeUserRating(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/remove-rating';
+    const readOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error removing user rating recipe to user 1-t-m: ', e)
+        });
+}
+
 
 /**
  * BUILD BODY

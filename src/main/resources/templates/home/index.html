@@ -3,72 +3,72 @@
 >
 
 <head th:replace="/partials/partials.html :: head ('Home Feed')"></head>
-<body>
-<!--NAV-->
-<nav th:replace="/partials/partials.html :: navbar"></nav>
-<!--HEADER-->
-<!--<section th:replace="/partials/partials.html :: header('Home Feed')"></section>-->
-<!--MAIN-->
+    <body>
+        <!--NAV-->
+        <nav th:replace="/partials/partials.html :: navbar"></nav>
+        <!--HEADER-->
+        <!--<section th:replace="/partials/partials.html :: header('Home Feed')"></section>-->
+        <!--MAIN-->
 
-<!--        CARD1-->
-<div class="card firstCard d-flex flex-row-reverse flex-wrap" id="card1">
-    <div class="firstCardImageSection col-12 col-md-6">
-        <a href="/recipes">
-        <img src="https://source.unsplash.com/random/561x561/?breakfast" class="card-img" alt="Responsive image">
-        </a>
-    </div>
-    <div class="firstCardTextSection  col-12 col-md-6">
-        <h5 class="card-title"></h5>
-        <p class="card-text font-italic">“A recipe has no soul. You as the cook must bring soul to the recipe.”
-            <img src="x.png" alt="testing broken image">
-            <br>
-            – Thomas Keller</p>
-        <p class="card-text"><small class="text-muted"></small></p>
-    </div>
-</div>
+        <!--        CARD1-->
+        <div class="card firstCard d-flex flex-row-reverse flex-wrap" id="card1">
+            <div class="firstCardImageSection col-12 col-md-6">
+                <a href="/recipes">
+                    <img src="https://source.unsplash.com/random/561x561/?breakfast" class="card-img" alt="Responsive image">
+                </a>
+            </div>
+            <div class="firstCardTextSection text-center col-12 col-md-6">
+                <h5 class="card-title"></h5>
+                <p class="card-text font-italic">“A recipe has no soul. You as the cook must bring soul to the recipe.”
+                    <img src="x.png" alt="testing broken image">
+                    <br>
+                    – Thomas Keller</p>
+                <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+        </div>
 
-<!--        CARD2-->
-<div class="card secondCard d-flex flex-row flex-wrap" id="card2">
-    <div class="secondCardImageSection col-12 col-md-6">
-        <a href="/recipes">
-            <img src="https://source.unsplash.com/random/561x561/?lunch" class="card-img" alt="...">
-        </a>
-    </div>
-    <div class="secondCardTextSection col-12 col-md-6">
-        <h5 class="card-title"></h5>
-        <p class="card-text font-italic">“Cooking requires confident guesswork and improvisation—experimentation and substitution,
-            dealing with failure and uncertainty in a creative way.” <br>
-            – Paul Theroux </p>
-        <p class="card-text"><small class="text-muted"></small></p>
-    </div>
-</div>
-</div>
+        <!--        CARD2-->
+        <div class="card secondCard d-flex flex-row flex-wrap" id="card2">
+            <div class="secondCardImageSection col-12 col-md-6">
+                <a href="/recipes">
+                    <img src="https://source.unsplash.com/random/561x561/?lunch" class="card-img" alt="...">
+                </a>
+            </div>
+            <div class="secondCardTextSection text-center col-12 col-md-6">
+                <h5 class="card-title"></h5>
+                <p class="card-text font-italic">“Cooking requires confident guesswork and improvisation—experimentation and
+                    substitution,
+                    dealing with failure and uncertainty in a creative way.” <br>
+                    – Paul Theroux </p>
+                <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+        </div>
+        </div>
 
-<!--        CARD3-->
-<div class="card thirdCard d-flex flex-row-reverse flex-wrap" id="card3">
-    <div class="thirdCardImageSection col-12 col-md-6">
-        <a href="/recipes" class="p-0">
-            <img src="https://source.unsplash.com/random/561x561/?dessert" class="card-img" alt="Responsive image">
-        </a> </div>
-    <div class="thirdCardTextSection col-12 col-md-6">
-        <h5 class="card-title"></h5>
-        <p class="card-text font-italic">“Cooking with kids is not just about ingredients, recipes, and cooking.
-            It’s about harnessing imagination, empowerment, and creativity.” <br>
-            – Guy Fieri</p>
-        <p class="card-text"><small class="text-muted"></small></p>
-    </div>
-</div>
-<br>
-<br>
+        <!--        CARD3-->
+        <div class="card thirdCard d-flex flex-row-reverse flex-wrap" id="card3">
+            <div class="thirdCardImageSection col-12 col-md-6">
+                <a href="/recipes" class="p-0">
+                    <img src="https://source.unsplash.com/random/561x561/?dessert" class="card-img" alt="Responsive image">
+                </a></div>
+            <div class="thirdCardTextSection text-center col-12 col-md-6">
+                <h5 class="card-title"></h5>
+                <p class="card-text font-italic">“Cooking with kids is not just about ingredients, recipes, and cooking.
+                    It’s about harnessing imagination, empowerment, and creativity.” <br>
+                    – Guy Fieri</p>
+                <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+        </div>
+        <br>
+        <br>
 
 
+        <!--FOOTER-->
+        <footer th:replace="/partials/partials.html :: footer"></footer>
 
-<!--FOOTER-->
-<footer th:replace="/partials/partials.html :: footer"></footer>
+        <!--SCRIPTS-->
+        <section th:replace="/partials/partials.html :: script-section"></section>
 
-<!--SCRIPTS-->
-<section th:replace="/partials/partials.html :: script-section"></section>
-
-</div>
-</body>
+        </div>
+    </body>
 </html>

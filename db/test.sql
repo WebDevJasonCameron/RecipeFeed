@@ -1,3 +1,3 @@
 USE feed_me_db;
 
-DELETE FROM ingredients WHERE id > 15;
+DELETE FROM ratings WHERE id > 0;
