@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="/partials/partials.html :: head ('Admin | Get Recipes')"></head>
+<head th:replace="partials/partials.html :: head ('Admin | Get Recipes')"></head>
 <body>
 
   <!--NAV-->
-  <nav th:replace="/partials/partials.html :: navbar"></nav>
+  <nav th:replace="partials/partials.html :: navbar"></nav>
 
   <div class="container">
 
     <!--HEADER-->
-    <section th:replace="/partials/partials.html :: header ('Amdin | Get Recipes')"></section>
+    <section th:replace="partials/partials.html :: header ('Amdin | Get Recipes')"></section>
 
     <!--MAIN-->
     <!--input form-->
@@ -25,17 +25,17 @@
     <div class="container" id="recipe-details"></div>
 
     <!--MODAL-->
-    <div th:replace="/partials/partials.html :: recipe-details-modal"></div>
+    <div th:replace="partials/partials.html :: recipe-details-modal"></div>
 
 
 
   </div>
   <!--FOOTER-->
-  <footer th:replace="/partials/partials.html :: footer"></footer>
+  <footer th:replace="partials/partials.html :: footer"></footer>
 
 
   <!--SCRIPTS-->
-  <section th:replace="/partials/partials.html :: script-section"></section>
+  <section th:replace="partials/partials.html :: script-section"></section>
   <script th:src="@{/js/keys.js}"></script>
   <script th:src="@{/js/admin-get-recipes.js}"></script>
 
