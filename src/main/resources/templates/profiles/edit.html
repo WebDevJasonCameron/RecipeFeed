@@ -11,29 +11,38 @@
     <div class="container d-flex align-items-center justify-content-center">
         <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
             <section th:replace="/partials/partials.html :: header ('Edit Profile')"></section>
-            <form th:action="@{/user/edit}" method="post" th:object="${user}">
+            <form th:action="@{/user/edit}" method="post" th:object="${user}" onsubmit="submitForm(event)">
                 <div class="my-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" th:field="*{username}">
+                    <input type="text" class="form-control" id="username" th:field="*{username}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{username}" class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" th:field="*{password}">
+                    <input type="password" class="form-control" id="password" th:field="*{password}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{username}" class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirm" >
                 </div>
 
                 <div class="mb-3">
                     <label for="bio" class="form-label">Bio</label>
-                    <textarea rows="5" cols="80" class="form-control" id="bio" th:field="*{bio}"></textarea>
+                    <textarea rows="5" cols="80" class="form-control" id="bio" th:field="*{bio}" th:errorClass="is-invalid"></textarea>
+                    <div th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}" class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
                     <div id="upload-img" class="btn btn-primary">Upload an Image</div>
-                    <input id="avatar" type="hidden" th:field="*{avatar}">
+                    <input id="avatar" type="hidden" th:field="*{avatar}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="invalid-feedback"></div>
                 </div>
 
 
@@ -61,8 +70,7 @@
     <section th:replace="/partials/partials.html :: script-section"></section>
     <script th:src="@{/js/keys.js}"></script>
     <script th:src="@{/js/edit-filestack-intigration.js}"></script>
-
-
+    <script th:src="@{/js/password-check.js}"></script>
 
 </body>
 </html>

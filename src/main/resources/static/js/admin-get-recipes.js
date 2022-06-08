@@ -244,7 +244,7 @@ function hiddenCategoryInputs(rC){
     `
 }
 
-// COMBINE HIDDEN CAT LIST FOR MORM
+// COMBINE HIDDEN CAT LIST FOR RORM
 function hiddenCategoryInputList(r) {
     let output = '';
     for (let i = 0; i < r.dishTypes.length; i++) {

@@ -50,6 +50,10 @@ public class Recipe {
     @JsonManagedReference
     private List<Ingredient> ingredients;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
+    @JsonManagedReference
+    private List<Rating> recipeRatings;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
@@ -140,8 +144,9 @@ public class Recipe {
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
-
-
+    public List<Rating> getRecipeRatings() {
+        return recipeRatings;
+    }
 
     // SET
     public void setApiId(long apiId) {
@@ -204,7 +209,9 @@ public class Recipe {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
+    public void setRecipeRatings(List<Rating> recipeRatings) {
+        this.recipeRatings = recipeRatings;
+    }
 
     // CHECK
     @Override
@@ -212,12 +219,13 @@ public class Recipe {
         return "Recipe{" +
                 "id=" + id +
                 ", apiId=" + apiId +
+                ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", summary='" + summary + '\'' +
                 ", instruction='" + instruction + '\'' +
-                ", readyInMin=" + readyInMin +
-                ", servingAmount=" + servingAmount +
+                ", readyInMin='" + readyInMin + '\'' +
+                ", servingAmount='" + servingAmount + '\'' +
                 ", sourceName='" + sourceName + '\'' +
                 ", sourceUrl='" + sourceUrl + '\'' +
                 ", vegetarian=" + vegetarian +
@@ -225,10 +233,11 @@ public class Recipe {
                 ", glutenFree=" + glutenFree +
                 ", dairyFree=" + dairyFree +
                 ", video_url='" + video_url + '\'' +
+                ", ingredients=" + ingredients +
+                ", recipeRatings=" + recipeRatings +
                 ", user=" + user +
                 ", userFavorites=" + userFavorites +
                 ", recipeCategories=" + recipeCategories +
-                ", ingredients=" + ingredients +
                 '}';
     }
 

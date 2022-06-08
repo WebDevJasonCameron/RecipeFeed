@@ -228,7 +228,18 @@
                                     <div class="d-flex d-inline-block p-1">
                                         <!--HEART-->
                                         <div>
-                                            <a href="#"><i class="fa-regular fa-heart fa-2x p-2"></i></a>
+                                            <button
+                                                    class="btn border-0 heart-btn"
+                                                    href="#"
+                                                    th:data="${recipe.id} + ',' + ${user.id}"
+                                            >
+                                                <span th:if="${#lists.contains(user.userRatings, recipe)}">
+                                                   <i class="fa-solid fa-heart fa-2x p-2"></i>
+                                                </span>
+                                                <span th:if="${!#lists.contains(user.userRatings, recipe)}">
+                                                   <i class="fa-regular fa-heart fa-2x p-2"></i>
+                                                </span>
+                                            </button>
                                         </div>
                                         <!--LIST-->
                                         <div>
@@ -245,12 +256,11 @@
                                                     href="#"
                                                     th:data="${recipe.id} + ',' + ${user.id}"
                                                     >
-                                                <span th:utext="${#lists.contains(user.userFavorites, recipe.id)
-                                                ?
-                                                 '<i class=&quot;fa-regular fa-bookmark fa-2x p-2&quot;></i>'
-                                                 :
-                                                 '<i class=&quot;fa-solid fa-bookmark fa-2x p-2&quot;></i>'}">
-                                                    response
+                                                <span th:if="${#lists.contains(user.userFavorites, recipe)}">
+                                                   <i class="fa-solid fa-bookmark fa-2x p-2"></i>
+                                                </span>
+                                                <span th:if="${!#lists.contains(user.userFavorites, recipe)}">
+                                                   <i class="fa-regular fa-bookmark fa-2x p-2"></i>
                                                 </span>
                                             </button>
                                         </div>
