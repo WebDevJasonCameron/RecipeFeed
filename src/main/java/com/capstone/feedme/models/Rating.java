@@ -31,7 +31,11 @@ public class Rating {
     // CON
     public Rating() {
     }
-
+    public Rating(int rating, User user, Recipe recipe) {
+        this.rating = rating;
+        this.user = user;
+        this.recipe = recipe;
+    }
 
     // GET
     public long getId() {

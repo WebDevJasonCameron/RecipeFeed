@@ -15,11 +15,37 @@ $('#find-more-from-api-btn').on('click', (e) => {
 })
 
 // BOOKMARK BTN
-$('.bookmark-btn').on('click', (e) => {
+$('.bookmark-btn').on('click', function (e) {
     e.preventDefault();
 
-    // testLocalAjaxRequest()
+    // must check to see if a user is logged in, or you will get errors in the run log
+    let checkAnonU = getBtnValue($(this));
+    if(checkAnonU[1] != -1){
+        if($(this).children('span').children('i').hasClass('fa-regular')){
+            changeIconClass($(this), 'fa-regular', 'fa-solid');
+            addToFavorite(getBtnValue($(this)));
+        } else {
+            changeIconClass($(this), 'fa-solid', 'fa-regular');
+            removeFromFavorite(getBtnValue($(this)));
+        }
+    }
+})
 
+// HEART BTN
+$('.heart-btn').on('click', function (e) {
+    e.preventDefault();
+
+    // must check to see if a user is logged in, or you will get errors in the run log
+    let checkAnonU = getBtnValue($(this));
+    if(checkAnonU[1] != -1){
+        if($(this).children('span').children('i').hasClass('fa-regular')){
+            changeIconClass($(this), 'fa-regular', 'fa-solid');
+            addUserRating(getBtnValue($(this)));
+        } else {
+            changeIconClass($(this), 'fa-solid', 'fa-regular');
+            removeUserRating(getBtnValue($(this)));
+        }
+    }
 })
 
 // ACCESS MODAL
@@ -31,6 +57,22 @@ function seeRecipeDetails(id){
 function scrollToTop() {
     window.scrollTo(0, 0);
 }
+
+/**
+ * HELPER METHS
+ */
+function getBtnValue(target){
+    let val = target;
+    val = val[0].attributes[2].value.split(',');
+    console.log(val);
+    return val;
+}
+
+function changeIconClass(target, fromClass, toClass){
+    target.children('span').children('i').removeClass(fromClass).addClass(toClass);
+}
+
+
 
 
 /**
@@ -80,17 +122,103 @@ function getSpoonRecipeDetailsByID(cid){
         });
 }
 
-// TEST LOCAL AJAX REQ
-function testLocalAjaxRequest(){
-    const url = 'http://localhost:8080/admin/get-recipe-titles';
+// ADD TO FAVORITE
+function addToFavorite(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/add-favorite';
     const readOption = {
-        method: 'GET',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
     };
 
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error adding favorite recipe to user m-t-m: ', e)
+        });
+}
+
+// REMOVE FROM FAVORITE
+function removeFromFavorite(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/remove-favorite';
+    const readOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error removing favorite recipe to user m-t-m: ', e)
+        });
+}
+
+// ADD USER RATING
+function addUserRating(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/add-rating';
+    const readOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error adding user rating recipe to user 1-t-m: ', e)
+        });
+}
+
+// REMOVE USER RATING
+function removeUserRating(values){
+    const data = {
+        user_id: values[1],
+        recipe_id: values[0]
+    }
+    const url = 'http://localhost:8080/ajax/remove-rating';
+    const readOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(url, readOption)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log('Error removing user rating recipe to user 1-t-m: ', e)
         });
 }
 
