@@ -3,7 +3,8 @@ const client = filestack.init(FILESTACKAPI);
 
 const options = {
     fromSources: ["local_file_system", "url"],
-    onUploadDone: function (res) {$("#avatar").val(res.filesUploaded[0].url)}
+    accept: ["image/*"],
+    onUploadDone: function (res) {$("#avatar").val(res.filesUploaded[0].url)},
 }
 
 $("#upload-img").click(function(){
