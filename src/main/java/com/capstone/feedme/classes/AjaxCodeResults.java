@@ -1,6 +1,6 @@
-package com.capstone.feedme.models;
+package com.capstone.feedme.classes;
 
-public class Error {
+public class AjaxCodeResults {
 
     // ATT
     private String name;
@@ -8,7 +8,7 @@ public class Error {
     private String description;
 
     // CON
-    public Error(String name, int code, String description) {
+    public AjaxCodeResults(String name, int code, String description) {
         this.name = name;
         this.code = code;
         this.description = description;
