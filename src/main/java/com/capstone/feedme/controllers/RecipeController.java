@@ -435,13 +435,13 @@ public class RecipeController {
 
 //        model.addAttribute("similarRecipes", similarRecipes);
         model.addAttribute("recipe", recipe);
-        return "/recipes/details";
+        return "recipes/details";
     }
 
     @GetMapping("/create")
     public String createRecipe(Model model){
         model.addAttribute("recipe", new Recipe());
-        return "/recipes/create";
+        return "recipes/create";
     }
 
     @PostMapping("/create")

@@ -53,14 +53,14 @@ public class UserController {
 
         if(bindingResult.hasErrors()){
             model.addAttribute("user", user);
-            return "/users/register";
+            return "users/register";
         }
 
 
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         usersDao.save(user);
-        return "redirect:/recipes";
+        return "redirect:recipes";
 
     }
 
@@ -92,7 +92,7 @@ public class UserController {
 
         if(bindingResult.hasErrors()){
             model.addAttribute("user", user);
-            return "/profiles/edit";
+            return "profiles/edit";
         }
 
         if(!usersDao.findByUsername(user.getUsername()).getUsername().equals(loggedInUser.getUsername()) && usersDao.findByUsername(user.getUsername()) != null){
@@ -105,7 +105,7 @@ public class UserController {
 
         if(bindingResult.hasErrors()){
             model.addAttribute("user", user);
-            return "/profiles/edit";
+            return "profiles/edit";
         }
 
         User editedUser = usersDao.getById(principle.getId());
