@@ -112,23 +112,38 @@ public class AjaxController {
         long recipe_id  = actualObj.get("recipe_id").asLong();
 
         // build objects
+        System.out.println("user_id = " + user_id);
+        System.out.println("recipe_id = " + recipe_id);
         User user = usersDao.getById(user_id);
         Recipe recipe = recipesDao.getById(recipe_id);
-        List<Rating> userRatings = user.getUserRatings();
+        List<Rating> ratings = ratingsDao.findAll();
 
         Rating rating = new Rating(1, user, recipe);
 
-        // logic stops dupes
-        if(userRatings.contains(recipe.getId())){
-            System.out.println("True!!!!!!!!!!!!!!!!!!");
-            return new AjaxCodeResults("rating result", 500, "user unable to rate a recipe");
+        System.out.println("rating.getRating() = " + rating.getRating());
+        System.out.println("rating.getUser() = " + rating.getUser());
+        System.out.println("rating = " + rating);
+
+        if(ratings.equals(rating)){
+            System.out.println("Has Rating... shows true ========================>");
         } else {
-            System.out.println("False------------------");
-            userRatings.add(rating);
-            user.setUserRatings(userRatings);
-            usersDao.save(user);
-            return new AjaxCodeResults("rating result", 200, "user successfully rated a recipe");
+            System.out.println("No Rating... shows false ========================>");
+            ratingsDao.save(rating);
         }
+
+
+        // logic stops dupes
+//        if(ratings.contains(rating)){
+//            System.out.println("True!!!!!!!!!!!!!!!!!!");
+//            return new AjaxCodeResults("rating result", 500, "user unable to rate a recipe");
+//        } else {
+//            System.out.println("False------------------");
+//            ratingsDao.save(rating);
+//            return new AjaxCodeResults("rating result", 200, "user successfully rated a recipe");
+//        }
+
+        return new AjaxCodeResults("test", 7700, "test");
+
     }
 
     @PostMapping("/remove-rating")
@@ -148,16 +163,19 @@ public class AjaxController {
         List<Rating> userRatings = user.getUserRatings();
 
         // logic stops dupes
-        if(userRatings.contains(recipe.getId())){
-            System.out.println("True!!!!!!!!!!!!!!!!!!");
-            userRatings.remove(rating);
-            user.setUserRatings(userRatings);
-            usersDao.save(user);
-            return new AjaxCodeResults("rating result", 200, "user successfully able remove rating of recipe");
-        } else {
-            System.out.println("False------------------");
-            return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
-        }
+//        if(userRatings.contains(recipe.getId())){
+//            System.out.println("True!!!!!!!!!!!!!!!!!!");
+//            userRatings.remove(rating);
+//            user.setUserRatings(userRatings);
+//            usersDao.save(user);
+//            return new AjaxCodeResults("rating result", 200, "user successfully able remove rating of recipe");
+//        } else {
+//            System.out.println("False------------------");
+//            return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
+//        }
+
+        return new AjaxCodeResults("test", 7700, "testing the rating");
+
     }
 
 

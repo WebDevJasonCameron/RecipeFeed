@@ -557,16 +557,16 @@ public class RecipeController {
         List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
         List<Recipe> rl3 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
 
-        for (int i = 0; i < rl2.size(); i++) {
-            if(rl1.contains(rl2.get(i))){
-                rl2.remove(rl2.get(i));
-            }
-        }
-        for (int i = 0; i < rl3.size(); i++) {
-            if(rl1.contains(rl3.get(i)) || rl2.contains(rl3.get(i))){
-                rl3.remove(rl3.get(i));
-            }
-        }
+//        for (int i = 0; i < rl2.size(); i++) {
+//            if(rl1.contains(rl2.get(i))){
+//                rl2.remove(rl2.get(i));
+//            }
+//        }
+//        for (int i = 0; i < rl3.size(); i++) {
+//            if(rl1.contains(rl3.get(i)) || rl2.contains(rl3.get(i))){
+//                rl3.remove(rl3.get(i));
+//            }
+//        }
 
         recipes.addAll(rl1);
         recipes.addAll(rl2);
