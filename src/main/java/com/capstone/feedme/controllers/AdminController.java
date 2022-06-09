@@ -34,17 +34,17 @@ public class AdminController {
     // METH
     @GetMapping
     public String showRecipeHomePage(){
-        return "/admin/index";
+        return "admin/index";
     }
 
     @GetMapping("/get-recipes")
     public String getRecipeListPage(){
-        return "/admin/admin-get-recipes";
+        return "admin/admin-get-recipes";
     }
 
     @GetMapping("/get-details")
     public String getRecipeDetailsPage(){
-        return "/admin/admin-get-details";
+        return "admin/admin-get-details";
     }
 
     @PostMapping("/get-details")
@@ -59,13 +59,13 @@ public class AdminController {
             return "redirect:/admin/get-list";
         }
 
-        return "/admin/admin-get-details";
+        return "admin/admin-get-details";
     }
 
     @GetMapping("/admin-details-to-db")
     public String showRecipeDetailsToDb(){
 
-        return "/admin/admin-details-to-db";
+        return "admin/admin-details-to-db";
     }
 
     @PostMapping("/admin-details-to-db")
@@ -185,7 +185,7 @@ public class AdminController {
 
         model.addAttribute(recipe);
 
-        return "/admin/admin-details-to-db";
+        return "admin/admin-details-to-db";
     }
 
 }

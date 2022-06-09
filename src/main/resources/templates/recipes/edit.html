@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:form="http://www.w3.org/1999/html"
       lang="en">
-<head th:replace="/partials/partials.html :: head ('Edit Recipe')" ></head>
+<head th:replace="partials/partials.html :: head ('Edit Recipe')" ></head>
 <body>
-<ul th:replace="/partials/partials.html :: navbar"></ul>
+<ul th:replace="partials/partials.html :: navbar"></ul>
 <form th:action="@{/recipes/edit}"
       th:method="post" th:object="${recipe}">
 
     <div class="container d-flex align-items-center justify-content-center">
         <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
-    <section th:replace="/partials/partials.html :: header ('Edit Recipe')"></section>
+    <section th:replace="partials/partials.html :: header ('Edit Recipe')"></section>
             <!-- CATEGORY-->
         <label for="category">Category</label>
         <select name="category" id="category">
@@ -102,9 +102,9 @@
 
 
 
-<footer th:replace="/partials/partials.html :: footer"></footer>
+<footer th:replace="partials/partials.html :: footer"></footer>
 
-<section th:replace="/partials/partials.html :: script-section"></section>
+<section th:replace="partials/partials.html :: script-section"></section>
 
 </body>
 </html>

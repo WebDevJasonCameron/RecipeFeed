@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/partials.html :: head ('Log In')" ></head>
+<head th:replace="partials/partials.html :: head ('Log In')" ></head>
 
 
 <body>
-<div th:replace="/partials/partials.html :: navbar"></div>
+<div th:replace="partials/partials.html :: navbar"></div>
 
 
 
 
 <div class="container d-flex align-items-center justify-content-center">
     <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
-        <div th:replace="/partials/partials.html :: header('Login')"></div>
+        <div th:replace="partials/partials.html :: header('Login')"></div>
 
         <form th:action="@{/login}" method="post">
             <div class="my-3">
@@ -34,7 +34,7 @@
 </div>
 
 <!--SCRIPTS-->
-<section th:replace="/partials/partials.html :: script-section"></section>
-<div th:replace="/partials/partials.html :: footer"></div>
+<section th:replace="partials/partials.html :: script-section"></section>
+<div th:replace="partials/partials.html :: footer"></div>
 </body>
 </html>
