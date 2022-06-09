@@ -1,5 +1,5 @@
 USE feed_me_db;
 
-DELETE FROM recipes WHERE id > 0;
+DELETE FROM ratings WHERE id > 0;
 
 

@@ -18,7 +18,6 @@ public class Rating {
     @Column(name = "rating")
     private int rating;
 
-
     @ManyToOne                              // Many ratings per one user
     @JoinColumn(name = "user_id")
     @JsonBackReference
