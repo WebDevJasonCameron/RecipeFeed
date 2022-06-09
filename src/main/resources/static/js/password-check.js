@@ -9,3 +9,13 @@ function submitForm(event){
         alert("Passwords do not match");
     }
 }
+
+function deleteCheck(event){
+    const deleteButton = document.getElementById("delete");
+    const message = confirm("Are you sure you want to delete your account?");
+
+        if(message === false){
+            event.preventDefault();
+        }
+
+}
