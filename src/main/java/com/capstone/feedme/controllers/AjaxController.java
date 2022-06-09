@@ -114,22 +114,18 @@ public class AjaxController {
         // build objects
         User user = usersDao.getById(user_id);
         Recipe recipe = recipesDao.getById(recipe_id);
-        List<Rating> userRatings = user.getUserRatings();
+        List<Rating> ratings = ratingsDao.findAll();
 
         Rating rating = new Rating(1, user, recipe);
 
-        // logic stops dupes
-        if(userRatings.contains(recipe.getId())){
-            System.out.println("True!!!!!!!!!!!!!!!!!!");
-            return new AjaxCodeResults("rating result", 500, "user unable to rate a recipe");
-        } else {
-            System.out.println("False------------------");
-            userRatings.add(rating);
-            user.setUserRatings(userRatings);
-            usersDao.save(user);
+        // Helper Meth checks for existing rating
+        if(checkRatingWithUserExists(ratings, user, recipe) == -1){
+            ratingsDao.save(rating);
             return new AjaxCodeResults("rating result", 200, "user successfully rated a recipe");
         }
+        return new AjaxCodeResults("rating result", 500, "user unable to rate a recipe");
     }
+
 
     @PostMapping("/remove-rating")
     public Object removeUserRating(@RequestBody String data) throws IOException {
@@ -144,20 +140,21 @@ public class AjaxController {
         // build objects
         User user = usersDao.getById(user_id);
         Recipe recipe = recipesDao.getById(recipe_id);
-        Rating rating = new Rating(1, user, recipe);
-        List<Rating> userRatings = user.getUserRatings();
+        List<Rating> ratings = ratingsDao.findAll();
 
-        // logic stops dupes
-        if(userRatings.contains(recipe.getId())){
-            System.out.println("True!!!!!!!!!!!!!!!!!!");
-            userRatings.remove(rating);
-            user.setUserRatings(userRatings);
-            usersDao.save(user);
-            return new AjaxCodeResults("rating result", 200, "user successfully able remove rating of recipe");
-        } else {
-            System.out.println("False------------------");
-            return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
+        if(checkRatingWithUserExists(ratings, user, recipe) != -1){
+            long ratingId = checkRatingWithUserExists(ratings, user, recipe);
+
+            System.out.println("ratingId = " + ratingId);
+            Rating rating = ratingsDao.getById(ratingId);
+            System.out.println(rating.getId());
+
+            ratingsDao.delete(rating);
+            
+            return new AjaxCodeResults("rating result", 200, "user successfully removed rating from recipe");
         }
+
+        return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
     }
 
 
@@ -173,6 +170,13 @@ public class AjaxController {
         return actualObj;
     }
 
-
+    private long checkRatingWithUserExists(List<Rating> ratings, User user, Recipe recipe ){
+        for (int i = 0; i < ratings.size(); i++) {
+            if(ratings.get(i).getUser() == user && ratings.get(i).getRecipe() == recipe){
+                return ratings.get(i).getId();
+            }
+        }
+        return -1;
+    }
 
 }  //<--END

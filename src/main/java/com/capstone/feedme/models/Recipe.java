@@ -50,7 +50,7 @@ public class Recipe {
     @JsonManagedReference
     private List<Ingredient> ingredients;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rating", orphanRemoval = true)
     @JsonManagedReference
     private List<Rating> recipeRatings;
 
