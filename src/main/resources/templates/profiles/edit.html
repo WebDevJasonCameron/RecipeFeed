@@ -44,11 +44,17 @@
                     <input id="avatar" type="hidden" th:field="*{avatar}" th:errorClass="is-invalid">
                     <div th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="invalid-feedback"></div>
                 </div>
-
-
-
                 <button id="submit" type="submit" value="post" class="btn btn-primary">Submit</button>
             </form>
+
+
+            <div class="mb-3">
+                <form th:action="@{/user/delete}" method="post" th:object="${user}">
+                    <input id="id" type="hidden" th:field="*{id}">
+                    <button class="btn btn-danger" type="submit" value="post">Delete Account</button>
+                </form>
+
+            </div>
         </div>
     </div>
 
