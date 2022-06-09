@@ -107,7 +107,6 @@ public class UserController {
             model.addAttribute("user", user);
             return "profiles/edit";
         }
-
         User editedUser = usersDao.getById(principle.getId());
         editedUser.setUsername(username);
         editedUser.setPassword(hash);
@@ -127,7 +126,7 @@ public class UserController {
 
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
-        usersDao.save(user);
+        usersDao.delete(user);
         return "redirect:/login";
     }
 
