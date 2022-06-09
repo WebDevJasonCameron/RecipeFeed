@@ -127,7 +127,7 @@ public class UserController {
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
         usersDao.delete(user);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 }

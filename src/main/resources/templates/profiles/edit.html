@@ -49,9 +49,9 @@
 
 
             <div class="mb-3">
-                <form th:action="@{/user/delete}" method="post" th:object="${user}">
+                <form th:action="@{/user/delete}" method="post" th:object="${user}" onsubmit="deleteCheck(event)">
                     <input id="id" type="hidden" th:field="*{id}">
-                    <button class="btn btn-danger" type="submit" value="post">Delete Account</button>
+                    <button class="btn btn-danger" id="delete" type="submit" value="post">Delete Account</button>
                 </form>
 
             </div>
