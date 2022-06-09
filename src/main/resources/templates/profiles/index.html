@@ -121,8 +121,9 @@
                 <!--DATA-->
                 <div class="tab-content mt-2" id="right-tab-contents">
                     <!--1: recipe created-->
-                    <div class="tab-pane fade show active" id="user-created" role="tabpanel">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque error modi placeat quasi quibusdam, reiciendis reprehenderit. Deserunt facilis ipsum minima modi necessitatibus perspiciatis possimus ratione tempora velit veniam. Atque, neque.
+                    <div class="tab-pane fade d-flex flex-wrap overflow-auto" id="user-created" role="tabpanel">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio dolorum eaque ex incidunt quae sapiente. Beatae blanditiis, consectetur cum, deserunt, expedita facere fuga ipsam laboriosam molestias natus perferendis voluptate?
+
                     </div>
                     <!--2: recipe remixed-->
                     <div class="tab-pane fade" id="user-remix" role="tabpanel">
@@ -130,11 +131,23 @@
                     </div>
                     <!--3: favourited recipes-->
                     <div class="tab-pane fade" id="user-favorites" role="tabpanel">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aspernatur corporis culpa, distinctio dolor dolore dolorem facere modi natus odio provident quas qui quo sapiente veniam vero vitae. Est, nisi.
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <div th:each="fRecipe : ${user.getUserFavorites()}" style="width: 200px; margin:10px 25px">
+                                <a th:href="@{/recipes/details/{id}(id=${fRecipe.id})}">
+                                    <img th:src="${fRecipe.imgUrl}" th:alt="${fRecipe.title}" class="img-thumbnail">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <!--3: liked recipes-->
                     <div class="tab-pane fade" id="user-liked" role="tabpanel">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium at atque consequatur debitis distinctio dolore dolorum in laborum laudantium, libero, nam quam quia quisquam rem repellat ut veniam, vero voluptate!
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <div th:each="rRecipe : ${rRecipes}" style="width: 200px; margin:10px 25px">
+                                <a th:href="@{/recipes/details/{id}(id=${rRecipe.id})}">
+                                    <img th:src="${rRecipe.imgUrl}" th:alt="${rRecipe.title}" class="img-thumbnail">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

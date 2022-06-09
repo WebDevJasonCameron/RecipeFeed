@@ -3,6 +3,8 @@ package com.capstone.feedme.controllers;
 import com.capstone.feedme.models.Rating;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.models.User;
+import com.capstone.feedme.repositories.RatingsRepository;
+import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
@@ -27,17 +29,20 @@ public class UserController {
 
     // ATT : DAO
     private final UserRepository usersDao;
+    private final RecipeRepository recipeDao;
+    private final RatingsRepository ratingsDao;
 
     // ATT : SERVICES
     private final PasswordEncoder passwordEncoder;
 
 
     // CON
-    public UserController(UserRepository usersDao, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository usersDao, RecipeRepository recipeDao, RatingsRepository ratingsDao, PasswordEncoder passwordEncoder) {
         this.usersDao = usersDao;
+        this.recipeDao = recipeDao;
+        this.ratingsDao = ratingsDao;
         this.passwordEncoder = passwordEncoder;
     }
-
 
     // SECURITY
     public void initBinder(WebDataBinder dataBinder){
@@ -80,8 +85,11 @@ public class UserController {
     @GetMapping("/profile")
     public String profile(Model model){
 
-        // GET USER MODEL
-        provideUserModel(model);
+        // PROVIDE USER MODEL
+        User user = provideUserModel(model);
+
+        // PROVIDE USER RATED RECIPES MODEL
+        provideUserRatedRecipeModel(model, user);
 
         return "profiles/index";
     }
@@ -144,7 +152,7 @@ public class UserController {
     }
 
     // HELPER METHS
-    private void provideUserModel(Model model){
+    private User provideUserModel(Model model){
 
         // First, get the authenticated session's credentials
         Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -175,6 +183,21 @@ public class UserController {
             user = usersDao.findByUsername(username);
         }
         model.addAttribute("user", user);
+
+        return user;
+    }
+
+    private void provideUserRatedRecipeModel(Model model, User user){
+
+        List<Recipe> rRecipes = new ArrayList<>();
+        List<Rating> ratings = ratingsDao.findAll();
+
+        for (int i = 0; i < ratings.size(); i++) {
+            if(ratings.get(i).getUser().getId() == user.getId()){
+                rRecipes.add(recipeDao.findRecipeById(ratings.get(i).getRecipe().getId()));
+            }
+        }
+        model.addAttribute("rRecipes", rRecipes);
     }
 
 
