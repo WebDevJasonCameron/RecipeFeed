@@ -162,7 +162,7 @@
                 <!--footer-->
                 <div class="modal-footer">
                     <div>
-                        <small>Source: sourc_name</small>
+                        <small>Source: source_name</small>
                     </div>
                     <form action="x">
                         <div id="recipe-data">
@@ -200,6 +200,40 @@
         </div>
     </div>
 </div>
+
+<div th:fragment="registration" class="container d-flex align-items-center justify-content-center">
+    <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
+        <div th:replace="partials/partials.html :: header ('Create an Account')"></div>
+        <form th:action="@{/}" method="POST" th:object="${user}" onsubmit="submitForm(event)">
+            <div class="my-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+                <label for="confirm" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm" >
+            </div>
+            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<script th:src="@{/js/password-check.js}"></script>
+
+
 
 
 <!--FOOTER-->
