@@ -8,44 +8,145 @@
     <!--NAV-->
     <nav th:replace="partials/partials.html :: navbar"></nav>
 
-    <!--HEADER-->
-    <div class="text-center pt-5">
-<!--    <section th:replace="/partials/partials.html :: header('Profile Page')"></section>-->
-    </div>
-
     <!--MAIN-->
-    <div class="text-center d-flex flex-wrap">
+    <div class="container w-75">
+        <!--FIRST ROW-->
+        <div class="row">
+            <!--AVATAR-->
+            <div class="col-md-4 text-center">
+                <div class="row">
+                    <a th:href="@{/user/profile}" class="col-12">
+                        <img th:src="${user.avatar}" th:alt="${user.username} + ' avatar'"
+                             class="img-fluid rounded-circle mb-3" style="width: 70%">
+                    </a>
+                </div>
+                <!--MENU-->
+                <div class="row">
+                    <!--list-->
+                    <div class="mt-1 ">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn border-0 mx-5" type="submit" th:href="@{/admin/get-recipes}">
+                                <i class="fa-regular fa-square-plus fa-2x"></i> Recipe
+                            </a>
+                            <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
+                                <i class="fa-regular fa-pen-to-square fa-2x"></i> Create
+                            </a>
+                            <a class="btn border-0 mx-3 d-block d-md-none" type="submit" th:href="@{/user/edit}">
+                                <i class="fa-solid fa-user-gear fa-2x mx-3"></i> Edit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--USER INFO-->
+            <div class="col-md-8 text-center text-md-start">
+                <!--NAME & EDIT PROFILE BTN-->
+                <div class="row">
+                    <!--name-->
+                    <div class="col-12 col-md-3">
+                            <h1><span th:text="${user.username}"/></h1><br>
+                    </div>
+                    <!--edit btn-->
+                    <div class="d-none d-md-block col-md-7">
+                        <a class="btn border-0 mx-3" type="submit" th:href="@{/user/edit}">
+                            Edit Profile <i class="fa-solid fa-user-gear fa-1x mx-3"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--USER ACTIVITY INFO-->
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                # Created Recipes
+                            </div>
+                            <div>
+                                # Remix
+                            </div>
+                            <div>
+                                # Favorites
+                            </div>
+                        </div>
+                    </div>
+                    <!--INSTAGRAM BLANK SPACE-->
+                    <div class="col-md-8"></div>
+                </div>
+                <!--USER BIO-->
+                <div class="row">
+                    <!--bio-->
+                    <div class="col-md-8 mt-3">
+                        <div class="mx-1" th:text="${user.bio}"></div>
+                        <div>
+                            <a class="text-decoration-none" th:href="'mailto:' + ${user.email}"><span th:text="${user.email}"></span></a>
+                        </div>
+                    </div>
+                    <!--space-->
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <a th:href="@{/user/profile}" class="col-12">
-        <img th:src="${user.avatar}" alt="px" class="img-fluid rounded-circle mb-3" style="width: 20em; height: 20em;">
-    </a>
-    <div sec:authorize="isAuthenticated()" class="col-12">
-        <h1><span th:text="${#authentication.principal.username}"/></h1><br>
-        <p th:text="${user.bio}"></p>
-    </div>
-        <section class="col-12">
+        <hr>
+        <!--SECOND ROW-->
+        <div class="row">
+            <div class="col-12">
+                <!--TABS-->
+                <ul class="nav nav-tabs justify-content-center text-capitalize small border-0" id="user-tabs" role="tablist">
+                    <!--1-->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active border-0" id="user-created-tab" data-bs-toggle="tab" data-bs-target="#user-created" type="button" role="tab">
+                            <i class="fa-solid fa-square-plus mx-1"></i> created
+                        </button>
+                    </li>
+                    <!--2-->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link border-0" id="user-remix-tab" data-bs-toggle="tab" data-bs-target="#user-remix" type="button" role="tab">
+                            <i class="fa-solid fa-recycle mx-1"></i> remixed
+                        </button>
+                    </li>
+                    <!--3-->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link border-0" id="user-favorites-tab" data-bs-toggle="tab" data-bs-target="#user-favorites" type="button" role="tab">
+                            <i class="fa-solid fa-bookmark mx-1"></i> favourited
+                        </button>
+                    </li>
+                    <!--4-->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link border-0" id="user-liked-tab" data-bs-toggle="tab" data-bs-target="#user-liked" type="button" role="tab">
+                            <i class="fa-solid fa-heart mx-1"></i> liked
+                        </button>
+                    </li>
+                </ul>
+                <!--DATA-->
+                <div class="tab-content mt-2" id="right-tab-contents">
+                    <!--1: recipe created-->
+                    <div class="tab-pane fade show active" id="user-created" role="tabpanel">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque error modi placeat quasi quibusdam, reiciendis reprehenderit. Deserunt facilis ipsum minima modi necessitatibus perspiciatis possimus ratione tempora velit veniam. Atque, neque.
+                    </div>
+                    <!--2: recipe remixed-->
+                    <div class="tab-pane fade" id="user-remix" role="tabpanel">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda autem beatae distinctio ducimus earum illo ipsum magni minima non odio, omnis placeat praesentium quisquam vitae? Commodi iusto laborum vel?
+                    </div>
+                    <!--3: favourited recipes-->
+                    <div class="tab-pane fade" id="user-favorites" role="tabpanel">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aspernatur corporis culpa, distinctio dolor dolore dolorem facere modi natus odio provident quas qui quo sapiente veniam vero vitae. Est, nisi.
+                    </div>
+                    <!--3: liked recipes-->
+                    <div class="tab-pane fade" id="user-liked" role="tabpanel">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium at atque consequatur debitis distinctio dolore dolorum in laborum laudantium, libero, nam quam quia quisquam rem repellat ut veniam, vero voluptate!
+                    </div>
+                </div>
 
-                    <a class="btn border-0" type="submit" th:href="@{/user/edit}">
-                        Edit Profile
-                    </a>
-                    |
-            <a class="btn border-0" type="submit" th:href="@{/admin/get-recipes}">
-                Add Recipe
-            </a>
-            |
-                    <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
-                    Create Recipe
-                    </a>
-                    |
-                    <a class="btn border-0" type="submit" th:href="@{/user/favorites}">
-                        View Favorites
-                    </a>
-            |
-            <a class="btn border-0" type="submit" th:href="@{/recipes}">
-                Main Feed
-            </a>
-        </section>
+
+
+            </div>
+
+
+
+        </div>
     </div>
+
 
 
 
