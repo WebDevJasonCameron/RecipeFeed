@@ -8,34 +8,23 @@
 <body>
 
 <ul th:replace="partials/partials.html :: navbar"></ul>
-         <form th:action="@{/recipes/create}"
-               th:method="post" th:object="${recipe}">
+
 
             <div class="container d-flex align-items-center justify-content-center">
                <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
 
          <section th:replace="partials/partials.html :: header ('Create Your Own')"></section>
-<!--CATEGORIES-->
-            <label for="category">Category</label>
-                   <select name="category" id="category">
-                       <option value="select" disabled="disabled" selected="selected">Select</option>
-                       <option value="breakfast">Breakfast</option>
-                       <option value="brunch">Brunch</option>
-                       <option value="lunch">Lunch</option>
-                       <option value="dinner">Dinner</option>
-                       <option value="dessert">Dessert</option>
-                       <option value="main">Main</option>
-                       <option value="appetizer">Appetizer</option>
-                       <option value="side dishes">Side Dishes</option>
-                       <option value="condiments">Condiments</option>
-                       <option value="dips">Dips</option>
-                       <option value="sauces">Sauces</option>
-                       <option value="spreads">Spreads</option>
-                   </select>
 
-                  <!--    </form:se>-->
                   <br><br>
+ <form th:action="@{/recipes/create}"
+       th:method="post" th:object="${recipe}">
 
+<!-- CATEGORIES-->
+     <select name="recipeCategories" id="category">
+         <option value="select" disabled="disabled" selected="selected">Select</option>
+         <option th:each="category : *{recipeCategories}" th:value="${category.id}" th:text="${category.type}"></option>
+
+     </select>
                   <!--IMAGE-->
                   <label for="image">Image:</label>
                   <input th:field="*{imgUrl}" th:errorClass="is-invalid" name="image" id="image">
