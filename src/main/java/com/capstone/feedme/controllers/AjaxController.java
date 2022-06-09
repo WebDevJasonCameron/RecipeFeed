@@ -157,9 +157,7 @@ public class AjaxController {
         return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
     }
 
-
-
-
+    
     // HELPER METHS
     private JsonNode stringToJsonNode(String data) throws IOException {
         ObjectMapper mapper = new ObjectMapper();

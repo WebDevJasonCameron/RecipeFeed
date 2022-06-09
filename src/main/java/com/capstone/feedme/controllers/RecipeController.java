@@ -3,6 +3,7 @@ package com.capstone.feedme.controllers;
 import com.capstone.feedme.models.*;
 
 import com.capstone.feedme.repositories.*;
+import com.capstone.feedme.services.IconService;
 import org.apache.tomcat.util.json.JSONParser;
 import com.capstone.feedme.repositories.CategoryRepository;
 import com.capstone.feedme.repositories.IngredientRepository;
@@ -23,29 +24,35 @@ import java.util.*;
 @RequestMapping("/recipes")
 public class RecipeController {
 
-    // ATT
+    // ATT: DAO
     private final RecipeRepository recipesDao;
     private final UserRepository usersDao;
     private final CategoryRepository categoryDao;
     private final IngredientRepository ingredientsDao;
     private final RatingsRepository ratingsDao;
+
+    // ATT SERVICES
     private final EmailService emailService;
-  
+    private final IconService iconService;
 
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, EmailService emailService) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, EmailService emailService, IconService iconService) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
         this.ingredientsDao = ingredientsDao;
         this.ratingsDao = ratingsDao;
         this.emailService = emailService;
+        this.iconService = iconService;
     }
 
     // METH
     @GetMapping
     public String showMainRecipeFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -159,6 +166,9 @@ public class RecipeController {
     public String showMainRecipeBreakfastFeed(Model model){
         List<Recipe> recipes = new ArrayList<>();
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -177,6 +187,9 @@ public class RecipeController {
 
     @GetMapping("/brunch")
     public String showMainRecipeBrunchFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -197,6 +210,10 @@ public class RecipeController {
     @GetMapping("/lunch")
     public String showMainRecipeLunchFeed(Model model){
 
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -215,6 +232,9 @@ public class RecipeController {
 
     @GetMapping("/dinner")
     public String showMainRecipeDinnerFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -235,6 +255,9 @@ public class RecipeController {
     @GetMapping("/dessert")
     public String showMainRecipeDessertFeed(Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -253,6 +276,9 @@ public class RecipeController {
 
     @GetMapping("/main-course")
     public String showMainRecipeMainCourseFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -273,6 +299,9 @@ public class RecipeController {
     @GetMapping("/appetizer")
     public String showMainRecipeAppetizerFeed(Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -291,6 +320,9 @@ public class RecipeController {
 
     @GetMapping("/sides")
     public String showMainRecipeSidesFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -311,6 +343,9 @@ public class RecipeController {
     @GetMapping("/snacks")                                          // not used yet
     public String showMainRecipeSnacksFeed(Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -329,6 +364,9 @@ public class RecipeController {
     @GetMapping("/antipasto")                                      // not used yet
     public String showMainRecipeAntipastoFeed(Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -346,6 +384,9 @@ public class RecipeController {
 
     @GetMapping("/condiments")
     public String showMainRecipeCondimentsFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -366,6 +407,9 @@ public class RecipeController {
     @GetMapping("/dips")
     public String showMainRecipeDipsFeed(Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -384,6 +428,9 @@ public class RecipeController {
     @GetMapping("/sauces")
     public String showMainRecipeSaucesFeed(Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
+
         // USER MODEL
         provideUserModel(model);
 
@@ -401,6 +448,9 @@ public class RecipeController {
 
     @GetMapping("/spreads")
     public String showMainRecipeSpreadsFeed(Model model){
+
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         // USER MODEL
         provideUserModel(model);
@@ -423,6 +473,8 @@ public class RecipeController {
     public String showRecipeDetail(@PathVariable long id,
                                    Model model){
 
+        // ICON MODEL
+        model.addAttribute("iconService", iconService);
 
         Recipe recipe = recipesDao.findRecipeById(id);
 
@@ -536,6 +588,7 @@ public class RecipeController {
         List<Recipe> recipes = new ArrayList<>();
         List<Recipe> rl1 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param1));
         List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
+        List<Recipe> mergR = new ArrayList<>();
 
         for (int i = 0; i < rl2.size(); i++) {
             if(rl1.contains(rl2.get(i))){

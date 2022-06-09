@@ -231,14 +231,8 @@
                                             <button
                                                     class="btn border-0 heart-btn"
                                                     href="#"
-                                                    th:data="${recipe.id} + ',' + ${user.id}"
-                                            >
-                                                <span th:if="${#lists.contains(ratings, user)}">
-                                                   <i class="fa-solid fa-heart fa-2x p-2"></i>
-                                                </span>
-                                                <span th:if="${!#lists.contains(ratings, user)}">
-                                                   <i class="fa-regular fa-heart fa-2x p-2"></i>
-                                                </span>
+                                                    th:data="${recipe.id} + ',' + ${user.id}">
+                                                <span th:utext="${iconService.ratingIcon(ratings, user, recipe)}">   </span>
                                             </button>
                                         </div>
                                         <!--LIST-->
