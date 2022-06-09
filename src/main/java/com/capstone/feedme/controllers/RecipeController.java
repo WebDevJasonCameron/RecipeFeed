@@ -66,6 +66,7 @@ public class RecipeController {
         // API SEARCH MODEL
         provideApiSearchModel(model, "");
 
+
         return "recipes/index";
     }
 
@@ -492,14 +493,25 @@ public class RecipeController {
 
     @GetMapping("/create")
     public String createRecipe(Model model){
-        model.addAttribute("recipe", new Recipe());
+
+        Recipe recipe = new Recipe();
+        List <Category> categories = categoryDao.findAll();
+        recipe.setRecipeCategories(categories);
+
+
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("category", new Category());
+
         return "recipes/create";
     }
 
     @PostMapping("/create")
-    public String publishRecipe(@Valid Recipe recipe, Model model){
+    public String publishRecipe(@Valid Recipe recipe, Category category, Model model){
+
         recipesDao.save(recipe);
         model.addAttribute("recipe", recipe);
+        model.addAttribute("category", category);
+
         return "redirect:/recipes";
     }
 
