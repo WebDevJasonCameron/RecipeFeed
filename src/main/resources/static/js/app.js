@@ -59,7 +59,7 @@ function scrollToTop() {
 }
 
 /**
- * HELPER METHS
+ * HELPER FUN
  */
 function getBtnValue(target){
     let val = target;
@@ -76,7 +76,7 @@ function changeIconClass(target, fromClass, toClass){
 
 
 /**
- *    API CRUD
+ *    LOCAL DB CRUD
  */
 // GET R LIST
 function getSpoonRecipeListByKeyWord(kw){

@@ -280,7 +280,11 @@
                                     </div>
                                     <div class="input-group w-100 pl-2">
                                         <div class="form-outline w-100 "> <!--Add Form action and method-->
-                                            <input id="a-comment" type="Add a comment" class="form-control border-0" placeholder="Add a comment..." />
+                                            <input th:id="${recipe.id} + ',' + ${user.id}"
+                                                   name="commentName"
+                                                   type="Add a comment"
+                                                   class="comment-btn form-control border-0"
+                                                   placeholder="Add a comment..." />
                                         </div>
                                     </div>
                                 </div>
@@ -359,6 +363,7 @@
 <section th:replace="partials/partials.html :: script-section"></section>
 <script th:src="@{/js/keys.js}"></script>
 <script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/comments.js}"></script>
 
 </body>
 </html>

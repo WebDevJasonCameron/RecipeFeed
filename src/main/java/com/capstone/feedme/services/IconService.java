@@ -26,13 +26,6 @@ public class IconService {
             return "<i class=\"fa-regular fa-heart fa-2x p-2\"></i>";
         }
 
-
-
-
-
-
-
-
     }
 
-}
+}  //<--END
