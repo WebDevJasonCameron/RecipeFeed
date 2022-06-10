@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/partials/partials.html :: head ('About Page')"></head>
+<head th:replace="/partials/partials.html :: head ('About Page')" ></head>
 <meta charset="UTF-8" />
 <body>
+
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1483137140003-ae073b395549?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNvb2tpbmclMjBpbmdyZWRpZW50c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 
     <!--NAV-->
     <nav th:replace="/partials/partials.html :: navbar"></nav>
@@ -11,74 +20,80 @@
     <!--HEADER-->
     <section th:replace="/partials/partials.html :: header ('About Us')"></section>
 
+
+
     <!--MAIN-->
     <!--SOCIAL MEDIA-->
-    <!--        CARD1-->
-    <div class="card 1stCard d-flex flex-row flex-wrap" id="card1">
-        <div class="1stCardImageSection col-4 col-md-2">
-            <div class="fade-in-image">
-            <img src="https://avatars.githubusercontent.com/u/50087642?s=70&v=4" class="card-img" alt="...">
-            </div>
-        <div class="col-4 col-md-2">
-            <h5 class="card-title">(First Card)</h5>
-            <p class="card-text font-italic"></p>
-            <p class="card-text"><small class="text-muted"></small></p>
-        </div>
-        </div>
-    </div>
-    <!--        CARD2-->
-    <div class="card 2ndCard d-flex flex-row flex-wrap" id="card2">
-        <div class="2ndCardImageSection col-4 col-md-2">
-            <div class="fade-in-image">
-            <img src="https://avatars.githubusercontent.com/u/80545434?s=70&v=4" class="card-img" alt="...">
-            </div>
-        <div class="col-4 col-md-2">
-            <h5 class="card-title">(Second Card)</h5>
-            <p class="card-text font-italic"></p>
-            <p class="card-text"><small class="text-muted"></small></p>
-        </div>
-        </div>
-    </div>
+    <!--            CARD1-->
+<!--    <div class="card firstCard d-flex flex-row flex-wrap" id="card1">-->
+<!--        <div class="firstCardImageSection col-2 col-md-1">-->
+<!--            <div class="fade-in-image">-->
+<!--            <img src="https://avatars.githubusercontent.com/u/50087642?s=70&v=4" class="card-img" alt="...">-->
+<!--            </div>-->
+<!--        <div class="col-2 col-md-1">-->
+<!--            <h5 class="card-title"></h5>-->
+<!--            <p class="card-text font-italic"></p>-->
+<!--            <p class="card-text"><small class="text-muted"></small></p>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;        CARD2&ndash;&gt;-->
+<!--    <div class="card secondCard d-flex flex-row flex-wrap" id="card2">-->
+<!--        <div class="secondCardImageSection col-2 col-md-1">-->
+<!--            <div class="fade-in-image">-->
+<!--            <img src="https://avatars.githubusercontent.com/u/80545434?s=70&v=4" class="card-img" alt="...">-->
+<!--            </div>-->
+<!--        <div class="col-2 col-md-1">-->
+<!--            <h5 class="card-title"></h5>-->
+<!--            <p class="card-text font-italic"></p>-->
+<!--            <p class="card-text"><small class="text-muted"></small></p>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!--        CARD3-->
-    <div class="card 3rdCard d-flex flex-row flex-wrap" id="card3">
-        <div class="3rdCardImageSection col-4 col-md-2">
-            <div class="fade-in-image">
-            <img src="https://avatars.githubusercontent.com/u/98361722?s=70&v=4" class="card-img" alt="...">
-            </div>
-        <div class="col-4 col-md-2">
-            <h5 class="card-title">(Third Card)</h5>
-            <p class="card-text font-italic"></p>
-            <p class="card-text"><small class="text-muted"></small></p>
-        </div>
-    </div>
-    </div>
+<!--    &lt;!&ndash;        CARD3&ndash;&gt;-->
+<!--    <div class="card thirdCard d-flex flex-row flex-wrap" id="card3">-->
+<!--        <div class="thirdCardImageSection col-2 col-md-1">-->
+<!--            <div class="fade-in-image">-->
+<!--            <img src="https://avatars.githubusercontent.com/u/98361722?s=70&v=4" class="card-img" alt="...">-->
+<!--            </div>-->
+<!--        <div class="col-2 col-md-1">-->
+<!--            <h5 class="card-title"></h5>-->
+<!--            <p class="card-text font-italic"></p>-->
+<!--            <p class="card-text"><small class="text-muted"></small></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
 
-    <!--        CARD4-->
-    <div class="card 4thCard d-flex flex-row flex-wrap" id="card4">
-        <div class="col-4 col-md-2">
-            <img src="https://avatars.githubusercontent.com/u/98361785?s=70&v=4" class="card-img" alt="...">
-        </div>
-        <div class="col-4 col-md-2">
-            <h5 class="card-title">(Fourth Card)</h5>
-            <p class="card-text font-italic"></p>
-            <p class="card-text"><small class="text-muted"></small></p>
-        </div>
-    </div>
-    </div>
+<!--    &lt;!&ndash;        CARD4&ndash;&gt;-->
+<!--    <div class="card fourthCard d-flex flex-row flex-wrap" id="card4">-->
+<!--        <div class="fourthCardImageSelection col-2 col-md-1">-->
+<!--            <div class="fade-in-image">-->
+<!--            <img src="https://avatars.githubusercontent.com/u/98361785?s=70&v=4" class="card-img" alt="...">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-2 col-md-1">-->
+<!--            <h5 class="card-title"></h5>-->
+<!--            <p class="card-text font-italic"></p>-->
+<!--            <p class="card-text"><small class="text-muted"></small></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
 
-    <!--        CARD5-->
-    <div class="card 5thCard d-flex flex-row flex-wrap" id="card5">
-        <div class="col-4 col-md-2">
-            <img src="https://avatars.githubusercontent.com/u/98362003?s=70&v=4" class="card-img" alt="...">
-        </div>
-        <div class="col-4 col-md-2">
-            <h5 class="card-title">(Fifth Card)</h5>
-            <p class="card-text font-italic"></p>
-            <p class="card-text"><small class="text-muted"></small></p>
-        </div>
-    </div>
-    </div>
+<!--    &lt;!&ndash;        CARD5&ndash;&gt;-->
+<!--    <div class="card fifthCard d-flex flex-row flex-wrap" id="card5">-->
+<!--        <div class="fifthCardImageSelection col-2 col-md-1">-->
+<!--            <div class="fade-in-image">-->
+<!--            <img src="https://avatars.githubusercontent.com/u/98362003?s=70&v=4" class="card-img" alt="...">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-2 col-md-1">-->
+<!--            <h5 class="card-title"></h5>-->
+<!--            <p class="card-text font-italic"></p>-->
+<!--            <p class="card-text"><small class="text-muted"></small></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
 
 
 
