@@ -88,8 +88,17 @@ public class UserController {
         // PROVIDE USER MODEL
         User user = provideUserModel(model);
 
-        // PROVIDE USER RATED RECIPES MODEL
-        provideUserRatedRecipeModel(model, user);
+        // PROVIDE USER RATED RECIPES MODEL AND #
+        int rRecipeTotal = provideUserRatedRecipeModel(model, user);
+        model.addAttribute("rRecipeTotal", rRecipeTotal);
+
+        // PROVIDE USER REMIX RECIPES MODEL AND #
+        int remixRecipeTotal = provideUserRemixRecipeModel(model, user);
+        model.addAttribute("remixRecipeTotal", remixRecipeTotal);
+
+        // PROVIDE USER CREATED RECIPES MODEL AND #
+        int createdRecipeTotal = provideUserCreatedRecipeModel(model, user);
+        model.addAttribute("createdRecipeTotal", createdRecipeTotal);
 
         return "profiles/index";
     }
@@ -187,7 +196,7 @@ public class UserController {
         return user;
     }
 
-    private void provideUserRatedRecipeModel(Model model, User user){
+    private int provideUserRatedRecipeModel(Model model, User user){
 
         List<Recipe> rRecipes = new ArrayList<>();
         List<Rating> ratings = ratingsDao.findAll();
@@ -198,6 +207,51 @@ public class UserController {
             }
         }
         model.addAttribute("rRecipes", rRecipes);
+
+        return rRecipes.size();
+    }
+
+    private int provideUserRemixRecipeModel(Model model, User user){
+
+        List<Recipe> recipes = recipeDao.findAll();
+        List<Recipe> remixRecipes = new ArrayList<>();
+
+        for (int i = 0; i < recipes.size(); i++) {
+            if(recipes.get(i).getUserId() == user.getId() &&
+                recipes.get(i).getApiId() != 0){
+                remixRecipes.add(recipes.get(i));
+            }
+        }
+
+        model.addAttribute("remixRecipes", remixRecipes);
+
+        if(remixRecipes == null){
+            return 0;
+        } else {
+            return remixRecipes.size();
+        }
+
+    }
+
+    private int provideUserCreatedRecipeModel(Model model, User user){
+
+        List<Recipe> recipes = recipeDao.findAll();
+        List<Recipe> createdRecipes = new ArrayList<>();
+
+        for (int i = 0; i < recipes.size(); i++) {
+            if(recipes.get(i).getUserId() == user.getId() &&
+                recipes.get(i).getApiId() == 0){
+                createdRecipes.add(recipes.get(i));
+            }
+        }
+        model.addAttribute("createdRecipes", createdRecipes);
+
+        if(createdRecipes == null){
+            return 0;
+        } else {
+            return createdRecipes.size();
+        }
+
     }
 
 
