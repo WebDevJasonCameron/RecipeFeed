@@ -156,6 +156,7 @@ public class UserController {
 
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
+        recipeDao.dropUserRecipes(user.getId());
         usersDao.delete(user);
         return "redirect:/";
     }

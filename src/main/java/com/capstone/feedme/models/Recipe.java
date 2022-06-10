@@ -1,6 +1,7 @@
 package com.capstone.feedme.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 
@@ -240,6 +241,5 @@ public class Recipe {
                 ", recipeCategories=" + recipeCategories +
                 '}';
     }
-
 
 } //<--END
