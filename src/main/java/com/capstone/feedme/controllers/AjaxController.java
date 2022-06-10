@@ -1,6 +1,7 @@
 package com.capstone.feedme.controllers;
 
 import com.capstone.feedme.classes.AjaxCodeResults;
+import com.capstone.feedme.models.Comment;
 import com.capstone.feedme.models.Rating;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.models.User;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,15 +33,18 @@ public class AjaxController {
     private final CategoryRepository categoryDao;
     private final IngredientRepository ingredientsDao;
     private final RatingsRepository ratingsDao;
+    private final CommentsRepository commentsDao;
 
     // CON
-    public AjaxController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao) {
+    public AjaxController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, CommentsRepository commentsDao) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
         this.ingredientsDao = ingredientsDao;
         this.ratingsDao = ratingsDao;
+        this.commentsDao = commentsDao;
     }
+
 
     @PostMapping("/add-favorite")
     public Object addFavoriteToUser(@RequestBody String data) throws IOException {
@@ -155,6 +161,41 @@ public class AjaxController {
         }
 
         return new AjaxCodeResults("rating result", 500, "user unable to remove rating from recipe");
+    }
+
+    @PostMapping("/add-comment")
+    public Object addUserCommentToRecipe(@RequestBody String data) throws IOException{
+
+        // All this to get the String into a usable Json obj (See Helper Meths)
+        JsonNode actualObj = stringToJsonNode(data);
+
+        // placing data from the json into usable vars
+        long user_id  = actualObj.get("user_id").asLong();
+        long recipe_id  = actualObj.get("recipe_id").asLong();
+        String userComment = actualObj.get("comment").asText();
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        System.out.println("===================================>");
+        System.out.println("localDateTime = " + localDateTime);
+
+        // build objects
+        User user = usersDao.getById(user_id);
+        Recipe recipe = recipesDao.getById(recipe_id);
+
+        // set comment att
+        Comment comment = new Comment();
+
+        comment.setComment(userComment);
+        comment.setRecipe(recipe);
+        comment.setUser(user);
+        comment.setTimeStamp(localDateTime);
+
+        // save comment to user
+        commentsDao.save(comment);
+
+
+
+        return new AjaxCodeResults("comment result", 200, "user successfully added comment to recipe");
     }
 
     
