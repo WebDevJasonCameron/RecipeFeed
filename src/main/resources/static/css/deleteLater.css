@@ -5,12 +5,12 @@ body {
 }
 
 
-.firstCard, .secondCard, .thirdCard {
+.firstCard, .secondCard, .thirdCard, .fourthCard, .fifthCard {
     /*padding: 50px 0px 100px 0px;*/
     border-style: none;
 }
 
-.firstCardTextSection, .secondCardTextSection, .thirdCardTextSection {
+.firstCardTextSection, .secondCardTextSection, .thirdCardTextSection, .fourthCardTextSelection, .fifthCardTextSelection {
     padding: 250px 0px 0px 0px;
 }
 
@@ -29,12 +29,19 @@ body {
     }
     /*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
 
-    .firstCard, .secondCard, .thirdCard {
+
+    .firstCard, .secondCard, .thirdCard, .fourthCard, .fifthCard {
         padding: 0px 0px 100px 0px;
         border-style: none;
+        background-color: transparent;
     }
 
-    .firstCardTextSection, .secondCardTextSection, .thirdCardTextSection {
+    .firstCardImageSection, .secondCardImageSection, .thirdCardImageSection, .fourthCardImageSelection, .fifthCardImageSelection {
         padding: 20px 0px 20px 0px;
     }
+
+    /*.about-navbar-text {*/
+    /*    */
+    /*}*/
+
 }
