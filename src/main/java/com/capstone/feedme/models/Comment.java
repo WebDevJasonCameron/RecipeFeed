@@ -1,5 +1,6 @@
 package com.capstone.feedme.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -18,8 +19,10 @@ public class Comment {
     @Column(name = "comment", length = 2000)
     private String comment;
     @Column(name = "time_stamp")
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")       // ADDED, MAY NEED TO REMOVE
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")      // ADDED, MAY NEED TO REMOVE
     private LocalDateTime timeStamp;
+    @Column(name = "original_user_id")
+    private long originalUserId;            // id of user a comment is replied too
 
     @ManyToOne                              // Many comments per one user
     @JoinColumn(name = "user_id")

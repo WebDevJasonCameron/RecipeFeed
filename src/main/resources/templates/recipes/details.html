@@ -37,12 +37,54 @@
                         <div class="tab-pane fade show active" id="comments" role="tabpanel">
 
                             <div th:each="comment : ${comments}">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <!--AVATAR-->
+                                            <div class="col-2">
+                                                <img
+                                                        th:src="${comment.getUser().avatar}"
+                                                        th:alt="${comment.getUser().username}"
+                                                        class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                            </div>
+                                            <!--COMMENT SECTION-->
+                                            <div class="col-10 d-flex align-items-center">
+                                                <div>
+                                                    <!--USERNAME-->
+                                                    <div>
+                                                        <strong th:text="${comment.getUser().username}" >
+                                                            username
+                                                        </strong>
+                                                    </div>
+                                                    <!--COMMENT-->
+                                                    <div class="d-inline-block">
+                                                        <span th:text="${comment.getComment()}">
+                                                        comment
+                                                        </span>
+                                                    </div>
+                                                    <div class="row">
+                                                        <!--TIME-->
+                                                        <div class="col-9">
+                                                            <div class="d-inline-block text-muted small">
+                                                                <span th:text="${comment.timeStamp}">
+                                                                    date
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="d-flex ml-auto">
+                                                                <button class="btn">
+                                                                    reply
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-
-                                <div th:text="${comment.getComment()}">comment</div>
-                                <div th:text="${comment.getUser().username}">username</div>
-                                <div th:text="${comment.getUser().avatar}">avatar</div>
-                                <div th:text="${comment.timeStamp}">time</div>
 
 
                             </div>
