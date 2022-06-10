@@ -4,16 +4,25 @@ body {
     padding-bottom: 150px;
 }
 
-
-.firstCard, .secondCard, .thirdCard, .fourthCard, .fifthCard {
-    /*padding: 50px 0px 100px 0px;*/
+/*HOME INDEX*/
+.firstCard, .secondCard, .thirdCard {
     border-style: none;
 }
 
-.firstCardTextSection, .secondCardTextSection, .thirdCardTextSection, .fourthCardTextSelection, .fifthCardTextSelection {
-    padding: 250px 0px 0px 0px;
+.firstCardTextSection, .secondCardTextSection, .thirdCardTextSection {
+    padding: 5vh 0px 0px 0px;
 }
 
+/*ABOUT PAGE CSS :) v-v*/
+
+.fourthCard, .fifthCard {
+    border-style: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.fourthCardTextSelection, .fifthCardTextSelection {
+    padding: 0px 0px 0px 0px;
+}
 
 
 /*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
@@ -24,24 +33,20 @@ body {
 @media only screen and (max-width: 600px) {
     /*FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA*/
     body {
-        padding-top: 150px;
+        padding-top: 145px;
         padding-bottom: 150px;
     }
-    /*^FOR THE FIXED NAVBAR/FOOTER, MAKING A VIEWABLE MAIN AREA^*/
 
+    /*ABOUT PAGE CSS :) v-v*/
 
-    .firstCard, .secondCard, .thirdCard, .fourthCard, .fifthCard {
-        padding: 0px 0px 100px 0px;
+    .fourthCard, .fifthCard {
         border-style: none;
-        background-color: transparent;
+        padding: 0px 0px 0px 0px;
     }
 
-    .firstCardImageSection, .secondCardImageSection, .thirdCardImageSection, .fourthCardImageSelection, .fifthCardImageSelection {
-        padding: 20px 0px 20px 0px;
+    .fourthCardTextSelection, .fifthCardTextSelection {
+        padding: 0px 0px 0px 0px;
     }
 
-    /*.about-navbar-text {*/
-    /*    */
-    /*}*/
 
 }
