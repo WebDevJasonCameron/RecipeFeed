@@ -28,7 +28,8 @@
 <body>
 
 <!-- NAVBAR -->
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light text-dark bg-light.bg-gradient fixed-top">
+<nav th:fragment="navbar"
+     class="navbar navbar-expand-lg navbar-light text-dark bg-light bg-gradient shadow-sm fixed-top">
     <div class="container-fluid">
         <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-dark">Feed.</h1></a>
         <div sec:authorize="isAuthenticated()">
@@ -238,81 +239,75 @@
 
 
 <!--FOOTER-->
-<footer th:fragment="footer" class="navbar navbar-expand-lg navbar-light text-dark bg-light.bg-gradient fixed-bottom">
+<footer th:fragment="footer" class="navbar navbar-expand-lg text-dark bg-transparent fixed-bottom">
     <div class="container pb-0">
         <!-- Section: Social media -->
-                <!-- Facebook -->
-                <a class="btn btn-outline-light m-1" href="#!" role="button"
-                ><i class="bi bi-facebook"></i
-                ></a>
+        <!-- Facebook -->
+        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
+        ><i class="bi bi-facebook"></i
+        ></a>
 
-                <!-- Twitter -->
-                <a class="btn btn-outline-light m-1" href="#!" role="button"
-                ><i class="bi bi-twitter"></i
-                ></a>
+        <!-- Twitter -->
+        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
+        ><i class="bi bi-twitter"></i
+        ></a>
 
 
-                <!-- Google -->
-                <a class="btn btn-outline-light m-1" href="#!" role="button"
-                ><i class="bi bi-google"></i
-                ></a>
-                <a class="btn btn-outline-light m-1 btn-dark" data-bs-toggle="collapse" href="#multiCollapseExample1"
-                   role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Developers</a>
+        <!-- Google -->
+        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
+        ><i class="bi bi-google"></i
+        ></a>
+        <a class="btn btn-outline-light btn-dark m-1" data-bs-toggle="collapse" href="#multiCollapseExample1"
+           role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Developers</a>
 
-                <!-- Instagram -->
-                <a class="btn btn-outline-light m-1" href="https://www.instagram.com/feedme_lol/" role="button"
-                ><i class="bi bi-instagram"></i
-                ></a>
+        <!-- Instagram -->
+        <a class="btn btn-outline-dark btn-light m-1" href="https://www.instagram.com/feedme_lol/" role="button"
+        ><i class="bi bi-instagram"></i
+        ></a>
 
-                <!-- Linkedin -->
-                <a class="btn btn-outline-light m-1" href="#!" role="button"
-                ><i class="bi bi-linkedin"></i
-                ></a>
+        <!-- Linkedin -->
+        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
+        ><i class="bi bi-linkedin"></i
+        ></a>
 
-                <!-- Github -->
-                <a class="btn btn-outline-light m-1" href="#!" role="button"
-                ><i class="bi bi-github"></i
-                ></a>
-            </p>
-            <!--OUR GITHUBS-->
-            <div class="row">
-                <div class="col text-center navbar navbar-expand-lg navbar-light text-dark bg-light.bg-gradient">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="bg-dark">
-                            <a class="btn btn-outline-light m-1" href="https://github.com/Sarguello12" role="button"
-                            ><i class="bi bi-github"></i
-                            > Samuel Arguello</a>
-                            <a class="btn btn-outline-light m-1" href="https://github.com/joselopez747" role="button"
-                            ><i class="bi bi-github"></i
-                            > Jose Lopez</a>
-                            <a class="btn btn-outline-light m-1" href="https://github.com/LuisSanchez01" role="button"
-                            ><i class="bi bi-github"></i
-                            > Luis Sanchez</a>
-                            <a class="btn btn-outline-light m-1" href="https://github.com/WebDevJasonCameron"
-                               role="button"
-                            ><i class="bi bi-github"></i
-                            > Jason Cameron</a>
-                            <a class="btn btn-outline-light m-1" href="https://github.com/DenniseCamacho" role="button"
-                            ><i class="bi bi-github"></i
-                            > Dennise Camacho</a>
-                            <!--
-                            https://www.linkedin.com/in/samuelarguello/
+        <!-- Github -->
+        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
+        ><i class="bi bi-github"></i
+        ></a>
+        </p>
+        <!--OUR GITHUBS-->
+        <div class="row">
+            <div class="text-center navbar navbar-expand-lg navbar-light text-dark bg-transparent">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
 
-                            https://www.linkedin.com/in/jasonlcameron/
-
-                            https://www.linkedin.com/in/jose-lopez747/
-
-                            https://www.linkedin.com/in/luis-sanchez01/
-
-                            https://www.linkedin.com/in/dennisecamacho/
-                            -->
-                        </div>
-                    </div>
+                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/Sarguello12" role="button"
+                        ><i class="bi bi-github"></i
+                        > Samuel Arguello</a>
+                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/joselopez747" role="button"
+                        ><i class="bi bi-github"></i
+                        > Jose Lopez</a>
+                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/LuisSanchez01" role="button"
+                        ><i class="bi bi-github"></i
+                        > Luis Sanchez</a>
+                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/WebDevJasonCameron"
+                           role="button"
+                        ><i class="bi bi-github"></i
+                        > Jason Cameron</a>
+                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/DenniseCamacho" role="button"
+                        ><i class="bi bi-github"></i
+                        > Dennise Camacho</a>
+                        <!--
+                        https://www.linkedin.com/in/samuelarguello/
+                        https://www.linkedin.com/in/jasonlcameron/
+                        https://www.linkedin.com/in/jose-lopez747/
+                        https://www.linkedin.com/in/luis-sanchez01/
+                        https://www.linkedin.com/in/dennisecamacho/
+                        -->
                 </div>
             </div>
+        </div>
     </div>
 </footer>
-
 
 <!--SCRIPTS-->
 <section th:fragment="script-section">
@@ -337,8 +332,6 @@
             crossorigin="anonymous"></script>
     <!--MOD SCRIPTS-->
     <script th:src="@{/js/password-check.js}"></script>
-
-
 </section>
 
 </body>
