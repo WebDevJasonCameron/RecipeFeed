@@ -23,6 +23,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.format.DateTimeFormatter.ofLocalizedDateTime;
+
 @RestController
 @RequestMapping("/ajax")
 public class AjaxController {
@@ -174,6 +176,7 @@ public class AjaxController {
         long recipe_id  = actualObj.get("recipe_id").asLong();
         String userComment = actualObj.get("comment").asText();
         LocalDateTime localDateTime = LocalDateTime.now();
+
 
         System.out.println("===================================>");
         System.out.println("localDateTime = " + localDateTime);
