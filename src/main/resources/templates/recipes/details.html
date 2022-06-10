@@ -35,7 +35,25 @@
                     <div class="tab-content" id="left-tab-contents">
                         <!--COMMENTS-->
                         <div class="tab-pane fade show active" id="comments" role="tabpanel">
-                            SIDE CARD WITH AVATAR AND LIST OF COMMENTS HERE...
+
+                            <div th:each="comment : ${comments}">
+
+
+                                <div th:text="${comment.getComment()}">comment</div>
+                                <div th:text="${comment.getUser().username}">username</div>
+                                <div th:text="${comment.getUser().avatar}">avatar</div>
+                                <div th:text="${comment.timeStamp}">time</div>
+
+
+                            </div>
+
+
+
+
+
+
+
+
                         </div>
                         <!--SIMILAR-->
                         <div class="tab-pane fade d-flex flex-wrap overflow-auto" id="similar" role="tabpanel" style="height: 400px;">

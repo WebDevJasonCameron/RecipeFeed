@@ -30,6 +30,7 @@ public class RecipeController {
     private final CategoryRepository categoryDao;
     private final IngredientRepository ingredientsDao;
     private final RatingsRepository ratingsDao;
+    private final CommentsRepository commentsDao;
 
     // ATT SERVICES
     private final EmailService emailService;
@@ -37,15 +38,17 @@ public class RecipeController {
 
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, EmailService emailService, IconService iconService) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, CommentsRepository commentsDao, EmailService emailService, IconService iconService) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
         this.ingredientsDao = ingredientsDao;
         this.ratingsDao = ratingsDao;
+        this.commentsDao = commentsDao;
         this.emailService = emailService;
         this.iconService = iconService;
     }
+
 
     // METH
     @GetMapping
@@ -480,13 +483,18 @@ public class RecipeController {
         Recipe recipe = recipesDao.findRecipeById(id);
 
         // Used to get Similar Recipes (by their first cat type)
-//        Category category = recipe.getRecipeCategories().get(0);
-//        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
+        Category category = recipe.getRecipeCategories().get(0);
+        List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
 
         // NEED QUERY: Used to get Remix Recipes (find by apiId and userId is not null)
 
 
-//        model.addAttribute("similarRecipes", similarRecipes);
+        // NEED QUERY: Get comments on recipe
+        List<Comment> comments = commentsDao.findAllByRecipe(recipe);
+        model.addAttribute("comments", comments);
+
+
+        model.addAttribute("similarRecipes", similarRecipes);
         model.addAttribute("recipe", recipe);
         return "recipes/details";
     }
