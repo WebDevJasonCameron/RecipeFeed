@@ -28,44 +28,47 @@
 <body>
 
 <!-- NAVBAR -->
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark text-light fixed-top">
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light text-dark bg-light.bg-gradient fixed-top">
     <div class="container-fluid">
-        <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-light">FeedMe</h1></a>
+        <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-dark">Feed.</h1></a>
         <div sec:authorize="isAuthenticated()">
-            <span>Welcome, <span th:text="${#authentication.principal.username}"/>!</span>
+            <span class="me-2">Welcome, <span th:text="${#authentication.principal.username}"/>!</span>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <!--            <span class="navbar-toggler-icon"></span>-->
+            <span class="text-dark fs-1 border-0"><i class="bi bi-chevron-double-down"></i></span>
         </button>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse flex-grow-0 border-0" id="navbarTogglerDemo02">
             <div sec:authorize="!isAuthenticated()">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav flex-row-reverse flex-end me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2" th:href="@{/recipes}">Feed</a>
+                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2 text-nowrap" th:href="@{/login}">Login</a>
+                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/login}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2" th:href="@{/user/register}">Sign Up</a>
+                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/user/register}">Register</a>
                     </li>
                 </ul>
             </div>
             <div sec:authorize="isAuthenticated()">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-md-row-reverse flex-sm-column-reverse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-sm-column-reverse">
                     <li class="nav-item m-2">
-                        <a class="btn btn-outline-success pe-4" th:href="@{/recipes}">Feed</a>
+                        <a class="btn btn-outline-success pe-4 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
                     <li class="nav-item m-2">
-                        <a class="btn btn-outline-success" th:href="@{/user/profile}">Profile</a>
+                        <a class="btn btn-outline-success border-0" th:href="@{/user/profile}">Profile</a>
                     </li>
                     <li class="nav-item m-2">
                         <form th:action="@{/logout}" th:method="post">
-                            <button class="btn btn-outline-success">Logout</button>
+                            <button class="btn btn-outline-success border-0">Logout</button>
                         </form>
                     </li>
-                    <li class="nav-item m-2">
+                    <br class="">
+                    <li class="nav-item m-2 flex-wrap">
                         <form class="d-flex" role="search">
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success ms-2" type="submit">Search</button>
@@ -200,7 +203,7 @@
 </div>
 
 
-<!--MODAL FOR EMAIL-->
+<!--MODAL FOR EMAIL ON -->
 <div th:fragment="emailModal" class="modal fade" id="staticBackdropEmail" data-bs-backdrop="static"
      data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -221,7 +224,8 @@
 
 
                     Message:<br>
-                    <textarea name=”ContactComment” rows=”6″ cols=”20″ placeholder="will the recipe information be on here? link to recipe?"></textarea><br>
+                    <textarea name=”ContactComment” rows=”6″ cols=”20″
+                              placeholder="will the recipe information be on here? link to recipe?"></textarea><br>
                     <button type="button" class="btn btn-dark" value="submit">Submit</button>
                 </form>
             </div>
@@ -234,12 +238,9 @@
 
 
 <!--FOOTER-->
-<footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
+<footer th:fragment="footer" class="navbar navbar-expand-lg navbar-light text-dark bg-light.bg-gradient fixed-bottom">
     <div class="container pb-0">
         <!-- Section: Social media -->
-        <section class="mb-4">
-
-            <p>
                 <!-- Facebook -->
                 <a class="btn btn-outline-light m-1" href="#!" role="button"
                 ><i class="bi bi-facebook"></i
@@ -275,7 +276,7 @@
             </p>
             <!--OUR GITHUBS-->
             <div class="row">
-                <div class="col">
+                <div class="col text-center navbar navbar-expand-lg navbar-light text-dark bg-light.bg-gradient">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
                         <div class="bg-dark">
                             <a class="btn btn-outline-light m-1" href="https://github.com/Sarguello12" role="button"
@@ -309,7 +310,6 @@
                     </div>
                 </div>
             </div>
-        </section>
     </div>
 </footer>
 
