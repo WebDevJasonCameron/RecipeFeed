@@ -58,13 +58,16 @@
                     <div class="col-12 col-md-8">
                         <div class="d-flex justify-content-between">
                             <div>
-                                # Created Recipes
+                                <span class="font-weight-bold" th:text="${createdRecipeTotal}"></span> Created Recipes
                             </div>
                             <div>
-                                # Remix
+                                <span class="font-weight-bold" th:text="${remixRecipeTotal}"></span> Remix
                             </div>
                             <div>
-                                # Favorites
+                                <span th:text="${#arrays.length(user.getUserFavorites())}">#</span> Favorites
+                            </div>
+                            <div>
+                                <span class="font-weight-bold" th:text="${rRecipeTotal}"></span> Rated
                             </div>
                         </div>
                     </div>
