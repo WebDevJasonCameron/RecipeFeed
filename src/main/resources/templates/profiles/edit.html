@@ -10,8 +10,21 @@
     <!--MAIN-->
     <div class="container d-flex align-items-center justify-content-center">
         <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
-            <section th:replace="/partials/partials.html :: header ('Edit Profile')"></section>
+            <div class="container d-flex align-items-center justify-content-center mb-3">
+                <section th:replace="/partials/partials.html :: header ('Edit Profile')"></section>
+            </div>
+
             <form th:action="@{/user/edit}" method="post" th:object="${user}" onsubmit="submitForm(event)">
+                <div class="container d-flex justify-content-center align-items-center mb-3">
+                    <div id="upload-img" class="btn rounded-circle bg-secondary d-flex justify-content-center" style="height: 9em; width: 9em;">
+                        <div class="pt-3">
+                            <i class="fa-solid fa-user fa-3x"></i>
+                            <p>Upload an Image</p>
+                        </div>
+                    </div>
+                    <input id="avatar" type="hidden" th:field="*{avatar}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="invalid-feedback"></div>
+                </div>
                 <div class="my-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" th:field="*{username}" th:errorClass="is-invalid">
@@ -22,7 +35,6 @@
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" th:errorClass="is-invalid">
                     <div th:if="${#fields.hasErrors('email')}" th:errors="*{username}" class="invalid-feedback"></div>
                 </div>
-
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" th:field="*{password}" th:errorClass="is-invalid">
@@ -32,28 +44,22 @@
                     <label for="confirm" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="confirm" >
                 </div>
-
                 <div class="mb-3">
                     <label for="bio" class="form-label">Bio</label>
                     <textarea rows="5" cols="80" class="form-control" id="bio" th:field="*{bio}" th:errorClass="is-invalid"></textarea>
                     <div th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}" class="invalid-feedback"></div>
                 </div>
 
-                <div class="mb-3">
-                    <div id="upload-img" class="btn btn-primary">Upload an Image</div>
-                    <input id="avatar" type="hidden" th:field="*{avatar}" th:errorClass="is-invalid">
-                    <div th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="invalid-feedback"></div>
-                </div>
+
                 <button id="submit" type="submit" value="post" class="btn btn-primary">Submit</button>
             </form>
 
 
-            <div class="mb-3">
+            <div class="container d-flex justify-content-center align-items-center mt-4">
                 <form th:action="@{/user/delete}" method="post" th:object="${user}" onsubmit="deleteCheck(event)">
                     <input id="id" type="hidden" th:field="*{id}">
                     <button class="btn btn-danger" id="delete" type="submit" value="post">Delete Account</button>
                 </form>
-
             </div>
         </div>
     </div>
