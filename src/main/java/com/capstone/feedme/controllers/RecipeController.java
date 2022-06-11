@@ -520,39 +520,42 @@ public class RecipeController {
                                 @RequestParam(name = "all-ingredient-amounts") String allIngredientAmounts,
                                 Model model){
 
+        Recipe newRecipe = recipesDao.save(recipe);
+
         // CATEGORIES
         Category category = categoryDao.findCategoryByType(recipeCategory);
         List<Category> categories = new ArrayList<>();
         categories.add(category);
-        recipe.setRecipeCategories(categories);
+        newRecipe.setRecipeCategories(categories);
 
         // USER
         User user = usersDao.getById(userId);
-        recipe.setUser(user);
+        newRecipe.setUser(user);
 
         // INGREDIENTS
         List<Ingredient> ingredients = new ArrayList<>();
-        String ingredientTitlesString = allIngredientTitles.substring(0, allIngredientTitles.length() -1);
-        String ingredientAmountsString = allIngredientAmounts.substring(0, allIngredientAmounts.length() -1);
+        String ingredientTitlesString = allIngredientTitles.substring(0, allIngredientTitles.length() -3);
+        String ingredientAmountsString = allIngredientAmounts.substring(0, allIngredientAmounts.length() -3);
 
         String[] ingredientTitlesArray = ingredientTitlesString.split(",,,");
         String[] ingredientAmountsArray = ingredientAmountsString.split(",,,");
 
         for (int i = 0; i < ingredientTitlesArray.length; i++) {
             Ingredient ingredient = new Ingredient( );
-            if( recipe.getId() == 0) {
-                ingredient.setIngredientName(ingredientTitlesArray[i]);
-                ingredient.setIngredientAmount(ingredientAmountsArray[i]);
-                ingredientsDao.save(ingredient);
-                ingredients.add(ingredient);
-            }
+
+            ingredient.setIngredientName(ingredientTitlesArray[i]);
+            ingredient.setIngredientAmount(ingredientAmountsArray[i]);
+            ingredient.setRecipe(newRecipe);
+            ingredientsDao.save(ingredient);
+
+            ingredients.add(ingredient);
         }
 
         recipe.setIngredients(ingredients);
 
 
-        recipesDao.save(recipe);
-        model.addAttribute("recipe", recipe);
+        recipesDao.save(newRecipe);
+        model.addAttribute("recipe", newRecipe);
 
         return "redirect:/recipes";
     }

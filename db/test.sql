@@ -1,6 +1,8 @@
 USE feed_me_db;
 
-DELETE FROM recipes WHERE id > 8;
+DELETE FROM ingredients WHERE id > 381;
+
+DELETE FROM recipes WHERE id = 37;
 
 DELETE FROM comments WHERE id > 0;
 
