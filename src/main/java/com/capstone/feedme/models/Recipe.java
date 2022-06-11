@@ -21,7 +21,7 @@ public class Recipe {
     private long userId;
     @Column(name = "title", nullable = false)
     private String title;
-    @Column(name = "img_url")
+    @Column(name = "img_url", length = 10_000)
     private String imgUrl;
     @Column(name = "summary", columnDefinition="TEXT")
     private String summary;

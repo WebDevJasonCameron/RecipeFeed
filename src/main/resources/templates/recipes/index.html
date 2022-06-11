@@ -199,7 +199,9 @@
                                 <div class="row">
                                     <!--AVATAR-->
                                     <div class="col-2">
-                                        <img src="https://source.unsplash.com/random/50x50/?raccoon" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                        <img th:src="${recipe.user != null}? ${recipe.user.avatar} :  'https://source.unsplash.com/random/561x561/?people}'"
+                                             th:alt="${user.username}"
+                                             class="img-fluid rounded-circle d-none d-md-block about-img px-1">
                                     </div>
                                     <!--USERNAME-->
                                     <div class="col-10 d-flex align-items-center">
@@ -311,13 +313,13 @@
             </div>
 
             <!--PROFILE STUFF-->
-            <div class="col-4">
+            <div class="col-4 mt-4">
                 <div sec:authorize="isAuthenticated()" class="d-flex">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-4">
                                 <a th:href="@{/user/profile}">
-                                    <img src="https://source.unsplash.com/random/200x200/?cook" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
+                                    <img th:src="${user.avatar}" alt="px" class="img-fluid rounded-circle d-none d-md-block about-img px-1">
                                 </a>
                             </div>
                             <div class="col-8 d-flex align-items-center">
@@ -328,7 +330,7 @@
                                         </strong>
                                     </div>
                                     <div class="text-muted">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        <span th:text="${user.bio}">  Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
                                     </div>
                                     <!--SECURITY TEST BUTTONS-->
                                 </div>
