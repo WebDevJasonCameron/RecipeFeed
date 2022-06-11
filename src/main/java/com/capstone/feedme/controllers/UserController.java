@@ -218,9 +218,11 @@ public class UserController {
         List<Recipe> remixRecipes = new ArrayList<>();
 
         for (int i = 0; i < recipes.size(); i++) {
-            if(recipes.get(i).getUserId() == user.getId() &&
-                recipes.get(i).getApiId() != 0){
-                remixRecipes.add(recipes.get(i));
+            if(recipes.get(i).getUser() != null){
+                if(recipes.get(i).getUser().getId() == user.getId() &&
+                        recipes.get(i).getApiId() != 0){
+                    remixRecipes.add(recipes.get(i));
+                }
             }
         }
 
@@ -240,8 +242,8 @@ public class UserController {
         List<Recipe> createdRecipes = new ArrayList<>();
 
         for (int i = 0; i < recipes.size(); i++) {
-            if(recipes.get(i).getUserId() == user.getId() &&
-                recipes.get(i).getApiId() == 0){
+            if(recipes.get(i).getUser() != null){
+                if(recipes.get(i).getUser().getId() == user.getId() && recipes.get(i).getApiId() == 0);
                 createdRecipes.add(recipes.get(i));
             }
         }
