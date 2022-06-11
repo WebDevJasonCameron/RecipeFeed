@@ -503,22 +503,56 @@ public class RecipeController {
     public String createRecipe(Model model){
 
         Recipe recipe = new Recipe();
-        List <Category> categories = categoryDao.findAll();
-        recipe.setRecipeCategories(categories);
 
+        // PROVIDE USER MODEL
+        provideUserModel(model);
 
         model.addAttribute("recipe", recipe);
-        model.addAttribute("category", new Category());
 
         return "recipes/create";
     }
 
     @PostMapping("/create")
-    public String publishRecipe(@Valid Recipe recipe, Category category, Model model){
+    public String publishRecipe(@Valid Recipe recipe,
+                                @RequestParam(name = "recipe-categories") String recipeCategory,
+                                @RequestParam(name = "user-id") long userId,
+                                @RequestParam(name = "all-ingredient-titles") String allIngredientTitles,
+                                @RequestParam(name = "all-ingredient-amounts") String allIngredientAmounts,
+                                Model model){
+
+        // CATEGORIES
+        Category category = categoryDao.findCategoryByType(recipeCategory);
+        List<Category> categories = new ArrayList<>();
+        categories.add(category);
+        recipe.setRecipeCategories(categories);
+
+        // USER
+        User user = usersDao.getById(userId);
+        recipe.setUser(user);
+
+        // INGREDIENTS
+        List<Ingredient> ingredients = new ArrayList<>();
+        String ingredientTitlesString = allIngredientTitles.substring(0, allIngredientTitles.length() -1);
+        String ingredientAmountsString = allIngredientAmounts.substring(0, allIngredientAmounts.length() -1);
+
+        String[] ingredientTitlesArray = ingredientTitlesString.split(",,,");
+        String[] ingredientAmountsArray = ingredientAmountsString.split(",,,");
+
+        for (int i = 0; i < ingredientTitlesArray.length; i++) {
+            Ingredient ingredient = new Ingredient( );
+            if( recipe.getId() == 0) {
+                ingredient.setIngredientName(ingredientTitlesArray[i]);
+                ingredient.setIngredientAmount(ingredientAmountsArray[i]);
+                ingredientsDao.save(ingredient);
+                ingredients.add(ingredient);
+            }
+        }
+
+        recipe.setIngredients(ingredients);
+
 
         recipesDao.save(recipe);
         model.addAttribute("recipe", recipe);
-        model.addAttribute("category", category);
 
         return "redirect:/recipes";
     }

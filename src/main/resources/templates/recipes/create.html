@@ -9,96 +9,337 @@
 
 <ul th:replace="partials/partials.html :: navbar"></ul>
 
-
-            <div class="container d-flex align-items-center justify-content-center">
-               <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
-
-         <section th:replace="partials/partials.html :: header ('Create Your Own')"></section>
-
-                  <br><br>
- <form th:action="@{/recipes/create}"
-       th:method="post" th:object="${recipe}">
-
-<!-- CATEGORIES-->
-     <select name="recipeCategories" id="category">
-         <option value="select" disabled="disabled" selected="selected">Select</option>
-         <option th:each="category : *{recipeCategories}" th:value="${category.id}" th:text="${category.type}"></option>
-
-     </select>
-                  <!--IMAGE-->
-                  <label for="image">Image:</label>
-                  <input th:field="*{imgUrl}" th:errorClass="is-invalid" name="image" id="image">
-                  <br>
-                  <br>
-                  <!--TITLE-->
-                  <label for="title">Title:</label>
-                  <input th:field="*{title}" name="title" id="title">
-                  <br>
-                  <br>
-                  <!--             SUMMARY-->
-                  <label for="summary">Summary:</label>
-                  <input th:field="*{summary}" name="summary" id="summary">
-                  <br>
-                  <br>
-                  <!--INSTRUCTIONS-->
-                  <label for="instruction">Instructions:</label>
-                  <input th:field="*{instruction}" name="instruction" id="instruction">
-                  <br>
-                  <br>
-                  <!--READY IN MINUTES-->
-                  <label for="time">Time:</label>
-                  <input th:field="*{readyInMin}" name="time" id="time">
-                  <br>
-                  <br>
-                  <!--SERVING AMOUNT-->
-                  <label for="servings">Servings:</label>
-                  <input th:field="*{servingAmount}" name="servings" id="servings">
-                  <br>
-                  <br>
-                  <!--SOURCE NAME-->
-                  <label for="source">Source Name:</label>
-                  <input th:field="*{sourceName}" name="source" id="source">
-                  <br>
-                  <br>
-                  <!--SOURCE URL-->
-                  <label for="sourceUrl">Source Url:</label>
-                  <input th:field="*{sourceUrl}" name="sourceUrl" id="sourceUrl">
-                  <br>
-                  <br>
-                  <!--VIDEO URL-->
-                  <label for="video">Video:</label>
-                  <input th:field="*{video_url}" name="video" id="video">
-                  <br>
-                  <br>
-                  <!-- DAIRY-->
-                  <label class="form-check-label" for="dairy">Dairy:</label>
-                  <input class="form-check-input" type="checkbox" th:field="*{dairyFree}" id="dairy">
-                  <br>
-                  <br>
-                  <!--GLUTEN-->
-                  <label class="form-check-label" for="gluten">Gluten:</label>
-                  <input class="form-check-input" type="checkbox" th:field="*{glutenFree}" id="gluten">
-                  <br>
-                  <br>
-                  <!--VEGAN-->
-                  <label class="form-check-label" for="vegan">Vegan:</label>
-                  <input class="form-check-input" type="checkbox" th:field="*{vegan}" id="vegan">
-                  <br>
-                  <br>
-                  <!--VEGETARIAN-->
-                  <label class="form-check-label" for="vegetarian">Dairy:</label>
-                  <input class="form-check-input" type="checkbox" th:field="*{vegetarian}" id="vegetarian">
-                  <br>
-                  <br>
-                  <input type="submit" value="Create">
-               </div>
+    <div class="container w-75">
+        <div class="card">
+            <div class="card-header">
+                <div class="h2">
+                    Create Your Own Recipe
+                </div>
             </div>
-         </form>
+            <form th:action="@{/recipes/create}" th:method="post" th:object="${recipe}">
+                <div class="card-body">
+                    <!--MAIN-->
+                    <div id="main-recipe-section">
+                        <!--TITLE-->
+                        <div class="form-group">
+                            <label for="title"
+                                   class="form-label">
+                                        Title:
+                            </label>
+                            <input th:field="*{title}"
+                                   name="title"
+                                   id="title"
+                                   class="form-control">
+                        </div>
+                        <!--SUMMARY-->
+                        <div class="form-group mt-3">
+                            <label for="summary"
+                                   class="form-label">
+                                        Summary:
+                            </label>
+                            <textarea th:field="*{summary}"
+                                      rows="5" name="summary"
+                                      id="summary"
+                                      class="form-control">
+
+                            </textarea>
+                        </div>
+                        <!--INSTRUCTIONS-->
+                        <div class="form-group mt-3">
+                            <label for="instruction"
+                                   class="form-label">
+                                        Instructions:
+                            </label>
+                            <textarea th:field="*{instruction}"
+                                      rows="5"
+                                      name="instruction"
+                                      id="instruction"
+                                      class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                    <!--INGREDIENTS | IMG-->
+                    <div class="row">
+                        <!--ingredients-->
+                        <div class="col-md-6">
+                            <div id="ingredient-section ">
+                                <div class="h5 mt-3">
+                                    Ingredients
+                                </div>
+                                <div class="mt-5">
+                                     <button class="btn btn-secondary w-75 mt-3"
+                                             id="modal-open-btn"
+                                             data-toggle="modal"
+                                             data-target="#ing-modal">Please provide ingredients and amounts
+                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--INGREDIENT RESULTS-->
+                        <div class="col-md-6">
+                            <div class="mt-5">
+                                <ol id="ingredients-data">
+
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!--IMAGE-->
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="image"
+                                       class="form-label h5" style="margin-top: 32px">
+                                    Image
+                                </label>
+                                <input th:field="*{imgUrl}"
+                                       th:errorClass="is-invalid"
+                                       name="image"
+                                       id="image"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!--RECIPE DETAILS-->
+                    <div id="recipe-details-section">
+                        <hr>
+                        <div class="h5 mt-3">
+                            Recipe Details
+                        </div>
+                        <!--Cat | Size | Time-->
+                        <div class="row">
+                            <!--CATEGORIES-->
+                            <div class="col-md-4">
+                                <label for="category"
+                                       class="form-label mt-1">
+                                    Category:
+                                </label>
+                                <select name="recipe-categories"
+                                        id="category"
+                                        class="form-control">
+                                    <option value="select"
+                                            selected="selected">
+                                                Select...
+                                    </option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="brunch">Brunch</option>
+                                    <option value="lunch">Lunch</option>
+                                    <option value="dinner">dinner</option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="dessert">Dessert</option>
+                                    <option value="main course">Main Course</option>
+                                    <option value="appetizer">Appetizer</option>
+                                    <option value="side dish">Sides</option>
+                                    <option value="condiment">Condiments</option>
+                                    <option value="dip">Dips</option>
+                                    <option value="sauce">Sauces</option>
+                                    <option value="spread">Spreads</option>
+                                    <option value="snack">Snack</option>
+                                </select>
+                            </div>
+                            <!--SERVING SIZE-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="servings"
+                                           class="form-label mt-1">
+                                        Servings Size:
+                                    </label>
+                                    <input th:field="*{servingAmount}"
+                                           name="servings"
+                                           id="servings"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <!--READY IN MINUTES-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="time"
+                                           class="form-label mt-1">
+                                        Completion Time in Minutes:
+                                    </label>
+                                    <input th:field="*{readyInMin}"
+                                           name="time"
+                                           id="time"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!--Dietary Notes-->
+                        <div class="row">
+<!--                            <hr>-->
+                            <div class="h5 mt-5">
+                                Dietary Notes
+                            </div>
+                            <!--DAIRY-->
+                            <div class="col-6 col-md-3">
+                                <div class="form-group text-center">
+                                    <input class="form-check-input"
+                                           style="margin-top: 29px; margin-right: 10px;"
+                                           type="checkbox"
+                                           th:field="*{dairyFree}"
+                                           id="dairy">
+                                    <label for="dairy"
+                                           class="form-label mt-4">
+                                        Dairy Diet Friendly
+                                    </label>
+                                </div>
+                            </div>
+                            <!--GLUTEN-->
+                            <div class="col-6 col-md-3">
+                                <div class="form-group text-center">
+                                    <input class="form-check-input"
+                                           style="margin-top: 29px; margin-right: 10px;"
+                                           type="checkbox"
+                                           th:field="*{glutenFree}"
+                                           id="gluten">
+                                    <label for="gluten"
+                                           class="form-label mt-4">
+                                        Gluten Diet Friendly
+                                    </label>
+                                </div>
+                            </div>
+                            <!--VEGAN-->
+                            <div class="col-6 col-md-3">
+                                <div class="form-group text-center">
+                                    <input class="form-check-input"
+                                           style="margin-top: 29px; margin-right: 10px;"
+                                           type="checkbox"
+                                           th:field="*{vegan}"
+                                           id="vegan">
+                                    <label for="vegan"
+                                           class="form-label mt-4">
+                                        Vegan Diet Friendly
+                                    </label>
+                                </div>
+                            </div>
+                            <!--VEGETARIAN-->
+                            <div class="col-6 col-md-3">
+                                <div class="form-group text-center">
+                                    <input class="form-check-input"
+                                           style="margin-top: 29px; margin-right: 10px;"
+                                           type="checkbox"
+                                           th:field="*{vegetarian}"
+                                           id="vegetarian">
+                                    <label for="vegetarian"
+                                           class="form-label mt-4">
+                                        Vegetarian Diet Friendly
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="h5 mt-3">
+                        Source Info
+                    </div>
+                    <!--FINAL DETAILS-->
+                    <div class="row">
+                        <!--SOURCE NAME-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="source"
+                                       class="form-label mt-2">
+                                    Source Name:
+                                </label>
+                                <input th:field="*{sourceName}"
+                                       name="source"
+                                       id="source"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <!--SOURCE URL-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="sourceUrl"
+                                       class="form-label mt-2">
+                                    Source Url:
+                                </label>
+                                <input  th:field="*{sourceUrl}"
+                                        name="sourceUrl"
+                                        id="sourceUrl"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <!--VIDEO TUT-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="video"
+                                       class="form-label mt-2">
+                                    Video Tutorial:
+                                </label>
+                                <input  th:field="*{video_url}"
+                                        name="video"
+                                        id="video"
+                                        class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!--HIDDEN DETAILS-->
+                    <div th:object="${user}" >
+                        <input type="hidden" name="user-id" th:value="${user.id}">
+                        <input type="hidden" name="all-ingredient-titles" id="all-ingredient-titles">
+                        <input type="hidden" name="all-ingredient-amounts" id="all-ingredient-amounts">
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="add-recipe-btn" type="submit" class="btn btn-primary m-3 w-100">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--MODAL-->
+    <div class="modal fade" id="ing-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ing-title">Enter Ingredients</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <!--ING INPUT-->
+                        <div class="form-group">
+                            <label for="ing-input"
+                                   class="form-label">
+                                Ingredient Name:
+                            </label>
+                            <input
+                                   name="ing-input"
+                                   id="ing-input"
+                                   class="form-control">
+                        </div>
+                        <!--AMOUNT INPUT-->
+                        <div class="form-group">
+                            <label for="amount-input"
+                                   class="form-label">
+                                Amount:
+                            </label>
+                            <input
+                                    name="amount-input"
+                                    id="amount-input"
+                                    class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="add-ing-to-form">Add Ingredient</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-         <footer th:replace="partials/partials.html :: footer"></footer>
+    <footer th:replace="partials/partials.html :: footer"></footer>
 
-         <section th:replace="partials/partials.html :: script-section"></section>
+    <section th:replace="partials/partials.html :: script-section"></section>
+    <script th:src="@{/js/create-recipe.js}"></script>
 
 </body>
 </html>
