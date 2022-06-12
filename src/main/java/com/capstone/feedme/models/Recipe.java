@@ -16,7 +16,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "api_id", unique = true)
+    @Column(name = "api_id")
     private Long apiId;
     @Column(name = "title", nullable = false)
     private String title;
