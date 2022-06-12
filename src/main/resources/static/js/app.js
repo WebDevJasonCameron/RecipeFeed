@@ -63,6 +63,7 @@ function scrollToTop() {
  */
 function getBtnValue(target){
     let val = target;
+    console.log(val)
     val = val[0].attributes[2].value.split(',');
     console.log(val);
     return val;
