@@ -6,5 +6,11 @@ DELETE FROM recipes WHERE id = 37;
 
 DELETE FROM comments WHERE id > 0;
 
+UPDATE recipes
+SET
+    api_id = 0
+WHERE
+    id = 24;
+
 
 
