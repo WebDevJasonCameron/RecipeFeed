@@ -124,9 +124,14 @@
                 <!--DATA-->
                 <div class="tab-content mt-2" id="right-tab-contents">
                     <!--1: recipe created-->
-                    <div class="tab-pane fade d-flex flex-wrap overflow-auto" id="user-created" role="tabpanel">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio dolorum eaque ex incidunt quae sapiente. Beatae blanditiis, consectetur cum, deserunt, expedita facere fuga ipsam laboriosam molestias natus perferendis voluptate?
-
+                    <div class="tab-pane active" id="user-created" role="tabpanel">
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <div th:each="cRecipe : ${createdRecipes}" style="width: 200px; margin:10px 25px">
+                                <a th:href="@{/recipes/details/{id}(id=${cRecipe.id})}">
+                                    <img th:src="${cRecipe.imgUrl}" th:alt="${cRecipe.title}" class="img-thumbnail">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <!--2: recipe remixed-->
                     <div class="tab-pane fade" id="user-remix" role="tabpanel">

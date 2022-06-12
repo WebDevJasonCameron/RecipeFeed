@@ -550,9 +550,10 @@ public class RecipeController {
 
             ingredients.add(ingredient);
         }
-
         recipe.setIngredients(ingredients);
 
+        // API_ID TO ZERO                   <--IMPORTANT FOR FILTERING
+        newRecipe.setApiId(0);
 
         recipesDao.save(newRecipe);
         model.addAttribute("recipe", newRecipe);
