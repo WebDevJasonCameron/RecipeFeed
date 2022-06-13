@@ -554,7 +554,17 @@ public class RecipeController {
 
             ingredients.add(ingredient);
         }
-        recipe.setIngredients(ingredients);
+        newRecipe.setIngredients(ingredients);
+
+        // CREATE ANON USER
+        User anonUser = new User(-1, "anonUser");
+
+        // CREATE RATING (CHILDREN)
+        Rating rating = new Rating(0, anonUser, recipe);
+        List<Rating> ratings = new ArrayList<>();
+        ratings.add(rating);
+        newRecipe.setRecipeRatings(ratings);
+
 
         // API_ID TO ZERO                   <--IMPORTANT FOR FILTERING
         newRecipe.setApiId(0);
@@ -570,14 +580,12 @@ public class RecipeController {
     public String deleteRecipe(@PathVariable long id,
                                Model model) {
 
+        // DELETE
+        deleteRecipeMethod(id);
+
         // PROVIDE USER MODEL FOR REDIRECT
         provideUserModel(model);
 
-        // RECIPE
-        Recipe recipe = recipesDao.getById(id);
-
-        // DELETE RECIPE
-        recipesDao.delete(recipe);
         return "redirect:/user/profile";
     }
 
@@ -607,21 +615,58 @@ public class RecipeController {
                               @RequestParam(name = "user-id") long userId,
                               Model model){
 
-        // REPLACE ORIGINAL RECIPE ID
-        recipe.setId(originalId);
-
-        // REPLACE USER
+        // PLACE IT ALL ASIDE
         User user = usersDao.getById(userId);
-        recipe.setUser(user);
+        String title = recipe.getTitle();
+        String summary = recipe.getSummary();
+        String instructions = recipe.getInstruction();
+        String imgUrl = recipe.getImgUrl();
+        String servingAmount = recipe.getServingAmount();
+        String readyInMin = recipe.getReadyInMin();
+        String sourceName = recipe.getSourceName();
+        String sourceUrl = recipe.getSourceUrl();
+        String videoUrl = recipe.getVideo_url();
+        List<Rating> ratings = recipe.getRecipeRatings();
+        List<Ingredient> ingredients = recipe.getIngredients();
+        List<Category> categories = categoryDao.findByRecipes_Id(originalId);
+        List<Comment> comments = commentsDao.findByRecipe_Id(originalId);
 
-        // REPLACE API ID
-        recipe.setApiId(0);
 
-        // REPLACE RATING
+        // SET MOD RECIPE
+        Recipe modRecipe = new Recipe();
+
+        // SET MOD ATTRIBUTES
+        modRecipe.setId(originalId);
+        modRecipe.setApiId(0);
+        modRecipe.setUser(user);
+        modRecipe.setId(originalId);
+        modRecipe.setTitle(title);
+        modRecipe.setSummary(summary);
+        modRecipe.setInstruction(instructions);
+        modRecipe.setImgUrl(imgUrl);
+        modRecipe.setServingAmount(servingAmount);
+        modRecipe.setReadyInMin(readyInMin);
+        modRecipe.setSourceName(sourceName);
+        modRecipe.setSourceUrl(sourceUrl);
+        modRecipe.setVideo_url(videoUrl);
+//         CHILDREN
+        modRecipe.setRecipeRatings(ratings);
+        modRecipe.setIngredients(ingredients);
+        modRecipe.setRecipeCategories(categories);
+
+        // COMMENTS
+        for (int i = 0; i < comments.size(); i++) {
+            comments.get(i).setRecipe(modRecipe);
+        }
+        commentsDao.saveAll(comments);
+
+
+        // REMOVE WASTE
+        deleteRecipeMethod(originalId);
 
         // SAVE RECIPE
-        recipesDao.save(recipe);
-        model.addAttribute("recipe", recipe);
+        recipesDao.save(modRecipe);
+        model.addAttribute("recipe", modRecipe);
         return "redirect:/user/profile";
     }
 
@@ -729,6 +774,31 @@ public class RecipeController {
         Collections.shuffle(recipes);                   // Randomize
 
         model.addAttribute("recipes", recipes);
+    }
+
+    private void deleteRecipeMethod(long id){
+
+        // RECIPE
+        Recipe recipe = recipesDao.getById(id);
+
+        // GET ALL INGREDIENTS
+        List<Ingredient> ingredients = ingredientsDao.findAllByRecipeId(id);
+        ingredients.remove(ingredients);
+        recipe.getIngredients().clear();
+
+        // GET ALL RATINGS
+        List<Rating> ratings = ratingsDao.findAllByRecipeId(id);
+        ratingsDao.deleteAll(ratings);
+        recipe.getRecipeRatings().clear();
+
+        // DELETE ALL COMMENTS
+        List<Comment> comments = commentsDao.findByRecipe_Id(id);
+        commentsDao.deleteAll(comments);
+
+
+        // DELETE RECIPE
+        recipesDao.delete(recipe);
+
     }
 
 }  //<--END

@@ -8,10 +8,10 @@ DELETE FROM comments WHERE id > 0;
 
 UPDATE recipes
 SET
-    api_id = 0
+    user_id = 0
 
 WHERE
-    id = 16;
+    id = 6;
 
 
 

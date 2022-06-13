@@ -207,8 +207,10 @@ public class UserController {
         List<Rating> ratings = ratingsDao.findAll();
 
         for (int i = 0; i < ratings.size(); i++) {
-            if(ratings.get(i).getUser().getId() == user.getId()){
-                rRecipes.add(recipeDao.findRecipeById(ratings.get(i).getRecipe().getId()));
+            if(ratings.get(i).getUser() != null){
+                if(ratings.get(i).getUser().getId() == user.getId()){
+                    rRecipes.add(recipeDao.findRecipeById(ratings.get(i).getRecipe().getId()));
+                }
             }
         }
         model.addAttribute("rRecipes", rRecipes);
@@ -247,8 +249,10 @@ public class UserController {
 
         for (int i = 0; i < recipes.size(); i++) {
             if(recipes.get(i).getUser() != null){
-                if(recipes.get(i).getUser().getId() == user.getId() && recipes.get(i).getApiId() == 0);
-                createdRecipes.add(recipes.get(i));
+                if(recipes.get(i).getUser().getId() == user.getId() && recipes.get(i).getApiId() == 0){
+                    createdRecipes.add(recipes.get(i));
+                }
+
             }
         }
         model.addAttribute("createdRecipes", createdRecipes);
