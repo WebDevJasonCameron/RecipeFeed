@@ -39,7 +39,9 @@ public class Comment {
     // CON
     public Comment() {
     }
-
+    public Comment(Recipe recipe) {
+        this.recipe = recipe;
+    }
 
     // GET
     public long getId() {

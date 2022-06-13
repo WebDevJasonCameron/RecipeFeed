@@ -18,3 +18,6 @@ VALUES ('blank'),
        ('sauce'),
        ('spread'),
        ('snack');
+
+INSERT INTO users(id, email, password, username)
+VALUES (-1, 'no@mail.com', 'none', 'anonUser');
