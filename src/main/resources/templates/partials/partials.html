@@ -219,22 +219,10 @@
                 <h5 class="modal-title" id="staticBackdropLabelEmail">Email This Recipe/ Link to recipe:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
-                <form action=”mailto:contact@yourdomain.com”
-                      method=”POST”
-                      enctype=”multipart/form-data”
-                      name=”EmailForm”>
-
-                    EmailTo:<br>
-
-                    <input type=”text” size=”19″ name=”ContactName”><br><br>
-
-
-                    Message:<br>
-                    <textarea name=”ContactComment” rows=”6″ cols=”20″
-                              placeholder="will the recipe information be on here? link to recipe?"></textarea><br>
-                    <button type="button" class="btn btn-dark" value="submit">Submit</button>
-                </form>
+<!--                <li id="grey-contactus-icon"><a th:href="'mailto:Another Foodie?subject=' + ${recipe.title} + '&body=Hello! I thought you\'d be interested in this recipe!' + ${recipe.info}">Click to send email</a></li>-->
+                <li><a th:href="'#'">Test</a></li>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

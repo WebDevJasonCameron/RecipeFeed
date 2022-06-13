@@ -8,14 +8,28 @@ const options1 = {
     onUploadDone: function (res) {$("#img").val(res.filesUploaded[0].url)},
 }
 
-// options for picking multiple images *requires refactor
+// options for picking multiple images
 const options2 = {
     fromSources: ["local_file_system", "url"],
     accept: ["image/*"],
-    onUploadDone: function (res) {$("#img").val(res.filesUploaded[0].url)},
+    maxFiles: 4,
+    onUploadDone: function (res) {
+        const imgFiles = [];
+
+        res.filesUploaded.forEach((file) => {
+            imgFiles.push(file.url)
+        })
+
+        $("#img").val(imgFiles);
+    }
 }
 
 // single image selector
 $("#upload-img").click(function(){
     client.picker(options1).open();
+});
+
+// multiple image selector
+$("#upload-multipleImg").click(function(){
+    client.picker(options2).open();
 });
