@@ -13,9 +13,12 @@ public interface CommentsRepository extends JpaRepository<Comment, Long> {
 
     List<Comment> findAllByRecipe(Recipe recipe);
 
+    List<Comment> findByRecipe_Id(long id);
+
     @Modifying
     @Transactional
     @Query(value = "delete from comments where user_id = ?1", nativeQuery = true)
     void dropUserComments(long userId);
+
 
 }
