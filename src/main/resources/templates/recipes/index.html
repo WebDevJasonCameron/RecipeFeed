@@ -243,7 +243,10 @@
                                     </div>
                                     <!--PLAIN-->
                                     <div>
-                                        <i class="fa-regular fa-paper-plane fa-2x p-2" data-bs-toggle="modal" data-bs-target="#staticBackdropEmail"></i>
+                                            <a th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} + '&body=' + 'Hello! I thought you would be interested in this recipe! ' + ${recipe.instruction}">
+                                            <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
+                                            </a>
+<!--                                        <i class="fa-regular fa-paper-plane fa-2x p-2" data-bs-toggle="modal" data-bs-target="#staticBackdropEmail"></i>-->
                                     </div>
                                     <!--BOOKMARK-->
                                     <div style="margin-left: auto">
