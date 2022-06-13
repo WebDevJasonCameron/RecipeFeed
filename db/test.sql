@@ -9,8 +9,9 @@ DELETE FROM comments WHERE id > 0;
 UPDATE recipes
 SET
     api_id = 0
+
 WHERE
-    id = 24;
+    id = 16;
 
 
 

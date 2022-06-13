@@ -6,6 +6,7 @@ import com.capstone.feedme.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.Nullable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,4 +21,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Transactional
     @Query(value = "update recipes set user_id = null where user_id = ?1", nativeQuery = true)
     void dropUserRecipes(long userId);
+
+
+
+
+
 }

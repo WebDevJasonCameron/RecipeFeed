@@ -3,6 +3,12 @@ let recipeListReturns;
 let recipeDetails;
 let startingOffset = 0;
 
+const apiKey = SPOON_KEY_01;
+// const apiKey = SPOON_KEY_02;
+// const apiKey = SPOON_KEY_03;
+
+
+
 /**
  *   PAGE ACTIONS
  */
@@ -81,9 +87,6 @@ function changeIconClass(target, fromClass, toClass){
  */
 // GET R LIST
 function getSpoonRecipeListByKeyWord(kw){
-    const apiKey = SPOON_KEY_01;
-    // const apiKey = SPOON_KEY_02;
-    // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=' + startingOffset + '&number=50';
     const readOption = {
@@ -102,9 +105,6 @@ function getSpoonRecipeListByKeyWord(kw){
 
 // GET R DETAILS
 function getSpoonRecipeDetailsByID(cid){
-    const apiKey = SPOON_KEY_01;
-    // const apiKey = SPOON_KEY_02;
-    // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/' + cid + '/information?apiKey=' + apiKey;
     const readOption = {
