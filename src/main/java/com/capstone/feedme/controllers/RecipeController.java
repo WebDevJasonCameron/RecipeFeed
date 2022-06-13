@@ -562,11 +562,19 @@ public class RecipeController {
     }
 
 
-    @PostMapping("/delete")
-    public String deleteRecipe(@ModelAttribute Recipe recipe
-    ) {
-        recipesDao.save(recipe);
-        return "redirect:/recipes";
+    @GetMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable long id,
+                               Model model) {
+
+        // PROVIDE USER MODEL FOR REDIRECT
+        provideUserModel(model);
+
+        // RECIPE
+        Recipe recipe = recipesDao.getById(id);
+
+        // DELETE RECIPE
+        recipesDao.delete(recipe);
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/edit")

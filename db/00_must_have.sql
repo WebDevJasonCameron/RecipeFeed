@@ -4,4 +4,17 @@ USE feed_me_db;
 
 # CATEGORY SEEDER
 INSERT INTO categories(type)
-VALUES ('blank');
+VALUES ('blank'),
+       ('breakfast'),
+       ('brunch'),
+       ('lunch'),
+       ('dinner'),
+       ('dessert'),
+       ('main course'),
+       ('appetizer'),
+       ('side dish'),
+       ('condiment'),
+       ('dip'),
+       ('sauce'),
+       ('spread'),
+       ('snack');
