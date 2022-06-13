@@ -243,7 +243,7 @@
                                     </div>
                                     <!--PLAIN-->
                                     <div>
-                                            <a th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} + '&body=' + 'Hello! I thought you would be interested in this recipe! ' + ${recipe.instruction}">
+                                            <a th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} + '&body=' + 'Hello! I thought you would be interested in ' + ${recipe.title} + ': http://feedme.lol' + @{/recipes/details/{id}(id=${recipe.id})}">
                                             <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
                                             </a>
 <!--                                        <i class="fa-regular fa-paper-plane fa-2x p-2" data-bs-toggle="modal" data-bs-target="#staticBackdropEmail"></i>-->
@@ -366,7 +366,10 @@
 
 <!--SCRIPTS-->
 <section th:replace="partials/partials.html :: script-section"></section>
+<<<<<<< HEAD
 <!--<script th:src="@{/js/keys.js}"></script>-->
+=======
+>>>>>>> 41d5e47b4aa09020eb22ab8f5cbeaa2bd421628f
 <script th:src="@{/js/app.js}"></script>
 <script th:src="@{/js/comments.js}"></script>
 
