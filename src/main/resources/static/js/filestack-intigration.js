@@ -1,5 +1,5 @@
 "use strict";
-const client = filestack.init(FILESTACKAPI);
+const client = filestack.init(FS_API_KEY);
 
 // options for picking single image
 const options1 = {

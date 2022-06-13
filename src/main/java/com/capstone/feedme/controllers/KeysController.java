@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class KeysController {
 
-    @Value("${token")
-    private String token;
-
     @Value("${SPOON_API_KEY_01")
     private String SPOON_API_KEY_01;
 
@@ -27,7 +24,7 @@ public class KeysController {
     @GetMapping(path = "/keys", produces = "application/javascript")
     @ResponseBody
     public String keys() {
-        String output = "const token = " + token + "; ";
+        String output = "";
         output += "const SPOON_API_KEY_01 = " + SPOON_API_KEY_01 + "; ";
         output += "const SPOON_API_KEY_02 = " + SPOON_API_KEY_02 + "; ";
         output += "const SPOON_API_KEY_03 = " + SPOON_API_KEY_03 + "; ";
