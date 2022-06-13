@@ -10,6 +10,7 @@ $('.recipe-delete-btn').on('click', function (e) {
     if(confirm("Confirm, You Want To DELETE this Recipe?")){
         window.location.href = "/recipes/delete/" + id;
     }
+
 });
 
 // EDIT BTN
@@ -23,5 +24,6 @@ $('.recipe-edit-btn').on('click', function (e) {
         window.location.href = "/recipes/edit/" + id;
     }
 });
+
 
 
