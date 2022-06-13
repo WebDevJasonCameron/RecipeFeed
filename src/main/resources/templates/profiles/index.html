@@ -132,7 +132,11 @@
                                         <img th:src="${cRecipe.imgUrl}" th:alt="${cRecipe.title}" class="img-thumbnail">
                                     </a>
                                     <div style="position: absolute; left: 180px; top: -5px">
-                                        <button class="badge badge-warning recipe-edit-btn" style="color: black" th:data="${cRecipe.id}">
+
+                                        <button class="badge badge-warning recipe-edit-btn"
+                                                style="color: black"
+                                                th:data="${cRecipe.id}">
+
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </button>
                                     </div>

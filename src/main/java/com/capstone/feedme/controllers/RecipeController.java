@@ -471,8 +471,6 @@ public class RecipeController {
         return "recipes/index";
     }
 
-
-
     @GetMapping("/details/{id}")
     public String showRecipeDetail(@PathVariable long id,
                                    Model model){
@@ -534,8 +532,14 @@ public class RecipeController {
 
         // INGREDIENTS
         List<Ingredient> ingredients = new ArrayList<>();
-        String ingredientTitlesString = allIngredientTitles.substring(0, allIngredientTitles.length() -3);
-        String ingredientAmountsString = allIngredientAmounts.substring(0, allIngredientAmounts.length() -3);
+        String ingredientTitlesString = "";
+        String ingredientAmountsString ="";
+        if(allIngredientTitles.length() > 3){
+            ingredientTitlesString = allIngredientTitles.substring(0, allIngredientTitles.length() -3);
+        }
+        if(allIngredientAmounts.length() > 3){
+            ingredientAmountsString = allIngredientAmounts.substring(0, allIngredientAmounts.length() -3);
+        }
 
         String[] ingredientTitlesArray = ingredientTitlesString.split(",,,");
         String[] ingredientAmountsArray = ingredientAmountsString.split(",,,");
@@ -558,7 +562,7 @@ public class RecipeController {
         recipesDao.save(newRecipe);
         model.addAttribute("recipe", newRecipe);
 
-        return "redirect:/recipes";
+        return "redirect:/user/profile";
     }
 
 
@@ -577,17 +581,48 @@ public class RecipeController {
         return "redirect:/user/profile";
     }
 
-    @GetMapping("/edit")
-    public String editRecipe(Model model){
-        model.addAttribute("recipe", new Recipe());
+    @GetMapping("/edit/{id}")
+    public String editRecipe(@PathVariable long id,
+                             Model model){
+        // GET RECIPE FROM DB
+        Recipe recipe = recipesDao.getById(id);
+
+        // PASS RECIPE ID NUMBER
+        model.addAttribute("originalId", recipe.getId());
+
+        // PROVIDE INGREDIENT MODEL FROM ORIGINAL RECIPE
+        List<Ingredient> origIngredients = ingredientsDao.findAllByRecipeId(id);
+        model.addAttribute("origIngredients", origIngredients);
+
+        // PROVIDE USER MODEL
+        provideUserModel(model);
+
+        model.addAttribute("recipe", recipe);
      return "recipes/edit";
     }
 
     @PostMapping("/edit")
-    public String remixRecipe(@Valid Recipe recipe, Model model){
+    public String remixRecipe(@Valid Recipe recipe,
+                              @RequestParam(name = "recipe-id") long originalId,
+                              @RequestParam(name = "user-id") long userId,
+                              Model model){
+
+        // REPLACE ORIGINAL RECIPE ID
+        recipe.setId(originalId);
+
+        // REPLACE USER
+        User user = usersDao.getById(userId);
+        recipe.setUser(user);
+
+        // REPLACE API ID
+        recipe.setApiId(0);
+
+        // REPLACE RATING
+
+        // SAVE RECIPE
         recipesDao.save(recipe);
         model.addAttribute("recipe", recipe);
-        return "redirect:/recipes";
+        return "redirect:/user/profile";
     }
 
 
@@ -674,18 +709,18 @@ public class RecipeController {
         List<Recipe> recipes = new ArrayList<>();
         List<Recipe> rl1 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param1));
         List<Recipe> rl2 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
-        List<Recipe> rl3 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param2));
+        List<Recipe> rl3 = recipesDao.findRecipesByRecipeCategories(categoryDao.findCategoryByType(param3));
 
-//        for (int i = 0; i < rl2.size(); i++) {
-//            if(rl1.contains(rl2.get(i))){
-//                rl2.remove(rl2.get(i));
-//            }
-//        }
-//        for (int i = 0; i < rl3.size(); i++) {
-//            if(rl1.contains(rl3.get(i)) || rl2.contains(rl3.get(i))){
-//                rl3.remove(rl3.get(i));
-//            }
-//        }
+        for (int i = 0; i < rl2.size(); i++) {
+            if(rl1.contains(rl2.get(i))){
+                rl2.remove(rl2.get(i));
+            }
+        }
+        for (int i = 0; i < rl3.size(); i++) {
+            if(rl1.contains(rl3.get(i)) || rl2.contains(rl3.get(i))){
+                rl3.remove(rl3.get(i));
+            }
+        }
 
         recipes.addAll(rl1);
         recipes.addAll(rl2);

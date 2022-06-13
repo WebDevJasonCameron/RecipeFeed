@@ -1,6 +1,7 @@
 package com.capstone.feedme.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "recipes")
-public class Recipe {
+public class Recipe  {
 
     // ATT
     @Id
@@ -49,7 +50,7 @@ public class Recipe {
     @JsonManagedReference
     private List<Ingredient> ingredients;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rating", orphanRemoval = true)
+    @OneToMany(mappedBy = "rating", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Rating> recipeRatings;
 
@@ -145,6 +146,9 @@ public class Recipe {
     }
 
     // SET
+    public void setId(long id) {
+        this.id = id;
+    }
     public void setApiId(long apiId) {
         this.apiId = apiId;
     }
