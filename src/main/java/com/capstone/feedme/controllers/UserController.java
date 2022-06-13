@@ -3,11 +3,11 @@ package com.capstone.feedme.controllers;
 import com.capstone.feedme.models.Rating;
 import com.capstone.feedme.models.Recipe;
 import com.capstone.feedme.models.User;
+import com.capstone.feedme.repositories.CommentsRepository;
 import com.capstone.feedme.repositories.RatingsRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,16 +31,18 @@ public class UserController {
     private final UserRepository usersDao;
     private final RecipeRepository recipeDao;
     private final RatingsRepository ratingsDao;
+    private final CommentsRepository commentsDao;
 
     // ATT : SERVICES
     private final PasswordEncoder passwordEncoder;
 
 
     // CON
-    public UserController(UserRepository usersDao, RecipeRepository recipeDao, RatingsRepository ratingsDao, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository usersDao, RecipeRepository recipeDao, RatingsRepository ratingsDao, CommentsRepository commentsDao, PasswordEncoder passwordEncoder) {
         this.usersDao = usersDao;
         this.recipeDao = recipeDao;
         this.ratingsDao = ratingsDao;
+        this.commentsDao = commentsDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -156,6 +158,8 @@ public class UserController {
 
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
+        commentsDao.dropUserComments(user.getId());
+        ratingsDao.dropUserRatings(user.getId());
         recipeDao.dropUserRecipes(user.getId());
         usersDao.delete(user);
         return "redirect:/";
