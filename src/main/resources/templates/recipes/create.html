@@ -85,21 +85,37 @@
                         </div>
                     </div>
                     <!--IMAGE-->
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="image"
-                                       class="form-label h5" style="margin-top: 32px">
-                                    Image
-                                </label>
-                                <input th:field="*{imgUrl}"
-                                       th:errorClass="is-invalid"
-                                       name="image"
-                                       id="image"
-                                       class="form-control">
+                    <div class="container d-flex justify-content-center align-items-center mb-3">
+                        <div id="upload-img" class="btn rounded-circle bg-secondary d-flex justify-content-center" style="height: 9em; width: 9em;">
+                            <div class="pt-3">
+                                <i class="fa-solid fa-user fa-3x"></i>
+                                <p>Upload an Image</p>
                             </div>
                         </div>
+                        <input id="img" type="hidden" th:field="*{imgUrl}" th:errorClass="is-invalid">
+                        <div th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="invalid-feedback"></div>
                     </div>
+
+
+<!--                    <div class="row">-->
+<!--                        <div class="col">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="image"-->
+<!--                                       class="form-label h5" style="margin-top: 32px">-->
+<!--                                    Image-->
+<!--                                </label>-->
+<!--                                <input th:field="*{imgUrl}"-->
+<!--                                       th:errorClass="is-invalid"-->
+<!--                                       name="image"-->
+<!--                                       id="image"-->
+<!--                                       class="form-control">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+
+
                     <!--RECIPE DETAILS-->
                     <div id="recipe-details-section">
                         <hr>
@@ -337,7 +353,10 @@
     <footer th:replace="partials/partials.html :: footer"></footer>
 
     <section th:replace="partials/partials.html :: script-section"></section>
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
     <script th:src="@{/js/create-recipe.js}"></script>
+    <script th:src="@{/js/keys.js}"></script>
+    <script th:src="@{/js/filestack-intigration.js}"></script>
 
 </body>
 </html>
