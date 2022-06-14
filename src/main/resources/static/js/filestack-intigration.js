@@ -1,5 +1,5 @@
 "use strict";
-const client = filestack.init(FS_API_KEY);
+const client = filestack.init(SPOON_KEY_01);
 
 // options for picking single image
 const options1 = {
