@@ -3,95 +3,113 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/partials.html :: head ('About Page')" ></head>
 <meta charset="UTF-8" />
-<body>
-
-    <style>
-        body {
-            background-image: url('https://images.unsplash.com/photo-1483137140003-ae073b395549?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNvb2tpbmclMjBpbmdyZWRpZW50c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-        }
-    </style>
-
     <!--NAV-->
     <nav th:replace="partials/partials.html :: navbar"></nav>
 
     <!--HEADER-->
     <section th:replace="partials/partials.html :: header ('About Us')"></section>
 
+<style>
+     body {
+         /*background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvPTewP1VgFko_dSU73MGcU47nILivLwBcw&usqp=CAU');*/
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+         background-color: white;
+     }
+</style>
+<body>
 
+<div class="about-section fade-in-text" style="background-color: ghostwhite; color: black; font-stretch: expanded">
+<!--    <h1 style="font-size: 45px">About Us</h1>-->
+    <p class="fade-in-text" style="font-size: 25px; font-style: italic">"Feed. is an engaging recipe social media application created for food lovers who want to find new recipes,
+        remix existing recipes, and create new recipes to share with fellow food lovers. We invite you to be part
+        of the culturally universal experience."</p>
+</div>
 
-    <!--MAIN-->
-    <!--ABOUT US SUMMARY-->
-    <div class="aboutFirstCardTextSection text-center col-12 col-md-6">
-        <div class="fade-in-text pb-5 mb-5">
-            <figure class="text-center fade-in-text">
-                <blockquote class="blockquote">
-                    <p class="display-6 pt-md-5 testTextPush fs-1 fst-italic"> "Feed. is an engaging recipe social media application created for food lovers who want to find new recipes,
-                        remix existing recipes, and create new recipes to share with fellow food lovers. We invite you to be part
-                        of the culturally universal experience."</p>
-                </blockquote>
-                <figcaption class="blockquote-footer">
-                    <cite title="Source Title"></cite>
-                </figcaption>
-            </figure>
+<h2 class="fade-in-text" style="text-align:center; font-size: 40px; font-stretch: expanded">Our Team</h2>
+<br>
+<div class="row">
+    <div class="column">
+        <div class="card" style="background-color: ghostwhite; width: 20rem; left: 5em">
+            <img src="https://avatars.githubusercontent.com/u/50087642?s=70&v=4" alt="Jason" style="width:100%">
+            <div class="container">
+                <h2>Jason Cameron</h2>
+                <p class="title">Web Developer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>Dev.JasonCameron@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
         </div>
     </div>
+
+    <div class="column">
+        <div class="card" style="background-color: ghostwhite; width: 20rem; left: 5em">
+            <img src="https://avatars.githubusercontent.com/u/80545434?s=70&v=4" alt="Sam" style="width:100%">
+            <div class="container">
+                <h2>Samuel Arguello</h2>
+                <p class="title">Web Developer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>sam.arguello2@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card" style="background-color: ghostwhite; width: 20rem; left: 5em">
+            <img src="https://avatars.githubusercontent.com/u/98361722?s=70&v=4" alt="Luis" style="width:100%">
+            <div class="container">
+                <h2>Luis Sanchez</h2>
+                <p class="title">Web Developer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>Sanchez.Alberto.Luis01@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card" style="background-color: ghostwhite; width: 20rem; left: 22em">
+            <img src="https://avatars.githubusercontent.com/u/98361785?s=70&v=4" alt="Dennise" style="width:100%">
+            <div class="container">
+                <h2>Dennise Camacho</h2>
+                <p class="title">Web Developer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>dennise.e.camacho@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card" style="background-color: ghostwhite; width: 20rem; left: 20em">
+            <img src="https://avatars.githubusercontent.com/u/98362003?s=70&v=4" alt="Jose" style="width:100%">
+            <div class="container">
+                <h2>Jose Lopez</h2>
+                <p class="title">Web Developer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>jose.m.lopez747@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     <!--SOCIAL MEDIA-->
-    <!--            CARD1-->
-<!--    <div class="card" style="width: 12rem; background-color: transparent; border: none">-->
-<!--        <img src="https://avatars.githubusercontent.com/u/50087642?s=70&v=4" class="card-img-top" alt="...">-->
-<!--        <div class="card-body fade-in-image">-->
-<!--            <h5 class="card-title">Jason Cameron</h5>-->
-<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--            <a href="#" class="btn btn-primary" style="background-color: transparent; color: black; width: 8rem">Contact</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <div class="card" style="width: 12rem; background-color: transparent; border: none">-->
-<!--        <img src="https://avatars.githubusercontent.com/u/80545434?s=70&v=4" class="card-img-top" alt="...">-->
-<!--        <div class="card-body fade-in-image">-->
-<!--            <h5 class="card-title">Sam Arguello</h5>-->
-<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--            <a href="#" class="btn btn-primary" style="background-color: transparent; color: black; width: 8rem">Contact</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <div class="card" style="width: 12rem; background-color: transparent; border: none">-->
-<!--        <img src="https://avatars.githubusercontent.com/u/98361722?s=70&v=4" class="card-img-top" alt="...">-->
-<!--        <div class="card-body fade-in-image">-->
-<!--            <h5 class="card-title">Luis Sanchez</h5>-->
-<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--            <a href="#" class="btn btn-primary" style="background-color: transparent; color: black; width: 8rem">Contact</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <div class="card" style="width: 12rem; background-color: transparent; border: none">-->
-<!--        <img src="https://avatars.githubusercontent.com/u/98361785?s=70&v=4" class="card-img-top" alt="...">-->
-<!--        <div class="card-body fade-in-image">-->
-<!--            <h5 class="card-title">Dennise Camacho</h5>-->
-<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--            <a href="#" class="btn btn-primary" style="background-color: transparent; color: black; width: 8rem">Contact</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <div class="card" style="width: 12rem; background-color: transparent; border: none">-->
-<!--        <img src="https://avatars.githubusercontent.com/u/98362003?s=70&v=4" class="card-img-top" alt="...">-->
-<!--        <div class="card-body fade-in-image">-->
-<!--            <h5 class="card-title">Jose Lopez</h5>-->
-<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--            <a href="#" class="btn btn-primary" style="background-color: transparent; color: black; width: 8rem">Contact</a>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-
-
     <!--FOOTER-->
     <footer th:replace="partials/partials.html :: footer"></footer>
 
