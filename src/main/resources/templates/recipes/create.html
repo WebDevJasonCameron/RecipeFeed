@@ -84,37 +84,22 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <!--IMAGE-->
-                    <div class="container d-flex justify-content-center align-items-center mb-3">
-                        <div id="upload-img" class="btn bg-secondary d-flex justify-content-center" style="height: 5em; width: 9em;">
-                            <div class="pt-2">
-                                <p>Upload an Image</p>
-                            </div>
+                    <div>
+                        <div class="h5 mt-3">
+                            Pictures
                         </div>
-                        <input id="img" type="hidden" th:field="*{imgUrl}" th:errorClass="is-invalid">
-                        <div th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="invalid-feedback"></div>
+                        <div class="container d-flex justify-content-center align-items-center mt-3 mb-3">
+                            <div id="upload-img" class="btn bg-secondary d-flex justify-content-center" style="height: 5em; width: 9em;">
+                                <div class="pt-2">
+                                    <p>Upload an Image</p>
+                                </div>
+                            </div>
+                            <input id="img" type="hidden" th:field="*{imgUrl}" th:errorClass="is-invalid">
+                            <div th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="invalid-feedback"></div>
+                        </div>
                     </div>
-
-
-<!--                    <div class="row">-->
-<!--                        <div class="col">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="image"-->
-<!--                                       class="form-label h5" style="margin-top: 32px">-->
-<!--                                    Image-->
-<!--                                </label>-->
-<!--                                <input th:field="*{imgUrl}"-->
-<!--                                       th:errorClass="is-invalid"-->
-<!--                                       name="image"-->
-<!--                                       id="image"-->
-<!--                                       class="form-control">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-
-
-
                     <!--RECIPE DETAILS-->
                     <div id="recipe-details-section">
                         <hr>
@@ -178,68 +163,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Dietary Notes                   COMMENT OUT UNTIL TESTED!!!!!!!-->
-<!--                        <div class="row">-->
-<!--                            <div class="h5 mt-5">-->
-<!--                                Dietary Notes-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash;DAIRY&ndash;&gt;-->
-<!--                            <div class="col-6 col-md-3">-->
-<!--                                <div class="form-group text-center">-->
-<!--                                    <input class="form-check-input"-->
-<!--                                           style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                           type="checkbox"-->
-<!--                                           th:field="*{dairyFree}"-->
-<!--                                           id="dairy">-->
-<!--                                    <label for="dairy"-->
-<!--                                           class="form-label mt-4">-->
-<!--                                        Dairy Diet Friendly-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash;GLUTEN&ndash;&gt;-->
-<!--                            <div class="col-6 col-md-3">-->
-<!--                                <div class="form-group text-center">-->
-<!--                                    <input class="form-check-input"-->
-<!--                                           style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                           type="checkbox"-->
-<!--                                           th:field="*{glutenFree}"-->
-<!--                                           id="gluten">-->
-<!--                                    <label for="gluten"-->
-<!--                                           class="form-label mt-4">-->
-<!--                                        Gluten Diet Friendly-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash;VEGAN&ndash;&gt;-->
-<!--                            <div class="col-6 col-md-3">-->
-<!--                                <div class="form-group text-center">-->
-<!--                                    <input class="form-check-input"-->
-<!--                                           style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                           type="checkbox"-->
-<!--                                           th:field="*{vegan}"-->
-<!--                                           id="vegan">-->
-<!--                                    <label for="vegan"-->
-<!--                                           class="form-label mt-4">-->
-<!--                                        Vegan Diet Friendly-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash;VEGETARIAN&ndash;&gt;-->
-<!--                            <div class="col-6 col-md-3">-->
-<!--                                <div class="form-group text-center">-->
-<!--                                    <input class="form-check-input"-->
-<!--                                           style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                           type="checkbox"-->
-<!--                                           th:field="*{vegetarian}"-->
-<!--                                           id="vegetarian">-->
-<!--                                    <label for="vegetarian"-->
-<!--                                           class="form-label mt-4">-->
-<!--                                        Vegetarian Diet Friendly-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
                 </div>
                 <div class="card-footer">

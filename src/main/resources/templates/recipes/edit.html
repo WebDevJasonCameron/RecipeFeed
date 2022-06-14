@@ -61,69 +61,69 @@
                         Ingredients
                     </div>
                 <div class="row">
-                    <div th:object="${origIngredients}">
-                        <!--TEST-->
-                        <div th:each="oi : ${origIngredients}">
-
-                            <span th:text="${oi.getIngredientName()}"></span>
-                            <input type="text"
-                                   class="w-100"
-                                   name="listed-ing-title">
-
-                        </div>
-
-                        <!--Ingredient title from original-->
-<!--                        <div class="col-md-6 mt-3" th:each="origIng : ${origIngredients}">-->
-<!--                            <input type="text"-->
-<!--                                   class="w-100"-->
-<!--                                   name="listed-ingredient-title"-->
-<!--                                   th:field="${origIng.getIngredientName}">-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;Ingredient amount from original&ndash;&gt;-->
-<!--                        <div class="col-md-6 mt-3" th:each="origAmt : ${origIngredients}">-->
-<!--                            <input type="text"-->
-<!--                                   class="w-100"-->
-<!--                                   name="listed-ingredient-title"-->
-<!--                                   th:field="${origAmt.getIngredientName}">-->
-<!--                        </div>-->
-                    </div>
-
-                </div>
-                <div class="row">
-                    <!--ingredients-->
-                    <div class="col-md-6">
-                            <div class="mt-5">
-                                <button class="btn btn-secondary w-75 mt-3"
-                                        id="modal-open-btn"
-                                        data-toggle="modal"
-                                        data-target="#ing-modal">Need More Ingredients?
-                                </button>
+                    <!--INGREDIENT RESULTS-->
+                    <div class="col-12">
+                        <!--NAME-->
+                        <div class="row" th:each="ingredient : *{ingredients}">
+                            <div class="col-md-6 mt-2">
+                                <label th:for="'ingName-' + ${ingredient.id}"
+                                       class="form-label">
+                                    Ingredient Name:
+                                </label>
+                                <input  name="ingredient-name-input"
+                                        th:id="'ingName-' + ${ingredient.id}"
+                                        class="form-control w-100"
+                                        th:placeholder="${ingredient.ingredientName}"
+                                        th:value="${ingredient.ingredientName}">
+                            </div>
+                            <!--AMOUNT-->
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label th:for="'modIngAmount-' + ${ingredient.id}"
+                                           class="form-label">
+                                        Amount:
+                                    </label>
+                                    <input
+                                            name="ingredient-amount-input"
+                                            th:id="'modIngAmount-' + ${ingredient.id}"
+                                            class="form-control w-100"
+                                            th:placeholder="${ingredient.ingredientAmount}"
+                                            th:value="${ingredient.ingredientAmount}">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!--INGREDIENT RESULTS-->
-                    <div class="col-md-6">
-                        <div class="mt-5">
-                            <ol id="ingredients-data">
+                    <!--ING BTN-->
+                    <div class="col-12">
+                        <div class="mt-3 d-flex justify-content-center mb-3">
+                            <button class="btn btn-secondary w-75 mt-3"
+                                    id="modal-open-btn"
+                                    data-toggle="modal"
+                                    data-target="#ing-modal">Need More Ingredients?
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mt-5">
+                                <ol id="ingredients-data">
 
-                            </ol>
+                                </ol>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <hr>
                 <!--IMAGE-->
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="image"
-                                   class="form-label h5" style="margin-top: 32px">
-                                Image
-                            </label>
-                            <input th:field="*{imgUrl}"
-                                   th:errorClass="is-invalid"
-                                   name="image"
-                                   id="image"
-                                   class="form-control">
+                <div>
+                    <div class="h5 mt-3">
+                        Pictures
+                    </div>
+                    <div class="container d-flex justify-content-center align-items-center mt-3 mb-3">
+                        <div id="upload-img" class="btn bg-secondary d-flex justify-content-center" style="height: 5em; width: 9em;">
+                            <div class="pt-2">
+                                <p>Upload an Image</p>
+                            </div>
                         </div>
+                        <input id="img" type="hidden" th:field="*{imgUrl}" th:errorClass="is-invalid">
+                        <div th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <!--RECIPE DETAILS-->
@@ -189,69 +189,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--Dietary Notes                   COMMENT OUT UNTIL TESTED!!!!!!!-->
-<!--                    <div class="row">-->
-<!--                        &lt;!&ndash;                            <hr>&ndash;&gt;-->
-<!--                        <div class="h5 mt-5">-->
-<!--                            Dietary Notes-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;DAIRY&ndash;&gt;-->
-<!--                        <div class="col-6 col-md-3">-->
-<!--                            <div class="form-group text-center">-->
-<!--                                <input class="form-check-input"-->
-<!--                                       style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                       type="checkbox"-->
-<!--                                       th:field="*{dairyFree}"-->
-<!--                                       id="dairy">-->
-<!--                                <label for="dairy"-->
-<!--                                       class="form-label mt-4">-->
-<!--                                    Dairy Diet Friendly-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;GLUTEN&ndash;&gt;-->
-<!--                        <div class="col-6 col-md-3">-->
-<!--                            <div class="form-group text-center">-->
-<!--                                <input class="form-check-input"-->
-<!--                                       style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                       type="checkbox"-->
-<!--                                       th:field="*{glutenFree}"-->
-<!--                                       id="gluten">-->
-<!--                                <label for="gluten"-->
-<!--                                       class="form-label mt-4">-->
-<!--                                    Gluten Diet Friendly-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;VEGAN&ndash;&gt;-->
-<!--                        <div class="col-6 col-md-3">-->
-<!--                            <div class="form-group text-center">-->
-<!--                                <input class="form-check-input"-->
-<!--                                       style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                       type="checkbox"-->
-<!--                                       th:field="*{vegan}"-->
-<!--                                       id="vegan">-->
-<!--                                <label for="vegan"-->
-<!--                                       class="form-label mt-4">-->
-<!--                                    Vegan Diet Friendly-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;VEGETARIAN&ndash;&gt;-->
-<!--                        <div class="col-6 col-md-3">-->
-<!--                            <div class="form-group text-center">-->
-<!--                                <input class="form-check-input"-->
-<!--                                       style="margin-top: 29px; margin-right: 10px;"-->
-<!--                                       type="checkbox"-->
-<!--                                       th:field="*{vegetarian}"-->
-<!--                                       id="vegetarian">-->
-<!--                                <label for="vegetarian"-->
-<!--                                       class="form-label mt-4">-->
-<!--                                    Vegetarian Diet Friendly-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
             </div>
             <div class="card-footer">
@@ -311,7 +248,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button id="add-recipe-btn" type="submit" class="btn btn-primary m-3 w-100">Submit</button>
+                        <button id="edit-recipe-btn" type="submit" class="btn btn-primary m-3 w-100">Submit</button>
                     </div>
                 </div>
             </div>
@@ -320,10 +257,58 @@
 </div>
 
 
+<!--MODAL-->
+<div class="modal fade" id="ing-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ing-title">Enter Ingredients</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <!--ING INPUT-->
+                    <div class="form-group">
+                        <label for="ing-input"
+                               class="form-label">
+                            Ingredient Name:
+                        </label>
+                        <input
+                                name="ing-input"
+                                id="ing-input"
+                                class="form-control">
+                    </div>
+                    <!--AMOUNT INPUT-->
+                    <div class="form-group">
+                        <label for="amount-input"
+                               class="form-label">
+                            Amount:
+                        </label>
+                        <input
+                                name="amount-input"
+                                id="amount-input"
+                                class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="add-ing-to-form">Add Ingredient</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <footer th:replace="partials/partials.html :: footer"></footer>
 
 <section th:replace="partials/partials.html :: script-section"></section>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:src="@{/js/edit-recipe.js}"></script>
+<script th:src="@{/js/filestack-intigration.js}"></script>
 
 
 </body>

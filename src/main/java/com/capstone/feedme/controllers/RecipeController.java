@@ -531,29 +531,8 @@ public class RecipeController {
         newRecipe.setUser(user);
 
         // INGREDIENTS
-        List<Ingredient> ingredients = new ArrayList<>();
-        String ingredientTitlesString = "";
-        String ingredientAmountsString ="";
-        if(allIngredientTitles.length() > 3){
-            ingredientTitlesString = allIngredientTitles.substring(0, allIngredientTitles.length() -3);
-        }
-        if(allIngredientAmounts.length() > 3){
-            ingredientAmountsString = allIngredientAmounts.substring(0, allIngredientAmounts.length() -3);
-        }
-
-        String[] ingredientTitlesArray = ingredientTitlesString.split(",,,");
-        String[] ingredientAmountsArray = ingredientAmountsString.split(",,,");
-
-        for (int i = 0; i < ingredientTitlesArray.length; i++) {
-            Ingredient ingredient = new Ingredient( );
-
-            ingredient.setIngredientName(ingredientTitlesArray[i]);
-            ingredient.setIngredientAmount(ingredientAmountsArray[i]);
-            ingredient.setRecipe(newRecipe);
-            ingredientsDao.save(ingredient);
-
-            ingredients.add(ingredient);
-        }
+        List<Ingredient> ingredients = ingredientListFromTwoStrings(allIngredientTitles,
+                allIngredientAmounts, newRecipe);
         newRecipe.setIngredients(ingredients);
 
         // CREATE ANON USER
@@ -613,7 +592,43 @@ public class RecipeController {
     public String remixRecipe(@Valid Recipe recipe,
                               @RequestParam(name = "recipe-id") long originalId,
                               @RequestParam(name = "user-id") long userId,
+                              @RequestParam(name = "ingredient-name-input") String ingredientNameInput,
+                              @RequestParam(name = "ingredient-amount-input") String  ingredientAmountInput,
+                              @RequestParam(name = "all-ingredient-titles") String allIngredientTitles,
+                              @RequestParam(name = "all-ingredient-amounts") String allIngredientAmounts,
                               Model model){
+
+        // SET MOD RECIPE (the chosen one)
+        Recipe modRecipe = new Recipe();
+
+        ////////////////////////////////////////////ingredients///////////////////////////////////////
+
+        // INGREDIENT : USER INPUTS CONTROLS
+
+        // checks or breaks
+        String[] ingredientNameInputArray = ingredientNameInput.split(",");
+        String[] ingredientAmountInputArray = ingredientAmountInput.split(",");
+
+
+        List<Ingredient> oldIngredients = ingredientsDao.findAllByRecipeId(originalId);
+        List<Ingredient> modIngredients = new ArrayList<>();
+
+        for (int i = 0; i < oldIngredients.size(); i++) {
+            Ingredient ingredient = new Ingredient();
+            ingredient.setIngredientName(ingredientNameInputArray[i]);
+            ingredient.setIngredientAmount(ingredientAmountInputArray[i]);
+            ingredient.setRecipe(modRecipe);
+            modIngredients.add(ingredient);
+        }
+
+        List<Ingredient> addIngredients = ingredientListFromTwoStrings(allIngredientTitles,
+                allIngredientAmounts, modRecipe);
+
+        List<Ingredient> compModIngredients = new ArrayList<>();
+        compModIngredients.addAll(modIngredients);
+        compModIngredients.addAll(addIngredients);
+
+        /////////////////////////////////////end////////////////////////////////////////////////
 
         // PLACE IT ALL ASIDE
         User user = usersDao.getById(userId);
@@ -627,13 +642,9 @@ public class RecipeController {
         String sourceUrl = recipe.getSourceUrl();
         String videoUrl = recipe.getVideo_url();
         List<Rating> ratings = recipe.getRecipeRatings();
-        List<Ingredient> ingredients = recipe.getIngredients();
         List<Category> categories = categoryDao.findByRecipes_Id(originalId);
         List<Comment> comments = commentsDao.findByRecipe_Id(originalId);
 
-
-        // SET MOD RECIPE
-        Recipe modRecipe = new Recipe();
 
         // SET MOD ATTRIBUTES
         modRecipe.setId(originalId);
@@ -649,12 +660,12 @@ public class RecipeController {
         modRecipe.setSourceName(sourceName);
         modRecipe.setSourceUrl(sourceUrl);
         modRecipe.setVideo_url(videoUrl);
-//         CHILDREN
+        // CHILDREN
         modRecipe.setRecipeRatings(ratings);
-        modRecipe.setIngredients(ingredients);
         modRecipe.setRecipeCategories(categories);
+        modRecipe.setIngredients(compModIngredients);
 
-        // COMMENTS
+           // COMMENTS
         for (int i = 0; i < comments.size(); i++) {
             comments.get(i).setRecipe(modRecipe);
         }
@@ -799,6 +810,33 @@ public class RecipeController {
         // DELETE RECIPE
         recipesDao.delete(recipe);
 
+    }
+
+    private List<Ingredient> ingredientListFromTwoStrings(String iName, String iAmount, Recipe recipe){
+
+        List<Ingredient> ingredients = new ArrayList<>();
+        String ingredientTitlesString = "";
+        String ingredientAmountsString ="";
+        if(iName.length() > 3){
+            ingredientTitlesString = iName.substring(0, iName.length() -3);
+        }
+        if(iAmount.length() > 3){
+            ingredientAmountsString = iAmount.substring(0, iAmount.length() -3);
+        }
+
+        String[] ingredientTitlesArray = ingredientTitlesString.split(",,,");
+        String[] ingredientAmountsArray = ingredientAmountsString.split(",,,");
+
+        for (int i = 0; i < ingredientTitlesArray.length; i++) {
+            Ingredient ingredient = new Ingredient( );
+
+            ingredient.setIngredientName(ingredientTitlesArray[i]);
+            ingredient.setIngredientAmount(ingredientAmountsArray[i]);
+            ingredient.setRecipe(recipe);
+            ingredients.add(ingredient);
+        }
+
+        return ingredients;
     }
 
 }  //<--END
