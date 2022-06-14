@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="/partials/partials.html :: head ('Edit Profile')"></head>
+<head th:replace="partials/partials.html :: head ('Edit Profile')"></head>
 <body>
 
     <!--NAV-->
-    <nav th:replace="/partials/partials.html :: navbar"></nav>
+    <nav th:replace="partials/partials.html :: navbar"></nav>
     <!--MAIN-->
     <div class="container d-flex align-items-center justify-content-center">
         <div class="border border rounded-3 p-4 m-5 bg-secondary bg-opacity-10" style="width: 40em">
             <div class="container d-flex align-items-center justify-content-center mb-3">
-                <section th:replace="/partials/partials.html :: header ('Edit Profile')"></section>
+                <section th:replace="partials/partials.html :: header ('Edit Profile')"></section>
             </div>
 
             <form th:action="@{/user/edit}" method="post" th:object="${user}" onsubmit="submitForm(event)">
@@ -62,11 +62,11 @@
 
 
     <!--FOOTER-->
-    <footer th:replace="/partials/partials.html :: footer"></footer>
+    <footer th:replace="partials/partials.html :: footer"></footer>
 
     <!--SCRIPTS-->
     <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-    <section th:replace="/partials/partials.html :: script-section"></section>
+    <section th:replace="partials/partials.html :: script-section"></section>
 
 <!--    <script th:src="@{/js/keys.js}"></script>-->
 
