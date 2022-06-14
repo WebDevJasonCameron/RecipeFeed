@@ -1,0 +1,46 @@
+a:hover.links{
+    color: green;
+    background-color: transparent;
+}
+
+button:hover.links{
+    color: green;
+    background-color: transparent;
+}
+
+/** unvisited link *!*/
+a:link {
+    color: black;
+    text-underline: none;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+    text-underline: none;
+}
+
+/* mouse over link */
+a:hover {
+    color: green;
+    background-color: transparent;
+}
+
+/* selected link */
+a:active {
+    color: black;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-underline: none;
+    text-decoration: none;
+}
+
+.nav_links:hover{
+    color: green;
+}
+
+.links{
+    color: black;
+
+}

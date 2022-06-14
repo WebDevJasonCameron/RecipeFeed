@@ -67,7 +67,7 @@
                                     Ingredients
                                 </div>
                                 <div class="mt-5">
-                                     <button class="btn btn-secondary w-75 mt-3"
+                                     <button class="btn btn-success w-75 mt-3"
                                              id="modal-open-btn"
                                              data-toggle="modal"
                                              data-target="#ing-modal">Please provide ingredients and amounts
@@ -90,11 +90,12 @@
                         <div class="h5 mt-3">
                             Pictures
                         </div>
-                        <div class="container d-flex justify-content-center align-items-center mt-3 mb-3">
-                            <div id="upload-img" class="btn bg-secondary d-flex justify-content-center" style="height: 5em; width: 9em;">
-                                <div class="pt-2">
-                                    <p>Upload an Image</p>
+                        <div class="container d-flex justify-content-center align-items-center mb-3">
+                        <div id="upload-img" class="btn bg-secondary d-flex justify-content-center text-light" style="height: 5em; width: 9em;">
+                            <div class="pt-2">
+                                <p>Upload an Image</p>
                                 </div>
+
                             </div>
                             <input id="img" type="hidden" th:field="*{imgUrl}" th:errorClass="is-invalid">
                             <div th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="invalid-feedback"></div>
@@ -219,7 +220,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button id="add-recipe-btn" type="submit" class="btn btn-primary m-3 w-100">Submit</button>
+                            <button id="add-recipe-btn" type="submit" class="btn btn-success mx-auto m-3 w-100">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -233,8 +234,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ing-title">Enter Ingredients</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
+                    <button type="button" class="btn-close" data-dismiss="modal">
+<!--                        <span>&times;</span>-->
                     </button>
                 </div>
                 <div class="modal-body">
@@ -263,7 +264,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="add-ing-to-form">Add Ingredient</button>
+                            <button type="button" class="btn btn-success" id="add-ing-to-form">Add Ingredient</button>
                         </div>
                     </form>
                 </div>

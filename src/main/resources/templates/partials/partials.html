@@ -21,6 +21,7 @@
     <!--    can delete later, just to see main body in all the pages for now vv -->
     <link rel="stylesheet" th:href="@{/css/deleteLater.css}">
     <!--    can delete later, just to see main body in all the pages for now ^^ -->
+    <link rel="stylesheet" th:href="@{/css/styling.css}">
 
 
 </head>
@@ -45,13 +46,13 @@
             <div sec:authorize="!isAuthenticated()">
                 <ul class="navbar-nav flex-row-reverse flex-end me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/recipes}">Feed</a>
+                        <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/login}">Login</a>
+                        <a class="links btn m-2 border-0" th:href="@{/login}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/user/register}">Register</a>
+                        <a class="links btn m-2 border-0" th:href="@{/user/register}">Register</a>
                     </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/about}">About</a>-->
@@ -61,24 +62,24 @@
             <div sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav me-auto mb-2 ">
                     <li class="nav-item m-2">
-                        <a class="btn btn-outline-success pe-4 border-0" th:href="@{/recipes}">Feed</a>
+                        <a class="links btn pe-4 border-0 bg-transparent" th:href="@{/recipes}">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/about}">About</a>
+                        <a class="links btn m-2 border-0 bg-transparent" th:href="@{/about}">About</a>
                     </li>
                     <li class="nav-item m-2">
-                        <a class="btn btn-outline-success border-0" th:href="@{/user/profile}">Profile</a>
+                        <a class="links btn border-0 bg-transparent" th:href="@{/user/profile}">Profile</a>
                     </li>
                     <li class="nav-item m-2">
                         <form th:action="@{/logout}" th:method="post">
-                            <button class="btn btn-outline-success border-0">Logout</button>
+                            <button class="links btn border-0">Logout</button>
                         </form>
                     </li>
                     <br class="">
                     <li class="nav-item m-2 flex-wrap">
                         <form class="d-flex" role="search">
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+                            <button class="btn btn-success ms-2" type="submit">Search</button>
                         </form>
                     </li>
                 </ul>
@@ -204,7 +205,7 @@
                 <label for="confirm" class="form-label">Confirm Password</label>
                 <input type="password" class="form-control" id="confirm">
             </div>
-            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+            <button id="submit" type="submit" class="btn btn-success col-12">Submit</button>
         </form>
     </div>
 </div>
@@ -233,71 +234,37 @@
 
 
 <!--FOOTER-->
-<footer th:fragment="footer" class="navbar navbar-expand-lg text-dark bg-transparent fixed-bottom ms-md-5 ps-md-5">
-    <div class="container pb-0">
-        <!-- Section: Social media -->
-        <!-- Facebook -->
-        <a class="btn btn-outline-secondary bg-light text-muted link-dark border-0 shadow-sm m-1" href="#!" role="button"
-        ><i class="bi bi-facebook"></i
-        ></a>
-
-        <!-- Twitter -->
-        <a class="btn btn-outline-secondary btn-light m-1 shadow-sm" href="#!" role="button"
-        ><i class="bi bi-twitter"></i
-        ></a>
-
-
-        <!-- Google -->
-        <a class="btn btn-outline-success btn-light text-muted m-1" href="#!" role="button"
-        ><i class="bi bi-google"></i
-        ></a>
-        <a class="btn btn-outline-light btn-dark m-1 shadow" data-bs-toggle="collapse" href="#collapse1"
-           role="button" aria-expanded="false" aria-controls="collapse1">Developers</a>
-
-        <!-- Instagram -->
-        <a class="btn btn-outline-secondary btn-light m-1" href="https://www.instagram.com/feedme_lol/" role="button"
-        ><i class="bi bi-instagram"></i
-        ></a>
-
-        <!-- Linkedin -->
-        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
-        ><i class="bi bi-linkedin"></i
-        ></a>
-
-        <!-- Github -->
-        <a class="btn btn-outline-dark btn-light m-1" href="#!" role="button"
-        ><i class="bi bi-github"></i
-        ></a>
-        </p>
-        <!--OUR GITHUBS-->
-        <div class="row">
-            <div class="text-center navbar navbar-expand-lg navbar-light text-dark bg-transparent">
-                <div class="collapse multi-collapse" id="collapse1">
-
-                        <a class="btn btn-outline-secondary bg-light text-muted link-success m-1" href="https://github.com/Sarguello12" role="button"
-                        ><i class="bi bi-github"></i
-                        > Samuel Arguello</a>
-                        <a class="btn btn-outline-secondary bg-light text-muted link-dark shadow m-1" href="https://github.com/joselopez747" role="button"
-                        ><i class="bi bi-github"></i
-                        > Jose Lopez</a>
-                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/LuisSanchez01" role="button"
-                        ><i class="bi bi-github"></i
-                        > Luis Sanchez</a>
-                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/WebDevJasonCameron"
-                           role="button"
-                        ><i class="bi bi-github"></i
-                        > Jason Cameron</a>
-                        <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/DenniseCamacho" role="button"
-                        ><i class="bi bi-github"></i
-                        > Dennise Camacho</a>
-                        <!--
-                        https://www.linkedin.com/in/samuelarguello/
-                        https://www.linkedin.com/in/jasonlcameron/
-                        https://www.linkedin.com/in/jose-lopez747/
-                        https://www.linkedin.com/in/luis-sanchez01/
-                        https://www.linkedin.com/in/dennisecamacho/
-                        -->
-                </div>
+<footer th:fragment="footer" class="navbar fixed-bottom">
+    <div class="d-grid col-12">
+        <a class="links btn btn-light bg-light" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Developers</a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col">
+            <!--OUR GITHUBS-->
+            <div class="collapse multi-collapse" id="collapse1">
+                <a class="btn btn-outline-secondary bg-light text-muted link-success m-1" href="https://github.com/Sarguello12" role="button"
+                ><i class="bi bi-github"></i
+                > Samuel Arguello</a>
+                <a class="btn btn-outline-secondary bg-light text-muted link-dark shadow m-1" href="https://github.com/joselopez747" role="button"
+                ><i class="bi bi-github"></i
+                > Jose Lopez</a>
+                <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/LuisSanchez01" role="button"
+                ><i class="bi bi-github"></i
+                > Luis Sanchez</a>
+                <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/WebDevJasonCameron"
+                   role="button"
+                ><i class="bi bi-github"></i
+                > Jason Cameron</a>
+                <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/DenniseCamacho" role="button"
+                ><i class="bi bi-github"></i
+                > Dennise Camacho</a>
+                <!--
+                https://www.linkedin.com/in/samuelarguello/
+                https://www.linkedin.com/in/jasonlcameron/
+                https://www.linkedin.com/in/jose-lopez747/
+                https://www.linkedin.com/in/luis-sanchez01/
+                https://www.linkedin.com/in/dennisecamacho/
+                -->
             </div>
         </div>
     </div>
