@@ -127,27 +127,22 @@ public class UserController {
             return "profiles/edit";
         }
 
-        if(!usersDao.findByUsername(user.getUsername()).getUsername().equals(loggedInUser.getUsername()) && usersDao.findByUsername(user.getUsername()) != null){
-                bindingResult.addError(new FieldError("user", "username", "username already exists"));
-        }
-
-        if(!usersDao.findByEmail(user.getEmail()).getEmail().equals(loggedInUser.getEmail()) && usersDao.findByEmail(user.getEmail()) != null){
-                bindingResult.addError(new FieldError("user", "email", "email is already taken"));
+        if(usersDao.findByEmail(user.getEmail()) == null || loggedInUser.getEmail().equals(usersDao.findByEmail(user.getEmail()).getEmail())){
+            User editedUser = usersDao.getById(principle.getId());
+            editedUser.setUsername(username);
+            editedUser.setPassword(hash);
+            editedUser.setEmail(email);
+            editedUser.setBio(bio);
+            editedUser.setAvatar(avatar);
+            usersDao.save(editedUser);
+        } else if (user.getEmail().equals(usersDao.findByEmail(user.getEmail()).getEmail())){
+            bindingResult.addError(new FieldError("user", "email", "email is already taken"));
         }
 
         if(bindingResult.hasErrors()){
             model.addAttribute("user", user);
             return "profiles/edit";
         }
-        User editedUser = usersDao.getById(principle.getId());
-        editedUser.setUsername(username);
-        editedUser.setPassword(hash);
-        editedUser.setEmail(email);
-        editedUser.setBio(bio);
-        editedUser.setAvatar(avatar);
-
-
-        usersDao.save(editedUser);
         return "redirect:/user/profile";
     }
 

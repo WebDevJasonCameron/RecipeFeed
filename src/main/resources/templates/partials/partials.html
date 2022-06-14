@@ -272,6 +272,12 @@
 
 <!--SCRIPTS-->
 <section th:fragment="script-section">
+
+    <script th:inline="javascript">
+        var FS_API_KEY = /*[[${@environment.getProperty('spoon.api.key.01')}]]*/
+        var SPOON_KEY_01 = /*[[${@environment.getProperty('fs.api.key')}]]*/
+
+    </script>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/f2796ec852.js" crossorigin="anonymous"></script>
     <!--Bootstrap JS-->
@@ -293,14 +299,6 @@
             crossorigin="anonymous"></script>
     <!--MOD SCRIPTS-->
     <script th:src="@{/js/password-check.js}"></script>
-
-    <!-- //////////////////////////////// COMMENT OUT ON DEPLOYMENT  ///////////////////////////////-->
-    <script th:src="@{/js/keys.js}"></script>
-
-
-    <!-- //////////////////////////////// COMMENT OUT DURING LOCAL USE /////////////////////////////-->
-<!--    <script src="/keys"></script>-->
-
 </section>
 
 </body>
