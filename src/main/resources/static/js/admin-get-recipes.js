@@ -2,6 +2,10 @@
 let rLR;
 let rD;
 
+const apiKey = SPOON_KEY_ONE;
+// const apiKey = SPOON_KEY_TWO;
+// const apiKey = SPOON_KEY_THREE;
+
 /**
  *   PAGE ACTIONS
  */
@@ -22,9 +26,6 @@ function testFunction(id){
  */
 // GET R LIST
 function getSpoonRecipeListByKeyWord(kw){
-    const apiKey = SPOON_KEY_01;
-    // const apiKey = SPOON_KEY_02;
-    // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=0&number=10';
     const readOption = {
@@ -43,9 +44,6 @@ function getSpoonRecipeListByKeyWord(kw){
 
 // GET R DETAILS
 function getSpoonRecipeDetailsByID(cid){
-    const apiKey = SPOON_KEY_01;
-    // const apiKey = SPOON_KEY_02;
-    // const apiKey = SPOON_KEY_03;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/' + cid + '/information?apiKey=' + apiKey;
     const readOption = {

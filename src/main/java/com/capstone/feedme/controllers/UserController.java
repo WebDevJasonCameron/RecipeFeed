@@ -146,11 +146,6 @@ public class UserController {
         return "redirect:/user/profile";
     }
 
-    @GetMapping("/favorites")
-    public String userFavorites(){
-        return "profiles/favorites";
-    }
-
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
         commentsDao.dropUserComments(user.getId());
