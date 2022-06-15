@@ -26,6 +26,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" th:field="*{password}" th:errorClass="is-invalid">
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
+                <div id="passwordHelp" class="form-text">Password must be longer than 6 characters</div>
             </div>
             <div class="mb-3">
                 <label for="confirm" class="form-label">Confirm Password</label>

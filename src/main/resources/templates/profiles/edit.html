@@ -29,27 +29,25 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" th:errorClass="is-invalid">
-                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{username}" class="invalid-feedback"></div>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea rows="5" cols="80" class="form-control" id="bio" th:placeholder="${user.bio}" th:field="*{bio}" th:errorClass="is-invalid"></textarea>
+                    <div th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" th:field="*{password}" th:errorClass="is-invalid">
                     <div th:if="${#fields.hasErrors('password')}" th:errors="*{username}" class="invalid-feedback"></div>
+                    <div id="passwordHelp" class="form-text">Password must be longer than 6 characters</div>
                 </div>
                 <div class="mb-3">
                     <label for="confirm" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="confirm" >
                 </div>
-                <div class="mb-3">
-                    <label for="bio" class="form-label">Bio</label>
-                    <textarea rows="5" cols="80" class="form-control" id="bio" th:field="*{bio}" th:errorClass="is-invalid"></textarea>
-                    <div th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}" class="invalid-feedback"></div>
-                </div>
-
-
-                <button id="submit" type="submit" value="post" class="btn btn-success ms-2">Submit</button>
+                <button id="submit" type="submit" value="post" class="btn btn-primary">Submit</button>
             </form>
-
 
             <div class="container d-flex justify-content-center align-items-center mt-4">
                 <form th:action="@{/user/delete}" method="post" th:object="${user}" onsubmit="deleteCheck(event)">
@@ -61,15 +59,17 @@
     </div>
 
 
-
-
+    <!--FOOTER-->
+    <footer th:replace="partials/partials.html :: footer"></footer>
 
     <!--SCRIPTS-->
     <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
     <section th:replace="partials/partials.html :: script-section"></section>
+
+<!--    <script th:src="@{/js/keys.js}"></script>-->
+
     <script th:src="@{/js/filestack-intigration.js}"></script>
     <script th:src="@{/js/password-check.js}"></script>
-    <!--FOOTER-->
-    <footer th:replace="partials/partials.html :: footer"></footer>
+
 </body>
 </html>

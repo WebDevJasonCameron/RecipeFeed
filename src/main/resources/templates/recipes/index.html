@@ -278,17 +278,20 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!--LIKES and TITLE-->
+                                <!--LIKES | TITLE | COMMENTS-->
                                 <div class="p-3">
+                                    <!--likes-->
                                     <div class="small text-muted">
                                         <span th:id="'rated-recipe-' + ${recipe.id}"
                                               th:text="${generalServices.getNumberOfRatingsByRecipe(ratings, recipe)}">
                                                 #
                                         </span> of ratings
                                     </div>
+                                    <!--title-->
                                     <div>
                                         <span th:text="${recipe.title}">Title of Recipe</span>
                                     </div>
+                                    <!--comments-->
                                     <div class="small text-muted">
                                         <span th:id="'commented-recipe-' + ${recipe.id}"
                                               th:text="${generalServices.getNumberOfCommentsByRecipe(comments, recipe)}">#</span> of Comments

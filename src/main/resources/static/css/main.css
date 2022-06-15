@@ -37,6 +37,7 @@
 
 
 /*  About Page  */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -57,9 +58,10 @@ html {
     padding: 0 8px;
 }
 
-.card {
+#about .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 8px;
+    width: 250px;
 }
 
 .about-section {
@@ -67,6 +69,11 @@ html {
     text-align: center;
     background-color: #474e5d;
     color: white;
+}
+
+.about-section p {
+    font-size: large;
+    font-weight: bold;
 }
 
 .container {
@@ -83,26 +90,18 @@ html {
     color: black;
 }
 
-.button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-}
 
 .button:hover {
     background-color: #555;
 }
 
 @media screen and (max-width: 650px) {
-    .column {
+   #about .card {
         width: 100%;
         display: block;
+        overflow: scroll;
     }
+
+
 
 }
