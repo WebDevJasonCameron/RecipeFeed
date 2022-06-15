@@ -589,7 +589,7 @@ public class RecipeController {
     }
 
     @PostMapping("/edit")
-    public String remixRecipe(@Valid Recipe recipe,
+    public String pushEditRecipe(@Valid Recipe recipe,
                               @RequestParam(name = "recipe-id") long originalId,
                               @RequestParam(name = "user-id") long userId,
                               @RequestParam(name = "ingredient-name-input") String ingredientNameInput,
@@ -680,6 +680,8 @@ public class RecipeController {
         model.addAttribute("recipe", modRecipe);
         return "redirect:/user/profile";
     }
+
+
 
 
 

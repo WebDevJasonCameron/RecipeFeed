@@ -3,9 +3,9 @@ let recipeListReturns;
 let recipeDetails;
 let startingOffset = 0;
 
-const apiKey = SPOON_KEY_01;
-// const apiKey = SPOON_KEY_02;
-// const apiKey = SPOON_KEY_03;
+const apiKey = SPOON_KEY_ONE;
+// const apiKey = SPOON_KEY_TWO;
+// const apiKey = SPOON_KEY_THREE;
 
 
 

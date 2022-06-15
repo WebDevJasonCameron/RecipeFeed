@@ -25,5 +25,17 @@ $('.recipe-edit-btn').on('click', function (e) {
     }
 });
 
+// EDIT BTN
+$('.recipe-remix-btn').on('click', function (e) {
+    e.preventDefault();
+
+    console.log($(this));
+    let id = $(this)[0].attributes[2].nodeValue;
+
+    if(confirm("Confirm, You Want To EDIT this Recipe?")){
+        window.location.href = "/recipes/remix/" + id;
+    }
+});
+
 
 

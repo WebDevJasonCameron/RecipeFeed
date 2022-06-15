@@ -248,10 +248,9 @@
                                     </div>
                                     <!--PLAIN-->
                                     <div>
-                                            <a th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} + '&body=' + 'Hello! I thought you would be interested in ' + ${recipe.title} + ': http://feedme.lol' + @{/recipes/details/{id}(id=${recipe.id})}">
-                                            <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
-                                            </a>
-<!--                                        <i class="fa-regular fa-paper-plane fa-2x p-2" data-bs-toggle="modal" data-bs-target="#staticBackdropEmail"></i>-->
+                                        <a th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} + '&body=' + 'Hello! I thought you would be interested in ' + ${recipe.title} + ': http://feedme.lol' + @{/recipes/details/{id}(id=${recipe.id})}">
+                                        <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
+                                        </a>
                                     </div>
                                     <!--BOOKMARK-->
                                     <div style="margin-left: auto">
@@ -341,21 +340,8 @@
                                     <div class="text-muted">
                                         <span th:text="${user.bio}">  Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
                                     </div>
-                                    <!--SECURITY TEST BUTTONS-->
                                 </div>
                             </div>
-                            <div>
-                                <a class="btn border-0" type="submit" th:href="@{/recipes/create}">
-                                    create
-                                </a>
-                                <a class="btn border-0" type="submit" th:href="@{/recipes/edit}">
-                                    edit
-                                </a>
-                                <a class="btn border-0" type="submit" th:href="@{/user/profile}">
-                                    profile
-                                </a>
-                            </div>
-
                         </div>
                     </div>
                 </div>
