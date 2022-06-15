@@ -274,9 +274,8 @@
 <section th:fragment="script-section">
 
     <script th:inline="javascript">
-        var FS_API_KEY = /*[[${@environment.getProperty('spoon.api.key.01')}]]*/
-        var SPOON_KEY_01 = /*[[${@environment.getProperty('fs.api.key')}]]*/
-
+        var FS_API_KEY = /*[[${@environment.getProperty('fs.api.key')}]]*/
+        var SPOON_KEY_01 = /*[[${@environment.getProperty('spoon.api.key.01')}]]*/
     </script>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/f2796ec852.js" crossorigin="anonymous"></script>
