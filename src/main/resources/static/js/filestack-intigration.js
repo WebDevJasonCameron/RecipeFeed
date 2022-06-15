@@ -5,7 +5,8 @@ const client = filestack.init(FS_API_KEY);
 const options1 = {
     fromSources: ["local_file_system", "url"],
     accept: ["image/*"],
-    onUploadDone: function (res) {$("#img").val(res.filesUploaded[0].url)},
+    onUploadDone: function (res) {$("#img").val(res.filesUploaded[0].url)
+        console.log(res.filesUploaded[0].url)},
 }
 
 // options for picking multiple images
