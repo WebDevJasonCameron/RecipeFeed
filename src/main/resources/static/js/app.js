@@ -129,7 +129,7 @@ function addToFavorite(values){
         user_id: values[1],
         recipe_id: values[0]
     }
-    const url = 'http://localhost:8080/ajax/add-favorite';
+    const url = '/ajax/add-favorite';
     const readOption = {
         method: 'POST',
         headers: {
@@ -154,7 +154,7 @@ function removeFromFavorite(values){
         user_id: values[1],
         recipe_id: values[0]
     }
-    const url = 'http://localhost:8080/ajax/remove-favorite';
+    const url = '/ajax/remove-favorite';
     const readOption = {
         method: 'POST',
         headers: {
@@ -179,7 +179,7 @@ function addUserRating(values){
         user_id: values[1],
         recipe_id: values[0]
     }
-    const url = 'http://localhost:8080/ajax/add-rating';
+    const url = '/ajax/add-rating';
     const readOption = {
         method: 'POST',
         headers: {
@@ -204,7 +204,7 @@ function removeUserRating(values){
         user_id: values[1],
         recipe_id: values[0]
     }
-    const url = 'http://localhost:8080/ajax/remove-rating';
+    const url = '/ajax/remove-rating';
     const readOption = {
         method: 'POST',
         headers: {
