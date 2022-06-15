@@ -107,7 +107,8 @@ public class UserController {
 
     @GetMapping("/edit")
     public String editProfile(@AuthenticationPrincipal User user, Model model){
-        model.addAttribute("user", user);
+        User userToEdit = usersDao.getById(user.getId());
+        model.addAttribute("user", userToEdit);
         return "profiles/edit";
     }
 

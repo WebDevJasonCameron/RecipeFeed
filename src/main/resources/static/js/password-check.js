@@ -11,7 +11,7 @@ function submitForm(event){
 
     if(password.length < 6){
         event.preventDefault();
-        alert("Password must be longer than 6 characters");
+        alert("Invalid password");
     }
 }
 
