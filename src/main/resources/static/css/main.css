@@ -71,6 +71,11 @@ html {
     color: white;
 }
 
+.about-section p {
+    font-size: large;
+    font-weight: bold;
+}
+
 .container {
     padding: 0 16px;
 }
@@ -85,17 +90,6 @@ html {
     color: black;
 }
 
-.button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-}
 
 .button:hover {
     background-color: #555;
@@ -107,5 +101,7 @@ html {
         display: block;
         overflow: scroll;
     }
+
+
 
 }
