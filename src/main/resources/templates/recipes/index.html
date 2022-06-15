@@ -1,10 +1,20 @@
+<!--
+    RECIPE INDEX
+    FEED.
+    CodeUp Capstone, Titan Cohort
+    2022 06 27
+    Devs:   Samuel Arguello
+            Dennise Camacho
+            Jason Cameron
+            Jose Lopez
+            Luise Sanchez
+-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="partials/partials.html :: head ('Main Feed')">
-    <style>
-    </style>
 
 </head>
 
@@ -201,7 +211,7 @@
                         <div class="card mt-3">
                             <!--CARD HEADER-->
                             <div class="card-header">
-                                <div class="row">
+                                 <div class="row">
                                     <!--AVATAR-->
                                     <div class="col-2">
                                         <img th:src="${recipe.user != null}? ${recipe.user.avatar} :  'https://source.unsplash.com/random/561x561/?people}'"
@@ -268,16 +278,23 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!--LIKES and TITLE-->
+                                <!--LIKES | TITLE | COMMENTS-->
                                 <div class="p-3">
+                                    <!--likes-->
                                     <div class="small text-muted">
-                                        # of likes
+                                        <span th:id="'rated-recipe-' + ${recipe.id}"
+                                              th:text="${generalServices.getNumberOfRatingsByRecipe(ratings, recipe)}">
+                                                #
+                                        </span> of ratings
                                     </div>
+                                    <!--title-->
                                     <div>
                                         <span th:text="${recipe.title}">Title of Recipe</span>
                                     </div>
+                                    <!--comments-->
                                     <div class="small text-muted">
-                                        # of Comments
+                                        <span th:id="'commented-recipe-' + ${recipe.id}"
+                                              th:text="${generalServices.getNumberOfCommentsByRecipe(comments, recipe)}">#</span> of Comments
                                     </div>
                                 </div>
                             </div>

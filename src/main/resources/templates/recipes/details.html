@@ -1,3 +1,15 @@
+<!--
+    RECIPE DETAILS
+    FEED.
+    CodeUp Capstone, Titan Cohort
+    2022 06 27
+    Devs:   Samuel Arguello
+            Dennise Camacho
+            Jason Cameron
+            Jose Lopez
+            Luise Sanchez
+-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="partials/partials.html :: head ('Recipe Details')">
@@ -17,7 +29,7 @@
                 <div>
                     <img th:src="${recipe.imgUrl}" th:alt="${recipe.title}" style="width: 500px">
                 </div>
-                <!--COMMENTS/SIMILAR/REMIX-->
+                <!--COMMENTS/SIMILAR-->
                 <div class="mt-2">
                     <!--LEFT NAV TABS-->
                     <ul class="nav nav-tabs" id="details-tabs-left" role="tablist">
@@ -26,9 +38,6 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="links nav-link" id="similar-tab" data-bs-toggle="tab" data-bs-target="#similar" type="button" role="tab">Similar</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="links nav-link" id="remix-tab" data-bs-toggle="tab" data-bs-target="#remix" type="button" role="tab">Remix</button>
                         </li>
                     </ul>
                     <!--LEFT TAB DATA-->
@@ -84,18 +93,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
-
-
-
-
-
-
-
-
                         </div>
                         <!--SIMILAR-->
                         <div class="tab-pane fade d-flex flex-wrap overflow-auto" id="similar" role="tabpanel" style="height: 400px;">
@@ -106,10 +104,6 @@
                                 </a>
 
                             </div>
-                        </div>
-                        <!--REMIX-->
-                        <div class="tab-pane fade" id="remix" role="tabpanel">
-                            PINTEREST STYLE LIST OF REMIX RECIPES (PHOTOS ONLY)
                         </div>
                     </div>
                 </div>

@@ -15,9 +15,17 @@ $('.comment-btn').keypress(function(e) {
         let val = $(this).prop('id');
         val = val.split(',');
 
+        // targeting the span's value
+        let target = $('#commented-recipe-' + val[0])
+        console.log(target.text())
+
+        // change number of comments +1
+        let num = parseInt(target.text());
+        target.html(num + 1);
+
         // Logic to keep anon user entering comments
         if(val[1] != -1){
-            addComment(comment, val);
+            // addComment(comment, val);
         } else {
             alert('Please log in before commenting on recipe.')
         }
