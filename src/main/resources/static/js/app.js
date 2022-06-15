@@ -44,13 +44,33 @@ $('.heart-btn').on('click', function (e) {
     e.preventDefault();
 
     // must check to see if a user is logged in, or you will get errors in the run log
-    let checkAnonU = getBtnValue($(this));
-    if(checkAnonU[1] != -1){
+    let btnDataValue = getBtnValue($(this));
+    if(btnDataValue[1] != -1){
         if($(this).children('span').children('i').hasClass('fa-regular')){
+            // icon change
             changeIconClass($(this), 'fa-regular', 'fa-solid');
+
+            // targeting the span's value
+            let target = $('#rated-recipe-' + btnDataValue[0])
+
+            // change number of ratings to +1
+            let num = parseInt(target.text());
+            target.html(num + 1);
+
+            // to AJAX
             addUserRating(getBtnValue($(this)));
         } else {
+            // icon change
             changeIconClass($(this), 'fa-solid', 'fa-regular');
+
+            // targeting the span's value
+            let target = $('#rated-recipe-' + btnDataValue[0])
+
+            // change number of ratings to -1
+            let num = parseInt(target.text());
+            target.html(num - 1);
+
+            // to AJAX
             removeUserRating(getBtnValue($(this)));
         }
     }
@@ -71,9 +91,9 @@ function scrollToTop() {
  */
 function getBtnValue(target){
     let val = target;
-    console.log(val)
+    // console.log(val)
     val = val[0].attributes[2].value.split(',');
-    console.log(val);
+    // console.log(val);
     return val;
 }
 
@@ -100,7 +120,7 @@ function getSpoonRecipeListByKeyWord(kw){
     fetch(spoonURL, readOption)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             recipeListReturns = data;
         }).then(() => {
         $('#feed').html(combineCards(recipeListReturns));
@@ -118,7 +138,7 @@ function getSpoonRecipeDetailsByID(cid){
     fetch(spoonURL, readOption)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             recipeDetails = data;
         })
         .then(() => {
@@ -145,10 +165,10 @@ function addToFavorite(values){
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
         })
         .catch((e) => {
-            console.log('Error adding favorite recipe to user m-t-m: ', e)
+            // console.log('Error adding favorite recipe to user m-t-m: ', e)
         });
 }
 
@@ -170,10 +190,10 @@ function removeFromFavorite(values){
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
         })
         .catch((e) => {
-            console.log('Error removing favorite recipe to user m-t-m: ', e)
+            // console.log('Error removing favorite recipe to user m-t-m: ', e)
         });
 }
 
@@ -195,10 +215,10 @@ function addUserRating(values){
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
         })
         .catch((e) => {
-            console.log('Error adding user rating recipe to user 1-t-m: ', e)
+            // console.log('Error adding user rating recipe to user 1-t-m: ', e)
         });
 }
 
@@ -220,10 +240,10 @@ function removeUserRating(values){
     fetch(url, readOption)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
         })
         .catch((e) => {
-            console.log('Error removing user rating recipe to user 1-t-m: ', e)
+            // console.log('Error removing user rating recipe to user 1-t-m: ', e)
         });
 }
 
@@ -414,7 +434,7 @@ function hiddenCategoryInputs(rC){
     `
 }
 
-// COMBINE HIDDEN CAT LIST FOR MORM
+// COMBINE HIDDEN CAT LIST FOR NORM
 function hiddenCategoryInputList(r) {
     let output = `<input type="hidden" name="category-type" value="${keyWord}">`;
     for (let i = 0; i < r.dishTypes.length; i++) {

@@ -56,8 +56,9 @@ public class RecipeController {
     @GetMapping
     public String showMainRecipeFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -67,6 +68,9 @@ public class RecipeController {
 
         // RATINGS MODEL
         provideRatingsModel(model);
+
+        // COMMENT MODEL
+        provideCommentsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "");
@@ -172,8 +176,9 @@ public class RecipeController {
     public String showMainRecipeBreakfastFeed(Model model){
         List<Recipe> recipes = new ArrayList<>();
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -185,6 +190,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "breakfast");
 
@@ -194,8 +202,9 @@ public class RecipeController {
     @GetMapping("/brunch")
     public String showMainRecipeBrunchFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -207,6 +216,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "brunch");
 
@@ -216,9 +228,9 @@ public class RecipeController {
     @GetMapping("/lunch")
     public String showMainRecipeLunchFeed(Model model){
 
-
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -230,6 +242,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "lunch");
 
@@ -239,8 +254,9 @@ public class RecipeController {
     @GetMapping("/dinner")
     public String showMainRecipeDinnerFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -252,6 +268,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "dinner");
 
@@ -261,8 +280,9 @@ public class RecipeController {
     @GetMapping("/dessert")
     public String showMainRecipeDessertFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -274,6 +294,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "dessert");
 
@@ -283,8 +306,9 @@ public class RecipeController {
     @GetMapping("/main-course")
     public String showMainRecipeMainCourseFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -296,6 +320,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "main course");
 
@@ -305,8 +332,9 @@ public class RecipeController {
     @GetMapping("/appetizer")
     public String showMainRecipeAppetizerFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -318,6 +346,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "appetizer");
 
@@ -327,8 +358,9 @@ public class RecipeController {
     @GetMapping("/sides")
     public String showMainRecipeSidesFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -340,6 +372,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "appetizer");
 
@@ -349,8 +384,9 @@ public class RecipeController {
     @GetMapping("/snacks")                                          // not used yet
     public String showMainRecipeSnacksFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -362,6 +398,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "snack");
         return "recipes/index";
@@ -370,8 +409,9 @@ public class RecipeController {
     @GetMapping("/antipasto")                                      // not used yet
     public String showMainRecipeAntipastoFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -383,6 +423,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "snack");
         return "recipes/index";
@@ -391,8 +434,9 @@ public class RecipeController {
     @GetMapping("/condiments")
     public String showMainRecipeCondimentsFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -404,6 +448,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "condiment");
 
@@ -413,8 +460,9 @@ public class RecipeController {
     @GetMapping("/dips")
     public String showMainRecipeDipsFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -426,6 +474,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "dip");
         return "recipes/index";
@@ -434,8 +485,9 @@ public class RecipeController {
     @GetMapping("/sauces")
     public String showMainRecipeSaucesFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -447,6 +499,9 @@ public class RecipeController {
         // RATINGS MODEL
         provideRatingsModel(model);
 
+        // COMMENT MODEL
+        provideCommentsModel(model);
+
         // API SEARCH MODEL
         provideApiSearchModel(model, "sauce");
         return "recipes/index";
@@ -455,8 +510,9 @@ public class RecipeController {
     @GetMapping("/spreads")
     public String showMainRecipeSpreadsFeed(Model model){
 
-        // ICON MODEL
+        // SERVICES
         model.addAttribute("iconService", iconService);
+        model.addAttribute("generalServices", generalServices);
 
         // USER MODEL
         provideUserModel(model);
@@ -467,6 +523,9 @@ public class RecipeController {
 
         // RATINGS MODEL
         provideRatingsModel(model);
+
+        // COMMENT MODEL
+        provideCommentsModel(model);
 
         // API SEARCH MODEL
         provideApiSearchModel(model, "dip");
@@ -727,6 +786,13 @@ public class RecipeController {
 
     }
 
+    private void provideCommentsModel(Model model){
+
+        List<Comment> comments = commentsDao.findAll();
+
+        model.addAttribute("comments", comments);
+    }
+
     private void provideApiSearchModel(Model model, String param){
         model.addAttribute("apiSearchParameter", param);
     }
@@ -840,5 +906,7 @@ public class RecipeController {
 
         return ingredients;
     }
+
+
 
 }  //<--END

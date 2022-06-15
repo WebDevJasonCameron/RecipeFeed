@@ -94,10 +94,6 @@ public class UserController {
         int rRecipeTotal = provideUserRatedRecipeModel(model, user);
         model.addAttribute("rRecipeTotal", rRecipeTotal);
 
-        // PROVIDE USER REMIX RECIPES MODEL AND #
-        int remixRecipeTotal = provideUserRemixRecipeModel(model, user);
-        model.addAttribute("remixRecipeTotal", remixRecipeTotal);
-
         // PROVIDE USER CREATED RECIPES MODEL AND #
         int createdRecipeTotal = provideUserCreatedRecipeModel(model, user);
         model.addAttribute("createdRecipeTotal", createdRecipeTotal);
@@ -206,30 +202,6 @@ public class UserController {
         model.addAttribute("rRecipes", rRecipes);
 
         return rRecipes.size();
-    }
-
-    private int provideUserRemixRecipeModel(Model model, User user){
-
-        List<Recipe> recipes = recipeDao.findAll();
-        List<Recipe> remixRecipes = new ArrayList<>();
-
-        for (int i = 0; i < recipes.size(); i++) {
-            if(recipes.get(i).getUser() != null){
-                if(recipes.get(i).getUser().getId() == user.getId() &&
-                        recipes.get(i).getApiId() != 0){
-                    remixRecipes.add(recipes.get(i));
-                }
-            }
-        }
-
-        model.addAttribute("remixRecipes", remixRecipes);
-
-        if(remixRecipes == null){
-            return 0;
-        } else {
-            return remixRecipes.size();
-        }
-
     }
 
     private int provideUserCreatedRecipeModel(Model model, User user){
