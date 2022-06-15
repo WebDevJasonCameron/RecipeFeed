@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class GeneralServices {
 
-
     public int getNumberOfRatingsByRecipe(List<Rating> ratings, Recipe recipe){
         int output = 0;
         if(ratings == null){
@@ -47,4 +46,4 @@ public class GeneralServices {
         }
         return outputNumberOfCommentsByRecipe.size();
     }
-}
+
