@@ -25,7 +25,7 @@ $('.comment-btn').keypress(function(e) {
 
         // Logic to keep anon user entering comments
         if(val[1] != -1){
-            // addComment(comment, val);
+            addComment(comment, val);
         } else {
             alert('Please log in before commenting on recipe.')
         }
