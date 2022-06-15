@@ -7,6 +7,7 @@ import com.capstone.feedme.models.Recipe;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -46,6 +47,3 @@ public class GeneralServices {
         return outputNumberOfCommentsByRecipe.size();
     }
 
-
-
-}
