@@ -211,7 +211,7 @@
                         <div class="card mt-3">
                             <!--CARD HEADER-->
                             <div class="card-header">
-                                <div class="row">
+                                 <div class="row">
                                     <!--AVATAR-->
                                     <div class="col-2">
                                         <img th:src="${recipe.user != null}? ${recipe.user.avatar} :  'https://source.unsplash.com/random/561x561/?people}'"
@@ -281,13 +281,17 @@
                                 <!--LIKES and TITLE-->
                                 <div class="p-3">
                                     <div class="small text-muted">
-                                        <span th:text="${#lists.size(recipe.getRecipeRatings())}"></span> users like this
+                                        <span th:id="'rated-recipe-' + ${recipe.id}"
+                                              th:text="${generalServices.getNumberOfRatingsByRecipe(ratings, recipe)}">
+                                                #
+                                        </span> of ratings
                                     </div>
                                     <div>
                                         <span th:text="${recipe.title}">Title of Recipe</span>
                                     </div>
                                     <div class="small text-muted">
-<!--                                        View all <span th:text="${#lists.size(comment.get)}"></span> comments-->
+                                        <span th:id="'commented-recipe-' + ${recipe.id}"
+                                              th:text="${generalServices.getNumberOfCommentsByRecipe(comments, recipe)}">#</span> of Comments
                                     </div>
                                 </div>
                             </div>
