@@ -17,5 +17,4 @@ public interface RatingsRepository extends JpaRepository<Rating, Long> {
     @Query(value = "DELETE FROM ratings WHERE user_id = ?1", nativeQuery = true)
     void dropUserRatings(long userId);
 
-//    update ratings set user_id = null where user_id
 }
