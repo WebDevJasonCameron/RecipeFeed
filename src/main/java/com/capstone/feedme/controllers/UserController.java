@@ -76,9 +76,9 @@ public class UserController {
             return "users/register";
         }
 
-
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        user.setAvatar("https://cdn.filestackcontent.com/zxxSGgZSpG4pXARilg4o");
         usersDao.save(user);
         return "redirect:/login";
 

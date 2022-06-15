@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="/partials/partials.html :: head ('Recipe Details')">
+<head th:replace="partials/partials.html :: head ('Recipe Details')">
     <meta charset="UTF-8">
 </head>
 <body>
     <!--NAV-->
-    <nav th:replace="/partials/partials.html :: navbar"></nav>
+    <nav th:replace="partials/partials.html :: navbar"></nav>
 
     <div class="container w-75" style="margin-bottom: 100px;">
 
@@ -145,7 +145,7 @@
                             <!--RIGHT TABS-->
                             <ul class="nav nav-tabs" id="details-tabs-right" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="links nav-link" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab">Summary</button>
+                                    <button class="links nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab">Summary</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="links nav-link" id="instructions-tab" data-bs-toggle="tab" data-bs-target="#instructions" type="button" role="tab">Instructions</button>
@@ -205,9 +205,9 @@
     </div>
 
     <!--FOOTER-->
-    <footer th:replace="/partials/partials.html :: footer"></footer>
+    <footer th:replace="partials/partials.html :: footer"></footer>
 
     <!--SCRIPTS-->
-    <section th:replace="/partials/partials.html :: script-section"></section>
+    <section th:replace="partials/partials.html :: script-section"></section>
 </body>
 </html>

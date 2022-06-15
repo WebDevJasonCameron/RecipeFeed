@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="/partials/partials.html :: head ('Find More')"></head>
+<head th:replace="partials/partials.html :: head ('Find More')"></head>
 <body>
 <!--NAV-->
-<nav th:replace="/partials/partials.html :: navbar"></nav>
+<nav th:replace="partials/partials.html :: navbar"></nav>
 
   <div class="container w-75">
 
   <!--HEADER-->
-  <section th:replace="/partials/partials.html :: header ('API | Find More')"></section>
+  <section th:replace="partials/partials.html :: header ('API | Find More')"></section>
 
 
   <!--MAIN-->
@@ -20,10 +20,10 @@
   </div>
 
 <!--FOOTER-->
-<footer th:replace="/partials/partials.html :: footer"></footer>
+<footer th:replace="partials/partials.html :: footer"></footer>
 
 <!--SCRIPTS-->
-<section th:replace="/partials/partials.html :: script-section"></section>
+<section th:replace="partials/partials.html :: script-section"></section>
 <script th:src="@{/js/admin-get-recipes.js}"></script>
 
 </body>
