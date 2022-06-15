@@ -281,13 +281,13 @@
                                 <!--LIKES and TITLE-->
                                 <div class="p-3">
                                     <div class="small text-muted">
-                                        # of likes
+                                        <span th:text="${#lists.size(recipe.getRecipeRatings())}"></span> users like this
                                     </div>
                                     <div>
                                         <span th:text="${recipe.title}">Title of Recipe</span>
                                     </div>
                                     <div class="small text-muted">
-                                        # of Comments
+<!--                                        View all <span th:text="${#lists.size(comment.get)}"></span> comments-->
                                     </div>
                                 </div>
                             </div>
