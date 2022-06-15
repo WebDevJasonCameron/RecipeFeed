@@ -3,6 +3,7 @@ package com.capstone.feedme.controllers;
 import com.capstone.feedme.models.*;
 
 import com.capstone.feedme.repositories.*;
+import com.capstone.feedme.services.GeneralServices;
 import com.capstone.feedme.services.IconService;
 import org.apache.tomcat.util.json.JSONParser;
 import com.capstone.feedme.repositories.CategoryRepository;
@@ -35,10 +36,11 @@ public class RecipeController {
     // ATT SERVICES
     private final EmailService emailService;
     private final IconService iconService;
+    private final GeneralServices generalServices;
 
 
     // CON
-    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, CommentsRepository commentsDao, EmailService emailService, IconService iconService) {
+    public RecipeController(RecipeRepository recipesDao, UserRepository usersDao, CategoryRepository categoryDao, IngredientRepository ingredientsDao, RatingsRepository ratingsDao, CommentsRepository commentsDao, EmailService emailService, IconService iconService, GeneralServices generalServices) {
         this.recipesDao = recipesDao;
         this.usersDao = usersDao;
         this.categoryDao = categoryDao;
@@ -47,8 +49,8 @@ public class RecipeController {
         this.commentsDao = commentsDao;
         this.emailService = emailService;
         this.iconService = iconService;
+        this.generalServices = generalServices;
     }
-
 
     // METH
     @GetMapping
@@ -273,7 +275,7 @@ public class RecipeController {
         provideRatingsModel(model);
 
         // API SEARCH MODEL
-        provideApiSearchModel(model, "sweet");
+        provideApiSearchModel(model, "dessert");
 
         return "recipes/index";
     }
@@ -484,7 +486,8 @@ public class RecipeController {
         Category category = recipe.getRecipeCategories().get(0);
         List<Recipe> similarRecipes = recipesDao.findRecipesByRecipeCategories(category);
 
-        // NEED QUERY: Used to get Remix Recipes (find by apiId and userId is not null)
+        // FIX EXTRA CAT IN DETAILS
+        model.addAttribute("generalServices", generalServices);
 
 
         // NEED QUERY: Get comments on recipe
@@ -680,9 +683,6 @@ public class RecipeController {
         model.addAttribute("recipe", modRecipe);
         return "redirect:/user/profile";
     }
-
-
-
 
 
     // HELPER METHS

@@ -3,6 +3,8 @@ let recipeListReturns;
 let recipeDetails;
 let startingOffset = 0;
 
+let keyWord = "";
+
 const apiKey = SPOON_KEY_ONE;
 // const apiKey = SPOON_KEY_TWO;
 // const apiKey = SPOON_KEY_THREE;
@@ -87,6 +89,8 @@ function changeIconClass(target, fromClass, toClass){
  */
 // GET R LIST
 function getSpoonRecipeListByKeyWord(kw){
+
+    keyWord = kw;
 
     const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=' + startingOffset + '&number=50';
     const readOption = {
@@ -412,9 +416,12 @@ function hiddenCategoryInputs(rC){
 
 // COMBINE HIDDEN CAT LIST FOR MORM
 function hiddenCategoryInputList(r) {
-    let output = '';
+    let output = `<input type="hidden" name="category-type" value="${keyWord}">`;
     for (let i = 0; i < r.dishTypes.length; i++) {
         output += hiddenCategoryInputs(r.dishTypes[i]);
     }
+
+    keyWord = "";
+
     return output;
 }
