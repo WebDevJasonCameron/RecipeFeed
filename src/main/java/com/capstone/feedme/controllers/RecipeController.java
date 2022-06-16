@@ -12,10 +12,13 @@ import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
 import com.capstone.feedme.services.EmailService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -577,6 +580,8 @@ public class RecipeController {
         model.addAttribute("comments", comments);
 
 
+
+
         model.addAttribute("similarRecipes", similarRecipes);
         model.addAttribute("recipe", recipe);
         return "recipes/details";
@@ -584,11 +589,12 @@ public class RecipeController {
 
     @GetMapping("/create")
     public String createRecipe(Model model){
-
         Recipe recipe = new Recipe();
 
         // PROVIDE USER MODEL
         provideUserModel(model);
+
+        recipe.setRecipeCategories(categoryDao.findAll());
 
         model.addAttribute("recipe", recipe);
 
@@ -596,14 +602,30 @@ public class RecipeController {
     }
 
     @PostMapping("/create")
-    public String publishRecipe(@Valid Recipe recipe,
-                                @RequestParam(name = "recipe-categories") String recipeCategory,
-                                @RequestParam(name = "user-id") long userId,
-                                @RequestParam(name = "all-ingredient-titles") String allIngredientTitles,
-                                @RequestParam(name = "all-ingredient-amounts") String allIngredientAmounts,
-                                Model model){
+    public String publishRecipe(@Valid @ModelAttribute Recipe recipe,
+                                BindingResult bindingResult,
+                                Model model
+    ){
+
+
+        if(bindingResult.hasErrors()){
+            recipe.setRecipeCategories(categoryDao.findAll());
+            model.addAttribute("recipe", recipe);
+            return "recipes/create";
+        }
+
+        System.out.println(recipe.getIngredients());
+
+        User recipeCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+
+        for(Ingredient ingredient : recipe.getIngredients()) {
+            ingredient.setRecipe(recipe);
+        }
 
         Recipe newRecipe = recipesDao.save(recipe);
+
 
         // DEFAULT IMAG
         if(newRecipe.getImgUrl().equals("") || newRecipe.getImgUrl().equals("undefined")  ) {
@@ -611,32 +633,41 @@ public class RecipeController {
         }
 
         // CATEGORIES
-        Category category = categoryDao.findCategoryByType(recipeCategory);
-        List<Category> categories = new ArrayList<>();
-        categories.add(category);
-        newRecipe.setRecipeCategories(categories);
+//        Category category = categoryDao.findCategoryByType(recipeCategory);
+//        List<Category> categories = new ArrayList<>();
+//        categories.add(category);
+//        newRecipe.setRecipeCategories(categories);
 
         // USER
-        User user = usersDao.getById(userId);
+        User user = usersDao.getById(recipeCreator.getId());
         newRecipe.setUser(user);
 
         // INGREDIENTS
-        List<Ingredient> ingredients = ingredientListFromTwoStrings(allIngredientTitles,
-                allIngredientAmounts, newRecipe);
-        newRecipe.setIngredients(ingredients);
+//        List<Ingredient> ingredients =
+
+//                for(ingredient ingredients) {
+//                    System.out.println(ingredient);
+//
+//                }
+//        newRecipe.setIngredients(ingredients);
 
         // CREATE ANON USER
-        User anonUser = new User(-1, "anonUser");
+//        User anonUser = new User(-1, "anonUser");
 
         // CREATE RATING (CHILDREN)
-        Rating rating = new Rating(0, anonUser, recipe);
+//        Rating rating = new Rating(0, anonUser, newRecipe);
         List<Rating> ratings = new ArrayList<>();
-        ratings.add(rating);
+//        ratings.add(rating);
         newRecipe.setRecipeRatings(ratings);
 
 
         // API_ID TO ZERO                   <--IMPORTANT FOR FILTERING
         newRecipe.setApiId(0);
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("recipe", newRecipe);
+            return "recipes/create";
+        }
 
         recipesDao.save(newRecipe);
         model.addAttribute("recipe", newRecipe);

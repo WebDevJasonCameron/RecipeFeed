@@ -25,7 +25,7 @@
         <form th:action="@{/user/register}" method="POST" th:object="${user}" onsubmit="submitForm(event)">
             <div class="my-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" th:field="*{username}" th:errorClass="is-invalid">
+                    <input type="text" class="form-control" id="username" th:field="*{username}" th:errorClass="is-invalid">
                 <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
             </div>
             <div class="mb-3">
