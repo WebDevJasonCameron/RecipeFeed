@@ -62,7 +62,9 @@ public class Ingredient {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-
+    public void setId(int id) {
+        this.id=id;
+    }
 
     // CHECK
     @Override
