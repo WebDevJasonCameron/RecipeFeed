@@ -25,14 +25,16 @@ public class Recipe  {
     private String title;
     @Column(name = "img_url", length = 10_000)
     private String imgUrl;
-
+    @NotBlank(message = "Please enter a summary")
     @Column(name = "summary", columnDefinition="TEXT")
     private String summary;
-
+    @NotBlank(message = "Please enter instructions")
     @Column(name = "instruction", columnDefinition="TEXT")
     private String instruction;
+    @NotBlank(message = "Please enter cook time")
     @Column(name = "ready_in_min")
     private String readyInMin;
+    @NotBlank(message = "Please enter serving amount")
     @Column(name = "serving_amount")
     private String servingAmount;
     @Column(name = "source_name")
