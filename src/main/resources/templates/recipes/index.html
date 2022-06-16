@@ -285,17 +285,49 @@
                                         <span th:id="'rated-recipe-' + ${recipe.id}"
                                               th:text="${generalServices.getNumberOfRatingsByRecipe(ratings, recipe)}">
                                                 #
-                                        </span> of ratings
+                                        </span> ratings
                                     </div>
                                     <!--title-->
                                     <div>
                                         <span th:text="${recipe.title}">Title of Recipe</span>
                                     </div>
-                                    <!--comments-->
-                                    <div class="small text-muted">
-                                        <span th:id="'commented-recipe-' + ${recipe.id}"
-                                              th:text="${generalServices.getNumberOfCommentsByRecipe(comments, recipe)}">#</span> of Comments
+                                    <!--comment #-->
+                                    <div class="small text-muted d-flex align-items-center">
+
+                                            <!--comment collapse btn-->
+                                            <a th:id="'show-comments-btn-' + ${recipe.id}"
+                                               class="btn border-0"
+                                               th:href="'#comments-by-' +  ${recipe.id}"
+                                               data-toggle="collapse"
+                                               role="button">
+                                           <span th:id="'commented-recipe-' + ${recipe.id}"
+                                                 th:text="${generalServices.getNumberOfCommentsByRecipe(comments, recipe)}">#</span> &nbsp;Comments
+                                                <i class="fa-regular fa-comment"></i>
+                                            </a>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="collapse" th:id="'comments-by-' + ${recipe.id}">
+                                                <!--old comment-->
+                                                <div th:each="comment : ${comments}"
+                                                     class="mx-4">
+                                                    <div th:if="${comment.recipe.id eq recipe.id}">
+                                                        <bold>
+                                                    <span th:text="${comment.getUser().username}">
+                                                            username
+                                                    </span>:
+                                                        </bold>
+                                                        <span th:text="${comment.getComment()}">comment</span>
+                                                    </div>
+                                                </div>
+                                                <!--new comments-->
+                                                <div class="mx-4">
+                                                    <div th:id="'new-comments-' + ${recipe.id}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <!--FOOTER-->
@@ -306,7 +338,7 @@
                                     </div>
                                     <div class="input-group w-100 pl-2">
                                         <div class="form-outline w-100 "> <!--Add Form action and method-->
-                                            <input th:id="${recipe.id} + ',' + ${user.id}"
+                                            <input th:id="${recipe.id} + ',' + ${user.id} + ',' + ${user.username}"
                                                    name="commentName"
                                                    type="Add a comment"
                                                    class="comment-btn form-control border-0"
