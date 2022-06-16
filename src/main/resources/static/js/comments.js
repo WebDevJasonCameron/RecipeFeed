@@ -33,7 +33,7 @@ $('.comment-btn').keypress(function(e) {
 
         // PUSHING TO TABLE
         // Logic to keep anon user entering comments
-        if(val[1] !== -1){
+        if(val[1] != -1){
             // MAKING VIZ TO USER
             showDiv.append(buildListItemForNewComments(comment, val[2]));
             addComment(comment, val);
