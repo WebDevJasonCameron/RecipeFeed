@@ -73,18 +73,11 @@
                                                     </div>
                                                     <div class="row">
                                                         <!--TIME-->
-                                                        <div class="col-9">
+                                                        <div class="col-12">
                                                             <div class="d-inline-block text-muted small">
-                                                                <span th:text="${comment.timeStamp}">
+                                                                <span th:text="${generalServices.dateFormat(comment.timeStamp)}">
                                                                     date
                                                                 </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="d-flex ml-auto">
-                                                                <button class="btn">
-                                                                    reply
-                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>

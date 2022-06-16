@@ -6,6 +6,8 @@ import com.capstone.feedme.models.Rating;
 import com.capstone.feedme.models.Recipe;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -46,6 +48,20 @@ public class GeneralServices {
             }
         }
         return outputNumberOfCommentsByRecipe.size();
+    }
+
+    public String dateFormat(LocalDateTime localDateTime){
+
+        System.out.println("Before : " + localDateTime);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm E, MMM dd yyyy ");
+
+        String outputDateTimeString = localDateTime.format(formatter);
+
+        System.out.println("After : " + outputDateTimeString);
+
+        return outputDateTimeString;
+
     }
 }
 

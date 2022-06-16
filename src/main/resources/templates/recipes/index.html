@@ -365,12 +365,13 @@
                             class="form-control mr-sm-2"
                             type="hidden"
                             th:value="${apiSearchParameter}">
+                    <input type="hidden" id="user-id" name="user-id" th:value="${user.id}">
                     <div class="d-grid mx-auto">
-                    <button
-                            class="btn btn-success"
-                            id="find-more-from-api-btn"
-                            type="submit">
-                        Find More Recipes?
+                        <button
+                                class="btn btn-success"
+                                id="find-more-from-api-btn"
+                                type="submit">
+                            Find More Recipes?
                     </button>
                     </div>
                 </form>
