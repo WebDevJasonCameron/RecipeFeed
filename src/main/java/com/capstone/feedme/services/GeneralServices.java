@@ -47,6 +47,5 @@ public class GeneralServices {
         }
         return outputNumberOfCommentsByRecipe.size();
     }
-
 }
 
