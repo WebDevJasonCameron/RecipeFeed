@@ -1,5 +1,6 @@
 package com.capstone.feedme.controllers;
 
+import com.capstone.feedme.classes.AjaxCodeResults;
 import com.capstone.feedme.models.*;
 
 import com.capstone.feedme.repositories.*;
@@ -34,7 +35,6 @@ public class RecipeController {
     private final CommentsRepository commentsDao;
 
     // ATT SERVICES
-    private final EmailService emailService;
     private final IconService iconService;
     private final GeneralServices generalServices;
 
@@ -47,7 +47,6 @@ public class RecipeController {
         this.ingredientsDao = ingredientsDao;
         this.ratingsDao = ratingsDao;
         this.commentsDao = commentsDao;
-        this.emailService = emailService;
         this.iconService = iconService;
         this.generalServices = generalServices;
     }
@@ -98,6 +97,7 @@ public class RecipeController {
 
                                                   @RequestParam(name = "ingredient-name") String ingredientName,
                                                   @RequestParam(name = "ingredient-original") String ingredientOriginal,
+                                                  @RequestParam(name = "user-id") long userId,
 
                                                   Model model
     ){
@@ -105,7 +105,6 @@ public class RecipeController {
         Recipe recipe;
         List<Category> categories = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
-
 
         // IS RECIPE IN DB?
         if(recipesDao.findRecipeByApiId(cid) != null){
@@ -166,6 +165,7 @@ public class RecipeController {
             }
         }
 
+        // SAVE RECIPE
         recipesDao.save(recipe);
 
         for (int i = 0; i < ingredients.size(); i++) {
@@ -173,8 +173,25 @@ public class RecipeController {
             ingredientsDao.save(ingredients.get(i));
         }
 
+        // ADD TO USER FAVORITES
+        System.out.println("===============================================");
+        System.out.println("userId = " + userId);
+        User user = usersDao.getById(userId);
+        List<Recipe> userFavorites = user.getUserFavorites();
+
+        // logic stops dupes
+        if(userFavorites.contains(recipe)){
+            System.out.println("Unable to add to User's favorites");
+        } else {
+            System.out.println("Successfully added recipe to User's favorites");
+            userFavorites.add(recipe);
+            user.setUserFavorites(userFavorites);
+            usersDao.save(user);
+        }
+
+
         model.addAttribute(recipe);
-        return "redirect:/recipes";
+        return "redirect:/user/profile";
     }
 
 

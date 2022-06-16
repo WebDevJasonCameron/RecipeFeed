@@ -4,6 +4,7 @@ let recipeDetails;
 let startingOffset = 0;
 
 let keyWord = "";
+let userId = "";
 
 const apiKey = SPOON_KEY_ONE;
 // const apiKey = SPOON_KEY_TWO;
@@ -17,6 +18,11 @@ const apiKey = SPOON_KEY_ONE;
 // SEARCH BTN ACTION
 $('#find-more-from-api-btn').on('click', (e) => {
     e.preventDefault();
+
+    // get the user id
+    userId = $('#user-id').val();
+
+    // the search
     startingOffset += 50;
     getSpoonRecipeListByKeyWord($('#search-input').val());
     scrollToTop();
@@ -306,7 +312,7 @@ function combineCards(rL){
 
 // CREATE MODAL BODY
 function makeModalBody(r){
-    return `
+    let output = `
                 <div id="recipe-details-modal-content" >
                     <!--header-->
                     <div class="modal-header">
@@ -369,6 +375,7 @@ function makeModalBody(r){
                                 <input type="hidden" name="vegan" value="${r.vegan}">
                                 <input type="hidden" name="gluten-free" value="${r.glutenFree}">
                                 <input type="hidden" name="dairy-free" value="${r.dairyFree}">
+                                <input type="hidden" name="user-id" value="${userId}">
                                 
                                 <div id="categories">
                                 
@@ -401,7 +408,11 @@ function makeModalBody(r){
                         </form>
                     </div>
                 </div>
-    `
+    `;
+    userId = "";
+
+    return output;
+
 }
 
 // CREATE INGREDIENT LIST ITEM
