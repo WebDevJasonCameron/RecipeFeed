@@ -254,11 +254,18 @@
                                     </div>
                                     <!--LIST-->
                                     <div>
-                                        <a th:href="@{/recipes/details/{id}(id=${recipe.id})}"><i class="fa-solid fa-list-check fa-2x p-2"></i></a>
+                                        <a class="btn border-0"
+                                           th:href="@{/recipes/details/{id}(id=${recipe.id})}">
+                                            <i class="fa-solid fa-list-check fa-2x p-2"></i>
+                                        </a>
                                     </div>
                                     <!--PLAIN-->
                                     <div>
-                                        <a th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} + '&body=' + 'Hello! I thought you would be interested in ' + ${recipe.title} + ': https://feedme.lol' + @{/recipes/details/{id}(id=${recipe.id})}">
+                                        <a class="btn border-0"
+                                           th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} +
+                                           '&body=' + 'Hello! I thought you would be interested in ' +
+                                           ${recipe.title} + ': https://feedme.lol' +
+                                           @{/recipes/details/{id}(id=${recipe.id})}">
                                         <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
                                         </a>
                                     </div>
@@ -331,7 +338,7 @@
                                 </div>
                             </div>
                             <!--FOOTER-->
-                            <div class="card-footer">
+                            <div class="card-footer bg-white">
                                 <div class="d-flex d-inline-block">
                                     <div>
                                         <i class="fa-regular fa-face-smile fa-2x pt-1 pr-1"></i>
@@ -373,6 +380,7 @@
             <div class="col-4 mt-4">
                 <div sec:authorize="isAuthenticated()" class="d-flex">
                     <div class="card-header">
+                        <!--user-->
                         <div class="row">
                             <div class="col-4">
                                 <a th:href="@{/user/profile}">
@@ -392,10 +400,15 @@
                                 </div>
                             </div>
                         </div>
+                        <!--ads-->
+                        <div class="row">
+                            <!--Top five rated recipes go here (minus equals-->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <!--MODAL(S)-->

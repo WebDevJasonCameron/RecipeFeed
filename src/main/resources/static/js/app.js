@@ -69,6 +69,7 @@ $('.heart-btn').on('click', function (e) {
             // change number of ratings to -1
             let num = parseInt(target.text());
             target.html(num - 1);
+            target.html(num - 1);
 
             // to AJAX
             removeUserRating(getBtnValue($(this)));
@@ -101,6 +102,13 @@ function changeIconClass(target, fromClass, toClass){
     target.children('span').children('i').removeClass(fromClass).addClass(toClass);
 }
 
+function loader(){
+    return `
+        <div class="d-flex justify-content-center">
+            <img src="/img/loader.gif" alt="loading" style="width: 75%;">
+        </div>
+    `;
+}
 
 
 
@@ -138,6 +146,8 @@ function getSpoonRecipeDetailsByID(cid){
     fetch(spoonURL, readOption)
         .then((res) => res.json())
         .then((data) => {
+            // display loader
+            $('#recipe-details-modal-content').html(loader());
             // console.log(data);
             recipeDetails = data;
         })
@@ -263,12 +273,12 @@ function makeCard(r){
                         class="card-img-top">
                 </div>
                 <div class="col-sm-5">
-                    <div class="card-body">
+                    <div class="card-body border-0">
                         <div class="card-title h4">
                             ${r.title}
                         </div>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer bg-white border-0">
                         <button 
                             onclick="seeRecipeDetails(${r.id})"
                             class="btn btn-secondary w-100" 
@@ -276,7 +286,7 @@ function makeCard(r){
                             data-toggle="modal" 
                             data-target="#recipe-details-modal"
                             >
-                                Seed Details
+                                See Details
                         </button>
                     </div>
                 </div>
@@ -349,12 +359,12 @@ function makeModalBody(r){
                                 <input type="hidden" name="cid" value="${r.id}">
                                 <input type="hidden" name="title" value="${r.title}">
                                 <input type="hidden" name="image-url" value="${r.image}">
-                                <input type="hidden" name="summary" value="${r.summary.replaceAll('"', '')}">
-                                <input type="hidden" name="instructions" value="${r.instructions.replaceAll('"', '')}">
+                                <input type="hidden" name="summary" value="${r.summary.replaceAll}">
+                                <input type="hidden" name="instructions" value="${r.instructions}">
                                 <input type="hidden" name="ready-in-minutes" value="${r.readyInMinutes}">
                                 <input type="hidden" name="servings" value="${r.servings}">
-                                <input type="hidden" name="source-name" value="${r.sourceName.replaceAll('"', '')}">
-                                <input type="hidden" name="source-url" value="${r.sourceUrl.replaceAll('"', '')}">
+                                <input type="hidden" name="source-name" value="${r.sourceName}">
+                                <input type="hidden" name="source-url" value="${r.sourceUrl}">
                                 <input type="hidden" name="vegetarian" value="${r.vegetarian}">
                                 <input type="hidden" name="vegan" value="${r.vegan}">
                                 <input type="hidden" name="gluten-free" value="${r.glutenFree}">
