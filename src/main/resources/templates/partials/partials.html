@@ -33,9 +33,7 @@
      class="navbar navbar-expand-lg navbar-light text-dark bg-light bg-gradient shadow-sm fixed-top">
     <div class="container-fluid">
         <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-dark">Feed.</h1></a>
-        <div sec:authorize="isAuthenticated()">
-            <span class="me-2">Welcome, <span th:text="${#authentication.principal.username}"/>!</span>
-        </div>
+
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,13 +71,6 @@
                     <li class="nav-item m-2">
                         <form th:action="@{/logout}" th:method="post">
                             <button class="links btn border-0">Logout</button>
-                        </form>
-                    </li>
-                    <br class="">
-                    <li class="nav-item m-2 flex-wrap">
-                        <form class="d-flex" role="search">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-success ms-2" type="submit">Search</button>
                         </form>
                     </li>
                 </ul>
@@ -222,7 +213,7 @@
             </div>
 
             <div class="modal-body">
-<!--                <li id="grey-contactus-icon"><a th:href="'mailto:Another Foodie?subject=' + ${recipe.title} + '&body=Hello! I thought you\'d be interested in this recipe!' + ${recipe.info}">Click to send email</a></li>-->
+                <!--                <li id="grey-contactus-icon"><a th:href="'mailto:Another Foodie?subject=' + ${recipe.title} + '&body=Hello! I thought you\'d be interested in this recipe!' + ${recipe.info}">Click to send email</a></li>-->
                 <li><a th:href="'#'">Test</a></li>
             </div>
             <div class="modal-footer">
@@ -236,16 +227,19 @@
 <!--FOOTER-->
 <footer th:fragment="footer" class="navbar fixed-bottom">
     <div class="d-grid col-12">
-        <a class="links btn btn-light bg-light" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Developers</a>
+        <a class="links btn btn-light bg-light" data-bs-toggle="collapse" href="#collapse1" role="button"
+           aria-expanded="false" aria-controls="collapse1">Developers</a>
     </div>
     <div class="row justify-content-center">
         <div class="col">
             <!--OUR GITHUBS-->
             <div class="collapse multi-collapse" id="collapse1">
-                <a class="btn btn-outline-secondary bg-light text-muted link-success m-1" href="https://github.com/Sarguello12" role="button"
+                <a class="btn btn-outline-secondary bg-light text-muted link-success m-1"
+                   href="https://github.com/Sarguello12" role="button"
                 ><i class="bi bi-github"></i
                 > Samuel Arguello</a>
-                <a class="btn btn-outline-secondary bg-light text-muted link-dark shadow m-1" href="https://github.com/joselopez747" role="button"
+                <a class="btn btn-outline-secondary bg-light text-muted link-dark shadow m-1"
+                   href="https://github.com/joselopez747" role="button"
                 ><i class="bi bi-github"></i
                 > Jose Lopez</a>
                 <a class="btn btn-outline-dark btn-light m-1" href="https://github.com/LuisSanchez01" role="button"
