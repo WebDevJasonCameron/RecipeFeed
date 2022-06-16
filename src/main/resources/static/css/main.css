@@ -102,15 +102,5 @@ html {
         overflow: scroll;
     }
 
-    .btn i.bi-codeup {
-        background-image: url("https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/59/original/CodeupFullColorChevronYT.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        /*float: left;*/
-        /*width: 10px;*/
-        /*height: 40px;*/
-        /*padding: 16px;*/
-        /*border-radius: 8px;*/
-    }
 
 }
