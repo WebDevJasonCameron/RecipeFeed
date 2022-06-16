@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin")
-public class AdminController {
+@RequestMapping("/search")
+public class SearchController {
 
     // ATT
     private final RecipeRepository recipeDao;
@@ -24,27 +24,31 @@ public class AdminController {
 
 
     // CON
-    public AdminController(RecipeRepository recipeDao, IngredientRepository ingredientDao, CategoryRepository categoryDao) {
+    public SearchController(RecipeRepository recipeDao, IngredientRepository ingredientDao, CategoryRepository categoryDao) {
         this.recipeDao = recipeDao;
         this.ingredientDao = ingredientDao;
         this.categoryDao = categoryDao;
     }
 
-
     // METH
     @GetMapping
     public String showRecipeHomePage(){
-        return "admin/index";
+        return "recipes/index";
     }
 
     @GetMapping("/get-recipes")
-    public String getRecipeListPage(){
-        return "admin/admin-get-recipes";
+    public String getRecipeListPage(Recipe recipe, Model model, String keyword){
+        List<Recipe> recipes = recipeDao.findByKeyword(keyword);
+                model.addAttribute("recipes", recipes);
+
+
+        return "recipes/index";
+
     }
 
     @GetMapping("/get-details")
     public String getRecipeDetailsPage(){
-        return "admin/admin-get-details";
+        return "/search/search-get-details";
     }
 
     @PostMapping("/get-details")
@@ -56,19 +60,19 @@ public class AdminController {
             System.out.println("Recipe Not found");
             recipeDao.save(new Recipe(cid, title, image));
         } else {
-            return "redirect:/admin/get-list";
+            return "redirect:/search/get-list";
         }
 
-        return "admin/admin-get-details";
+        return "/search/search-get-details";
     }
 
-    @GetMapping("/admin-details-to-db")
+    @GetMapping("/search-details-to-db")
     public String showRecipeDetailsToDb(){
 
-        return "admin/admin-details-to-db";
+        return "/search/search-details-to-db";
     }
 
-    @PostMapping("/admin-details-to-db")
+    @PostMapping("/search-details-to-db")
     public String enterComplexRecipeDetailsIntoDb(@RequestParam(name = "cid") long cid,
                                                   @RequestParam(name = "title") String title,
                                                   @RequestParam(name = "image-url") String imageUrl,
@@ -128,14 +132,14 @@ public class AdminController {
         String[] categoryTypes = categoryType.toLowerCase().split(",");
 
         // ADD CATS IF NOT IN TABLE
-        for (int i = 0; i < categoryTypes.length; i++) {
+        for (String type : categoryTypes) {
             // if cat type !found, save cat in table
-            if(categoryDao.findCategoryByType(categoryTypes[i]) == null){
-                Category category = new Category(categoryTypes[i]);
+            if (categoryDao.findCategoryByType(type) == null) {
+                Category category = new Category(type);
                 categoryDao.save(category);
                 categories.add(category);
-            }else{
-                Category category = categoryDao.findCategoryByType(categoryTypes[i]);
+            } else {
+                Category category = categoryDao.findCategoryByType(type);
                 categories.add(category);
             }
         }
@@ -185,7 +189,7 @@ public class AdminController {
 
         model.addAttribute(recipe);
 
-        return "admin/admin-details-to-db";
+        return "/search/search-details-to-db";
     }
 
 }

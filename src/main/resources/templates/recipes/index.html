@@ -201,6 +201,18 @@
 
 
         </div>
+<!--        SEARCH RECIPES-->
+        <!--input form-->
+        <form th:action="@{/search/get-recipes}" th:method="GET" class="form-inline my-2 my-lg-0">
+            <input name="keyword" th:value="${keyword}" id="users-search-textarea" class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button id="get-search-button" class="btn btn-outline-success my-3 w-100" type="submit">Search</button>
+        </form>
+        <!--cards-->
+        <div class="container" id="recipe-results"></div>       <!--Rem, JS pops this-->
+        <!--details-->
+        <div class="container" id="recipe-details"></div>
+
+
         <!--FEED.-->
         <div class="row mt-2">
 
@@ -420,8 +432,11 @@
 
 <!--SCRIPTS-->
 <section th:replace="partials/partials.html :: script-section"></section>
-<script th:src="@{/js/app.js}"></script>
+<!--<script th:src="@{/js/app.js}"></script>-->
 <script th:src="@{/js/comments.js}"></script>
+<!--<script th:src="@{/js/recipe-search.js}"></script>-->
+
+<script th:src="@{/js/search-get-recipes.js}"></script>
 
 </body>
 </html>

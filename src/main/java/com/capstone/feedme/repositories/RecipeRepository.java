@@ -6,6 +6,7 @@ import com.capstone.feedme.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.lang.Nullable;
 
 import javax.transaction.Transactional;
@@ -22,5 +23,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Query(value = "update recipes set user_id = null where user_id = ?1", nativeQuery = true)
     void dropUserRecipes(long userId);
 
+    @Query(value="SELECT * FROM recipes WHERE title = :keyword", nativeQuery = true)
+    List<Recipe> findByKeyword(@Param("keyword") String keyword);
 
 }

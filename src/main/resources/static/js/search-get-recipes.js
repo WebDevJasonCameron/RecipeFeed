@@ -3,16 +3,16 @@ let rLR;
 let rD;
 
 const apiKey = SPOON_KEY_ONE;
-// const apiKey = SPOON_KEY_TWO;
-// const apiKey = SPOON_KEY_THREE;
+// // const apiKey = SPOON_KEY_TWO;
+// // const apiKey = SPOON_KEY_THREE;
 
 /**
  *   PAGE ACTIONS
  */
 // SEARCH BTN ACTION
-$('#get-recipe-btn').on('click', (e) => {
+$('#get-search-button').on('click', (e) => {
     e.preventDefault();
-    getSpoonRecipeListByKeyWord($('#search-input').val())
+    getSpoonRecipeListByKeyWord($('#users-search-textarea').val())
 })
 
 // TEST
@@ -93,7 +93,7 @@ function makeCard(r){
                             data-toggle="modal" 
                             data-target="#recipe-details-modal"
                             >
-                                Access Modal
+                                view details
                         </button>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ function makeModalBody(r){
                                 <a href="${r.sourceUrl}" alt="source link">${r.sourceName}</a>
                             </small>
                         </div>
-                        <form action="/admin/admin-details-to-db" method="post">
+                        <form action="search/search-details-to-db" method="post">
                             <div id="recipe-data">
                                 <input type="hidden" name="cid" value="${r.id}">
                                 <input type="hidden" name="title" value="${r.title}">
@@ -193,7 +193,7 @@ function makeModalBody(r){
                                 <button 
                                     class="btn btn-primary" 
                                     type="submit">
-                                        Add to DB
+                                        Add to Feed.
                                 </button>
                             </div>
                         </form>
@@ -242,7 +242,7 @@ function hiddenCategoryInputs(rC){
     `
 }
 
-// COMBINE HIDDEN CAT LIST FOR RORM
+// COMBINE HIDDEN CAT LIST FOR FORM
 function hiddenCategoryInputList(r) {
     let output = '';
     for (let i = 0; i < r.dishTypes.length; i++) {
