@@ -8,16 +8,16 @@ $('#modal-open-btn').on('click', (e) => {
 })
 
 // Zero out Globals
-$('#add-recipe-btn').on('click', ()=> {
-    ing = '';
-    amt = '';
-})
+// $('#add-recipe-btn').on('click', ()=> {
+//     ing = '';
+//     amt = '';
+// })
 
 
 let ingredentsAdded=0;
 // ADD BTN TO FORM
-$('#add-ing-to-form').on('click', function() {
-
+$('#add-ing-to-form').on('click', (e) => {
+    e.preventDefault();
     // vars
     ing += $('#ing-input').val() + ',,,';
     amt += $('#amount-input').val() + ',,,';

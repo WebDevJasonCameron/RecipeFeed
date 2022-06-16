@@ -602,6 +602,7 @@ public class RecipeController {
 
         recipe.setRecipeCategories(categoryDao.findAll());
 
+
         model.addAttribute("recipe", recipe);
 
         return "recipes/create";
