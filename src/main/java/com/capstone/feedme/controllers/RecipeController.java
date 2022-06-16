@@ -140,11 +140,17 @@ public class RecipeController {
         recipe.setServingAmount(servings);
         recipe.setSourceName(sourceName);
         recipe.setSourceUrl(sourceUrl);
+        recipe.setVideo_url("");
         recipe.setVegetarian(vegetarian);
         recipe.setVegan(vegan);
         recipe.setGlutenFree(glutenFree);
         recipe.setDairyFree(dairyFree);
         recipe.setRecipeCategories(categories);
+
+        // SET DEFAULT IMAGE IF ONE DOES NOT EXIST
+        if(recipe.getImgUrl().equals("") || recipe.getImgUrl().equals("undefined")  ) {
+            recipe.setImgUrl("https://cdn.filestackcontent.com/AI5azeMgSCqLqnoZOHoo");
+        }
 
         // INGREDIENTS
         String[] iNames = ingredientName.split(",");
@@ -581,6 +587,11 @@ public class RecipeController {
                                 Model model){
 
         Recipe newRecipe = recipesDao.save(recipe);
+
+        // DEFAULT IMAG
+        if(newRecipe.getImgUrl().equals("") || newRecipe.getImgUrl().equals("undefined")  ) {
+            newRecipe.setImgUrl("https://cdn.filestackcontent.com/AI5azeMgSCqLqnoZOHoo");
+        }
 
         // CATEGORIES
         Category category = categoryDao.findCategoryByType(recipeCategory);
