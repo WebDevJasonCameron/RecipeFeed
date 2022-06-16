@@ -29,6 +29,43 @@
                 <div>
                     <img th:src="${recipe.imgUrl}" th:alt="${recipe.title}" style="width: 500px">
                 </div>
+                <!--ICON LINKS-->
+                <div class="d-flex d-inline-block p-1">
+                    <!--HEART-->
+                    <div>
+                        <button
+                                class="links btn border-0 heart-btn"
+                                href="#"
+                                th:data="${recipe.id} + ',' + ${user.id}">
+                            <span th:utext="${iconService.ratingIcon(ratings, user, recipe)}">   </span>
+                        </button>
+                    </div>
+                    <!--PLAIN-->
+                    <div>
+                        <a class="btn border-0"
+                           th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} +
+                                           '&body=' + 'Hello! I thought you would be interested in ' +
+                                           ${recipe.title} + ': https://feedme.lol' +
+                                           @{/recipes/details/{id}(id=${recipe.id})}">
+                            <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
+                        </a>
+                    </div>
+                    <!--BOOKMARK-->
+                    <div style="margin-left: auto">
+                        <button
+                                class="links btn border-0 bookmark-btn"
+                                href="#"
+                                th:data="${recipe.id} + ',' + ${user.id}"
+                        >
+                                                <span th:if="${#lists.contains(user.userFavorites, recipe)}">
+                                                   <i class="fa-solid fa-bookmark fa-2x p-2"></i>
+                                                </span>
+                            <span th:if="${!#lists.contains(user.userFavorites, recipe)}">
+                                                   <i class="fa-regular fa-bookmark fa-2x p-2"></i>
+                                                </span>
+                        </button>
+                    </div>
+                </div>
                 <!--COMMENTS/SIMILAR-->
                 <div class="mt-2">
                     <!--LEFT NAV TABS-->
@@ -44,7 +81,6 @@
                     <div class="tab-content" id="left-tab-contents">
                         <!--COMMENTS-->
                         <div class="tab-pane fade show active" id="comments" role="tabpanel">
-
                             <div th:each="comment : ${comments}">
                                 <div class="card">
                                     <div class="card-body">
@@ -89,7 +125,7 @@
                             </div>
                         </div>
                         <!--SIMILAR-->
-                        <div class="tab-pane fade d-flex flex-wrap overflow-auto" id="similar" role="tabpanel" style="height: 400px;">
+                        <div class="tab-pane fade d-flex align-content-start flex-wrap overflow-auto" id="similar" role="tabpanel" style="height: 400px;">
                             <div th:each="similarRecipe: ${similarRecipes}" class="container m-1" style="width: 150px">
 
                                 <a th:href="@{/recipes/details/{id}(id=${similarRecipe.id})}">
@@ -183,12 +219,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
 
     <!--FOOTER-->
@@ -196,5 +226,7 @@
 
     <!--SCRIPTS-->
     <section th:replace="partials/partials.html :: script-section"></section>
+    <script th:src="@{/js/details-recipe.js}"></script>
+
 </body>
 </html>

@@ -135,7 +135,6 @@
                                         <img th:src="${cRecipe.imgUrl}" th:alt="${cRecipe.title}" class="img-thumbnail">
                                     </a>
                                     <div style="position: absolute; left: 180px; top: -5px">
-
                                         <button class="badge badge-warning recipe-edit-btn"
                                                 style="color: black"
                                                 th:data="${cRecipe.id}">
@@ -155,13 +154,16 @@
                             </div>
                         </div>
                     </div>
-                    <!--3: favourited recipes-->
+                    <!--3: favourite recipes-->
                     <div class="tab-pane fade" id="user-favorites" role="tabpanel">
                         <div class="d-flex flex-wrap justify-content-center">
                             <div th:each="fRecipe : ${user.getUserFavorites()}" style="width: 200px; margin:10px 25px">
                                 <div style="position: relative;">
                                     <a th:href="@{/recipes/details/{id}(id=${fRecipe.id})}">
-                                        <img th:src="${fRecipe.imgUrl}" th:alt="${fRecipe.title}" class="img-thumbnail">
+                                        <img th:src="${fRecipe.imgUrl}"
+                                             th:alt="${fRecipe.title}"
+                                             class="img-thumbnail"
+                                             th:id="'fav-image-' + ${fRecipe.id} + '-' + ${user.id}">
                                     </a>
                                 </div>
                             </div>

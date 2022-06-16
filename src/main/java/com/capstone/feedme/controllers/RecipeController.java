@@ -565,7 +565,15 @@ public class RecipeController {
         // ICON MODEL
         model.addAttribute("iconService", iconService);
 
+        // RECIPE MODEL
         Recipe recipe = recipesDao.findRecipeById(id);
+
+        // USER MODEL
+        provideUserModel(model);
+        provideUserModel(model);
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // Used to get Similar Recipes (by their first cat type)
         Category category = recipe.getRecipeCategories().get(0);
@@ -578,8 +586,6 @@ public class RecipeController {
         // NEED QUERY: Get comments on recipe
         List<Comment> comments = commentsDao.findAllByRecipe(recipe);
         model.addAttribute("comments", comments);
-
-
 
 
         model.addAttribute("similarRecipes", similarRecipes);
@@ -965,7 +971,6 @@ public class RecipeController {
 
         return ingredients;
     }
-
 
 
 }  //<--END
