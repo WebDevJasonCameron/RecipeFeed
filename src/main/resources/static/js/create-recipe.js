@@ -53,7 +53,7 @@ function makeShowIngredientList(n1, n2){
 
 const createHiddenInput = (name, amount,i) => {
     document.getElementById("hidden-data").innerHTML += `
-        <input type="hidden" name="ingredients[${i}].ingredientName" value="${name}">
+        <input id="ingredients" type="hidden" name="ingredients[${i}].ingredientName" value="${name}">
         <input type="hidden" name="ingredients[${i}].ingredientAmount" value="${amount}">
     `
 }
