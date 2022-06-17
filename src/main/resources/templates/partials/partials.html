@@ -30,60 +30,77 @@
 
 <!-- NAVBAR -->
 <nav th:fragment="navbar"
-     class="navbar navbar-expand-lg navbar-light text-dark bg-light bg-gradient shadow-sm fixed-top">
+     class="navbar navbar-expand-sm navbar-light text-dark bg-light bg-gradient shadow-sm fixed-top"
+     style="height: 60px;">
     <div class="container-fluid">
-        <a class="flex-grow-1 navbar-brand" href="/"><h1 class="text-dark">Feed.</h1></a>
-
+        <div class="d-flex align-self-start w-25 pt-2">
+            <a class="flex-grow-1 navbar-brand" href="/">
+                <h1 class="text-dark">Feed.</h1>
+            </a>
+        </div>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarTogglerDemo02"
-                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <!--            <span class="navbar-toggler-icon"></span>-->
+                data-bs-target="#main-nav">
+            <!--<span class="navbar-toggler-icon"></span>-->
             <span class="text-dark fs-1 border-0"><i class="bi bi-chevron-double-down"></i></span>
         </button>
-        <div class="collapse navbar-collapse flex-grow-0 border-0" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse flex-grow-0 border-0" id="main-nav">
+            <!--NO AUTH USER-->
             <div sec:authorize="!isAuthenticated()">
-                <ul class="navbar-nav flex-row-reverse flex-end me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                <ul class="navbar-nav flex-row flex-end me-auto mb-1 mb-lg-0">
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/login}">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/user/register' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/user/register}">Register</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-success m-2 border-0" th:href="@{/about}">About</a>
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}">
+                        <a class="links btn m-2 border-0" th:href="@{/about}">About</a>
                     </li>
                 </ul>
             </div>
+            <!--AUTH USER-->
             <div sec:authorize="isAuthenticated()">
-                <ul class="navbar-nav me-auto mb-2 ">
-                    <li class="nav-item m-2">
-                        <a class="links btn pe-4 border-0 bg-transparent" th:href="@{/recipes}">Feed</a>
+                <ul class="navbar-nav d-flex align-items-center flex-end me-auto mb-1 mb-lg-0">
+                    <li class="nav-item m-2"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}">
+                        <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="links btn m-2 border-0 bg-transparent" th:href="@{/about}">About</a>
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}">
+                        <a class="links btn m-2 border-0" th:href="@{/about}">About</a>
                     </li>
-                    <li class="nav-item m-2">
-                        <a class="links btn border-0 bg-transparent" th:href="@{/user/profile}">Profile</a>
+                    <li class="nav-item m-2"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/user/profile' ? 'active' : ''}">
+                        <a class="links btn m-2 border-0" th:href="@{/user/profile}">Profile</a>
                     </li>
-                    <li class="nav-item m-2">
+                    <li class="nav-item m-2"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active' : ''}">
                         <form th:action="@{/logout}" th:method="post">
                             <button class="links btn border-0">Logout</button>
                         </form>
                     </li>
                 </ul>
             </div>
-
         </div>
     </div>
 </nav>
 
-
 <!--HEADER-->
-<section th:fragment="header (headerName)">
-    <h1 th:text="${headerName}"></h1>
+<section th:fragment="header (headerName)" id="header">
+    <div class="container w-74 d-flex justify-content-between align-items-center">
+        <!--Flex heading-->
+        <div>
+            <h1 th:text="${headerName}"></h1>
+        </div>
+    </div>
+
 </section>
 
 
