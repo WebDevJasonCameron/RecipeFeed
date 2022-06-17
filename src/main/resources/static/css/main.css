@@ -110,5 +110,14 @@ html {
 
     /*}*/
 
+}
 
+
+/*Main Feed*/
+@media screen and (max-width: 389px) {
+
+    #main-container {
+        width: 90vw;
+
+    }
 }
