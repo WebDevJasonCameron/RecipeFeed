@@ -30,7 +30,7 @@
 
 <!-- NAVBAR -->
 <nav th:fragment="navbar"
-     class="navbar navbar-expand-sm navbar-light text-dark bg-light bg-gradient shadow-sm fixed-top"
+     class="navbar navbar-expand-lg bg-light shadow-sm fixed-top"
      style="height: 60px;">
     <div class="container-fluid">
         <div class="d-flex align-self-start w-25 pt-2">
@@ -43,13 +43,13 @@
             <!--<span class="navbar-toggler-icon"></span>-->
             <span class="text-dark fs-1 border-0"><i class="bi bi-chevron-double-down"></i></span>
         </button>
-        <div class="collapse navbar-collapse flex-grow-0 border-0" id="main-nav">
+        <div class="bg-light collapse navbar-collapse" id="main-nav">
             <!--NO AUTH USER-->
             <div sec:authorize="!isAuthenticated()">
                 <ul class="navbar-nav flex-row flex-end me-auto mb-1 mb-lg-0">
                     <li class="nav-item"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}">
-                        <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
+                        <a class="active links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
                     <li class="nav-item"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active' : ''}">
