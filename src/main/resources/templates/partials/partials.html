@@ -67,12 +67,12 @@
             </div>
             <!--AUTH USER-->
             <div sec:authorize="isAuthenticated()">
-                <ul class="navbar-nav d-flex align-items-center flex-end me-auto mb-1 mb-lg-0">
+                <ul class="navbar-nav flex-row flex-end me-auto">
                     <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
-                    <li class="nav-item"
+                    <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/about}">About</a>
                     </li>
@@ -83,7 +83,7 @@
                     <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active' : ''}">
                         <form th:action="@{/logout}" th:method="post">
-                            <button class="links btn border-0">Logout</button>
+                            <button class="links btn m-2 border-0">Logout</button>
                         </form>
                     </li>
                 </ul>
