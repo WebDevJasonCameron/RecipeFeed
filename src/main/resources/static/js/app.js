@@ -15,6 +15,16 @@ const apiKey = SPOON_KEY_ONE;
 /**
  *   PAGE ACTIONS
  */
+//MAIN SEARCH
+$('#get-recipe-btn').on('click', (e) => {
+    e.preventDefault();
+    // get the user id
+    userId = $('#user-id').val();
+    // the search
+    startingOffset += 50;
+    getSpoonRecipeListByKeyWord($('#search-input').val())
+})
+
 // SEARCH BTN ACTION
 $('#find-more-from-api-btn').on('click', (e) => {
     e.preventDefault();
