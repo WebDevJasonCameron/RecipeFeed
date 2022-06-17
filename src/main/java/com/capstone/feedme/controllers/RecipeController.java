@@ -1,5 +1,6 @@
 package com.capstone.feedme.controllers;
 
+import com.capstone.feedme.classes.AjaxCodeResults;
 import com.capstone.feedme.models.*;
 
 import com.capstone.feedme.repositories.*;
@@ -11,10 +12,13 @@ import com.capstone.feedme.repositories.IngredientRepository;
 import com.capstone.feedme.repositories.RecipeRepository;
 import com.capstone.feedme.repositories.UserRepository;
 import com.capstone.feedme.services.EmailService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,7 +38,6 @@ public class RecipeController {
     private final CommentsRepository commentsDao;
 
     // ATT SERVICES
-    private final EmailService emailService;
     private final IconService iconService;
     private final GeneralServices generalServices;
 
@@ -47,7 +50,6 @@ public class RecipeController {
         this.ingredientsDao = ingredientsDao;
         this.ratingsDao = ratingsDao;
         this.commentsDao = commentsDao;
-        this.emailService = emailService;
         this.iconService = iconService;
         this.generalServices = generalServices;
     }
@@ -98,6 +100,7 @@ public class RecipeController {
 
                                                   @RequestParam(name = "ingredient-name") String ingredientName,
                                                   @RequestParam(name = "ingredient-original") String ingredientOriginal,
+                                                  @RequestParam(name = "user-id") long userId,
 
                                                   Model model
     ){
@@ -105,7 +108,6 @@ public class RecipeController {
         Recipe recipe;
         List<Category> categories = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
-
 
         // IS RECIPE IN DB?
         if(recipesDao.findRecipeByApiId(cid) != null){
@@ -166,6 +168,7 @@ public class RecipeController {
             }
         }
 
+        // SAVE RECIPE
         recipesDao.save(recipe);
 
         for (int i = 0; i < ingredients.size(); i++) {
@@ -173,8 +176,25 @@ public class RecipeController {
             ingredientsDao.save(ingredients.get(i));
         }
 
+        // ADD TO USER FAVORITES
+        System.out.println("===============================================");
+        System.out.println("userId = " + userId);
+        User user = usersDao.getById(userId);
+        List<Recipe> userFavorites = user.getUserFavorites();
+
+        // logic stops dupes
+        if(userFavorites.contains(recipe)){
+            System.out.println("Unable to add to User's favorites");
+        } else {
+            System.out.println("Successfully added recipe to User's favorites");
+            userFavorites.add(recipe);
+            user.setUserFavorites(userFavorites);
+            usersDao.save(user);
+        }
+
+
         model.addAttribute(recipe);
-        return "redirect:/recipes";
+        return "redirect:/user/profile";
     }
 
 
@@ -545,7 +565,15 @@ public class RecipeController {
         // ICON MODEL
         model.addAttribute("iconService", iconService);
 
+        // RECIPE MODEL
         Recipe recipe = recipesDao.findRecipeById(id);
+
+        // USER MODEL
+        provideUserModel(model);
+        provideUserModel(model);
+
+        // RATINGS MODEL
+        provideRatingsModel(model);
 
         // Used to get Similar Recipes (by their first cat type)
         Category category = recipe.getRecipeCategories().get(0);
@@ -567,11 +595,13 @@ public class RecipeController {
 
     @GetMapping("/create")
     public String createRecipe(Model model){
-
         Recipe recipe = new Recipe();
 
         // PROVIDE USER MODEL
         provideUserModel(model);
+
+        recipe.setRecipeCategories(categoryDao.findAll());
+
 
         model.addAttribute("recipe", recipe);
 
@@ -579,14 +609,30 @@ public class RecipeController {
     }
 
     @PostMapping("/create")
-    public String publishRecipe(@Valid Recipe recipe,
-                                @RequestParam(name = "recipe-categories") String recipeCategory,
-                                @RequestParam(name = "user-id") long userId,
-                                @RequestParam(name = "all-ingredient-titles") String allIngredientTitles,
-                                @RequestParam(name = "all-ingredient-amounts") String allIngredientAmounts,
-                                Model model){
+    public String publishRecipe(@Valid @ModelAttribute Recipe recipe,
+                                BindingResult bindingResult,
+                                Model model
+    ){
+
+
+        if(bindingResult.hasErrors()){
+            recipe.setRecipeCategories(categoryDao.findAll());
+            model.addAttribute("recipe", recipe);
+            return "recipes/create";
+        }
+
+        System.out.println(recipe.getIngredients());
+
+        User recipeCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+
+        for(Ingredient ingredient : recipe.getIngredients()) {
+            ingredient.setRecipe(recipe);
+        }
 
         Recipe newRecipe = recipesDao.save(recipe);
+
 
         // DEFAULT IMAG
         if(newRecipe.getImgUrl().equals("") || newRecipe.getImgUrl().equals("undefined")  ) {
@@ -594,32 +640,41 @@ public class RecipeController {
         }
 
         // CATEGORIES
-        Category category = categoryDao.findCategoryByType(recipeCategory);
-        List<Category> categories = new ArrayList<>();
-        categories.add(category);
-        newRecipe.setRecipeCategories(categories);
+//        Category category = categoryDao.findCategoryByType(recipeCategory);
+//        List<Category> categories = new ArrayList<>();
+//        categories.add(category);
+//        newRecipe.setRecipeCategories(categories);
 
         // USER
-        User user = usersDao.getById(userId);
+        User user = usersDao.getById(recipeCreator.getId());
         newRecipe.setUser(user);
 
         // INGREDIENTS
-        List<Ingredient> ingredients = ingredientListFromTwoStrings(allIngredientTitles,
-                allIngredientAmounts, newRecipe);
-        newRecipe.setIngredients(ingredients);
+//        List<Ingredient> ingredients =
+
+//                for(ingredient ingredients) {
+//                    System.out.println(ingredient);
+//
+//                }
+//        newRecipe.setIngredients(ingredients);
 
         // CREATE ANON USER
-        User anonUser = new User(-1, "anonUser");
+//        User anonUser = new User(-1, "anonUser");
 
         // CREATE RATING (CHILDREN)
-        Rating rating = new Rating(0, anonUser, recipe);
+//        Rating rating = new Rating(0, anonUser, newRecipe);
         List<Rating> ratings = new ArrayList<>();
-        ratings.add(rating);
+//        ratings.add(rating);
         newRecipe.setRecipeRatings(ratings);
 
 
         // API_ID TO ZERO                   <--IMPORTANT FOR FILTERING
         newRecipe.setApiId(0);
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("recipe", newRecipe);
+            return "recipes/create";
+        }
 
         recipesDao.save(newRecipe);
         model.addAttribute("recipe", newRecipe);
@@ -917,7 +972,6 @@ public class RecipeController {
 
         return ingredients;
     }
-
 
 
 }  //<--END

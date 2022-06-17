@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -19,16 +20,21 @@ public class Recipe  {
     private long id;
     @Column(name = "api_id")
     private Long apiId;
+    @NotBlank(message = "Please enter a title")
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "img_url", length = 10_000)
     private String imgUrl;
+    @NotBlank(message = "Please enter a summary")
     @Column(name = "summary", columnDefinition="TEXT")
     private String summary;
+    @NotBlank(message = "Please enter instructions")
     @Column(name = "instruction", columnDefinition="TEXT")
     private String instruction;
+    @NotBlank(message = "Please enter cook time")
     @Column(name = "ready_in_min")
     private String readyInMin;
+    @NotBlank(message = "Please enter serving amount")
     @Column(name = "serving_amount")
     private String servingAmount;
     @Column(name = "source_name")
