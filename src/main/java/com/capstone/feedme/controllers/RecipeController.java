@@ -669,7 +669,7 @@ public class RecipeController {
 
 
         // API_ID TO ZERO                   <--IMPORTANT FOR FILTERING
-        newRecipe.setApiId(0);
+            newRecipe.setApiId(0);
 
         if(bindingResult.hasErrors()){
             model.addAttribute("recipe", newRecipe);
