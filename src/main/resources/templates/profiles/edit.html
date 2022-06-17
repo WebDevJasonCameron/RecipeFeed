@@ -58,15 +58,15 @@
                     <label for="confirm" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="confirm" >
                 </div>
-                <button id="submit" type="submit" value="post" class="btn btn-primary">Submit</button>
+                <button id="submit" type="submit" value="post" class="btn btn-primary w-100 my-3">Submit</button>
             </form>
 
-            <div class="container d-flex justify-content-center align-items-center mt-4">
-                <form th:action="@{/user/delete}" method="post" th:object="${user}" onsubmit="deleteCheck(event)">
+            <form th:action="@{/user/delete}" method="post" th:object="${user}" onsubmit="deleteCheck(event)">
+                <div class="container d-flex justify-content-center">
                     <input id="id" type="hidden" th:field="*{id}">
-                    <button class="btn btn-danger" id="delete" type="submit" value="post">Delete Account</button>
-                </form>
-            </div>
+                    <button class="btn btn-danger my-5" id="delete" type="submit" value="post">Delete Account</button>
+                </div>
+            </form>
         </div>
     </div>
 
