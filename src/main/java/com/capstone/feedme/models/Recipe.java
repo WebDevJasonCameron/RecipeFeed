@@ -1,9 +1,6 @@
 package com.capstone.feedme.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
-import org.springframework.data.jpa.repository.Query;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -31,10 +28,8 @@ public class Recipe  {
     @NotBlank(message = "Please enter instructions")
     @Column(name = "instruction", columnDefinition="TEXT")
     private String instruction;
-    @NotBlank(message = "Please enter cook time")
     @Column(name = "ready_in_min")
     private String readyInMin;
-    @NotBlank(message = "Please enter serving amount")
     @Column(name = "serving_amount")
     private String servingAmount;
     @Column(name = "source_name")
