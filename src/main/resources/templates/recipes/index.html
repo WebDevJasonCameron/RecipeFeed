@@ -203,6 +203,17 @@
 
 
             </div>
+
+            <form id="get-recipe-list-form" class="form-inline my-2 my-lg-0">
+                <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search" th:value="${apiSearchParameter}">
+                <input type="hidden" id="user-id" name="user-id" th:value="${user.id}">
+                <button id="get-recipe-btn" class="btn btn-outline-success my-3 w-100" type="submit">Search</button>
+            </form>
+            <!--cards-->
+            <div class="container" id="recipe-results"></div>       <!--Rem, JS pops this-->
+            <!--details-->
+            <div class="container" id="recipe-details"></div>
+
             <!--FEED.-->
             <div class="row mt-2">
 

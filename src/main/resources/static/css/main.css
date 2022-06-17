@@ -67,7 +67,7 @@ html {
 
 @media screen and (max-width:768px) {
     #about .card {
-        height: 450px;
+        height: 750px;
     }
 }
 
