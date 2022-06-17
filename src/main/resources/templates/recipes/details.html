@@ -24,10 +24,12 @@
         <!--MAIN-->
         <div class="row">
             <!--LEFT-->
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <!--IMG-->
                 <div>
-                    <img th:src="${recipe.imgUrl}" th:alt="${recipe.title}" style="width: 500px">
+                    <img th:src="${recipe.imgUrl}"
+                         th:alt="${recipe.title}"
+                         class="img-fluid">
                 </div>
                 <!--ICON LINKS-->
                 <div class="d-flex d-inline-block p-1">
@@ -67,7 +69,7 @@
                     </div>
                 </div>
                 <!--COMMENTS/SIMILAR-->
-                <div class="mt-2">
+                <div class="mt-2 d-none d-lg-block">
                     <!--LEFT NAV TABS-->
                     <ul class="nav nav-tabs" id="details-tabs-left" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -138,7 +140,7 @@
                 </div>
             </div>
             <!--RIGHT-->
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <div class="card no-gutters">
                     <!--HEADER-->
                     <div class="card-header">
