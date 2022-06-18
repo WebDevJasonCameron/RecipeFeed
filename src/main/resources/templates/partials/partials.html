@@ -32,7 +32,7 @@
 <nav th:fragment="navbar"
      class="navbar navbar-expand-sm navbar-light text-dark bg-light bg-gradient shadow-sm fixed-top"
      style="height: 60px;">
-    <div class="container-fluid">
+    <div class="bg-light container-fluid">
         <div class="d-flex align-self-start w-25 pt-2">
             <a class="flex-grow-1 navbar-brand" href="/">
                 <h1 class="text-dark">Feed.</h1>
@@ -43,7 +43,7 @@
             <!--<span class="navbar-toggler-icon"></span>-->
             <span class="text-dark fs-1 border-0"><i class="bi bi-chevron-double-down"></i></span>
         </button>
-        <div class="collapse navbar-collapse flex-grow-0 border-0" id="main-nav">
+        <div class="collapse bg-light navbar-collapse flex-grow-0 border-0" id="main-nav">
             <!--NO AUTH USER-->
             <div sec:authorize="!isAuthenticated()">
                 <ul class="navbar-nav flex-row flex-end me-auto mb-1 mb-lg-0">
@@ -67,12 +67,12 @@
             </div>
             <!--AUTH USER-->
             <div sec:authorize="isAuthenticated()">
-                <ul class="navbar-nav d-flex align-items-center flex-end me-auto mb-1 mb-lg-0">
+                <ul class="navbar-nav flex-row flex-end me-auto">
                     <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
-                    <li class="nav-item"
+                    <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/about}">About</a>
                     </li>
@@ -83,7 +83,7 @@
                     <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active' : ''}">
                         <form th:action="@{/logout}" th:method="post">
-                            <button class="links btn border-0">Logout</button>
+                            <button class="links btn m-2 border-0">Logout</button>
                         </form>
                     </li>
                 </ul>
