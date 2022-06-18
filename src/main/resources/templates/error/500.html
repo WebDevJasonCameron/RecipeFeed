@@ -23,12 +23,15 @@
 </head>
 <body>
     <div class="parent-container vh-100">
-        <div class="container d-flex align-items-center justify-content-center">
-            <img th:src="@{/img/error-img.jpg}" style="width: 20em; height: 15em;" class="pb-3">
-            <p class="fs-2">
-                We're sorry, but something went wrong along way!
-                Go back to <a th:href="@{/}">home page</a>.
-            </p>
+        <div class="container d-flex align-items-center justify-content-center pt-5 text-center">
+            <div>
+                <img th:src="@{/img/error-img.jpg}" style="width: 20em; height: 15em;" class="pb-3">
+                <p class="fs-2">
+                    We're sorry, but something went wrong along way!
+                    <br>
+                    Go back to <a th:href="@{/}">home page</a>.
+                </p>
+            </div>
         </div>
     </div>
 
