@@ -37,9 +37,6 @@
                     <!--list-->
                     <div class="mt-1 ">
                         <div class="d-flex justify-content-center">
-                            <a class="links btn border-0 mx-5" type="submit" th:href="@{/admin/get-recipes}">
-                                <i class="fa-regular fa-square-plus fa-2x"></i> Recipe
-                            </a>
                             <a class="links btn border-0" type="submit" th:href="@{/recipes/create}">
                                 <i class="fa-regular fa-pen-to-square fa-2x"></i> Create
                             </a>
@@ -70,10 +67,14 @@
                     <div class="col-12 col-md-8">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <span class="font-weight-bold" th:text="${createdRecipeTotal}"></span> Created Recipes
+                                <span class="font-weight-bold"
+                                      th:text="${createdRecipeTotal}">
+                                </span> Created Recipes
                             </div>
                             <div>
-                                <span th:text="${#arrays.length(user.getUserFavorites())}">#</span> Favorites
+                                <span th:text="${#arrays.length(user.getUserFavorites())}">
+                                    #
+                                </span> Favorites
                             </div>
                             <div>
                                 <span class="font-weight-bold" th:text="${rRecipeTotal}"></span> Rated

@@ -203,20 +203,18 @@
 
 
             </div>
-
-            <form id="get-recipe-list-form" class="form-inline my-2 my-lg-0">
-                <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search" th:value="${apiSearchParameter}">
-                <input type="hidden" id="user-id" name="user-id" th:value="${user.id}">
-                <button id="get-recipe-btn" class="btn btn-outline-success my-3 w-100" type="submit">Search</button>
-            </form>
+            <!--MOBIL SEARCH-->
+            <div sec:authorize="isAuthenticated()"  class="d-block d-lg-none my-3">
+                <input id="search-input-03" class="form-control mr-sm-2" type="search" placeholder="Search">
+            </div>
             <!--cards-->
             <div class="container" id="recipe-results"></div>       <!--Rem, JS pops this-->
             <!--details-->
             <div class="container" id="recipe-details"></div>
 
-            <!--FEED.-->
+            <!--MAIN BODY-->
             <div class="row mt-2">
-
+                <!--FEED.-->
                 <div class="col-12 col-lg-8">
                     <!--CARDS | ALL RECIPES-->
                     <div id="feed" >
@@ -227,6 +225,7 @@
                                      <div class="row">
                                         <!--AVATAR-->
                                         <div class="col-2">
+                                            <!--/*@thymesVar id="user" type=""*/-->
                                             <img th:src="${recipe.user != null}? ${recipe.user.avatar} :  'https://source.unsplash.com/random/561x561/?people}'"
                                                  th:alt="${user.username}"
                                                  class="img-fluid rounded-circle d-none d-md-block about-img px-1">
@@ -289,8 +288,7 @@
                                             <button
                                                     class="links btn border-0 bookmark-btn"
                                                     href="#"
-                                                    th:data="${recipe.id} + ',' + ${user.id}"
-                                            >
+                                                    th:data="${recipe.id} + ',' + ${user.id}">
                                                     <span th:if="${#lists.contains(user.userFavorites, recipe)}">
                                                        <i class="fa-solid fa-bookmark fa-2x p-2"></i>
                                                     </span>
@@ -376,7 +374,7 @@
                     <!--SEE MORE BTN-->
                     <form id="get-recipe-list-form" class="form-inline my-3">
                         <input
-                                id="search-input"
+                                id="search-input-01"
                                 class="form-control mr-sm-2"
                                 type="hidden"
                                 th:value="${apiSearchParameter}">
@@ -395,8 +393,8 @@
                 <!--PROFILE STUFF-->
                 <div class="d-none d-lg-block col-lg-4 mt-4">
                     <div sec:authorize="isAuthenticated()" class="d-flex">
-                        <div class="card-header">
-                            <!--user-->
+                        <div>
+                            <!--USER-->
                             <div class="row">
                                 <div class="col-4">
                                     <a th:href="@{/user/profile}">
@@ -416,7 +414,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--ads-->
+                            <!--SEARCH-->
+                            <div class="my-3">
+                                <input id="search-input-02" class="form-control mr-sm-2" type="search" placeholder="Search">
+                            </div>
+                            <!--ADS-->
                             <div class="row">
                                 <!--Top five rated recipes go here (minus equals-->
                             </div>

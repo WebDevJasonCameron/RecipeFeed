@@ -11,21 +11,51 @@ const apiKey = SPOON_KEY_ONE;
 // const apiKey = SPOON_KEY_THREE;
 
 
-
 /**
  *   PAGE ACTIONS
  */
-//MAIN SEARCH
-$('#get-recipe-btn').on('click', (e) => {
-    e.preventDefault();
-    // get the user id
-    userId = $('#user-id').val();
-    // the search
-    startingOffset += 50;
-    getSpoonRecipeListByKeyWord($('#search-input').val())
-})
+// SEARCH UNDER PROFILE (LARGE)
+$('#search-input-02').keypress(function(e) {
 
-// SEARCH BTN ACTION
+    // Enter Key pressed
+    if (e.keyCode == 13) {
+
+        // SETTING THE VARS
+        // Take comment value
+        let searchValue = $(this).val();
+
+        // get the user id
+        userId = $('#user-id').val();
+
+        // the search
+        // startingOffset += 50;
+        getSpoonRecipeListByKeyWord(searchValue);
+
+    }
+});
+
+// SEARCH DURING SMALL TO MED SCREENS
+$('#search-input-03').keypress(function(e) {
+
+    // Enter Key pressed
+    if (e.keyCode == 13) {
+
+        // SETTING THE VARS
+        // Take comment value
+        let searchValue = $(this).val();
+
+        // get the user id
+        userId = $('#user-id').val();
+
+        // the search
+        // startingOffset += 50;
+        getSpoonRecipeListByKeyWord(searchValue);
+
+    }
+});
+
+
+// FILTER BTN ACTION
 $('#find-more-from-api-btn').on('click', (e) => {
     e.preventDefault();
 
@@ -34,7 +64,7 @@ $('#find-more-from-api-btn').on('click', (e) => {
 
     // the search
     startingOffset += 50;
-    getSpoonRecipeListByKeyWord($('#search-input').val());
+    getSpoonRecipeListByKeyWord($('#search-input-01').val());
     scrollToTop();
 })
 
@@ -135,6 +165,7 @@ function loader(){
 function getSpoonRecipeListByKeyWord(kw){
 
     keyWord = kw;
+    console.log('kw was ' + kw)
 
     const spoonURL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=' + apiKey + '&query=' + kw + '&offset=' + startingOffset + '&number=50';
     const readOption = {
@@ -375,7 +406,7 @@ function makeModalBody(r){
                                 <input type="hidden" name="cid" value="${r.id}">
                                 <input type="hidden" name="title" value="${r.title}">
                                 <input type="hidden" name="image-url" value="${r.image}">
-                                <input type="hidden" name="summary" value="${r.summary.replaceAll}">
+                                <input type="hidden" name="summary" value="${r.summary}">
                                 <input type="hidden" name="instructions" value="${r.instructions}">
                                 <input type="hidden" name="ready-in-minutes" value="${r.readyInMinutes}">
                                 <input type="hidden" name="servings" value="${r.servings}">
