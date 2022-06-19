@@ -72,7 +72,7 @@ function addComment(comment, values){
         recipe_id: values[0],
         comment: comment
     }
-    const url = 'http://localhost:8080/ajax/add-comment';
+    const url = 'ajax/add-comment';
     const readOption = {
         method: 'POST',
         headers: {
