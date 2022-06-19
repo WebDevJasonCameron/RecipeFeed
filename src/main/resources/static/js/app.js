@@ -156,6 +156,15 @@ function loader(){
     `;
 }
 
+function removeTags(s) {
+    if ((s === null) || (s === '')) {
+        return false;
+    }
+    else {
+        s = s.toString();
+        return ( /(<([^>]+)>)/ig, '');
+    }
+}
 
 
 /**
@@ -407,7 +416,7 @@ function makeModalBody(r){
                                 <input type="hidden" name="title" value="${r.title}">
                                 <input type="hidden" name="image-url" value="${r.image}">
                                 <input type="hidden" name="summary" value="${r.summary}">
-                                <input type="hidden" name="instructions" value="${r.instructions}">
+                                <input type="hidden" name="instructions" value="${r.instructions.replace("\"", "")}">
                                 <input type="hidden" name="ready-in-minutes" value="${r.readyInMinutes}">
                                 <input type="hidden" name="servings" value="${r.servings}">
                                 <input type="hidden" name="source-name" value="${r.sourceName}">
@@ -475,8 +484,8 @@ function ingredientList(r){
 // CREATE HIDDEN INGREDIENT INPUT FOR FORM
 function hiddenIngredientInputs(rI){
     return `
-                <input type="hidden" name="ingredient-name" value="${rI.name}">
-                <input type="hidden" name="ingredient-original" value="${rI.original}">
+                <input type="hidden" name="ingredient-name" value="${rI.name.replace("\"", "")}">
+                <input type="hidden" name="ingredient-original" value="${rI.original.replace("\"", "")}">
     `
 }
 

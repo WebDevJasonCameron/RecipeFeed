@@ -47,8 +47,7 @@
                         <a class="btn border-0"
                            th:href="'mailto:Another Foodie' + '?subject=' + ${recipe.title} +
                                            '&body=' + 'Hello! I thought you would be interested in ' +
-                                           ${recipe.title} + ': https://feedme.lol' +
-                                           @{/recipes/details/{id}(id=${recipe.id})}">
+                                           ${recipe.title} + ': https://feedme.lol' + @{/recipes/details/{id}(id=${recipe.id})}">
                             <i class="fa-regular fa-paper-plane fa-2x p-2"></i>
                         </a>
                     </div>
@@ -57,8 +56,7 @@
                         <button
                                 class="links btn border-0 bookmark-btn"
                                 href="#"
-                                th:data="${recipe.id} + ',' + ${user.id}"
-                        >
+                                th:data="${recipe.id} + ',' + ${user.id}">
                                                 <span th:if="${#lists.contains(user.userFavorites, recipe)}">
                                                    <i class="fa-solid fa-bookmark fa-2x p-2"></i>
                                                 </span>
@@ -188,7 +186,7 @@
                                             Summary:
                                         </div>
                                         <div>
-                                            <span th:utext="${recipe.summary}">Recipe Summary</span><br><br>
+                                            <span th:utext="${generalServices.removeATags(recipe.summary)}">Recipe Summary</span><br><br>
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +208,7 @@
                                         <ul th:each="ing: ${recipe.ingredients}">
                                             <li style="list-style-type:none;">
                                                 <input type="checkbox"> &nbsp;<span th:text="${ing.ingredientName}">Name</span><br>
-                                                &emsp; Amount: <span th:text="${ing.ingredientAmount}">Amount</span>
+                                                &emsp; Amount: <span th:utext="${ing.ingredientAmount}">Amount</span>
                                             </li>
                                         </ul>
                                     </div>

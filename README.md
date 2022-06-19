@@ -22,19 +22,19 @@ Hello, as with all projects, it is good to visit them after a period to see if y
 
 
 ## Current Site 
-####Splash Page:
+#### Splash Page:
 ![](ReadMeDir/Capstone_SplashPage.gif)
 
-####Main Feed:
+#### Main Feed:
 ![](ReadMeDir/Capstone_Feed.gif)
 
-####Main Feed with API Call:
+#### Main Feed with API Call:
 ![](ReadMeDir/Capstone_Feed02.gif)
 
-####Edit Profile:
+#### Edit Profile:
 ![](ReadMeDir/Capstone_EditProfile.gif)
 
-####Comments:
+#### Comments:
 ![](ReadMeDir/Capstone_Comments.gif)
 
 

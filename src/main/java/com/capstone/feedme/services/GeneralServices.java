@@ -63,5 +63,14 @@ public class GeneralServices {
         return outputDateTimeString;
 
     }
+
+    public String removeATags(String string){
+        System.out.println("========================================");
+        System.out.println("don't ignorer me");
+        return string.replaceAll("<a href=", "<br>Link: ");
+
+    }
+
+
 }
 
