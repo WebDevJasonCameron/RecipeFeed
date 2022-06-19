@@ -73,12 +73,12 @@
                         <a class="links btn m-2 border-0" th:href="@{/recipes}">Feed</a>
                     </li>
                     <li class="nav-item m-2"
-                        th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}">
-                        <a class="links btn m-2 border-0" th:href="@{/about}">About</a>
-                    </li>
-                    <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/user/profile' ? 'active' : ''}">
                         <a class="links btn m-2 border-0" th:href="@{/user/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item m-2"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}">
+                        <a class="links btn m-2 border-0" th:href="@{/about}">About</a>
                     </li>
                     <li class="nav-item m-2"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active' : ''}">
