@@ -19,3 +19,22 @@ Hello, as with all projects, it is good to visit them after a period to see if y
 - [ ] Have set RecipeFeed logo for recipes gained from the api
 - [ ] Replace Feed. logo with RecipeFeed (RFo)
 - [ ] Comments speech bubble should be filled in when there are comments to be seen
+
+
+## Current Site 
+####Splash Page:
+![](ReadMeDir/Capstone_SplashPage.gif)
+
+####Main Feed:
+![](ReadMeDir/Capstone_Feed.gif)
+
+####Main Feed with API Call:
+![](ReadMeDir/Capstone_Feed02.gif)
+
+####Edit Profile:
+![](ReadMeDir/Capstone_EditProfile.gif)
+
+####Comments:
+![](ReadMeDir/Capstone_Comments.gif)
+
+
